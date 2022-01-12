@@ -1,0 +1,1 @@
+const data = {name:350,status: 'OK' }
