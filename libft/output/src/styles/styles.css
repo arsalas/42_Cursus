@@ -1,10 +1,129 @@
+:root {
+    --color-bg-fail: pink;
+    --color-fail: rgb(100, 0, 17);
+    --color-bg-success: rgb(154, 255, 151);
+    --color-success: rgb(24, 110, 53);
+}
 
-.logo{
+body {
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: #eee;
+}
+
+#user {
+    color: #555;
+    text-align: center;
+}
+
+#user img {
+    width: 300px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
+
+}
+
+.logo {
     display: flex;
     justify-content: center;
 }
 
-.logo img{
+.logo img {
     background-color: #111;
     width: 420px;
+}
+
+#result {
+    padding: 10px;
+    display: flex;
+    /* justify-content: space-around; */
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.exercice {
+    border-radius: 4px;
+    margin: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.exercice.ok {
+    border: 1px solid var(--color-success);
+
+}
+
+.exercice.ok .title {
+    color: var(--color-bg-success);
+    background-color: var(--color-success);
+    padding: 5px 30px;
+}
+
+.exercice.ok .status {
+    color: var(--color-success);
+    background-color: var(--color-bg-success);
+    padding: 5px 30px;
+    width: auto;
+}
+
+.exercice.ko {
+    border: 1px solid var(--color-fail);
+
+}
+
+.exercice.ko .title {
+    color: var(--color-bg-fail);
+    background-color: var(--color-fail);
+    padding: 5px 30px;
+}
+
+.exercice.ko .status {
+    color: var(--color-fail);
+    background-color: var(--color-bg-fail);
+    padding: 5px 30px;
+    width: auto;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+
+.status {
+    text-align: center;
+    width: fit-content;
+}
+
+.pass {
+    color: var(--color-success);
+    background-color: var(--color-bg-success);
+    border: solid 1px var(--color-success);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.fail {
+    color: var(--color-fail);
+    background-color: var(--color-bg-fail);
+    border: solid 1px var(--color-fail);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#note {
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.calification {
+    padding: 10px 50px;
+    border-radius: 4px;
+
 }

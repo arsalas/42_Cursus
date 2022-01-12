@@ -19,9 +19,9 @@ int main()
         printf("Error!");
         exit(1);
     }
-    fprintf(fptr, "const data = {name:");
-    fprintf(fptr, "%d", num);
-    fprintf(fptr, ",status: 'OK' }");
+    char *user = getenv("USERNAME"); 
+    fprintf(fptr, "const user = '%s';\n", user);
+    fprintf(fptr, "const data = [{name:'ft_atoi', result: true},{name:'ft_bzero', result: false},{name:'ft_calloc', result: false}]");
     fclose(fptr);
     getcwd(path, MAX_BUF);
     memccpy(memccpy(buffer, path, '\0', MAX_BUF) - 1, "/src/index.html", '\0', MAX_BUF);
