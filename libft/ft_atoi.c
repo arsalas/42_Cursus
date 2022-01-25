@@ -6,48 +6,34 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:11:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/01/11 15:01:38 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/01/24 13:11:13 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int	ft_increment(const char *str, int num, int i)
-{
-	if (str[i] == '0')
-		num *= 10;
-	else
-	{
-		if (num % 10 == 0)
-			num = num * 10 + (str[i] - '0');
-		else
-			num = (num / 10 + (num % 10 * 10)) + (str[i] - '0');
-	}
-	return (num);
-}
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
-	int		num;
-	int		i;
-	int		sign;
+	int	i;
+	int	n;
+	int	sign;
 
-	num = 0;
 	i = 0;
-	sign = 1;
-	while (str[i] >= 0 && str[i] <= 31)
+	n = 0;
+	while ((unsigned char)str[i] == ' ' || (unsigned char)str[i] == '\t'
+		|| (unsigned char)str[i] == '\n' || (unsigned char)str[i] == '\f'
+		|| (unsigned char)str[i] == '\r' || (unsigned char)str[i] == '\v')
 		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
-	{
+	if (str[i] == '-')
 		sign = -1;
+	else
+		sign = 1;
+	if (str[i] == '+' || str[i] == '-')
 		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (ft_isdigit(str[i]))
 	{
-		num = ft_increment(str, num, i);
+		n = 10 * n + (str[i] - '0');
 		i++;
 	}
-	return (sign * num);
+	return (sign * n);
 }

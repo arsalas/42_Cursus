@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 11:20:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/01/18 16:46:21 by aramirez         ###   ########.fr       */
+/*   Created: 2022/01/12 15:03:26 by aramirez          #+#    #+#             */
+/*   Updated: 2022/01/25 12:37:38 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*p;
 	int		i;
-	int		f;
-	int		find;
+	char	*str1;
+	char	*str2;
 
-	p = (char *)s;
+	str1 = (char *)s1;
+	str2 = (char *)s2;
 	i = 0;
-	f = 0;
-	find = 0;
-	if ((unsigned char)c == '\0')
-		return (p + ft_strlen(p));
-	while (s[i] != '\0')
+	while (i < (int)n && (unsigned char)str1[i] == (unsigned char)str2[i])
 	{
-		if (s[i] == (unsigned char)c)
-		{
-			f = i;
-			find = 1;
-		}
 		i++;
 	}
-	if (find == 1)
-		return (p + f);
-	else
+	if (n == 0)
 		return (0);
+	if (i < (int)n)
+		i++;
+	if ((unsigned char)str1[i - 1] == (unsigned char)str2[i - 1])
+		return (0);
+	else
+		return ((unsigned char)str1[i - 1] - (unsigned char)str2[i - 1]);
 }

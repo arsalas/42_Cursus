@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 11:20:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/01/18 16:46:21 by aramirez         ###   ########.fr       */
+/*   Created: 2022/01/20 18:20:31 by aramirez          #+#    #+#             */
+/*   Updated: 2022/01/25 12:37:51 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*p;
-	int		i;
-	int		f;
-	int		find;
+	t_list	*new;
+	t_list	*list;
+	void	*r_func;
 
-	p = (char *)s;
-	i = 0;
-	f = 0;
-	find = 0;
-	if ((unsigned char)c == '\0')
-		return (p + ft_strlen(p));
-	while (s[i] != '\0')
+	if (!f || !del || !lst)
+		return (NULL);
+	list = NULL;
+	while (lst)
 	{
-		if (s[i] == (unsigned char)c)
+		r_func = f(lst->content);
+		new = ft_lstnew(r_func);
+		if (new == NULL)
 		{
-			f = i;
-			find = 1;
+			del(r_func);
+			ft_lstclear(&list, del);
+			return (NULL);
 		}
-		i++;
+		lst = lst->next;
+		ft_lstadd_back(&list, new);
 	}
-	if (find == 1)
-		return (p + f);
-	else
-		return (0);
+	return (list);
 }
