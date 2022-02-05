@@ -45,26 +45,24 @@ int	get_len(char *str, char type)
 		while (str[i] != '\0')
 		i++;
 	}
+	if (str[i] == '\n')
+		i++;
 	return (i);
 }
 
-void	delete_line(char *str, int l)
+void	delete_line(char *str)
 {
 	int	len;
 	int	i;
 
-	len = get_len(str, 's');
+	len = get_len(str, 'l');
 	i = 0;
-	while (i < l)
+	while (str[len + i])
 	{
-		str[i] = str[l + i];
+		str[i] = str[len + i];
 		i++;
 	}
-	while (i < len)
-	{
-		str[i] = '\0';
-		i++;
-	}
+	str[i] = '\0';
 }
 
 char	*get_line(char *str)
@@ -81,9 +79,8 @@ char	*get_line(char *str)
 		line[i] = str[i];
 		i++;
 	}
-	line[i] = '\n';
-	line[i + 1] = '\0';
-	delete_line(str, len);
+	line[i] = '\0';
+	delete_line(str);
 	return (line);
 }
 
@@ -97,23 +94,17 @@ char	*augment_storage(char *aux)
 		len = 0;
 	else
 		len = get_len(aux, 's');
-	str = malloc(sizeof(char) * (BUFFER_SIZE + len));
-	if (!aux)
+	str = malloc(sizeof(char) * (BUFFER_SIZE + len + 1));
+	if(len > 0)
 	{
-		while (i < len)
-		{
-			str[i] = '\0';
-			i++;
-		}
-	}
-	else
-	{
-		while (aux && aux[i])
+		while (aux[i])
 		{
 			str[i] = aux[i];
 			i++;
 		}
 	}
+	else
+		str[0] = '\0';
 	return (str);
 }
 
@@ -124,11 +115,12 @@ void	concat_line(char *str, char *buffer)
 
 	i = 0;
 	len = get_len(str, 's');
-	while (i < len)
+	while (i + len < BUFFER_SIZE)
 	{
 		str[len + i] = buffer[i];
 		i++;
 	}
+	str[len + i] = '\0';
 	free(buffer);
 }
 
@@ -137,13 +129,12 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	static char	*aux;
 	int			numbytes;
-
 	if (contain_line(aux) == 1)
 	{
 		return (get_line(aux));
 	}
 	aux = augment_storage(aux);
-	buffer = calloc(1, BUFFER_SIZE);
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
 	numbytes = read(fd, buffer, BUFFER_SIZE);
