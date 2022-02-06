@@ -18,6 +18,8 @@ int	contain_line(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
 	while (str[i])
 	{
@@ -28,108 +30,114 @@ int	contain_line(char *str)
 	return (0);
 }
 
-int	get_len(char *str)
+int	get_len(char *str, char type)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (type == 'l')
+	{
+		while (str[i] != '\n')
+		i++;
+	}
+	else if (type == 's')
+	{
+		while (str[i] != '\0')
+		i++;
+	}
+	if (str[i] == '\n')
 		i++;
 	return (i);
 }
 
-char	*concat_str(char *storage, char *buffer)
+void	delete_line(char *str)
 {
-	int		i;
-	int		len_s;
-	int		len_b;
-	char	*str;
-
-	if (storage)
-		len_s = get_len(storage);
-	else
-		len_s = 0;
-	len_b = get_len(buffer);
-	str = malloc(sizeof(char) * (len_s + len_b + 1));
-	i = 0;
-	while (i < len_s)
-	{
-		str[i] = storage[i];
-		i++;
-	}
-	i = 0;
-	while (i < len_b)
-	{
-		str[len_s + i] = buffer[i];
-		i++;
-	}
-	str[len_s + i] = '\0';
-	free(storage);
-	free(buffer);
-	return (str);
-}
-
-int	count_line_words(char *str)
-{
+	int	len;
 	int	i;
 
+	len = get_len(str, 'l');
 	i = 0;
-	while (str[i] != '\n')
-		i++;
-	return (i + 1);
-}
-
-void	clean_storage(char *storage)
-{
-	int		old_len;
-	int		new_len;
-	int		i;
-
-	old_len = count_line_words(storage);
-	new_len = get_len(storage) - old_len;
-	i = 0;
-	while (i < new_len)
+	while (str[len + i])
 	{
-		storage[i] = storage[old_len + i];
+		str[i] = str[len + i];
 		i++;
 	}
-	storage[i] = '\0';
+	str[i] = '\0';
 }
 
-char	*extract_line(char *str)
+char	*get_line(char *str)
 {
-	int		words;
-	int		i;
+	int		len;
 	char	*line;
+	int		i;
 
-	words = count_line_words(str);
-	line = malloc(sizeof(char) * (words + 1));
+	len = get_len(str, 'l');
+	line = malloc(sizeof(char) * (len + 2));
 	i = 0;
-	while (i < words)
+	while (i < len)
 	{
 		line[i] = str[i];
 		i++;
 	}
 	line[i] = '\0';
-	clean_storage(str);
+	delete_line(str);
 	return (line);
+}
+
+char	*augment_storage(char *aux)
+{
+	char	*str;
+	int		i;
+	int		len;
+
+	if (aux == NULL)
+		len = 0;
+	else
+		len = get_len(aux, 's');
+	str = malloc(sizeof(char) * (BUFFER_SIZE + len + 1));
+	if(len > 0)
+	{
+		while (aux[i])
+		{
+			str[i] = aux[i];
+			i++;
+		}
+	}
+	else
+		str[0] = '\0';
+	return (str);
+}
+
+void	concat_line(char *str, char *buffer)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = get_len(str, 's');
+	while (i + len < BUFFER_SIZE)
+	{
+		str[len + i] = buffer[i];
+		i++;
+	}
+	str[len + i] = '\0';
+	free(buffer);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*storage;
+	static char	*aux;
 	int			numbytes;
-
-	if (storage && contain_line(storage) == 1)
+	if (contain_line(aux) == 1)
 	{
-		return(extract_line(storage));
+		return (get_line(aux));
 	}
+	aux = augment_storage(aux);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
 	numbytes = read(fd, buffer, BUFFER_SIZE);
-	buffer[BUFFER_SIZE] = '\0';
-	storage = concat_str(storage, buffer);
+	concat_line(aux, buffer);
 	return (get_next_line(fd));
 }
