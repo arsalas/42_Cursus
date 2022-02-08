@@ -1,22 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/25 16:19:38 by aramirez          #+#    #+#             */
+/*   Updated: 2022/02/08 11:41:45 by aramirez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
 #include "get_next_line.h"
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <unistd.h>
+#include <stdio.h>
 
-int main(void)
+int	main(void)
 {
-    int fd;
+	int	fd;
 
-    fd = open("file.txt", 'r');
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("\n");
-    return (0);
+	fd = open("empty", O_RDONLY);
+	//fd = open("files/empty", O_RDWR);
+	printf("fd: %i\n", fd);
+	close(fd);
+	printf("fd: %i\n", fd);
+	printf("%s", get_next_line(fd));
+	/*printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));*/
+	return (0);
 }

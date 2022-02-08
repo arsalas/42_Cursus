@@ -1,0 +1,6 @@
+1.Esto es la Primera linea
+2.Esto es la Segunda linea
+3.Esto es la Tercera linea
+gcc -D BUFFER_SIZE=32  get_next_line.c main.c get_next_line_utils.c
+0123456789012345678901234567890123456789012
+FIN

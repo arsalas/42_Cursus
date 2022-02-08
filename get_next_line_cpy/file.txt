@@ -1,6 +1,1 @@
-1.Esto es la primera linea
-2.Esto es la segunda linea
-3.Esto es la tercera linea
-4.Esto es la cuarta linea
-gcc -D BUFFER_SIZE=32  get_next_line.c main.c
-
+0123456789012345678901234567890123456789012
