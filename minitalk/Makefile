@@ -26,8 +26,8 @@ all:		${NAME}
 ${NAME}:	${OBJS_C} ${OBJS_S}
 			ar rc ${NAME_C} ${OBJS_C}
 			ar rc ${NAME_S} ${OBJS_S}
-			gcc ${CFLAGS} ${NAME_C} libft/libft.a printf/libftprintf.a -o client
-			gcc ${CFLAGS} ${NAME_S} libft/libft.a printf/libftprintf.a -o server
+			gcc ${CFLAGS} ${NAME_C} libft/libft.a ./printf/libftprintf.a -o client
+			gcc ${CFLAGS} ${NAME_S} libft/libft.a ./printf/libftprintf.a -o server
 
 clean:
 			${RM} ${OBJS_C}

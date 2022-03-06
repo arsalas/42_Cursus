@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
+#include <stdio.h>
 int	binary_to_num(struct s_bin n)
 {
 	int	num;
@@ -42,9 +42,9 @@ void	sighandler(int signum)
 		num.started = 1;
 		num.current = 0;
 	}
-	if (signum == 30)
+	if (signum == SIGUSR1)
 		num.bit[num.current] = '0';
-	else if (signum == 31)
+	else if (signum == SIGUSR2)
 		num.bit[num.current] = '1';
 	num.current++;
 	if (num.current == 8)
@@ -57,7 +57,7 @@ void	sighandler(int signum)
 
 int	main(void)
 {
-	ft_printf("PID: %i\n", getpid());
+	printf("PID: %i\n", getpid());
 	signal(SIGUSR1, sighandler);
 	signal(SIGUSR2, sighandler);
 	while (1)

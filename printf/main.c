@@ -16,14 +16,15 @@ int	ft_printf(const char *str, ...);
 
 int	main(void)
 {
-	void	*p;
+	char	p;
 
+	p = 10;
 	ft_printf("Pintando dos letras: %c %c\n", 'a', 'b');
 	printf("Pintando dos letras: %c %c\n", 'a', 'b');
 	ft_printf("Pintando un string: %s\n", "Hola Mundo");
 	printf("Pintando un string: %s\n", "Hola Mundo");
-	ft_printf("Pintando un puntero: %p\n", p);
-	printf("Pintando un puntero: %p\n", p);
+	ft_printf("Pintando un puntero: %p\n", &p);
+	printf("Pintando un puntero: %p\n", &p);
 	ft_printf("Pintando un numero decimal: %d\n", 133);
 	printf("Pintando un numero decimal: %d\n", 133);
 	ft_printf("Pintando un numero entero: %i\n", 133);
