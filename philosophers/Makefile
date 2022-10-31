@@ -67,9 +67,9 @@ $(NAME_B): $(OBJS_B) $(HEADERS) $(HEADERS_B)
 start: $(NAME)
 #	@./philo/philo 1 800 200 200
 #	@./philo/philo 5 800 200 200
-	@./philo/philo 5 800 200 200 7
+#	@./philo/philo 5 800 200 200 7
 #	@./philo/philo 4 410 200 200
-#	@./philo/philo 4 310 200 100
+	@./philo/philo 4 310 200 100
 
 start_bonus: $(NAME_B)
 #	@./philo_bonus/philo_bonus 1 800 200 200

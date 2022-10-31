@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+  <body>
     <div class="container mt-4">
-        <div class="columns mt-4">
-            <div class="column">
-                <h1 class="title">POKEDEX</h1>
-                <form id="form">
-                    <div class="field is-grouped">
-                        <p class="control is-expanded">
-                            <input class="input" id="search" autocomplete="off" type="text"
-                            placeholder="Type number or pokemon name">
-                        </p>
-                        <p class="control">
-                            <button class="button is-info" type="submit">SEARCH</button>
-                        </p>
-                    </div>
-                </form>
-                <div id="content" class="mt-2"></div>
+      <div class="columns mt-4">
+        <div class="column">
+          <h1 class="title">POKEDEX</h1>
+          <form id="form">
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <input
+                  class="input"
+                  id="search"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="Type number or pokemon name"
+                />
+              </p>
+              <p class="control">
+                <button class="button is-info" type="submit">SEARCH</button>
+              </p>
             </div>
-            <div class="column">
-                <h2 class="title">HISTORY</h2>
-                <button id="clean" class="button is-info" type="submit">CLEAN</button>
-                <div id="history"></div>
-            </div>
+          </form>
+          <div id="content" class="mt-2"></div>
         </div>
+        <div class="column">
+          <h2 class="title">HISTORY</h2>
+          <button id="clean" class="button is-info" type="submit">CLEAN</button>
+          <div id="history"></div>
+        </div>
+      </div>
     </div>
-    
-    <script type="module" src="main.js"></script>
-</body>
 
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
