@@ -1,22 +1,23 @@
-const carElement = (car) => {
-  return `<div class="road">
+/**
+ * html del coche y la carretera
+ */
+const carComponent = (car) => {
+  return (`<div class="road">
         <img id="car_${car.id}" src="${car.image}" />
-      </div>`;
+      </div>`);
 };
 
-const roadElement = () => {
-  return `<div class="road"></div>`;
+/**
+ * html de la carretera sin coche
+ */
+const roadComponent = () => {
+  return (`<div class="road"></div>`);
 };
 
-const sortByKeyDesc = (array, key) => {
-  return array.sort((a, b) => {
-    const x = a[key];
-    const y = b[key];
-    return x > y ? -1 : x < y ? 1 : 0;
-  });
-};
-
-const createTable = () => {
+/**
+ * Crea la tabla de html con las posiciones de cada coche
+ */
+const tableComponent = () => {
   let tableHtml = `
   <table>
   <tr>
@@ -25,7 +26,7 @@ const createTable = () => {
     <th>Position</th>
     <th>Distance</th>
   </tr>`;
-  const carSort = sortByKeyDesc(cars, "distance");
+  const carSort = sortByKeyDesc(CarController.cars, "distance");
   carSort.forEach((row, index) => {
     tableHtml += `
     <tr>
