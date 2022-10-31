@@ -43,6 +43,7 @@ int main(int argc, char **argv)
         printf("Error creating the thread. Code %i", thread_rc);
         return -1;
     }
+    
     sleep(1);
     printf("[MAIN:%ld]: Thread allocated \n", pthread_self());
     int *ptr_output_data;
