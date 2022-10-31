@@ -1,10 +1,5 @@
-// compile with $ gcc -Wall -g *.c -pthread -o program
-// run with ./program
-// check with valgrind --tool=helgrind ./program
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <unistd.h>
+
+#include "./philo.h"
 
 void *thread_run(void *data)
 {
@@ -16,11 +11,32 @@ void *thread_run(void *data)
     pthread_exit(data);
 }
 
-int main()
+/**
+ * Recivir argumentos del programa y guardarlos en una estructura
+*/
+t_params    recive_args(char **argv)
+{
+    t_params    params;
+
+    params.n_philo = ft_atoi(argv[1]);
+    params.t_die = ft_atoi(argv[2]);
+    params.t_eat = ft_atoi(argv[3]);
+    params.t_sleep = ft_atoi(argv[4]);
+    if (argv[5])
+        params.time_eats = ft_atoi(argv[5]);
+    return (params);
+}
+
+int main(int argc, char **argv)
 {
     pthread_t thread;
     int data = 0;
     int thread_rc;
+    t_params    params;
+
+    if (argc < 4)
+        return (0);
+    params = recive_args(argv);
     printf("[MAIN:%ld]: Starting............ \n", pthread_self());
     if ((thread_rc = pthread_create(&thread, NULL, thread_run, &data)) != 0)
     {
