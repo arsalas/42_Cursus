@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ballon</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #ballon {
+        width: 200px;
+        aspect-ratio: 1;
+        background-color: red;
+        border-radius: 100%;
+        transition: 300ms;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ballon"></div>
+    <script>
+      const colors = {
+        values: ["red", "blue", "green"],
+        index: 0,
+        size: 200,
+        increment(element) {
+          if (this.index === this.values.length - 1) this.index = 0;
+          else this.index++;
+          this.size += 10;
+          if (this.size > 420) this.size = 200;
+          this.apply(element);
+        },
+        decrement(element) {
+          if (this.index === 0) this.index = this.values.length - 1;
+          else this.index--;
+          this.size -= 5;
+          if (this.size < 200) this.size = 200;
+          this.apply(element);
+        },
+        apply(element) {
+          element.style.backgroundColor = this.values[this.index];
+          element.style.width = `${this.size}px`;
+        },
+      };
+
+      const ballon = document.querySelector("#ballon");
+
+      const handleClick = () => {
+        colors.increment(ballon);
+      };
+
+      const handleMouseleave = () => {
+        colors.decrement(ballon);
+      };
+
+      ballon.addEventListener("click", handleClick, false);
+      ballon.addEventListener("mouseleave", handleMouseleave, false);
+    </script>
+  </body>
+</html>

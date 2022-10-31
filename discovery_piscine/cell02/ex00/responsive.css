@@ -1,0 +1,28 @@
+body {
+	margin: 0px;
+	padding: 0px;
+  }
+  main {
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+  }
+  .cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+  }
+  .first {
+	background-color: greenyellow;
+	border: 1px solid yellowgreen;
+  }
+  .second {
+	background-color: darksalmon;
+	border: 1px solid salmon;
+  }
+  @media (max-width: 800px) {
+	main {
+	  flex-direction: column;
+	}
+  }
