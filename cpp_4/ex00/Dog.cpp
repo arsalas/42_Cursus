@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:27:50 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/20 19:41:08 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:53:20 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Dog::~Dog(void)
 	std::cout << "Dog destroy" << std::endl;
 }
 
-void Dog::makeSound(void) const
+void Dog::makeSound(void)
 {
 	std::cout << "guau!" << std::endl;
 }

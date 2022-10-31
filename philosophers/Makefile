@@ -78,12 +78,13 @@ $(DIR)/$(OBJ_DIR)/%.o : $(DIR)/$(SRC_DIR)/%.c
 	$(CC) -c -MD ${CFLAGS} $< -o $@
 
 -include *.d
+-include $(OBJ)
 
 $(DIR_B)/$(OBJ_DIR)/%.o : $(DIR_B)/$(SRC_DIR)/%.c
 	mkdir -p $(OBJ_FOLDERS_B)
 	$(CC) -c -MD ${CFLAGS} $< -o $@
 
--include *.d
+#-include *.d
 
 all:		${NAME}
 
