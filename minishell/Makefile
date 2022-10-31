@@ -1,5 +1,5 @@
 
 
 all:
-	@gcc -lreadline main.c
+	gcc -lreadline main.c
 	@./a.out
