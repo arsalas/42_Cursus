@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:26 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/12 14:29:47 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:02:09 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 */
 void	take_fork(t_data *data, int philo_id)
 {
+	data->philos[philo_id].status = WAITNG_FORK;
 	sem_wait(data->semaphore);
 	sem_wait(data->semaphore);
 	if (!is_game_over(data))

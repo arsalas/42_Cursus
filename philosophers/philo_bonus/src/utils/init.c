@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/12 14:03:49 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:00:58 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,8 @@ void	create_process(t_data *data)
 		usleep(10);
 		i++;
 	}
+	int status;
+	for(int j = 0; j < data->params.n_philo; j++)
+		waitpid(data->philos[j].c_pid, &status, 0);
+
 }

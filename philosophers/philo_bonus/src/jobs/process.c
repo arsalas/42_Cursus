@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/12 14:18:40 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:36:21 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,12 @@ void	process_start(t_data *data, int i)
 			continue ;
 		if (get_timestamp() - data->philos[i].last_food > data->params.t_die
 			&& data->philos[i].status != EAT)
+		{
 			philo_die(data, i);
+			sem_close(data->semaphore);
+			sem_unlink("forks");
+			exit(0);
+		}
 		else if (data->philos[i].status == THINK)
 			start_eat(data, i);
 		else if (data->philos[i].status == EAT)
@@ -63,5 +68,4 @@ void	process_start(t_data *data, int i)
 		}
 		usleep(10);
 	}
-	//exit(0);
 }
