@@ -1,3 +1,7 @@
+:root {
+  --border-bg-color: #620808;
+}
+
 body,
 html {
   margin: 0px;
@@ -24,7 +28,7 @@ img {
 }
 
 body {
-  background-image: url("../images/spectators.jpeg");
+  background-image: url("../images/grass.jpg");
   background-repeat: repeat;
 }
 
@@ -39,7 +43,8 @@ body {
   display: flex;
   height: 80%;
   flex: 1;
-  border: solid 10px #333;
+  border: solid 10px var(--border-bg-color);
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
@@ -47,21 +52,23 @@ body {
 #table {
   margin-left: 20px;
   width: 300px;
+    border-radius: 20px;
+
 }
 
 table {
   border-collapse: collapse;
-  border: solid #333 10px;
+  border: solid  var(--border-bg-color) 10px;
 }
 
 th,
 td {
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border-bg-color);
 }
 
 tr {
   background-color: #ddd;
-  border: solid #333 2px;
+  border: solid var(--border-bg-color) 2px;
   padding: 20px 10px;
 }
 
@@ -93,8 +100,9 @@ header {
   align-items: flex-end;
   height: 100px;
   background-color: #8bc6ec;
-  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
-  border-bottom: solid #333 10px;
+  /* background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%); */
+  background-image: linear-gradient(180deg, #fff 0%, #840808 100%);
+  border-bottom: solid var(--border-bg-color) 10px;
 }
 
 header label {
@@ -111,15 +119,15 @@ input {
   font-size: 20px;
   font-weight: bold;
   border-radius: 1000px;
-  border: solid 5px #333;
-  background-color: #ede577;
+  border: solid 5px var(--border-bg-color);
+  background-color: #efefef;
   text-align: center;
 }
 
 select:focus,
 select:focus-visible,
 input:focus {
-  border: solid 5px #555;
+  border: solid 5px var(--border-bg-color);
   outline: none;
   box-shadow: rgba(85, 85, 85, 0.5) 0px 10px 40px 4px;
 }
