@@ -6,9 +6,8 @@
  */
 params.start.addEventListener("click", () => {
     params.start.style.display = 'none';
-    params.reset.style.display = 'block'
+    params.reset.style.display = 'block';
     params.nCars.disabled = true;
-    params.speed.disabled = true;
     startRace();
 });
 
@@ -22,7 +21,6 @@ params.reset.addEventListener("click", () => {
     params.start.style.display = 'block';
     params.reset.style.display = 'none';
     params.nCars.disabled = false;
-    params.speed.disabled = false;
     clearInterval(params.interval);
     params.table.innerHTML = '';
 
@@ -47,5 +45,5 @@ const startRace = () => {
             clearInterval(params.interval);
             params.table.innerHTML = tableComponent();
         }
-    }, params.speed.value * 250)
+    }, params.speed)
 }
