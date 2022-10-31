@@ -9,25 +9,21 @@ class Car {
         this.distance = 0;
     }
 
-    calcDist(dist){
-        return (dist / parseInt(distance.value) * 100);
-    }
-
     run() {
-        const dist = Math.floor(Math.random() * 10) + 1;
+        const dist = getRandom();
         document.querySelector(`#car_${this.id}`).animate(
             {
-                marginLeft: [`${this.calcDist(this.distance)}%`, `${this.calcDist(this.distance + dist) < 100 ? this.calcDist(this.distance + dist) : 100}%`]
+                marginLeft: [`${this.distance}%`, `${(this.distance + dist) < 100 ? this.distance + dist : 100}%`]
             },
             {
-                duration: 500,
+                duration: params.speed.value * 250,
                 easing: "linear",
                 iterations: 1,
                 fill: "both"
             }
         );
         this.distance += dist;
-        if (this.distance >= distance.value)
-            clearInterval(interval);
+        if (this.distance >= 100)
+            clearInterval(params.interval);
     }
 }
