@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:57:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:27:41 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:58:57 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Create a semaphores object
  * 
- * @param data 
+ * @param data estructura de datos del programa
  */
 void	create_semaphores(t_data *data)
 {
@@ -32,7 +32,7 @@ void	create_semaphores(t_data *data)
 /**
  * @brief Cierra los semaforos abiertos
  * 
- * @param data 
+ * @param data estructura de datos del programa
  */
 void	close_semaphores(t_data *data)
 {
@@ -45,7 +45,7 @@ void	close_semaphores(t_data *data)
 /**
  * @brief Unlink los semaforos creados
  * 
- * @param data 
+ * @param data estructura de datos del programa
  */
 void	unlink_semaphores(void)
 {

@@ -6,15 +6,18 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:21 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:37:06 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:42:35 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 /**
- * Printa el log y pone el estado del filosofo como muerto
-*/
+ * @brief Printa el log y pone el estado del filosofo como muerto
+ * 
+ * @param data Estructura de datos del programa
+ * @param philo_id id del filosofo
+ */
 void	philo_die(t_data *data, int philo_id)
 {
 	print_log(data, philo_id, DIE);
