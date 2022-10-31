@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:26 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 15:48:52 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:19:56 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	take_fork(t_data *data, int philo_id)
 	if (data->params.n_philo == 1)
 		return ;
 	data->philo.status = WAITNG_FORK;
-	sem_wait(data->sems.sem_eat);
+	sem_wait(data->sems.sem_fork);
 	data->philo.status = FORK;
 	print_log(data, philo_id + 1, FORK);
 	start_eat(data, philo_id);
@@ -32,5 +32,5 @@ void	take_fork(t_data *data, int philo_id)
 */
 void	leave_fork(t_data *data)
 {
-	sem_post(data->sems.sem_eat);
+	sem_post(data->sems.sem_fork);
 }

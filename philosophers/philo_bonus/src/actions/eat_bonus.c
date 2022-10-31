@@ -6,13 +6,12 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:24 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 15:47:39 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:39:06 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-//TODO !revisar
 /**
  * El filosofo empieza a comer 
 */

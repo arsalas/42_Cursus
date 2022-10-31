@@ -6,17 +6,12 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:32:09 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 17:03:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:39:35 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-/**
- * @brief Inicia los threats para comprobar si se ha de cerrar el programa
- * 
- * @param data estructura de datos del programa
- */
 void	start_threads(t_data *data)
 {
 	pthread_create(&data->threads.die, NULL, &th_philo_die, data);
@@ -60,11 +55,6 @@ void	*th_philos_eat(void *info)
 	return (NULL);
 }
 
-/**
- * @brief Cierra los programas hijos y los semaforos abiertos
- * 
- * @param data estructura del programa
- */
 void	exit_program(t_data *data)
 {
 	int		i;
@@ -76,6 +66,5 @@ void	exit_program(t_data *data)
 		i++;
 	}
 	unlink_semaphores();
-	free(data->id_forks);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:58:38 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 15:57:35 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:45:39 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	data.timestamp = get_timestamp();
 	create_semaphores(&data);
 	create_process(&data);
-	while(true)
+	while (true)
 		usleep(10);
 	return (0);
 }

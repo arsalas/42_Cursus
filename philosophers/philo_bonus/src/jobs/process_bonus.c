@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 16:49:37 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:35:14 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	*is_game_finish(void *info)
 			sem_post(data->sems.sem_die);
 			close_program(data);
 		}
-		if (data->philo.n_eat >= data->params.time_eats && !eat)
+		if (data->philo.n_eat > -1
+			&& data->philo.n_eat >= data->params.time_eats && !eat)
 		{
 			sem_post(data->sems.sem_eat);
 			eat = true;
