@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Wed Jun 15 15:27:32 2022
+# Make data base, printed on Mon Jun 20 14:01:49 2022
 
 # Variables
 
@@ -34,6 +34,7 @@ SHELL = /bin/sh
 RM := rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+ 
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
@@ -47,7 +48,7 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 36)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-4bb2ff4d-d286-4a3e-bbc4-1a29b85f1330.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-99dab228-5fbd-4f8c-a437-3f0f384a7bbe.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -61,7 +62,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AMMzY9qI6m/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.SCaoDdPBNF/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -135,7 +136,7 @@ MFLAGS = -Rrqp
 # environment
 MAIL = aramirez@student.42barcelona.com
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2436
+XPC_SERVICE_NAME = com.microsoft.VSCode.3220
 # makefile (from `Makefile', line 31)
 OBJS_DIR := obj
 # automatic
@@ -167,7 +168,7 @@ OBJS_M = $(addprefix $(OBJS_DIR)/, $(SRCS_M:.c=.o))
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1210
+VSCODE_PID = 96055
 # makefile (from `Makefile', line 42)
 NAME_B := philo_bonus
 # variable set hash-table stats:
@@ -277,7 +278,6 @@ philo/includes/philo.h:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 # Not a target:
 obj/die_bonus.o:
 #  Implicit rule search has not been done.
@@ -303,6 +303,7 @@ obj/main.o: philo/src/main.c | obj
 # automatic
 # % := 
 # automatic
+ 
 # * := main
 # automatic
 # + := 
@@ -597,7 +598,6 @@ obj/thread.o: philo/src/jobs/thread.c | obj
 #  Implicit/static pattern stem: `thread'
 #  Last modified 2022-06-07 13:31:01
 #  File has been updated.
- 
 #  Successfully updated.
 # automatic
 # @ := obj/thread.o
@@ -631,6 +631,7 @@ obj/main_bonus.o:
 # Load=46/1024=4%, Rehash=0, Collisions=10/169=6%
 # VPATH Search Paths
 
+ 
 vpath %.c philo:philo/src:philo/src/actions:philo/src/jobs:philo/src/utils
 vpath %.c philo_bonus:philo_bonus/src:philo_bonus/src/actions:philo_bonus/src/jobs:philo_bonus/src/utils
 vpath %.h includes:philo/includes:philo_bonus/includes
@@ -644,6 +645,6 @@ vpath %.h includes:philo/includes:philo_bonus/includes
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Jun 15 15:27:32 2022
+# Finished Make data base on Mon Jun 20 14:01:49 2022
 
  
