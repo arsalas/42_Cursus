@@ -6,14 +6,15 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:26 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/19 13:36:39 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:36:11 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo_bonus.h"
 
 /**
- * Coge los tenedores para empezar a comer  
+ * Coge los tenedores para empezar a comer
+ * Utiliza dos semafaros para esperar a comer
 */
 void	take_fork(t_data *data, int philo_id)
 {
@@ -22,13 +23,13 @@ void	take_fork(t_data *data, int philo_id)
 	sem_wait(data->semaphore);
 	if (!data->philos[philo_id].is_alive)
 		exit(0);
-	print_log(philo_id + 1, FORK);
+	print_log(data, philo_id + 1, FORK);
 	data->forks -= 2;
 	sem_post(data->semaphore);
 }
 
 /**
- * Deja los tenedores  
+ * Deja los tenedores
 */
 void	leave_fork(t_data *data)
 {
