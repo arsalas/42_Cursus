@@ -47,9 +47,9 @@ int	main(int argc, char *argv[])
 	t_vars	vars;
 	int		width;
 	int		height;
-	int		i;
+	//int		i;
 
-	i = 0;
+	//i = 0;
 	if (argc == 1)
 		exit (0);
 	vars.map = read_map(argv[1]);
