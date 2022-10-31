@@ -28,10 +28,6 @@ class Car {
         );
         this.distance += dist;
         if (this.distance >= distance.value)
-        {
             clearInterval(interval);
-            console.log("FIN");
-        }
-
     }
 }

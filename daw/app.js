@@ -1,10 +1,10 @@
-
 // Declaracion de variables
 const app = document.querySelector("#app");
 const nCars = document.querySelector("#nCars");
 const distance = document.querySelector("#distance");
 const start = document.querySelector("#start");
 const reset = document.querySelector("#reset");
+const table = document.querySelector("#table");
 let cars = [];
 let interval;
 
@@ -39,4 +39,3 @@ const loadCars = () => {
   createCars();
   printCars();
 }
-
