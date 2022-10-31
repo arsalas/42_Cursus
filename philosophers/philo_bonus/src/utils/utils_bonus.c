@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/03 15:43:38 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:46:18 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_log(t_data *data, int philo, t_status action)
 {
 	char	*desc;
 
-	sem_wait(data->sem_log);
+	sem_wait(data->sems.sem_log);
 	if (action == FORK)
 		desc = BMAG "has taken a fork" RESET;
 	else if (action == EAT)
@@ -93,8 +93,7 @@ void	print_log(t_data *data, int philo, t_status action)
 		desc = BRED "died" RESET;
 	else
 		return ;
-	if (data->finish == 0)
-		printf(UGRN "%lli" RESET BHWHT" %i " RESET "%s\n",
-			get_timestamp() - data->timestamp, philo, desc);
-	sem_post(data->sem_log);
+	printf(UGRN "%lli" RESET BHWHT" %i " RESET "%s\n",
+		get_timestamp() - data->timestamp, philo, desc);
+	sem_post(data->sems.sem_log);
 }

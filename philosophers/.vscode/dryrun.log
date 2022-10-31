@@ -1,9 +1,10 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/aramirez/Documents/GitHub/Cursus/philosophers'
-gcc -Wall -Wextra -Werror -pthread -g -I includes/ -I philo/includes/ -I philo_bonus/includes/ -c philo/src/utils/utils.c -o obj/utils.o
+gcc -Wall -Wextra -Werror -pthread -g -I includes/ -I philo/includes/ -I philo_bonus/includes/ -c philo/src/main.c -o obj/main.o
+ 
+gcc -Wall -Wextra -Werror -pthread -g -I includes/ -I philo/includes/ -I philo_bonus/includes/ -c philo/src/actions/eat.c -o obj/eat.o
  
 gcc -Wall -Wextra -Werror -pthread -g -I includes/ -I philo/includes/ -I philo_bonus/includes/ obj/main.o obj/thread.o obj/init.o obj/args.o obj/utils.o obj/die.o obj/eat.o obj/forks.o obj/sleep.o -o ./philo/philo
 echo "\x1b[32mphilo compiled!\x1b[0m"
- 
 make: Leaving directory `/Users/aramirez/Documents/GitHub/Cursus/philosophers'
  

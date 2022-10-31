@@ -13,6 +13,7 @@ SRCS 	= main.c \
 
 SRCS_B 	= main_bonus.c \
 		process_bonus.c \
+		threads_bonus.c \
 		args_bonus.c \
 		init_bonus.c \
 		utils_bonus.c \
@@ -71,9 +72,9 @@ start: $(NAME)
 #	@./philo/philo 4 310 200 100
 
 start_bonus: $(NAME_B)
-#	@./philo_bonus/philo_bonus 1 800 200 200
+	@./philo_bonus/philo_bonus 1 800 200 200
 #	@./philo_bonus/philo_bonus 5 800 200 200
-	@./philo_bonus/philo_bonus 5 800 200 200 7
+#	@./philo_bonus/philo_bonus 5 800 200 200 7
 #	@./philo_bonus/philo_bonus 4 410 200 200
 #	@./philo_bonus/philo_bonus 4 310 200 100
 

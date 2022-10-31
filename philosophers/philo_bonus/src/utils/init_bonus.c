@@ -6,15 +6,17 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/03 15:00:56 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/07 16:39:56 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 /**
- *  Espera a que terminen los forks lanzados 
-*/
+ * @brief Espera a que terminen los forks lanzados 
+ * 
+ * @param data Estructura de datos
+ */
 static void	wait_process(t_data *data)
 {
 	int	status;
@@ -23,11 +25,17 @@ static void	wait_process(t_data *data)
 	i = 0;
 	while (i < data->params.n_philo)
 	{
-		waitpid(data->philos[i].c_pid, &status, 0);
+		waitpid(data->id_forks[i], &status, 0);
 		i++;
 	}
 }
 
+/**
+ * @brief Obtiene la informacion inicial del filosofo
+ * 
+ * @param i posicion del filosofo
+ * @return t_philo estructura del filosofo
+ */
 static t_philo	start_philo(int i)
 {
 	t_philo	philo;
@@ -42,32 +50,34 @@ static t_philo	start_philo(int i)
 }
 
 /**
- * Crea los procesos de los filosofos
+ * @brief Crea los procesos de los filosofos
  * fork = 0 para el proceso hijo
-*/
+ * @param data Estructura de datos
+ */
 void	create_process(t_data *data)
 {
 	int		i;
+	pid_t	pid;
 
-	data->philos = malloc(sizeof(t_philo) * data->params.n_philo);
-	if (data->philos == NULL)
+	data->id_forks = malloc(sizeof(pid_t) * data->params.n_philo);
+	if (data->id_forks == NULL)
 		return ;
 	i = 0;
 	while (i < data->params.n_philo)
 	{
-		data->philos[i] = start_philo(i);
-		if (i == data->params.n_philo - 1)
-			data->start = true;
-		data->philos[i].c_pid = fork();
-		if (data->philos[i].c_pid == -1)
+		data->philo = start_philo(i);
+		pid = fork();
+		if (pid == -1)
 			exit(EXIT_FAILURE);
-		if (data->philos[i].c_pid == 0)
+		if (pid == 0)
 		{
 			process_start(data, i);
 			break ;
 		}
+		data->id_forks[i] = pid;
 		usleep(10);
 		i++;
 	}
+	start_threads(data);	
 	wait_process(data);
 }
