@@ -9,15 +9,17 @@
 body {
   margin: 0px;
   padding: 0px;
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  /* display: flex; */
+  /* width: 100vw;
+  height: 100vh; */
 }
 
 nav {
+  /* position: sticky; */
+  position: fixed;
+  top: 0px;
   width: 60px;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -56,7 +58,6 @@ nav li {
 
 main {
   overflow: hidden;
-  overflow-y: auto;
 }
 
 figure {
@@ -65,7 +66,7 @@ figure {
   width: 20vw;
 }
 
-img {
+.home img {
   width: 100%;
   border-radius: 50%;
 }
@@ -110,7 +111,7 @@ section .experiences {
   padding: 5px 10px;
   background-color: #e1e1e1;
   width: fit-content;
-  border-radius: 4x;
+  border-radius: 4px;
 }
 
 h3 {
@@ -191,7 +192,19 @@ section.last {
   font-weight: 600;
 }
 
+.last p {
+  width: 60vw;
+}
 
-.last p{
-	width: 60vw;
+#contact figure {
+  overflow: hidden;
+  aspect-ratio: 1.5;
+  width: fit-content;
+}
+#contact img {
+  object-fit: cover;
+}
+
+#contact p {
+  text-align: center;
 }
