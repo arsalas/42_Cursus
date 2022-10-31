@@ -1,12 +1,13 @@
 const add = document.querySelector("#add");
 
 const handleClick = () => {
-  const todo = prompt();
-  if (todo.length == 0) console.log(todo);
+    const todo = prompt();
+    if (todo.length == 0) return;
+    console.log(todo);
+    const confirm = confirm("confirm");
+    console.log(confirm)
 };
 
-const arr = [1, 2, 3];
- 
-clas
+
 
 add.addEventListener("click", handleClick, false);

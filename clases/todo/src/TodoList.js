@@ -69,7 +69,8 @@ export class TodoList {
                <i class="fa-solid fa-trash-can"></i> </span>
        </div>
    </div>`;
-        document.querySelector('#todoList').insertAdjacentHTML('beforeend', html)
+        // document.querySelector('#todoList').insertAdjacentHTML('beforeend', html)
+         document.querySelector('#todoList').insertAdjacentHTML('afterbegin', html)
     }
 
     completedTodo(id) {
