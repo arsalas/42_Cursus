@@ -1,11 +1,10 @@
 CFLAGS 	= -Wall -Wextra -Werror
 CC		= g++
 
-SRCS 	= main.cpp File.cpp
-HEADERS 	= File.hpp
+SRCS 	= main.cpp read.cpp
+HEADERS 	= read.hpp
 
 OBJS_DIR	= obj
-BIN_DIR	= bin
 
 OBJS		= $(addprefix  $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
@@ -19,31 +18,20 @@ all:	$(NAME)
 $(OBJS_DIR)/%.o: %.cpp | $$(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(HEADERS) $(BIN_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(BIN_DIR)/$(NAME)
+$(NAME): $(OBJS) $(HEADERS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "\x1b[32mex04 compiled!\x1b[0m"
-
-run: $(NAME)
-	@./$(BIN_DIR)/$(NAME) test.txt mundo replace
-	@echo ORIGINAL:
-	@cat test.txt
-	@echo "\n"
-	@echo RESULT:
-	@cat test.txt.replace
 
 clean:
 	@$(RM) $(OBJS)
 	@echo "\x1b[32mcleaned!\x1b[0m"
 
 fclean:		clean
-	@$(RM) $(BIN_DIR)/$(NAME)
+	@$(RM) $(NAME)
 
 re:			fclean all
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-$(BIN_DIR):
-	@mkdir -p $(BIN_DIR)
-
-.PHONY:		all clean fclean re run
+.PHONY:		all clean fclean re

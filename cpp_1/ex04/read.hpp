@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   read.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 14:16:02 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/04 16:36:36 by aramirez         ###   ########.fr       */
+/*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
+/*   Updated: 2022/05/04 16:36:27 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "read.hpp"
+#ifndef Read_H
+#define Read_H
+# include "iostream"
+# include <iostream>
+# include <fstream>
 
-
-int main(int argc, char **argv)
+class File
 {
-	std::string filename;
-	std::string s1;
-	std::string s2;
+private:
+	std::string _filename;
+	std::ifstream _file;
 
-	if (argc < 4)
-		return (0);
-	filename = argv[1];
-	s1 = argv[2];
-	s2 = argv[3];
-
-	File file(filename);
-	file.replaceFile(s1, s2);
+public:
+	File(std::string filename) : _filename(filename){};
+	std::string getFilename(void) { return (_filename); }
+	void setFilename(std::string value) { _filename = value; }
+	void replaceFile(std::string s1, std::string s2);
 	
+};
 
-	return (0);
-}
+#endif
