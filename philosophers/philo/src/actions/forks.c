@@ -6,19 +6,15 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:26 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/31 18:40:04 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:39:52 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * @brief Obtiene la posicion en el array del siguiente tenedor al filosofo 
- * 
- * @param pos posicion en la array del filosofo
- * @param max length de la array
- * @return posicion del tenedor
- */
+ * Obtiene la posicion en el array del siguiente tenedor al filosofo 
+*/
 int	next_fork(int pos, int max)
 {
 	if (pos == max - 1)
@@ -28,12 +24,8 @@ int	next_fork(int pos, int max)
 }
 
 /**
- * @brief Inica si el filosofo pueded coger los tenedores
- * 
- * @param data estructura de datos
- * @param philo_id id del filosofo
- * @return true si puede coger un tenerdor
- */
+ * Inica si el filosofo pueded coger los tenedores
+*/
 bool	can_take_fork(t_data *data, int philo_id)
 {
 	bool	can;
@@ -50,11 +42,8 @@ bool	can_take_fork(t_data *data, int philo_id)
 }
 
 /**
- * @brief Coge los tenedores para empezar a comer  
- * 
- * @param data estructura de datos
- * @param philo_id id del filosofo
- */
+ * Coge los tenedores para empezar a comer  
+*/
 void	take_fork(t_data *data, int philo_id)
 {
 	pthread_mutex_lock(&data->fork_mutex);
@@ -66,11 +55,8 @@ void	take_fork(t_data *data, int philo_id)
 }
 
 /**
- * @brief Deja los tenedores  
- * 
- * @param data estructura de datos
- * @param philo_id id del filosofo
- */
+ * Deja los tenedores  
+*/
 void	leave_fork(t_data *data, int philo_id)
 {
 	pthread_mutex_lock(&data->fork_mutex);

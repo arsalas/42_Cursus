@@ -6,18 +6,15 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/31 18:44:29 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:35:47 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * @brief Completa la informacion inicial del filosofo 
- * 
- * @param i posicion del filosofo
- * @return t_philo estructura de datos del filosofo
- */
+ * Completa la informacion inicial del filosofo 
+*/
 static t_philo	init_philo_data(int i)
 {
 	t_philo	philo;
@@ -32,11 +29,8 @@ static t_philo	init_philo_data(int i)
 }
 
 /**
- * @brief Crea los datos de los filosofos para completar la array 
- * y lanza los hilos
- * 
- * @param data estructura de datos
- * @return 0 si ha habido algun problema 
+ * Crea los datos de los filosofos para completar la array y lanza los hilos
+ * Devuelve 0 si ha habido algun problema
  */
 int	create_data_philos(t_data *data)
 {
@@ -62,10 +56,8 @@ int	create_data_philos(t_data *data)
 }
 
 /**
- * @brief Crea los datos de los tenedores y las inicializa a 1
- * 
- * @param data estructura de datos
- * @return 0 si ha habido algun problema 
+ * Crea los datos de los tenedores y las inicializa a 1
+ * Devuelve 0 si ha habido algun problema
  */
 int	create_data_forks(t_data *data)
 {
@@ -83,11 +75,6 @@ int	create_data_forks(t_data *data)
 	return (1);
 }
 
-/**
- * @brief Libera la memoria alocada
- * 
- * @param data estructura de datos
- */
 void	destroy_data(t_data *data)
 {
 	free(data->philos);

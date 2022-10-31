@@ -6,18 +6,15 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/02 13:03:44 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 12:48:06 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * @brief Comprueba si ha terminado la partida
- * 
- * @param data estructura de datos
- * @return true si la partida ha terminado
- */
+ * Comprueba si ha terminado la partida
+*/
 bool	is_game_over(t_data *data)
 {
 	int	i;
@@ -41,11 +38,8 @@ bool	is_game_over(t_data *data)
 }
 
 /**
- * @brief Logica de las acciones de los filosofos 
- * 
- * @param data estructura de datos
- * @param i posicion del filosofo
- */
+ * Logica de las acconse de los filosofos 
+*/
 static void	philo_actions(t_data *data, int i)
 {
 	if (get_timestamp() - data->philos[i].last_food > data->params.t_die
@@ -67,10 +61,7 @@ static void	philo_actions(t_data *data, int i)
 }
 
 /**
- * @brief Inicia el proceso de vida de cada filosofo
- * 
- * @param d estructura de datos
- * @return void* 
+ * Inicia el proceso de vida de cada filosofo
  */
 void	*philo_life(void *d)
 {
@@ -88,5 +79,6 @@ void	*philo_life(void *d)
 		philo_actions(data, i);
 		usleep(10);
 	}
+	pthread_detach(data->philos[i].thread);
 	return (NULL);
 }

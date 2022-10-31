@@ -8,7 +8,7 @@ while read line; do
 done < /dev/stdin
 
 if [[ ${success} == true ]]; then
-	echo "\x1b[32mNORMINETTE OK!"
+	echo "\x1b[32mOK"
 else
-	echo "\x1b[31mNORMINETTE KO!"
+	echo "\x1b[31mKO"
 fi

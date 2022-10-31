@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 15:34:28 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:13:09 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 	}
 	data.timestamp = get_timestamp();
 	pthread_mutex_init(&data.fork_mutex, NULL);
-	pthread_mutex_init(&data.log, NULL);
 	if (create_data_forks(&data) == 0 || create_data_philos(&data) == 0)
 		return (0);
 	i = 0;

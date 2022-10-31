@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eat_bonus.c                                        :+:      :+:    :+:   */
+/*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:24 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:43:22 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:36:02 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../../includes/philo_bonus.h"
 
 /**
- * @brief El filosofo empieza a comer 
- * 
- * @param data estructura de datos del programa
- * @param philo_id id del filosofo
- */
-void	start_eat(t_data *data, int philo_id)
+ * El filosofo empieza a comer 
+*/
+void	*start_eat(void *p_data)
 {
-	data->philo.last_food = get_timestamp();
-	data->philo.status = EAT;
-	print_log(data, philo_id + 1, EAT);
+	t_data	*data;
+
+	data = (t_data *)p_data;
+	take_fork(data, data->i);
+	data->philos[data->i].last_food = get_timestamp();
+	data->philos[data->i].status = EAT;
+	print_log(data, data->i + 1, EAT);
+	return (NULL);
 }
 
 /**
- * @brief El filosofo deja de comer 
- * 
- * @param data estructura de datos del programa
- * @param philo_id id del filosofo
- */
+ * El filosofo deja de comer 
+*/
 void	finish_eat(t_data *data, int philo_id)
 {
 	leave_fork(data);
-	data->philo.n_eat++;
+	data->philos[philo_id].last_food = get_timestamp();
+	data->philos[philo_id].n_eat++;
 	start_sleep(data, philo_id);
 }

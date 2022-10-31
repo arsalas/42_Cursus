@@ -1,67 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_bonus.c                                    :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:45:33 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:27:25 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../../includes/philo_bonus.h"
 
 /**
- * @brief Comprueba si ha terminado la partida
- * 
- * @param info estructura de datos del programa
- * @return void* NULL
- */
-void	*is_game_finish(void *info)
+ * Comprueba si ha terminado la partida
+*/
+bool	is_game_over(t_data *data)
 {
-	t_data		*data;
-	static bool	eat = false;
+	int	i;
+	int	eats;
 
-	data = (t_data *)info;
-	while (true)
+	i = 0;
+	eats = 0;
+	while (i < data->params.n_philo)
 	{
-		if (get_timestamp() - data->philo.last_food > data->params.t_die
-			&& data->philo.status != EAT)
-		{
-			philo_die(data, data->philo.id);
-			sem_post(data->sems.sem_die);
-			close_program(data);
-		}
-		if (data->philo.n_eat > -1
-			&& data->philo.n_eat >= data->params.time_eats && !eat)
-		{
-			sem_post(data->sems.sem_eat);
-			eat = true;
-		}
-		usleep(10);
+		if (data->philos[i].is_alive == false && data->start)
+			return (true);
+		if (data->philos[i].n_eat >= data->params.time_eats)
+			eats++;
+		i++;
 	}
-	return (NULL);
+	if (data->params.time_eats == -1)
+		return (false);
+	if (eats == data->params.n_philo)
+		return (true);
+	return (false);
 }
 
 /**
- * @brief Inicia el proceso del filosofo 
- * 
- * @param data estructura de datos de la partida
- * @param i 
- */
+ * Inicia el proceso del filosofo 
+*/
 void	process_start(t_data *data, int i)
 {
-	pthread_create(&data->threads.life, NULL, &is_game_finish, data);
-	while (true)
+	data->i = i;
+	while (!is_game_over(data))
 	{
-		if (data->philo.status == THINK)
-			take_fork(data, i);
-		else if (data->philo.status == EAT
-			&& get_timestamp() - data->philo.last_food > data->params.t_eat)
+		if (i >= data->params.n_philo)
+			continue ;
+		if (get_timestamp() - data->philos[i].last_food > data->params.t_die
+			&& data->philos[i].status != EAT)
+		{
+			philo_die(data, i);
+			sem_close(data->semaphore);
+			sem_unlink("forks_sem");
+			exit(0);
+		}
+		else if (data->philos[i].status == THINK)
+			pthread_create(&data->thread, NULL, &start_eat, data);
+		else if (data->philos[i].status == EAT
+			&& get_timestamp() - data->philos[i].last_food > data->params.t_eat)
 			finish_eat(data, i);
-		else if (data->philo.status == SLEEP && get_timestamp()
-			- data->philo.last_sleep > data->params.t_sleep)
+		else if (data->philos[i].status == SLEEP && get_timestamp()
+			- data->philos[i].last_sleep > data->params.t_sleep)
 			finish_sleep(data, i);
 		usleep(10);
 	}

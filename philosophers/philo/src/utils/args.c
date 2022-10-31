@@ -6,12 +6,12 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:30 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/13 20:59:03 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:37:36 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// TODO: Mirar nulos
+
 /**
  * @brief Recibir argumentos del programa y guardarlos en una estructura
  * 

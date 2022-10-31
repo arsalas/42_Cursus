@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep_bonus.c                                      :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:44:47 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:36:20 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../../includes/philo_bonus.h"
 
 /**
- * @brief El filosofo empieza a dormir 
- * 
- * @param data estructura de datos del programa
- * @param philo_id id del filosofo
- */
+ * El filosofo empieza a dormir 
+*/
 void	start_sleep(t_data *data, int philo_id)
 {
-	data->philo.last_sleep = get_timestamp();
-	data->philo.status = SLEEP;
-	print_log(data, philo_id + 1, SLEEP);
+	data->philos[philo_id].last_sleep = get_timestamp();
+	data->philos[philo_id].status = SLEEP;
+	if (!is_game_over(data))
+		print_log(data, philo_id + 1, SLEEP);
 }
 
 /**
- * @brief El filosofo termina de dormir 
- * 
- * @param data estructura de datos del programa
- * @param philo_id id del filosofo
- */
+ * El filosofo termina de dormir 
+*/
 void	finish_sleep(t_data *data, int philo_id)
 {
-	data->philo.last_sleep = get_timestamp();
-	data->philo.status = THINK;
-	print_log(data, philo_id + 1, THINK);
+	data->philos[philo_id].last_sleep = get_timestamp();
+	data->philos[philo_id].status = THINK;
+	if (!is_game_over(data))
+		print_log(data, philo_id + 1, THINK);
 }

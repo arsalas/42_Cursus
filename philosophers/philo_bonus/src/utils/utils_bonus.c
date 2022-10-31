@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 18:50:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:21:11 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../../includes/philo_bonus.h"
 
 /**
- * @brief Comprueba si el el valor pasado es un digito
- * 
- * @param c character
- * @return int 1 si es digito 0 si no lo es
+ * Comprueba si el el valor pasado es un digito
  */
 static int	ft_isdigit(int c)
 {
@@ -27,10 +24,7 @@ static int	ft_isdigit(int c)
 }
 
 /**
- * @brief Comprueba si el caracter pasado es un delimitador de la funcion atoi
- * 
- * @param d character
- * @return int 1 si lo es 0 si no lo es
+ * Comprueba si el caracter pasado es un delimitador de la funcion atoi
  */
 static int	is_atoi_delimiter(unsigned char d)
 {
@@ -42,10 +36,7 @@ static int	is_atoi_delimiter(unsigned char d)
 }
 
 /**
- * @brief Transforma un string en un int
- * 
- * @param str numero en string
- * @return int numero en int
+ * Transforma un string en un int
  */
 int	ft_atoi(const char *str)
 {
@@ -72,9 +63,7 @@ int	ft_atoi(const char *str)
 }
 
 /**
- * @brief Obtiene el timestamp
- * 
- * @return long long timestamp
+ * Obtiene el timestamp
  */
 long long	get_timestamp(void)
 {
@@ -85,30 +74,27 @@ long long	get_timestamp(void)
 }
 
 /**
- * @brief Imprime por pantalla el log de la accion
- * 
- * @param data estructura de datos del programa
- * @param philo id del filosofo
- * @param action accion a imprimir
+ * Imprime por pantalla el log de la accion
  */
 void	print_log(t_data *data, int philo, t_status action)
 {
 	char	*desc;
 
-	sem_wait(data->sems.sem_log);
 	if (action == FORK)
-		desc = BMAG "has taken a fork" RESET;
+		desc = BMAG "has taken a fork" reset;
 	else if (action == EAT)
-		desc = BYEL "is eating" RESET;
+		desc = BYEL "is eating" reset;
 	else if (action == SLEEP)
-		desc = BBLU "is sleeping" RESET;
+		desc = BBLU "is sleeping" reset;
 	else if (action == THINK)
-		desc = BCYN "is thiking" RESET;
+		desc = BCYN "is thiking" reset;
 	else if (action == DIE)
-		desc = BRED "died" RESET;
+		desc = BRED "died" reset;
 	else
 		return ;
-	printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
-		get_timestamp() - data->timestamp, philo, desc);
-	sem_post(data->sems.sem_log);
+	sem_wait(data->sem_log);
+	if (data->finish == 0)
+		printf(UGRN "%lli" reset BHWHT" %i " reset "%s\n",
+			get_timestamp() - data->timestamp, philo, desc);
+	sem_post(data->sem_log);
 }

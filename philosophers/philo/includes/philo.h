@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/03 15:48:26 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:12:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# include "colors.h"
+# include "colors.h"   
 
 # define SEC 1000000
 # define MS 100000

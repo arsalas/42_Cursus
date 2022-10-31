@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_bonus.c                                       :+:      :+:    :+:   */
+/*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:30 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/06 16:30:26 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:04:32 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../../includes/philo_bonus.h"
 
 /**
- * @brief  Recive los argumentos del programa y los guarda en una estructura
- * 
- * @param argv 
- * @return t_params 
+ * Recivir argumentos del programa y guardarlos en una estructura
  */
 t_params	recive_args(char **argv)
 {
