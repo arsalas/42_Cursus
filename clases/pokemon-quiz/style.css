@@ -1,0 +1,84 @@
+body {
+    margin: 0px;
+    width: 0px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+}
+
+#main {
+    height: 100vh;
+    width: 100vw;
+    background-color: #eee;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.pokemon {
+    width: 40%;
+    height: 40%;
+}
+
+.options {
+
+    width: 400px;
+}
+
+.options ul {
+    list-style-type: none;
+    width: 100%;
+}
+
+.options li {
+    margin-bottom: 15px;
+}
+
+.options button {
+    padding: 10px 30px;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #222;
+    border-radius: 4px;
+}
+
+.options button:hover {
+    background-color: #666;
+}
+
+.pokemon {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.hidden {
+    filter: brightness(0);
+}
+
+img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    object-fit: contain;
+    height: 100%;
+}
+
+.success {
+    color: green;
+}
+
+.fail {
+    color: darkred;
+}
