@@ -14,6 +14,7 @@ reset.addEventListener("click", () => {
     nCars.disabled = false;
     distance.disabled = false;
     clearInterval(interval);
+    table.innerHTML = '';
 
 });
 
@@ -26,9 +27,7 @@ const startRace = () => {
     interval = setInterval(() => {
         cars.forEach((car) => {
             car.run();
-            console.log(car.distance);
         })
+        table.innerHTML = createTable();
     }, 500)
-
-
 }

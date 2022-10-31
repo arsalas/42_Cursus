@@ -1,157 +1,183 @@
-body, html {
-	margin: 0px;
-	padding: 0px;
-	font-family: 'Ubuntu', sans-serif;
-	z-index: 0;
+body,
+html {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Ubuntu", sans-serif;
+  z-index: 0;
 }
 
- /* SELECCION DE TEXTO */
+/* SELECCION DE TEXTO */
 * {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
- /* ARRASTRAR IMAGENES */
+/* ARRASTRAR IMAGENES */
 img {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
-  user-drag: none;
   -webkit-touch-callout: none;
 }
 
 body {
-	background-color: #7ab361;
+  background-image: url("../images/spectators.jpeg");
+  background-repeat: repeat;
+}
 
+.race-layout {
+  display: flex;
+  height: calc(100vh - 100px - 100px - 40px - 10px);
+  padding: 50px;
+  align-items: center;
 }
 
 .container {
-	display: flex;
-	/* height: calc(100vh - 100px - 40px); */
-	height: 600px;
-	width: 1000px;
-	margin: 50px;
-	/* background: #7ab361; */
-	border: solid 10px #333;
-	border-radius: 20px;
-	overflow: hidden;
-	box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  display: flex;
+  height: 80%;
+  flex: 1;
+  border: solid 10px #333;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+#table {
+  margin-left: 20px;
+  width: 300px;
+}
+
+table {
+  border-collapse: collapse;
+  border: solid #333 10px;
+}
+
+th,
+td {
+  border-bottom: 1px solid #333;
+}
+
+tr {
+  background-color: #ddd;
+  border: solid #333 2px;
+  padding: 20px 10px;
+}
+
+table img {
+  object-fit: contain;
+  height: 32px;
 }
 
 #app {
-	height: 100%;
-	width: 100%;
-	background-color: #7ab361;
-	z-index: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #7ab361;
+  z-index: 0;
 }
 
 #goal {
-	height: 100%;
-	width: 220px;
-	background-image: url("../images/goal.jpg");
-	background-repeat: repeat;
-	background-size: contain;
-	z-index: -1;
+  height: 100%;
+  width: 220px;
+  background-image: url("../images/goal.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+  z-index: -1;
 }
 
-
 header {
-	padding: 20px 50px;
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
-	height: 100px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100px;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  border-bottom: solid #333 10px;
 }
 
 header label {
-	display: block;
-	font-weight: bold;
-	font-size: 30px;
+  display: block;
+  font-weight: bold;
+  font-size: 30px;
 }
 
-select, input {
-	margin-top: 10px;
-	width: 100%;
-	padding: 10px 10px;
-	font-size: 20px;
-	font-weight: bold;
-	border-radius: 1000px;
-	border: solid 5px #333;
-	background-color: #ede577;
-	text-align: center;
+select,
+input {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 1000px;
+  border: solid 5px #333;
+  background-color: #ede577;
+  text-align: center;
 }
 
-select:focus, select:focus-visible, input:focus {
-
-	border: solid 5px #555;
-	outline: none;
-	box-shadow: rgba(85, 85, 85, 0.5) 0px 10px 40px 4px;
+select:focus,
+select:focus-visible,
+input:focus {
+  border: solid 5px #555;
+  outline: none;
+  box-shadow: rgba(85, 85, 85, 0.5) 0px 10px 40px 4px;
 }
 
 button {
-	border-radius: 1000px;
-	cursor: pointer;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 10px 30px;
-	transition: 500ms;
+  border-radius: 1000px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 30px;
+  transition: 500ms;
 }
 
 #start {
-	background-color: #4770f7;
-	border: solid #2a449a 4px;
-	color: #2a449a;
-
+  background-image: url("../images/start.png");
+  background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+  width: 175px;
+  height: 75px;
+  border: solid #2a9a59 2px;
+  /*background-color: #4770f7;
+  color: #2a449a;*/
 }
 
 #start:hover {
-	background-color: #2a449a;
-	border-color: #4770f7;
-	color: #4770f7;
-	box-shadow: rgba(42, 68, 154, 0.5) 0px 10px 40px 4px;
-
+  /*background-color: #2a449a;
+  border-color: #4770f7;
+  color: #4770f7;*/
+  box-shadow: rgba(42, 154, 89, 0.5) 0px 10px 40px 4px;
 }
 
 #reset {
-	display: none;
-	background-color: #ff948a;
-	border: solid #d54639 4px;
-	color: #d54639;
-
-
+  display: none;
+  background-color: #ff948a;
+  border: solid #d54639 4px;
+  color: #d54639;
 }
 
 #reset:hover {
-	background-color: #d54639;
-	border-color: #ff948a;
-	color: #ff948a;
-	box-shadow: rgba(213, 70, 57, 0.5) 0px 10px 40px 4px;
-
+  background-color: #d54639;
+  border-color: #ff948a;
+  color: #ff948a;
+  box-shadow: rgba(213, 70, 57, 0.5) 0px 10px 40px 4px;
 }
 
 .road {
-	height: calc(100% / 9);
-	background-image: url("../images/road.jpeg");
-	background-repeat: repeat;
-	background-size: contain;
+  height: calc(100% / 9);
+  background-image: url("../images/road.jpeg");
+  background-repeat: repeat;
+  background-size: contain;
 }
 
 .road img {
-	height: 100%;
-	z-index: 1;
+  height: 100%;
+  z-index: 1;
 }
 
 .car {
-	height: 100%;
-}
-
-.test {
-	display: flex;
-}
-
-table, th, td {
-	border: 1px solid black;
+  height: 100%;
 }
