@@ -1,30 +1,46 @@
 CFLAGS 	= -Wall -Wextra -Werror
+CC		= g++
 
 SRCS 	= megaphone.cpp
 
-OBJS	= ${SRCS:.c=.o}
+OBJS_DIR	= obj
 
-NAME	= contacts.a
+BIN_DIR	= bin
 
-NAME_EX	= contacts
+OBJS		= $(addprefix  $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
+NAME	= megaphone
 RM 		= rm -f
 
-.c.o:	
-	g++ -c ${CFLAGS} $< -o ${<:.c=.o}
+.SECONDEXPANSION:
 
-all:		${NAME}
+all:		$(NAME)
 
-${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
-			g++ ${CFLAGS} ${SRCS} -o ${NAME_EX}
 
+$(OBJS_DIR)/%.o: %.cpp | $$(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(NAME): $(OBJS) $(BIN_DIR)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(BIN_DIR)/$(NAME)
+	@echo "\x1b[32m$(NAME) compiled!\x1b[0m"
+
+run: $(NAME)
+	@./$(BIN_DIR)/$(NAME)
+	
 clean:
-			${RM} ${OBJS}
+	@$(RM) $(OBJS)
+	@echo "\x1b[32mcleaned!\x1b[0m"
 
 fclean:		clean
-			${RM} ${NAME}
+	@$(RM) $(BIN_DIR)/$(NAME)
 
 re:			fclean all
+
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
+
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
 
 .PHONY:		all clean fclean re

@@ -1,18 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/01 14:47:44 by aramirez          #+#    #+#             */
+/*   Updated: 2022/07/01 14:47:45 by aramirez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <unistd.h>
-#include <ctype.h>
+#include "iostream"
 
-void    print_char(char c)
-{
-    write(1, &c, 1);
-}
-
-void    print_void(void)
-{
-    write(1, "* LOUD AND UNBEARABLE FEEDBACK NOISE *", 38);
-}
-
-void    megaphone(char *str)
+void toUpper(char *str)
 {
     int i;
 
@@ -20,31 +20,27 @@ void    megaphone(char *str)
     while (str[i])
     {
         if (isupper(str[i]) == 0 && isalpha(str[i]) != 0)
-            print_char(toupper(str[i]));
-        else
-            print_char(str[i]);
+            str[i] = (toupper(str[i]));
         i++;
     }
-    
+}
+
+void megaphone(int len, char **words)
+{
+    if (len == 1)
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+    for (int i = 1; i < len; i++)
+    {
+        toUpper(words[i]);
+        std::cout << words[i];
+        if (i < len - 1)
+            std::cout << " ";
+    }
+    std::cout << std::endl;
 }
 
 int main(int argc, char *argv[])
 {
-    int i;
-
-    i = 1;
-    if (argc == 1)
-    {
-        print_void();
-    }
-    else
-    {
-        while (argv[i])
-        {
-            megaphone(argv[i]);
-            i++;
-        }
-    }
-    print_char('\n');
+    megaphone(argc, argv);
     return (0);
 }
