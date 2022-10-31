@@ -80,6 +80,9 @@ start_bonus: $(NAME_B)
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
+
+leaks_bonus: $(NAME_B)
+	@leaks -atExit -- ./philo_bonus/$(NAME_B) 2 800 900 900
 	
 norminette:
 	@echo "\x1b[33mMANDATORY":

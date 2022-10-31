@@ -6,15 +6,18 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:35:14 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:45:33 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 /**
- * Comprueba si ha terminado la partida
-*/
+ * @brief Comprueba si ha terminado la partida
+ * 
+ * @param info estructura de datos del programa
+ * @return void* NULL
+ */
 void	*is_game_finish(void *info)
 {
 	t_data		*data;
@@ -42,8 +45,11 @@ void	*is_game_finish(void *info)
 }
 
 /**
- * Inicia el proceso del filosofo 
-*/
+ * @brief Inicia el proceso del filosofo 
+ * 
+ * @param data estructura de datos de la partida
+ * @param i 
+ */
 void	process_start(t_data *data, int i)
 {
 	pthread_create(&data->threads.life, NULL, &is_game_finish, data);
