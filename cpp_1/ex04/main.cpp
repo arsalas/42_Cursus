@@ -6,12 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:16:02 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/04 16:36:36 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:27:50 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "read.hpp"
-
+#include "File.hpp"
 
 int main(int argc, char **argv)
 {
@@ -27,7 +26,6 @@ int main(int argc, char **argv)
 
 	File file(filename);
 	file.replaceFile(s1, s2);
-	
 
 	return (0);
 }

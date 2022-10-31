@@ -1,8 +1,8 @@
 CFLAGS 	= -Wall -Wextra -Werror
 CC		= g++
 
-SRCS 	= main.cpp read.cpp
-HEADERS 	= read.hpp
+SRCS 	= main.cpp File.cpp
+HEADERS 	= File.hpp
 
 OBJS_DIR	= obj
 
