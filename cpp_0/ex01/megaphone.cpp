@@ -151,7 +151,6 @@ int main(void)
     int         num;
 
     num = 0;
-    
     while (true)
     {
         std::cout << YELLOW"Introduce instruccion: (ADD | SEARCH | EXIT)" WHITE << "\n";
