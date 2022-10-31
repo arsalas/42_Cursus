@@ -64,14 +64,17 @@ $(NAME_B): $(OBJS_B) $(HEADERS) $(HEADERS_B)
 start:
 #	@./philo/philo 1 800 200 200
 #	@./philo/philo 5 800 200 200
-#	@./philo/philo 5 800 200 200 7
+	@./philo/philo 5 800 200 200 7
 #	@./philo/philo 4 410 200 200
-	@./philo/philo 4 310 200 100
+#	@./philo/philo 4 310 200 100
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
 norminette:
-	@norminette | sh ./tests/norminette.sh
+	@echo "\x1b[33mMANDATORY":
+	@norminette philo |  sh ./tests/norminette.sh
+	@echo "\x1b[33mBONUS":
+	@norminette philo_bonus | sh ./tests/norminette.sh
 
 clean:
 	@$(RM) $(OBJS)
