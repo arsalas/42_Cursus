@@ -61,14 +61,15 @@ $(NAME_B): $(OBJS_B) $(HEADERS) $(HEADERS_B)
 	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o $(NAME_B)
 	@echo "\x1b[32m$(NAME_B) compiled!\x1b[0m"
 
-run:
-	@./philo/philo 1 310 200 100
-
+start:
+#	@./philo/philo 1 800 200 200
+#	@./philo/philo 5 800 200 200
+#	@./philo/philo 5 800 200 200 7
+#	@./philo/philo 4 410 200 200
+	@./philo/philo 4 310 200 100
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
-#	@valgrind --leak-check=yes ./philo/$(NAME) 2 800 900 900
-
 norminette:
 	@norminette | sh ./tests/norminette.sh
 
@@ -86,4 +87,4 @@ re:	fclean all
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-.PHONY:		all clean fclean re bonus norminette run
+.PHONY:		all clean fclean re bonus norminette start

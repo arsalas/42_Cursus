@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/aramirez/Documents/GitHub/Cursus/philosophers'
+make: Nothing to be done for `all'.
+make: Leaving directory `/Users/aramirez/Documents/GitHub/Cursus/philosophers'
+ 

@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"__threading_support": "c"
+	},
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/aramirez/Documents/GitHub/Cursus/philosophers/philo",
+			"binaryPath": "/Users/aramirez/Documents/GitHub/Cursus/philosophers/philo/philo",
+			"binaryArgs": []
+		}
+	]
+}

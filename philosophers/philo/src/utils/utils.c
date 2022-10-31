@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/30 13:16:01 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:17:13 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ void	print_log(t_data *data, int philo, t_status action)
 		desc = BRED "died" reset;
 	else
 		return ;
+	pthread_mutex_lock(&data->log);
 	if (data->finish == 0)
 		printf(UGRN "%lli" reset BHWHT"\t%i\t" reset "%s\n",
 			get_timestamp() - data->timestamp, philo, desc);
+	pthread_mutex_unlock(&data->log);
 }
