@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/12 14:30:56 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:01:18 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum e_status
 {
 	FORK,
 	EAT,
+	WAITNG_FORK,
 	SLEEP,
 	THINK,
 	DIE
