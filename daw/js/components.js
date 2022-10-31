@@ -38,7 +38,7 @@ const tableComponent = () => {
   <div class="table">`;
   const carSort = sortByKeyDesc(CarController.cars, "position");
   carSort.forEach((row) => {
-      tableHtml += `
+    tableHtml += `
       <div class="row ${getClassPosition(row.position)}">
       <div class="column"><img src='${row.image}' /></div>
       <div class="column position">${positionComponent(row.position)}</div>

@@ -12,7 +12,7 @@ const sortByKeyDesc = (array, key) => {
 /**
  * Genera un numero entre 1 y 10
  */
-const getRandom = () => (Math.floor(Math.random() * 10) + 1)
+const getRandom = () => (Math.floor(Math.random() * 10) + 1);
 
 /**
  * Obtiene la clase de css en funcion de la posicion del coche

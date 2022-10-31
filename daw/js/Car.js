@@ -24,7 +24,7 @@ class Car {
                     marginLeft: [`${this.distance}%`, `${(this.distance + dist) < 100 ? this.distance + dist : 100}%`]
                 },
                 {
-                    duration: params.speed.value * 250,
+                    duration: params.speed,
                     easing: "linear",
                     iterations: 1,
                     fill: "both"
