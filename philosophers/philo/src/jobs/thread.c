@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/30 12:48:06 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:38:51 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	is_game_over(t_data *data)
 }
 
 /**
- * Logica de las acconse de los filosofos 
+ * Logica de las acciones de los filosofos 
 */
 static void	philo_actions(t_data *data, int i)
 {
@@ -79,6 +79,5 @@ void	*philo_life(void *d)
 		philo_actions(data, i);
 		usleep(10);
 	}
-	pthread_detach(data->philos[i].thread);
 	return (NULL);
 }
