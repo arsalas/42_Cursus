@@ -13,32 +13,23 @@
 #include "./get_next_line.h"
 
 /**
- * Obtener la str de la linea de el storage
- */
-char *extract_line(char *str)
+ * Comprobar si hay un salto de linea
+*/
+int contain_line(char *str)
 {
-    int len;
-    char *n_str;
     int i;
 
-    len = strlenline(str);
-    n_str = malloc(sizeof(char) * (len + 1));
-    if (!n_str)
-        return (NULL);
     i = 0;
-    while (i < len)
+    while (str[i])
     {
-        n_str[i] = str[i];
+        if (str[i] == '\n')
+            return (1);
         i++;
     }
-    n_str[i] = '\0';
-    return (n_str);
+    return (0);
 }
 
-/**
- * Contar la cantidad de caracteres de una string
- */
-int ft_strlen(char *str)
+int str_len(char *str)
 {
     int i;
 
@@ -48,40 +39,85 @@ int ft_strlen(char *str)
     return (i);
 }
 
-/**
- * Obtener la ultima linea en el storage
- */
-char *get_last_line(char *str)
+void    push_str(char *storage, char *str)
 {
+    int i;
     int len;
-    char *n_str;
+
+    len = str_len(storage);
+    i = 0;
+    while (str[i])
+    {
+        storage[len + i] = str[i];
+        i++;
+    }
+    storage[len + i] = '\0';
+}
+
+int count_line(char *str)
+{
     int i;
 
-    len = ft_strlen(str);
-    n_str = malloc(sizeof(char) * (len + 1));
-    if (!n_str)
+    i = 0;
+    while (str[i] != '\n')
+        i++;
+    return (i + 1);
+}
+
+void    mem_move(char *storage)
+{
+    int start;
+    int i;
+
+    start = count_line(storage);
+    i = 0;
+    while (storage[start + i])
+    {
+        storage[i] = storage[start + i];
+        i++;
+    }
+    storage[i] = '\0';
+}
+
+char    *extract_line(char *storage)
+{
+    int     len;
+    char    *str;
+    int     i;
+
+    len = count_line(storage);
+    str = malloc(sizeof(char) * (len + 1));
+    if (str == NULL)
         return (NULL);
     i = 0;
     while (i < len)
     {
-        n_str[i] = str[i];
-        str[i] = '\0';
+        str[i] = storage[i];
         i++;
     }
-    n_str[i] = '\0';
-    return (n_str);
+    mem_move(storage);
+    return (str);
 }
-
-/**
- * Cuando no leemos mas bytes del fichero comprobamos si queda algo en
- * el storage para devolver la ultima line o devolver un NULL
- */
-char *no_read(char *storage)
+char    *extract_last_line(char *storage)
 {
-    if (ft_strlen(storage) > 0)
-        return (get_last_line(storage));
-    else
+    int     len;
+    char    *str;
+    int     i;
+
+    len = str_len(storage);
+    if (len == 0)
         return (NULL);
+    str = malloc(sizeof(char) * (len + 1));
+    if (str == NULL)
+        return (NULL);
+    i = 0;
+    while (i < len)
+    {
+        str[i] = storage[i];
+        storage[i] = '\0';
+        i++;
+    }
+    return (str);
 }
 
 /**
@@ -89,31 +125,27 @@ char *no_read(char *storage)
  */
 char *get_next_line(int fd)
 {
-    char        *buf;
     static char storage[INT_MAX];
-    size_t      nbytes;
-    char        *str;
+    int     nb;
+    char    buffer[BUFFER_SIZE];
 
-    if (fd == -1)
+    if (fd == -1 || fd > FOPEN_MAX)
         return (NULL);
+    // Comprobar si hay una linea almacenada
     if (contain_line(storage) == 1)
+         return (extract_line(storage));
+    while (1)
     {
-        str = extract_line(storage);
-        if (ft_strlen(str) != ft_strlen(storage))
-            mem_move(storage, ft_strlen(str));
-        else
-            mem_zero(storage);
-        return (str);
+        nb = read(fd, buffer, BUFFER_SIZE);
+        // Problemas de lectura
+        if (nb == -1)
+            return (NULL);
+        // No ha leido nada
+        if (nb == 0)
+            return (extract_last_line(storage));
+        push_str(storage, buffer);
+        if(contain_line(storage) == 1)
+            break ;
     }
-    buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (!buf)
-        return (buf);
-    nbytes = read(fd, buf, BUFFER_SIZE);
-    if (nbytes == -1)
-        return (NULL);
-    if (nbytes == 0)
-        return (no_read(storage));
-    buf[nbytes] = '\0';
-    str_join(storage, buf);
-    return (get_next_line(fd));
+    return (extract_line(storage));
 }

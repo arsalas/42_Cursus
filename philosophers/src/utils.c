@@ -1,5 +1,6 @@
+#include "../includes/philo.h"
 
-int	ft_isdigit(int c)
+int ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -7,17 +8,15 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+int ft_atoi(const char *str)
 {
-	int	i;
-	int	n;
-	int	sign;
+	int i;
+	int n;
+	int sign;
 
 	i = 0;
 	n = 0;
-	while ((unsigned char)str[i] == ' ' || (unsigned char)str[i] == '\t'
-		|| (unsigned char)str[i] == '\n' || (unsigned char)str[i] == '\f'
-		|| (unsigned char)str[i] == '\r' || (unsigned char)str[i] == '\v')
+	while ((unsigned char)str[i] == ' ' || (unsigned char)str[i] == '\t' || (unsigned char)str[i] == '\n' || (unsigned char)str[i] == '\f' || (unsigned char)str[i] == '\r' || (unsigned char)str[i] == '\v')
 		i++;
 	if (str[i] == '-')
 		sign = -1;
@@ -31,4 +30,12 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (sign * n);
+}
+
+long long get_timestamp(void)
+{
+	struct timeval time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

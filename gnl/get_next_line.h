@@ -19,12 +19,6 @@
 #include <string.h>
 #include <limits.h>
 
-char    *get_next_line(int fd);
-int     contain_line(char *str);
-int     strlenline(char *str);
-void    str_join(char *storage, char *str);
-void    mem_move(char *str, int len);
-void    mem_zero(char *str);
-int     ft_strlen(char *str);
+char *get_next_line(int fd);
 
 #endif
