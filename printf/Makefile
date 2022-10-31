@@ -10,6 +10,7 @@ NAME 	= libftprintf.a
 RM 		= rm -f
 
 .c.o:	
+	make -C libft
 	gcc -c ${CFLAGS} $< -o ${<:.c=.o}
 
 all:		${NAME}
@@ -19,9 +20,11 @@ ${NAME}:	${OBJS}
 
 clean:
 			${RM} ${OBJS}
+			make clean -C libft
 
 fclean:		clean
 			${RM} ${NAME}
+			make fclean -C libft
 
 re:			fclean all
 

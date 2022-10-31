@@ -1,4 +1,4 @@
-CFLAGS 	= -Wall -Wextra -Werror
+CFLAGS 	= -Wall -Wextra -Werror -g3
 
 SRCS 	= ft_atoi.c \
 		ft_bzero.c \
@@ -45,30 +45,34 @@ B_SRCS 	= ft_lstnew.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 
-OBJS 	= ${SRCS:.c=.o}
+OBJS 	= $(SRCS:.c=.o)
 
-B_OBJS 	= ${B_SRCS:.c=.o}
+B_OBJS 	= $(B_SRCS:.c=.o)
+
+HEADERS 	= libft.h
 
 NAME 	= libft.a
 
 RM 		= rm -f
 
 .c.o:	
-	gcc -c ${CFLAGS} $< -o ${<:.c=.o}
+	@gcc -c ${CFLAGS} $< -o ${<:.c=.o}
 
 all:		${NAME}
 
-${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
+${NAME}:	$(OBJS) $(HEADERS)
+	@ar rc ${NAME} ${OBJS}
+	@echo "\x1b[32mlibft compiled!\x1b[0m"
 
 bonus:		${B_OBJS} ${OBJS}
-			ar rc ${NAME} ${OBJS} ${B_OBJS}
+	@ar rc ${NAME} ${OBJS} ${B_OBJS}
 
 clean:
-			${RM} ${OBJS} ${B_OBJS}
+	@${RM} ${OBJS} ${B_OBJS}
+	@echo "\x1b[32mlibft cleaned!\x1b[0m"
 
 fclean:		clean
-			${RM} ${NAME}
+	${RM} ${NAME}
 
 re:			fclean all
 

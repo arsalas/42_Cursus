@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:20:50 by aramirez          #+#    #+#             */
-/*   Updated: 2022/02/23 13:06:52 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/03/04 15:30:16 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int	print_number_unsgned(unsigned int num)
 {
 	int	numbytes;
 
+	if (num < 0)
+	{
+		print_char('-');
+		num = -num;
+	}
 	numbytes = 0;
 	if (num >= 10)
 	{
