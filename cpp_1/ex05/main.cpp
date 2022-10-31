@@ -5,27 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 14:16:02 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 18:27:50 by aramirez         ###   ########.fr       */
+/*   Created: 2022/05/05 15:41:21 by aramirez          #+#    #+#             */
+/*   Updated: 2022/05/05 18:42:57 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "File.hpp"
+#include "Karen.hpp"
 
-int main(int argc, char **argv)
+int main(void)
 {
-	std::string filename;
-	std::string s1;
-	std::string s2;
-
-	if (argc < 4)
-		return (0);
-	filename = argv[1];
-	s1 = argv[2];
-	s2 = argv[3];
-
-	File file(filename);
-	file.replaceFile(s1, s2);
-
-	return (0);
+	Karen karen;
+	karen.complain("debug");
+	karen.complain("info");
+	karen.complain("warning");
+	karen.complain("error");
+	return(0);
 }

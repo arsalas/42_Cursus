@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   file.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 17:16:01 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 18:45:29 by aramirez         ###   ########.fr       */
+/*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
+/*   Updated: 2022/05/05 15:22:16 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-#define ZOMBIE_HPP
+#ifndef FILE_H
+#define FILE_H
+# include <iostream>
+# include <fstream>
 
-#define BLK "\e[0;30m"
-#define RED "\e[0;31m"
-#define GRN "\e[0;32m"
-#define YEL "\e[0;33m"
-#define BLU "\e[0;34m"
-#define MAG "\e[0;35m"
-#define CYN "\e[0;36m"
-#define WHT "\e[0;37m"
-
-#include "iostream"
-
-class Zombie
+class File
 {
 private:
-	std::string name;
+	std::string _filename;
+	std::ifstream _file;
 
 public:
-	void announce(void);
-	~Zombie();
-
-	Zombie(std::string zombie_name);
+	File(std::string filename) : _filename(filename){};
+	std::string getFilename(void) { return (_filename); }
+	void setFilename(std::string value) { _filename = value; }
+	void replaceFile(std::string s1, std::string s2);
+	std::string transform_line(std::string s, std::string s1, std::string s2);
 };
-
-Zombie *newZombie(std::string name);
-void randomChump(std::string name);
 
 #endif

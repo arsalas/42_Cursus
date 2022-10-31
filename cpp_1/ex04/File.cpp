@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.cpp                                           :+:      :+:    :+:   */
+/*   file.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:31:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/04 17:57:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:16:36 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "read.hpp"
+#include "File.hpp"
 
 void File::replaceFile(std::string s1, std::string s2)
 {
-	(void)s1;
-	(void)s2;
 	_file.open(_filename);
 	if (!_file)
 	{
@@ -25,36 +23,40 @@ void File::replaceFile(std::string s1, std::string s2)
 	std::string line;
 	std::string new_filename = _filename + ".replace";
 	std::ofstream new_file;
-
 	new_file.open(new_filename);
-
 	if (_file.is_open())
 	{
 		while (!_file.eof())
 		{
 			std::getline(_file, line);
-
-			int posInit = 0;
-			int posFound = 0;
-			std::string splitted;
-
-			while (posFound >= 0)
-			{
-				posFound = line.find(s1, posInit);
-				if (posFound > 0)
-				{
-					splitted += line.substr(posInit, posFound - posInit) + s2;
-					posInit = posFound + 1;
-				}
-				else
-				{
-					splitted += line.substr(posInit + s1.length() - 1, line.length() - posInit - s1.length() + 1);
-				}
-			}
-			new_file << splitted << std::endl;
+			new_file << transform_line(line, s1, s2);
 		}
 	}
-
 	_file.close();
 	new_file.close();
 }
+
+std::string File::transform_line(std::string s, std::string s1, std::string s2)
+{
+	std::string new_line = "";
+	int start = 0;
+	std::string del = " ";
+	int end = s.find(del);
+	while (end != -1)
+	{
+		if (s.substr(start, end - start) == s1)
+			new_line += s2;
+		else
+			new_line += s.substr(start, end - start);
+		new_line += " ";
+		start = end + del.size();
+		end = s.find(del, start);
+	}
+	if (s.substr(start, end - start) == s1)
+		new_line += s2;
+	else
+		new_line += s.substr(start, end - start);
+	new_line += "\n";
+	return (new_line);
+}
+

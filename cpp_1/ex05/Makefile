@@ -1,14 +1,14 @@
 CFLAGS 	= -Wall -Wextra -Werror
 CC		= g++
 
-SRCS 	= main.cpp File.cpp
-HEADERS 	= File.hpp
+SRCS 	= main.cpp Karen.cpp
+HEADERS 	= Karen.hpp
 
 OBJS_DIR	= obj
 
 OBJS		= $(addprefix  $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
-NAME	= replace
+NAME	= karen
 RM 		= rm -f
 
 all:	$(NAME)
