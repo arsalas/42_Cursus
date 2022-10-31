@@ -50,32 +50,10 @@ body {
 }
 
 #table {
-  margin-left: 20px;
-  width: 300px;
-    border-radius: 20px;
-
+  width: 350px;
+  height: 80%;
 }
 
-table {
-  border-collapse: collapse;
-  border: solid  var(--border-bg-color) 10px;
-}
-
-th,
-td {
-  border-bottom: 1px solid var(--border-bg-color);
-}
-
-tr {
-  background-color: #ddd;
-  border: solid var(--border-bg-color) 2px;
-  padding: 20px 10px;
-}
-
-table img {
-  object-fit: contain;
-  height: 32px;
-}
 
 #app {
   height: 100%;
@@ -149,7 +127,7 @@ button {
   width: 175px;
   height: 75px; */
   height: 54px;
-  border: solid #457d04 2px;
+  border: solid #457d04 4px;
   background-color: #71c502;
   color: #457d04;
 }
@@ -190,4 +168,61 @@ button {
 
 .car {
   height: 100%;
+}
+
+.container-table {
+  margin-top: -10px;
+  margin-left: 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  border: solid 10px var(--border-bg-color);
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  width: 100%;
+  height: 100%;
+  /*padding: 5px 20px;*/
+  background-color: #efefef;
+}
+
+.table {
+  height: 100%;
+  width: 100%;
+}
+.row {
+  display: flex;
+  justify-content: space-around;
+  height: calc(100% / 9 - 1px);
+  border-bottom: solid 1px #333;
+  padding: 0px 0px;
+}
+.column {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.column img {
+  height: 100%;
+}
+
+.column.position{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.first{
+  background-color: #FFD700;
+  color: #776600;
+}
+
+.second{
+  background-color: #C0C0C0;
+  color: #616161;
+}
+
+.third{
+  background-color: #CD7F32;
+  color: #503316;
 }
