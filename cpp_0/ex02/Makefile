@@ -1,27 +1,50 @@
 CFLAGS 	= -Wall -Wextra -Werror
+CC		= g++
 
-SRCS 	= megaphone.cpp
+SRCS 	= tests.cpp Account.cpp
 
-OBJS	= ${SRCS:.c=.o}
+OBJS_DIR	= obj
 
-NAME	= megaphone
+BIN_DIR	= bin
+
+OBJS		= $(addprefix  $(OBJS_DIR)/, $(SRCS:.cpp=.o))
+
+INC = Account.hpp 
+
+NAME	= account
 
 RM 		= rm -f
 
-.c.o:	
-	g++ -c ${CFLAGS} $< -o ${<:.c=.o}
+.SECONDEXPANSION:
 
-all:		${NAME}
+all:		$(NAME)
 
-${NAME}:	${OBJS}
-			g++ ${CFLAGS} ${SRCS} -o ${NAME}
+$(OBJS_DIR)/%.o: %.cpp | $$(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(NAME): $(OBJS) $(BIN_DIR)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(BIN_DIR)/$(NAME)
+	@echo "\x1b[32m$(NAME) compiled!\x1b[0m"
+
+run: $(NAME)
+	@./$(BIN_DIR)/$(NAME)
+
+test: $(NAME)
+	@./$(BIN_DIR)/$(NAME) > result.log
+	@diff 19920104_091532.log result.log
 clean:
-			${RM} ${OBJS}
+	@$(RM) $(OBJS)
+	@echo "\x1b[32mcleaned!\x1b[0m"
 
 fclean:		clean
-			${RM} ${NAME}
+	@$(RM) $(BIN_DIR)/$(NAME)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
+
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+.PHONY:		all clean fclean re test run
