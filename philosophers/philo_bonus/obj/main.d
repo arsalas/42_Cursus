@@ -1,6 +1,5 @@
-philo/obj/actions/die.o: philo/src/actions/die.c \
- /usr/include/stdc-predef.h philo/src/actions/../../includes/philo.h \
- /usr/include/stdio.h \
+philo_bonus/obj/main.o: philo_bonus/src/main.c /usr/include/stdc-predef.h \
+ philo_bonus/src/../includes/philo_bonus.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -64,4 +63,5 @@ philo/obj/actions/die.o: philo/src/actions/die.c \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
  /usr/include/x86_64-linux-gnu/sys/time.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
- philo/src/actions/../../includes/../../includes/colors.h
+ /usr/include/semaphore.h /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ philo_bonus/src/../includes/../../includes/colors.h

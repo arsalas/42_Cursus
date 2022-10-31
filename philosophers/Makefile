@@ -94,6 +94,9 @@ ${NAME}:	${OBJS}
 bonus:		${OBJS_B}
 			$(CC) ${CFLAGS} $(OBJS_B) -o $(DIR_B)/$(NAME_BONUS)
 
+run:
+	./philo/philo 4 4000 4000 2000
+
 clean:
 			${RM} ${OBJS} ${OBJS:.o=.d}
 			${RM} ${OBJS_B} ${OBJS_B:.o=.d}
