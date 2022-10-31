@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:24:45 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/19 16:50:35 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:23:54 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ Account::Account(int initial_deposit) : _accountIndex(Account::_nbAccounts), _am
 Account::~Account(void)
 {
 	_displayTimestamp();
-	std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";closed" << std::endl;
+	std::cout << "index:" << _accountIndex
+			  << ";amount:" << _amount << ";closed" << std::endl;
 	Account::_nbAccounts--;
 	Account::_totalAmount -= Account::checkAmount();
 }
