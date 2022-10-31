@@ -125,7 +125,7 @@ char    *extract_last_line(char *storage)
  */
 char *get_next_line(int fd)
 {
-    static char storage[INT_MAX];
+    static char storage[100000];
     int     nb;
     char    buffer[BUFFER_SIZE];
 
