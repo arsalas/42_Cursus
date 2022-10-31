@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:16:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/09 13:30:50 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:37:38 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ unsigned int ClapTrap::getEp(void)
 unsigned int ClapTrap::getAtk(void)
 {
 	return (_atk);
+}
+
+std::string ClapTrap::getName(void)
+{
+	return (_name);
 }
 
 void ClapTrap::setHp(unsigned int hp)

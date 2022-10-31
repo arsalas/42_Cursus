@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 17:16:01 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/09 13:53:54 by aramirez         ###   ########.fr       */
+/*   Created: 2022/05/09 13:23:50 by aramirez          #+#    #+#             */
+/*   Updated: 2022/05/10 15:12:55 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ScavTrap_HPP
-#define ScavTrap_HPP
+#include "DiamondTrap.hpp"
 
-#include "iostream"
-#include "ClapTrap.hpp"
-
-class ScavTrap : ClapTrap
+int	main(void)
 {
-private:
-
-public:
-	ScavTrap(std::string name);
-	~ScavTrap(void);
-
-	void guardGate();
-
-};
-
-#endif
+	DiamondTrap diamondTrap("Arma 1");
+	std::cout << "Name:\t" << diamondTrap.getName() << std::endl;
+	std::cout << "Hp:\t" << diamondTrap.getHp() << std::endl;
+	std::cout << "Ep:\t" << diamondTrap.getEp() << std::endl;
+	std::cout << "Atk:\t" << diamondTrap.getAtk() << std::endl;
+	return (0);
+}

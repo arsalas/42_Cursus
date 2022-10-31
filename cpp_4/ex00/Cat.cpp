@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 13:23:50 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/09 13:54:18 by aramirez         ###   ########.fr       */
+/*   Created: 2022/05/10 15:27:50 by aramirez          #+#    #+#             */
+/*   Updated: 2022/05/10 15:53:32 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "Cat.hpp"
 
-int	main(void)
+Cat::Cat(void)
 {
-	ScavTrap scavTrap("Arma 1");
-	return (0);
+	type = "Cat";
+	std::cout << "Cat construct" << std::endl;
+}
+
+Cat::~Cat(void)
+{
+	std::cout << "Cat destroy" << std::endl;
+}
+
+void Cat::makeSound(void)
+{
+	std::cout << "miau!" << std::endl;
 }
