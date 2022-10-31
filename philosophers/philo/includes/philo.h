@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/06 13:15:05 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:22:00 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 # define SEC 1000000
 # define MS 100000
-
 
 typedef enum e_status
 {
@@ -48,11 +47,12 @@ typedef struct s_philo
 
 typedef struct s_params
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	time_eats;
+	int		n_philo;
+	int		t_die;
+	int		t_eat;
+	int		t_sleep;
+	int		time_eats;
+	bool	correct_format;
 }	t_params;
 
 typedef struct s_data

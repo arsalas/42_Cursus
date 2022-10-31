@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/05 16:56:47 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:37:36 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ bool	is_game_over(t_data *data)
 }
 
 /**
+ * Logica de las acconse de los filosofos 
+*/
+static void	philo_actions(t_data *data, int i)
+{
+	if (get_timestamp() - data->philos[i].last_food > data->params.t_die
+		&& data->philos[i].status != EAT)
+		philo_die(data, i);
+	else if (data->philos[i].status == THINK
+		&& can_take_fork(data, i))
+		start_eat(data, i);
+	else if (data->philos[i].status == EAT)
+	{
+		if (get_timestamp() - data->philos[i].last_food > data->params.t_eat)
+			finish_eat(data, i);
+	}
+	else if (data->philos[i].status == SLEEP)
+	{
+		if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
+			finish_sleep(data, i);
+	}
+}
+
+/**
  * Inicia el proceso de vida de cada filosofo
  */
 void	*philo_life(void *d)
@@ -53,22 +76,7 @@ void	*philo_life(void *d)
 	{
 		if (i >= data->params.n_philo)
 			continue ;
-		if (get_timestamp() - data->philos[i].last_food > data->params.t_die
-			&& data->philos[i].status != EAT)
-			philo_die(data, i);
-		else if (data->philos[i].status == THINK
-			&& can_take_fork(data, i))
-			start_eat(data, i);
-		else if (data->philos[i].status == EAT)
-		{
-			if (get_timestamp() - data->philos[i].last_food > data->params.t_eat)
-				finish_eat(data, i);
-		}
-		else if (data->philos[i].status == SLEEP)
-		{
-			if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
-				finish_sleep(data, i);
-		}
+		philo_actions(data, i);
 		usleep(10);
 	}
 	pthread_detach(data->philos[i].thread);

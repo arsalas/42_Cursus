@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/05 16:22:47 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/11 12:49:50 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void	process_start(t_data *data, int i)
 		if (get_timestamp() - data->philos[i].last_food > data->params.t_die
 			&& data->philos[i].status != EAT)
 			philo_die(data, i);
-		else if (data->philos[i].status == THINK
-			&& can_take_fork(data))
+		else if (data->philos[i].status == THINK)
 			start_eat(data, i);
 		else if (data->philos[i].status == EAT)
 		{

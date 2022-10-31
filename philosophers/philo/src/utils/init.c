@@ -6,11 +6,27 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/04 16:46:17 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:37:31 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
+
+/**
+ * Completa la informacion inicial del filosofo 
+*/
+static t_philo	init_philo_data(int i)
+{
+	t_philo	philo;
+
+	philo.id = i + 1;
+	philo.is_alive = true;
+	philo.last_food = get_timestamp();
+	philo.last_sleep = 0;
+	philo.n_eat = 0;
+	philo.status = THINK;
+	return (philo);
+}
 
 /**
  * Crea los datos de los filosofos para completar la array y lanza los hilos
@@ -19,7 +35,6 @@
 int	create_data_philos(t_data *data)
 {
 	int		i;
-	t_philo	philo;
 	t_info	info;
 
 	data->philos = malloc(sizeof(t_philo) * data->params.n_philo);
@@ -28,13 +43,7 @@ int	create_data_philos(t_data *data)
 	i = 0;
 	while (i < data->params.n_philo)
 	{
-		philo.id = i + 1;
-		philo.is_alive = true;
-		philo.last_food = get_timestamp();
-		philo.last_sleep = 0;
-		philo.n_eat = 0;
-		philo.status = THINK;
-		data->philos[i] = philo;
+		data->philos[i] = init_philo_data(i);
 		info.data = data;
 		info.i = i;
 		if (i == data->params.n_philo - 1)

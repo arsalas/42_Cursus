@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/05 16:04:21 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:21:44 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define SEC 1000000
 # define MS 100000
-# define SEM_NAME "/sem_name"
+# define SEM_NAME "/semaphore2"
 
 typedef enum e_status
 {
