@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="piedraPapelTijera.css">
+	<title>Piedra Papel Tijera</title>
+</head>
+<body>
+
+	<h1>Juego de Piedra Papel Tijera</h1>
+
+	<p><label>Introduce el nombre del jugador </label><input type="text" name="nombre"></p>
+	<p><label>¿Cuántas partidas quieres jugar? </label><input type="number" name="partidas" value="0"></p>
+	<button>¡JUGAR!</button>
+
+
+	<h3>Jugando la partida <span id="actual">0</span> de <span id="total">0</span>.</h3>
+
+	<div id="jugador">
+		<img class="seleccionado" src="img/defecto.png">
+		<img class="noSeleccionado" src="img/defecto.png">
+		<img class="noSeleccionado" src="img/defecto.png">
+	</div>
+
+	<h2>Piedra, papel o tijera.... <button>¡YA!</button></h2>
+
+	
+	<div id="maquina">
+		<img src="img/defecto.png">
+	</div>
+
+	<div>
+		<h3>Historial de partidas</h3>
+		<ul id="historial">
+		</ul>
+		<button>RESET</button>
+	</div>
+
+
+	<script type="text/javascript" src="piedraPapelTijera.js"></script>
+
+</body>
+</html>
