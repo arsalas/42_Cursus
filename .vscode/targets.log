@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Fri Jun  3 15:23:32 2022
+# Make data base, printed on Mon Jun  6 13:58:27 2022
 
 # Variables
 
@@ -36,7 +36,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-d17eb136-722b-4ce1-b51a-589d5a29a6cc.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-ad3aa03c-8ee5-47d2-a128-d3bb81f5e53a.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -48,7 +48,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.w7S2C5sZup/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Xk8bIurll6/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -136,7 +136,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 75761
+VSCODE_PID = 98051
 # variable set hash-table stats:
 # Load=63/1024=6%, Rehash=0, Collisions=1/84=1%
 
@@ -220,7 +220,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Fri Jun  3 15:23:32 2022
+# Finished Make data base on Mon Jun  6 13:58:27 2022
 
  
 make: *** No rule to make target `all'.  Stop.
