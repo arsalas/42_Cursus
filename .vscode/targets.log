@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Wed Jun  8 13:23:39 2022
+
+# Make data base, printed on Wed Jun 15 15:27:30 2022
 
 # Variables
 
@@ -36,7 +39,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-ef6def58-079c-4097-8b22-9664e9e2b282.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-fe3d73e3-4a6e-4466-9021-bf7112ae7056.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -48,7 +51,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.I6ZPpb7TDa/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AMMzY9qI6m/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -112,7 +115,7 @@ MFLAGS = -Rrqp
 # environment
 MAIL = aramirez@student.42barcelona.com
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.3220
+XPC_SERVICE_NAME = com.microsoft.VSCode.2436
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -136,7 +139,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 96683
+VSCODE_PID = 1210
 # variable set hash-table stats:
 # Load=63/1024=6%, Rehash=0, Collisions=1/84=1%
 
@@ -220,8 +223,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Wed Jun  8 13:23:39 2022
+# Finished Make data base on Wed Jun 15 15:27:30 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
