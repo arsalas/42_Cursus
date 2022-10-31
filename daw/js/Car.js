@@ -10,20 +10,24 @@ class Car {
     }
 
     run() {
-        const dist = getRandom();
-        document.querySelector(`#car_${this.id}`).animate(
-            {
-                marginLeft: [`${this.distance}%`, `${(this.distance + dist) < 100 ? this.distance + dist : 100}%`]
-            },
-            {
-                duration: params.speed.value * 250,
-                easing: "linear",
-                iterations: 1,
-                fill: "both"
+        if (this.distance < 100) {
+            const dist = getRandom();
+            document.querySelector(`#car_${this.id}`).animate(
+                {
+                    marginLeft: [`${this.distance}%`, `${(this.distance + dist) < 100 ? this.distance + dist : 100}%`]
+                },
+                {
+                    duration: params.speed.value * 250,
+                    easing: "linear",
+                    iterations: 1,
+                    fill: "both"
+                }
+            );
+            this.distance += dist;
+            if (this.distance >= 100) {
+                // clearInterval(params.interval);
+                params.positions.push(this.id);
             }
-        );
-        this.distance += dist;
-        if (this.distance >= 100)
-            clearInterval(params.interval);
+        }
     }
 }

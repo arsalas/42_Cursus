@@ -20,6 +20,7 @@ const CarController = {
             car.destroy;
         })
         this.cars = [];
+        params.positions = [];
     },
 
     /**

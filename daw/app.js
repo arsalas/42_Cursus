@@ -8,6 +8,7 @@ const params = {
   start: document.querySelector("#start"),
   reset: document.querySelector("#reset"),
   table: document.querySelector("#table"),
+  positions: [],
   interval: undefined
 }
 

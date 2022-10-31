@@ -44,5 +44,7 @@ const startRace = () => {
             car.run();
         })
         params.table.innerHTML = tableComponent();
+        if (params.positions.length == params.nCars.value)
+            clearInterval(params.interval);
     }, params.speed.value * 250)
 }
