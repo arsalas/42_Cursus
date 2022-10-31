@@ -1,12 +1,9 @@
-const goHome = () => {
-  window.scrollTo({top: 0, behavior: 'smooth'});
-};
-const goSkills = () => {
-  const el = document.querySelector("#skill").getBoundingClientRect();
-  window.scrollTo({top: el.bottom + el.top, behavior: 'smooth'});
-};
-const goContact = () => {
-  window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+const goHome = () => scrollTo("#home-section");
+const goSkills = () => scrollTo("#skill-section");
+const goContact = () => scrollTo("#contact-section");
+
+const scrollTo = (id) => {
+  document.querySelector(id).scrollIntoView({ behavior: "smooth" });
 };
 
 document.querySelector("#home").addEventListener("click", goHome, false);
