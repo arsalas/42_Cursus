@@ -3,6 +3,8 @@ CFLAGS 	= -Wall -Wextra -Werror -pthread
 SRCS 	= philo.c \
 		src/utils.c \
 		src/args.c \
+		src/init.c \
+		src/jobs/thread.c \
 
 OBJS 	= ${SRCS:.c=.o}
 

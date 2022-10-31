@@ -1,4 +1,3 @@
-
 #include "./includes/philo.h"
 
 void *thread_run(void *data)
