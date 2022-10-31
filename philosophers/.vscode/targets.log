@@ -8,30 +8,30 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Tue May 31 18:35:44 2022
+# Make data base, printed on Fri Jun  3 15:22:34 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
+ 
 # automatic
 ?F = $(notdir $?)
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from `Makefile', line 30)
-INCLUDES := includes/ philo/includes/
+# makefile (from `Makefile', line 31)
+INCLUDES := includes/ philo/includes/ philo_bonus/includes/
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
 # makefile
- 
 CURDIR := /Users/aramirez/Documents/GitHub/Cursus/philosophers
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 41)
+# makefile (from `Makefile', line 42)
 RM := rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
@@ -45,15 +45,15 @@ MAKEFILE_LIST :=  Makefile
 SRCS = main.c thread.c init.c args.c utils.c die.c eat.c forks.c sleep.c
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from `Makefile', line 33)
+# makefile (from `Makefile', line 34)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-ae61b40d-3764-4811-aa67-71a8e0e4d43d.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cbfc0032vl/T/vscode-ipc-0307c61f-a47b-4319-968d-9d0d691a07d1.sock
 # environment
 VSCODE_CWD = /
 # environment
 PATH = /Users/aramirez/.brew/bin:/Users/aramirez/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
-# makefile (from `Makefile', line 34)
+# makefile (from `Makefile', line 35)
 OBJS_B = $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.o))
 # environment
 VSCODE_LOG_STACK = false
@@ -62,7 +62,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.In5qH12SaQ/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.w7S2C5sZup/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -85,9 +85,9 @@ VSCODE_CODE_CACHE_PATH = /Users/aramirez/Library/Application Support/Code/Cached
 LOGNAME = aramirez
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# makefile (from `Makefile', line 25)
+# makefile (from `Makefile', line 26)
 HEADERS_M = philo/includes/philo.h
-# makefile (from `Makefile', line 24)
+# makefile (from `Makefile', line 25)
 HEADERS = includes/colors.h
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
@@ -111,13 +111,13 @@ MAKE_VERSION := 3.81
 USER = aramirez
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 37)
+# makefile (from `Makefile', line 38)
 NAME := philo
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# makefile (from `Makefile', line 31)
+# makefile (from `Makefile', line 32)
 INC = $(addprefix -I , $(INCLUDES))
 # default
 .VARIABLES := 
@@ -136,8 +136,9 @@ MFLAGS = -Rrqp
 # environment
 MAIL = aramirez@student.42barcelona.com
 # environment
+ 
 XPC_SERVICE_NAME = com.microsoft.VSCode.3220
-# makefile (from `Makefile', line 28)
+# makefile (from `Makefile', line 29)
 OBJS_DIR := obj
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
@@ -151,28 +152,28 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 26)
+# makefile (from `Makefile', line 27)
 HEADERS_B = philo_bonus/includes/philo_bonus.h
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
 # makefile (from `Makefile', line 14)
-SRCS_B = main_bonus.c process_bonus.c args_bonus.c init_bonus.c utils_bonus.c die_bonus.c eat_bonus.c fork_bonus.c sleep_bonus.c 
+SRCS_B = main_bonus.c process_bonus.c args_bonus.c init_bonus.c utils_bonus.c die_bonus.c eat_bonus.c fork_bonus.c sleep_bonus.c exit_bonus.c 
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
-# makefile (from `Makefile', line 35)
+# makefile (from `Makefile', line 36)
 OBJS_M = $(addprefix $(OBJS_DIR)/, $(SRCS_M:.c=.o))
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1952
-# makefile (from `Makefile', line 39)
+VSCODE_PID = 75761
+# makefile (from `Makefile', line 40)
 NAME_B := philo_bonus
 # variable set hash-table stats:
-# Load=79/1024=8%, Rehash=0, Collisions=5/129=4%
+# Load=79/1024=8%, Rehash=0, Collisions=5/131=4%
 
 # Pattern-specific Variable Values
 
@@ -183,28 +184,39 @@ NAME_B := philo_bonus
 # philo/src/jobs (device 16777228, inode 2753614): 3 files, no impossibilities.
 # philo_bonus/src (device 16777228, inode 2753647): No files, no impossibilities so far.
 # . (device 16777228, inode 2753164): 18 files, no impossibilities.
+# philo_bonus/src/actions (device 16777228, inode 2753648): No files, no impossibilities so far.
 # philo/src (device 16777228, inode 2753608): 6 files, no impossibilities.
 # philo_bonus/includes (device 16777228, inode 2753622): 3 files, no impossibilities.
 # philo/src/actions (device 16777228, inode 2753609): 6 files, no impossibilities.
 # philo_bonus (device 16777228, inode 2753621): No files, no impossibilities so far.
-# includes (device 16777228, inode 2753572): No files, no impossibilities so far.
+# includes (device 16777228, inode 2753572): 3 files, no impossibilities.
 # philo (device 16777228, inode 2753582): 5 files, no impossibilities.
-# philo_bonus/src/utils (device 16777228, inode 2753656): No files, no impossibilities so far.
+# philo_bonus/src/utils (device 16777228, inode 2753656): 6 files, no impossibilities.
 # philo/includes (device 16777228, inode 2753583): 3 files, no impossibilities.
 # philo/src/utils (device 16777228, inode 2753617): 5 files, no impossibilities so far.
+# philo_bonus/src/jobs (device 16777228, inode 2753653): No files, no impossibilities so far.
 
-# 49 files, no impossibilities in 12 directories.
+# 58 files, no impossibilities in 14 directories.
 
 # Implicit Rules
 
 obj/%.o: %.c | $(@D)
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
+
+start_bonus: philo_bonus
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 75):
+	@./philo_bonus/philo_bonus 5 800 200 200 7
+	
 
 obj/args.o: philo/src/utils/args.c | obj
 #  Implicit rule search has been done.
@@ -218,7 +230,6 @@ obj/args.o: philo/src/utils/args.c | obj
 # % := 
 # automatic
 # * := args
- 
 # automatic
 # + := 
 # automatic
@@ -231,7 +242,7 @@ obj/args.o: philo/src/utils/args.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
@@ -247,12 +258,12 @@ all: philo
 
 philo: obj/main.o obj/thread.o obj/init.o obj/args.o obj/utils.o obj/die.o obj/eat.o obj/forks.o obj/sleep.o includes/colors.h philo/includes/philo.h
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 18:32:08
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/9=0%
-#  commands to execute (from `Makefile', line 55):
+#  commands to execute (from `Makefile', line 56):
 	@$(CC) $(CFLAGS) $(INC) $(OBJS) -o ./philo/$(NAME)
 	@echo "\x1b[32m$(NAME) compiled!\x1b[0m"
 	
@@ -266,7 +277,7 @@ philo/includes/philo.h:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-.PHONY: all clean fclean re bonus norminette start
+.PHONY: all clean fclean re bonus norminette start start_bonus
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -301,7 +312,7 @@ obj/main.o: philo/src/main.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
@@ -329,18 +340,18 @@ includes/colors.h:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 18:26:53
+#  Last modified 2022-06-03 15:22:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-start:
+start: philo
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 67):
+#  commands to execute (from `Makefile', line 68):
 	@./philo/philo 5 800 200 200 7
 	
 
@@ -359,7 +370,7 @@ obj/init_bonus.o:
 # Not a target:
 philo/src/actions/sleep.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 12:48:22
+#  Last modified 2022-05-31 18:40:41
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -368,7 +379,7 @@ philo/src/actions/sleep.c:
 # Not a target:
 philo/src/actions/die.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 14:19:22
+#  Last modified 2022-05-31 18:36:49
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -377,7 +388,7 @@ philo/src/actions/die.c:
 # Not a target:
 philo/src/utils/init.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 12:39:38
+#  Last modified 2022-05-31 18:44:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -400,7 +411,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 85):
+#  commands to execute (from `Makefile', line 94):
 	@$(RM) philo/$(NAME)
 	@$(RM) philo_bonus/$(NAME_B)
 	
@@ -410,7 +421,7 @@ norminette:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 74):
+#  commands to execute (from `Makefile', line 83):
 	@echo "\x1b[33mMANDATORY":
 	@norminette philo |  sh ./tests/norminette.sh
 	@echo "\x1b[33mBONUS":
@@ -419,6 +430,7 @@ norminette:
 
 .SECONDEXPANSION:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -426,23 +438,23 @@ leaks: philo
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 72):
+#  commands to execute (from `Makefile', line 80):
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
 	
 
 obj:
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 18:32:08
+#  Last modified 2022-06-03 15:21:50
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 91):
+#  commands to execute (from `Makefile', line 100):
 	@mkdir -p $(OBJS_DIR)
 	
 
 obj/sleep.o: philo/src/actions/sleep.c | obj
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `sleep'
-#  Last modified 2022-05-30 13:02:49
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -463,14 +475,14 @@ obj/sleep.o: philo/src/actions/sleep.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
 obj/die.o: philo/src/actions/die.c | obj
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `die'
-#  Last modified 2022-05-31 14:19:51
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -491,7 +503,7 @@ obj/die.o: philo/src/actions/die.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
@@ -510,16 +522,22 @@ philo_bonus/includes/philo_bonus.h:
 # Not a target:
 philo/src/actions/eat.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 16:21:38
+#  Last modified 2022-05-31 18:37:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+obj/exit_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 philo/src/actions/forks.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 15:39:01
+#  Last modified 2022-05-31 18:40:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -542,17 +560,16 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 80):
+#  commands to execute (from `Makefile', line 89):
 	@$(RM) $(OBJS)
 	@$(RM) $(OBJS_B)
 	@echo "\x1b[32mcleaned!\x1b[0m"
 	
 
 obj/init.o: philo/src/utils/init.c | obj
- 
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `init'
-#  Last modified 2022-05-31 12:45:19
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -573,14 +590,14 @@ obj/init.o: philo/src/utils/init.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
 obj/eat.o: philo/src/actions/eat.c | obj
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `eat'
-#  Last modified 2022-05-31 18:32:08
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -601,14 +618,14 @@ obj/eat.o: philo/src/actions/eat.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
 obj/forks.o: philo/src/actions/forks.c | obj
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `forks'
-#  Last modified 2022-05-30 15:39:07
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -629,14 +646,14 @@ obj/forks.o: philo/src/actions/forks.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
 # Not a target:
 philo/src/jobs/thread.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 16:38:51
+#  Last modified 2022-06-02 13:03:44
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -651,7 +668,7 @@ obj/args_bonus.o:
 obj/utils.o: philo/src/utils/utils.c | obj
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `utils'
-#  Last modified 2022-05-31 14:17:37
+#  Last modified 2022-06-02 13:03:46
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -672,7 +689,7 @@ obj/utils.o: philo/src/utils/utils.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
@@ -691,12 +708,12 @@ philo/src/utils/args.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-philo_bonus: obj/main_bonus.o obj/process_bonus.o obj/args_bonus.o obj/init_bonus.o obj/utils_bonus.o obj/die_bonus.o obj/eat_bonus.o obj/fork_bonus.o obj/sleep_bonus.o includes/colors.h philo_bonus/includes/philo_bonus.h
+philo_bonus: obj/main_bonus.o obj/process_bonus.o obj/args_bonus.o obj/init_bonus.o obj/utils_bonus.o obj/die_bonus.o obj/eat_bonus.o obj/fork_bonus.o obj/sleep_bonus.o obj/exit_bonus.o includes/colors.h philo_bonus/includes/philo_bonus.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 61):
-	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o $(NAME_B)
+#  commands to execute (from `Makefile', line 62):
+	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o ./philo_bonus/$(NAME_B)
 	@echo "\x1b[32m$(NAME_B) compiled!\x1b[0m"
 	
 
@@ -712,7 +729,7 @@ philo/src/main.c:
 # Not a target:
 philo/src/utils/utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 14:17:13
+#  Last modified 2022-05-31 18:47:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -721,7 +738,7 @@ philo/src/utils/utils.c:
 obj/thread.o: philo/src/jobs/thread.c | obj
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `thread'
-#  Last modified 2022-05-30 16:38:59
+#  Last modified 2022-06-02 13:03:45
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -742,7 +759,7 @@ obj/thread.o: philo/src/jobs/thread.c | obj
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 53):
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 
@@ -753,11 +770,12 @@ obj/main_bonus.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=46/1024=4%, Rehash=0, Collisions=13/241=5%
+# Load=48/1024=5%, Rehash=0, Collisions=13/247=5%
 # VPATH Search Paths
 
 vpath %.c philo:philo/src:philo/src/actions:philo/src/jobs:philo/src/utils
-vpath %.c philo_bonus:philo_bonus/src:philo/src/actions:philo/src/jobs:philo_bonus/src/utils
+vpath %.c philo_bonus:philo_bonus/src:philo_bonus/src/actions:philo_bonus/src/jobs:philo_bonus/src/utils
+ 
 vpath %.h includes:philo/includes:philo_bonus/includes
 
 # 3 `vpath' search paths.
@@ -769,6 +787,6 @@ vpath %.h includes:philo/includes:philo_bonus/includes
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue May 31 18:35:44 2022
+# Finished Make data base on Fri Jun  3 15:22:34 2022
 
  

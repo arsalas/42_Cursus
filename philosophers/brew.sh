@@ -10,9 +10,9 @@
 
 # Create symlink of .brew in personal sgoinfre
 rm -rf $HOME/.brew
-rm -rf /sgoinfre/students/$USER/homebrew
-mkdir -p /sgoinfre/students/$USER/homebrew
-ln -s /sgoinfre/students/$USER/homebrew $HOME/.brew
+rm -rf /sgoinfre/$USER/homebrew
+mkdir -p /sgoinfre/$USER/homebrew
+ln -s /sgoinfre/$USER/homebrew $HOME/.brew
 
 # Delete and reinstall Homebrew from Github repo on symlinked destination
 git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew

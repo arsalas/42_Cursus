@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/31 18:47:17 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:43:27 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,20 @@ void	print_log(t_data *data, int philo, t_status action)
 	char	*desc;
 
 	if (action == FORK)
-		desc = BMAG "has taken a fork" reset;
+		desc = BMAG "has taken a fork" RESET;
 	else if (action == EAT)
-		desc = BYEL "is eating" reset;
+		desc = BYEL "is eating" RESET;
 	else if (action == SLEEP)
-		desc = BBLU "is sleeping" reset;
+		desc = BBLU "is sleeping" RESET;
 	else if (action == THINK)
-		desc = BCYN "is thiking" reset;
+		desc = BCYN "is thiking" RESET;
 	else if (action == DIE)
-		desc = BRED "died" reset;
+		desc = BRED "died" RESET;
 	else
 		return ;
 	pthread_mutex_lock(&data->log);
 	if (data->finish == 0)
-		printf(UGRN "%lli" reset BHWHT"\t%i\t" reset "%s\n",
+		printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
 			get_timestamp() - data->timestamp, philo, desc);
 	pthread_mutex_unlock(&data->log);
 }

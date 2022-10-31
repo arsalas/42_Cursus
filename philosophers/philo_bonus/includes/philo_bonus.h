@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/20 12:45:46 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:50:00 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 # include <stdbool.h>
 # include <semaphore.h>
 
-# include "../../includes/colors.h" 
+# include "colors.h"
 
 # define SEC 1000000
 # define MS 100000
-# define SEM_NAME "/semaphore_bonus"
+# define SEM_NAME1 "/forks"
+# define SEM_NAME2 "/logs"
 
 typedef enum e_status
 {
@@ -96,5 +97,6 @@ int			next_fork(int pos, int max);
 bool		can_take_fork(t_data *data);
 void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
+void		close_program(t_data *data);
 
 #endif

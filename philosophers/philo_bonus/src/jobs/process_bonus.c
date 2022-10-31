@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   process_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/20 13:27:25 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:17:23 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
+#include "philo_bonus.h"
+
+
+//TODO: Crear un thread para comprobar si los filosofos mueren
+
 
 /**
  * Comprueba si ha terminado la partida
@@ -51,11 +55,10 @@ void	process_start(t_data *data, int i)
 			&& data->philos[i].status != EAT)
 		{
 			philo_die(data, i);
-			sem_close(data->semaphore);
-			sem_unlink("forks_sem");
-			exit(0);
+			close_program(data);
 		}
 		else if (data->philos[i].status == THINK)
+			//take_fork(data, i);
 			pthread_create(&data->thread, NULL, &start_eat, data);
 		else if (data->philos[i].status == EAT
 			&& get_timestamp() - data->philos[i].last_food > data->params.t_eat)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/20 12:38:22 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:00:56 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
+#include "philo_bonus.h"
 
 /**
  *  Espera a que terminen los forks lanzados 
@@ -43,6 +43,7 @@ static t_philo	start_philo(int i)
 
 /**
  * Crea los procesos de los filosofos
+ * fork = 0 para el proceso hijo
 */
 void	create_process(t_data *data)
 {
