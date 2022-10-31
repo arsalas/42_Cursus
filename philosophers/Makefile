@@ -20,6 +20,7 @@ SRCS_B 	= main_bonus.c \
 		eat_bonus.c \
 		fork_bonus.c \
 		sleep_bonus.c \
+		exit_bonus.c \
 
 HEADERS 	= includes/colors.h
 HEADERS_M 	= philo/includes/philo.h
@@ -27,7 +28,7 @@ HEADERS_B 	= philo_bonus/includes/philo_bonus.h
 
 OBJS_DIR	:= obj
 
-INCLUDES 	:=  includes/ philo/includes/
+INCLUDES 	:=  includes/ philo/includes/ philo_bonus/includes/
 INC 		= $(addprefix -I , $(INCLUDES))
 
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
@@ -41,7 +42,7 @@ NAME_B 	:= philo_bonus
 RM 		:= rm -f
 
 vpath %.c philo philo/src philo/src/actions philo/src/jobs philo/src/utils  
-vpath %.c philo_bonus philo_bonus/src philo/src/actions philo/src/jobs philo_bonus/src/utils  
+vpath %.c philo_bonus philo_bonus/src philo_bonus/src/actions philo_bonus/src/jobs philo_bonus/src/utils  
 vpath %.h includes philo/includes philo_bonus/includes 
 
 .SECONDEXPANSION:
@@ -58,18 +59,26 @@ $(NAME): $(OBJS) $(HEADERS) $(HEADERS_M)
 bonus:	$(NAME_B)
 
 $(NAME_B): $(OBJS_B) $(HEADERS) $(HEADERS_B)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o $(NAME_B)
+	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o ./philo_bonus/$(NAME_B)
 	@echo "\x1b[32m$(NAME_B) compiled!\x1b[0m"
 
-start:
+start: $(NAME)
 #	@./philo/philo 1 800 200 200
 #	@./philo/philo 5 800 200 200
 	@./philo/philo 5 800 200 200 7
 #	@./philo/philo 4 410 200 200
 #	@./philo/philo 4 310 200 100
 
+start_bonus: $(NAME_B)
+#	@./philo_bonus/philo_bonus 1 800 200 200
+#	@./philo_bonus/philo_bonus 5 800 200 200
+	@./philo_bonus/philo_bonus 5 800 200 200 7
+#	@./philo_bonus/philo_bonus 4 410 200 200
+#	@./philo_bonus/philo_bonus 4 310 200 100
+
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
+	
 norminette:
 	@echo "\x1b[33mMANDATORY":
 	@norminette philo |  sh ./tests/norminette.sh
@@ -90,4 +99,4 @@ re:	fclean all
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-.PHONY:		all clean fclean re bonus norminette start
+.PHONY:		all clean fclean re bonus norminette start start_bonus
