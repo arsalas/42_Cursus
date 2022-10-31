@@ -7,7 +7,7 @@
 
 int main(void)
 {
-    int fd = open("./text.txt", O_RDONLY);
+    int fd = open("./nl.txt", O_RDONLY);
     // printf("START: \n");
     printf("%s", get_next_line(fd));
     printf("%s", get_next_line(fd));

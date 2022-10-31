@@ -12,32 +12,38 @@
 
 #ifndef PHILO_H
 # define PHILO_H
-// compile with $ gcc -Wall -g *.c -pthread -o program
-// run with ./program
-// check with valgrind --tool=helgrind ./program
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <unistd.h>
-# include <sys/time.h>    
+# include <sys/time.h>
+# include <stdbool.h>
 
-typedef enum e_action
+# include "colors.h"   
+
+# define SEC 1000000
+# define MS 100000
+
+
+typedef enum e_status
 {
 	FORK,
 	EAT,
 	SLEEP,
 	THINK,
 	DIE
-}	t_actions;
+}	t_status;
 
 typedef struct s_philo
 {
 	pthread_t	thread;
 	int			id;
 	int			n_eat;
+	bool		is_alive;
 	long long	last_food;
 	long long	last_sleep;
-	t_actions	action;
+	t_status	status;
 }	t_philo;
 
 typedef struct s_params
@@ -51,16 +57,35 @@ typedef struct s_params
 
 typedef struct s_data
 {
-	t_params	params;
-	t_philo		*philos;
-	int			finish;
+	t_params		params;
+	t_philo			*philos;
+	int				*forks;
+	int				finish;
+	pthread_mutex_t fork_mutex;
 }	t_data;
+
+typedef struct s_info
+{
+	t_data	*data;
+	int		i;
+}	t_info;
 
 int			ft_atoi(const char *str);
 long long	get_timestamp(void);
 t_params	recive_args(char **argv);
-void		print_log(int philo, t_actions action);
-void		create_data_philos(t_data *data, int n);
+void		print_log(int philo, t_status action);
+int			create_data_philos(t_data *data);
+int 		create_data_forks(t_data *data);
 void		*philo_life(void *d);
+void    	start_eat(t_data *data, int philo_id);
+void    	finish_eat(t_data *data, int philo_id);
+void    	start_sleep(t_data *data, int philo_id);
+void    	finish_sleep(t_data *data, int philo_id);
+
+void    	take_fork(t_data *data, int philo_id);
+void    	leave_fork(t_data *data, int philo_id);
+int 		next_fork(int pos, int max);
+bool 		can_take_fork(t_data *data, int philo_id);
+void    	philo_die(t_data *data, int philo_id);
 
 #endif

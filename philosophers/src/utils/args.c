@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 /**
  * Recivir argumentos del programa y guardarlos en una estructura
@@ -25,5 +25,7 @@ t_params	recive_args(char **argv)
 	params.t_sleep = ft_atoi(argv[4]);
 	if (argv[5])
 		params.time_eats = ft_atoi(argv[5]);
+	else
+		params.time_eats = -1;
 	return (params);
 }

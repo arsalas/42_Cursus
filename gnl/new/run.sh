@@ -1,1 +1,1 @@
-gcc main.c gnl.c -D BUFFER_SIZE=1000 && ./a.out
+gcc main.c get_next_line.c -D BUFFER_SIZE=1000 && ./a.out

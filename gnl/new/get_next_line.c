@@ -97,7 +97,6 @@ char *str_join(char *str, char *storage)
     int len_s;
     char *new;
     int i;
-    int i2;
 
     if (storage == NULL)
         len_s = 0;

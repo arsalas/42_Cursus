@@ -10,9 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
-int	ft_isdigit(int c)
+/**
+ * Comprueba si el el valor pasado es un digito
+ */
+int ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -20,20 +23,25 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-static int	is_atoi_delimiter(unsigned char d)
+/**
+ * Comprueba si el caracter pasado es un delimitador de la funcion atoi
+ */
+static int is_atoi_delimiter(unsigned char d)
 {
-	if (d == ' ' || d == '\t' || d == '\n'
-		|| d == '\f' || d == '\r' || d == '\v')
+	if (d == ' ' || d == '\t' || d == '\n' || d == '\f' || d == '\r' || d == '\v')
 		return (1);
 	else
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+/**
+ * Transforma un string en un int
+ */
+int ft_atoi(const char *str)
 {
-	int	i;
-	int	n;
-	int	sign;
+	int i;
+	int n;
+	int sign;
 
 	i = 0;
 	n = 0;
@@ -53,29 +61,35 @@ int	ft_atoi(const char *str)
 	return (sign * n);
 }
 
-long long	get_timestamp(void)
+/**
+ * Obtiene el timestamp
+ */
+long long get_timestamp(void)
 {
-	struct timeval	time;
+	struct timeval time;
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void	print_log(int philo, t_actions action)
+/**
+ * Imprime por pantalla el log de la accion
+ */
+void print_log(int philo, t_status action)
 {
-	char	*desc;
+	char *desc;
 
 	if (action == FORK)
-		desc = "has taken a fork";
+		desc = BMAG "has taken a fork" reset;
 	else if (action == EAT)
-		desc = "is eating";
+		desc = BYEL "is eating" reset;
 	else if (action == SLEEP)
-		desc = "is sleeping";
+		desc = BBLU "is sleeping" reset;
 	else if (action == THINK)
-		desc = "is thiking";
+		desc = BCYN "is thiking" reset;
 	else if (action == DIE)
-		desc = "died";
+		desc = BRED "died" reset;
 	else
-		return ;
-	printf("%lli %i %s\n", get_timestamp(), philo, desc);
+		return;
+	printf(UGRN "%lli" reset BHWHT" %i " reset "%s\n", get_timestamp(), philo, desc);
 }

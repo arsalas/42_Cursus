@@ -10,24 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/philo.h"
-// TODO PONER MUTEX A LAS VARIABLES PARA ESCRIBIR
+#include "../includes/philo.h"
+
 int	main(int argc, char **argv)
 {
-	t_data		data;
+	t_data	data;
+	int		i;
 
 	if (argc < 4)
 		return (0);
 	data.finish = 0;
 	data.params = recive_args(argv);
-	data.philos = malloc(sizeof(t_philo) * data.params.n_philo);
-	if (data.philos == NULL)
+	pthread_mutex_init(&data.fork_mutex, NULL);
+	if (create_data_forks(&data) == 0 || create_data_philos(&data) == 0)
 		return (0);
-	create_data_philos(&data, data.params.n_philo);
-	print_log(1, FORK);
-	print_log(3, DIE);
-	while (data.finish == 0)
-		usleep(1);
-	print_log(3, EAT);
+	i = 0;
+	while (i < data.params.n_philo)
+	{
+		pthread_join(data.philos[i].thread, NULL);
+		i++;
+	}
 	return (0);
 }
