@@ -6,11 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:24 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/19 14:20:32 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 12:48:29 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "philo.h"
 
 /**
  * El filosofo empieza a comer 

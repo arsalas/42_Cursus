@@ -6,11 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/06 14:37:31 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:35:47 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "philo.h"
 
 /**
  * Completa la informacion inicial del filosofo 
@@ -73,4 +73,10 @@ int	create_data_forks(t_data *data)
 		i++;
 	}
 	return (1);
+}
+
+void	destroy_data(t_data *data)
+{
+	free(data->philos);
+	free(data->forks);
 }

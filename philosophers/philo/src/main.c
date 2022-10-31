@@ -6,11 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/06 14:02:04 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:13:09 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {
@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 		pthread_join(data.philos[i].thread, NULL);
 		i++;
 	}
+	destroy_data(&data);
 	return (0);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fork.c                                             :+:      :+:    :+:   */
+/*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:26 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/04 17:05:04 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:39:52 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "philo.h"
 
 /**
  * Obtiene la posicion en el array del siguiente tenedor al filosofo 
@@ -30,6 +30,8 @@ bool	can_take_fork(t_data *data, int philo_id)
 {
 	bool	can;
 
+	if (data->params.n_philo == 1)
+		return (false);
 	can = false;
 	pthread_mutex_lock(&data->fork_mutex);
 	if (data->forks[philo_id] == 1

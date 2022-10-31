@@ -6,11 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/06 13:46:20 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:16:01 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "philo.h"
 
 /**
  * Comprueba si el el valor pasado es un digito
@@ -93,6 +93,6 @@ void	print_log(t_data *data, int philo, t_status action)
 	else
 		return ;
 	if (data->finish == 0)
-		printf(UGRN "%lli" reset BHWHT" %i " reset "%s\n",
+		printf(UGRN "%lli" reset BHWHT"\t%i\t" reset "%s\n",
 			get_timestamp() - data->timestamp, philo, desc);
 }

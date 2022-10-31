@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/19 12:28:03 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:12:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# include "../../includes/colors.h"   
+# include "colors.h"   
 
 # define SEC 1000000
 # define MS 100000
@@ -91,5 +91,6 @@ int			next_fork(int pos, int max);
 bool		can_take_fork(t_data *data, int philo_id);
 void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
+void		destroy_data(t_data *data);
 
 #endif

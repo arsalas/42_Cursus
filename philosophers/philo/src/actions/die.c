@@ -6,11 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:21 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/19 14:20:21 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/30 12:48:10 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "philo.h"
 
 /**
  * Accion de muerte del filosofo
