@@ -6,40 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsive</title>
     <style>
+      .first {
+        background-color: greenyellow;
+      }
+      .second {
+        background-color: darksalmon;
+      }
       body {
         margin: 0px;
         padding: 0px;
       }
-      main {
-        display: flex;
-        flex-direction: row;
-        height: 100vh;
+      table {
+        width: 100vw;
+        background-color: #333;
       }
-      .cell {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-      }
-      .first {
-        background-color: greenyellow;
-        border: 1px solid yellowgreen;
-      }
-      .second {
-        background-color: darksalmon;
-        border: 1px solid salmon;
-      }
-      @media (max-width: 800px) {
-        main {
-          flex-direction: column;
-        }
+      td {
+        padding: 20px;
       }
     </style>
   </head>
   <body>
-    <main>
-      <div class="cell first">First cell</div>
-      <div class="cell second">Second cell</div>
-    </main>
+    <table>
+      <tbody>
+        <tr>
+          <td class="first">First cell</td>
+          <td class="second">Second cell</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
