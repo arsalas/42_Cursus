@@ -1,36 +1,42 @@
-//import { test } from "./src/test.js";
 
-console.log("probando");
+// Declaracion de variables
+const app = document.querySelector("#app");
+const nCars = document.querySelector("#nCars");
+const distance = document.querySelector("#distance");
+const start = document.querySelector("#start");
+const reset = document.querySelector("#reset");
+let cars = [];
+let interval;
 
-class Car {
-  id;
-  distance;
 
-  run() {
-    Math.floor(Math.random() * 9);
+// Creacion de la array de coches
+const createCars = () => {
+  for (let i = 1; i <= nCars.value; i++) {
+    const car = new Car(i);
+    cars = [...cars, car];
   }
 }
 
-const start = () => {
-  const app = document.querySelector("#app");
-  const nCars = document.querySelector("#nCars");
-  const distance = document.querySelector("#distance");
-  const start = document.querySelector("#start");
-  // app.innerHTML = "Hola Mundo";
+const destroyCars = () => {
+  cars.forEach((car) => {
+    car.destroy;
+  })
+  cars = [];
+}
 
-  const run = () => Math.floor(Math.random() * 10) + 1;
+const printCars = () => {
+  let html = '';
+  cars.forEach((car) => {
+    html += carElement(car)
+  })
+  for (i = cars.length; i <= 9; i++)
+    html += roadElement();
+  app.innerHTML = html;
+}
 
-  const getCars = () => {
-    return [...Array(parseInt(nCars.value)).keys()];
-  };
+const loadCars = () => {
+  destroyCars();
+  createCars();
+  printCars();
+}
 
-  start.addEventListener("click", () => {
-    const a = getCars();
-    console.log(
-      a,
-      nCars.value,
-      distance.value,
-      Math.floor(Math.random() * 10) + 1
-    );
-  });
-};

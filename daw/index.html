@@ -1,55 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./app.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./css/index.css" />
-    <title>Document</title>
-  </head>
-  <body onload="start()">
-    <header>
-      <div>
-        <label for="cars">Numero de participantes</label>
-        <select name="cars" id="nCars">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet" />
+
+
+  <script src="./js/Car.js"></script>
+  <script src="./js/elements.js"></script>
+
+  <link rel="stylesheet" href="./css/index.css" />
+  <title>Document</title>
+</head>
+
+<body onload="loadCars()">
+  <header>
+    <div>
+      <label for="cars">Numero de participantes</label>
+      <select name="cars" id="nCars">
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
+    </div>
+    <div>
+      <label for="cars">Distancia a recorrer</label>
+      <input value="20" min="1" step="1" type="number" id="distance" />
+    </div>
+    <div>
+      <button id="start">INICIAR</button>
+      <button id="reset">RESET</button>
+    </div>
+  </header>
+  <div class="test">
+    <div class="container">
+      <div id="app">
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
+        <div class="road"></div>
       </div>
-      <div>
-        <label for="cars">Distancia a recorrer</label>
-        <input type="number" id="distance" />
+      <div id="goal">
       </div>
-	  <div>
-		  <button id="start">INICIAR</button>
-	  </div>
-    </header>
-    <div id="app">
-		<div class="road">
-			<div class="car"></div>
-		</div>
-		<div class="road"></div>
-		<div class="road"></div>
-		<div class="road"></div>
-		<div class="road"></div>
-		<div class="road"></div>
-		<div class="road"></div>
-		<div class="road"></div>
-		<div class="road"></div>
-	</div>
-  </body>
+    </div>
+    <div class="table">
+      <table>
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+          <td>Mexico</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+  <script src="./js/events.js"></script>
+
+</body>
+
 </html>
