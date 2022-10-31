@@ -5,6 +5,7 @@ SRCS 	= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 HEADERS 	= Weapon.hpp HumanA.hpp HumanB.cpp
 
 OBJS_DIR	= obj
+BIN_DIR	= bin
 
 OBJS		= $(addprefix  $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
@@ -18,20 +19,27 @@ all:	$(NAME)
 $(OBJS_DIR)/%.o: %.cpp | $$(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(HEADERS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(HEADERS) $(BIN_DIR)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(BIN_DIR)/$(NAME)
 	@echo "\x1b[32mex03 compiled!\x1b[0m"
+
+run: $(NAME)
+	@./$(BIN_DIR)/$(NAME)
 
 clean:
 	@$(RM) $(OBJS)
 	@echo "\x1b[32mcleaned!\x1b[0m"
 
 fclean:		clean
-	@$(RM) $(NAME)
+	@$(RM) $(BIN_DIR)/$(NAME)
 
 re:			fclean all
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-.PHONY:		all clean fclean re
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+
+.PHONY:		all clean fclean re run

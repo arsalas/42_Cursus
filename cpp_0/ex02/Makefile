@@ -34,7 +34,7 @@ test: $(NAME)
 	@diff 19920104_091532.log result.log
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(BIN_DIR)/$(OBJS)
 	@echo "\x1b[32mcleaned!\x1b[0m"
 
 fclean:		clean

@@ -31,7 +31,7 @@ clean:
 	@echo "\x1b[32mcleaned!\x1b[0m"
 
 fclean:		clean
-	@$(RM) $(NAME)
+	@$(RM) $(BIN_DIR)/$(NAME)
 
 re:			fclean all
 

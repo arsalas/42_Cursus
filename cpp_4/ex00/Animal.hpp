@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/10 19:38:54 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:40:57 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ protected:
 
 public:
 	Animal(void);
-	~Animal(void);
-	std::string getType();
-	virtual void makeSound();
+	virtual ~Animal(void);
+	virtual std::string getType();
+	virtual void makeSound() const;
 };
 
 #endif
