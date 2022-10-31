@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:21 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:34:41 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	is_game_over(t_data *data)
 */
 void	process_start(t_data *data, int i)
 {
+	data->i = i;
 	while (!is_game_over(data))
 	{
 		if (i >= data->params.n_philo)
@@ -55,7 +56,7 @@ void	process_start(t_data *data, int i)
 			exit(0);
 		}
 		else if (data->philos[i].status == THINK)
-			start_eat(data, i);
+			pthread_create(&data->thread, NULL, &start_eat, data);
 		else if (data->philos[i].status == EAT)
 		{
 			if (get_timestamp() - data->philos[i].last_food > data->params.t_eat)
