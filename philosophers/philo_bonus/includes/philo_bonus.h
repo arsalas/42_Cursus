@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/19 13:10:41 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:45:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ typedef struct s_data
 	t_philo			*philos;
 	int				forks;
 	int				finish;
+	long			timestamp;
 	bool			start;
 	sem_t			*semaphore;
+	sem_t			*sem_log;
 }	t_data;
 
 typedef struct s_info
@@ -78,7 +80,7 @@ typedef struct s_info
 int			ft_atoi(const char *str);
 long long	get_timestamp(void);
 t_params	recive_args(char **argv);
-void		print_log(int philo, t_status action);
+void		print_log(t_data *data, int philo, t_status action);
 
 void		create_process(t_data *data);
 void		process_start(t_data *data, int i);

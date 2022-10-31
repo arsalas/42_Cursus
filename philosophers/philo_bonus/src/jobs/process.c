@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/04/19 13:34:41 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:27:25 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,17 @@ void	process_start(t_data *data, int i)
 		{
 			philo_die(data, i);
 			sem_close(data->semaphore);
-			sem_unlink("forks");
+			sem_unlink("forks_sem");
 			exit(0);
 		}
 		else if (data->philos[i].status == THINK)
 			pthread_create(&data->thread, NULL, &start_eat, data);
-		else if (data->philos[i].status == EAT)
-		{
-			if (get_timestamp() - data->philos[i].last_food > data->params.t_eat)
-				finish_eat(data, i);
-		}
-		else if (data->philos[i].status == SLEEP)
-		{
-			if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
-				finish_sleep(data, i);
-		}
+		else if (data->philos[i].status == EAT
+			&& get_timestamp() - data->philos[i].last_food > data->params.t_eat)
+			finish_eat(data, i);
+		else if (data->philos[i].status == SLEEP && get_timestamp()
+			- data->philos[i].last_sleep > data->params.t_sleep)
+			finish_sleep(data, i);
 		usleep(10);
 	}
 }
