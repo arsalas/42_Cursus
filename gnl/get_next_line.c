@@ -89,10 +89,10 @@ char *no_read(char *storage)
  */
 char *get_next_line(int fd)
 {
-    char *buf;
+    char        *buf;
     static char storage[INT_MAX];
-    size_t nbytes;
-    char *str;
+    size_t      nbytes;
+    char        *str;
 
     if (fd == -1)
         return (NULL);
