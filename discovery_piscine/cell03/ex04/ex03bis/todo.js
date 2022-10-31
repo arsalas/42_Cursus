@@ -1,5 +1,3 @@
-const add = document.querySelector("#add");
-
 const todos = JSON.parse(localStorage.getItem("todo")) || [];
 
 const handleClick = () => {
@@ -24,9 +22,8 @@ const saveStorage = () => {
 function handleDelete() {
   const canDelete = confirm("confirm");
   if (!canDelete) return;
-  const element = document.querySelector(`#${this.id}`);
-  element.addEventListener("click", handleDelete, false);
-  element.remove();
+  $(`#${this.id}`).click(handleDelete);
+  $(`#${this.id}`).remove();
   const id = this.id.split("todo_")[1];
   const i = todos.findIndex((t) => t.id == id);
   todos.splice(i, 1);
@@ -36,10 +33,8 @@ function handleDelete() {
 const printTodo = (newId, todo) => {
   const id = `todo_${newId}`;
   const html = `<div id="${id}" class="todo">${todo}</div>`;
-  document.querySelector("#ft_list").insertAdjacentHTML("afterbegin", html);
-  document
-    .querySelector(`#${id}`)
-    .addEventListener("click", handleDelete, false);
+  $("#ft_list").prepend(html);
+  $(`#${id}`).click(handleDelete);
 };
 
 const addTodo = (todo) => {
@@ -49,7 +44,7 @@ const addTodo = (todo) => {
   saveStorage();
 };
 
-add.addEventListener("click", handleClick, false);
+$("#add").click(handleClick);
 todos.forEach((todo) => {
   printTodo(todo.id, todo.todo);
 });
