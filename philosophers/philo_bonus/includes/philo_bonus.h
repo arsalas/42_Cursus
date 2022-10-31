@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 15:46:57 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:27:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 # include <sys/time.h>
 # include <stdbool.h>
 # include <semaphore.h>
+# include <signal.h>
 
 # include "colors.h"
 
 # define SEC 1000000
 # define MS 100000
-# define SEM_FORK "/forks"
-# define SEM_LOGS "/logs"
-# define SEM_DIE "/die"
-# define SEM_EAT "/eat"
+# define SEM_FORK "/sem_forks"
+# define SEM_LOGS "/sem_logs"
+# define SEM_DIE "/sem_die"
+# define SEM_EAT "/sem_eat"
 
 typedef enum e_status
 {
@@ -113,10 +114,11 @@ void		close_program(t_data *data);
 
 void		create_semaphores(t_data *data);
 void		close_semaphores(t_data *data);
-void		unlink_semaphores(t_data *data);
+void		unlink_semaphores(void);
 
 void		*th_philo_die(void *info);
 void		*th_philos_eat(void *info);
 void		start_threads(t_data *data);
+void		exit_program(t_data *data);
 
 #endif

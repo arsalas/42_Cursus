@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:57:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 16:47:51 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:27:41 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 void	create_semaphores(t_data *data)
 {
 	data->sems.sem_fork = sem_open(SEM_FORK,
-			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, data->params.n_philo / 2 - 1);
-	data->sems.sem_log = sem_open(SEM_FORK,
+			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, data->params.n_philo / 2);
+	data->sems.sem_log = sem_open(SEM_LOGS,
+			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, 1);
+	data->sems.sem_die = sem_open(SEM_DIE,
 			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, 0);
-	data->sems.sem_die = sem_open(SEM_FORK,
-			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, -1);
-	data->sems.sem_eat = sem_open(SEM_FORK,
-			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, data->params.n_philo - 1);
+	data->sems.sem_eat = sem_open(SEM_EAT,
+			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, 0);
 }
 
 /**
@@ -47,13 +47,10 @@ void	close_semaphores(t_data *data)
  * 
  * @param data 
  */
-void	unlink_semaphores(t_data *data)
+void	unlink_semaphores(void)
 {
-	(void)data;
-	/*
-	sem_unlink(data->sems.sem_fork);
-	sem_unlink(data->sems.sem_log);
-	sem_unlink(data->sems.sem_eat);
-	sem_unlink(data->sems.sem_die);
-	*/
+	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_LOGS);
+	sem_unlink(SEM_DIE);
+	sem_unlink(SEM_EAT);
 }

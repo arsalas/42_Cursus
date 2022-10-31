@@ -7,7 +7,12 @@
 		"optional": "c",
 		"__bit_reference": "c",
 		"chrono": "c",
-		"unordered_map": "c"
+		"unordered_map": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
 	},
 	"makefile.launchConfigurations": [
 		{

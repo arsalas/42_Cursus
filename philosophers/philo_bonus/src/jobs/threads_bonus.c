@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:32:09 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 16:53:41 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:39:35 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	start_threads(t_data *data)
 {
 	pthread_create(&data->threads.die, NULL, &th_philo_die, data);
-	pthread_create(&data->threads.eat, NULL, &th_philos_eat, data);
+	if (data->params.time_eats > -1)
+		pthread_create(&data->threads.eat, NULL, &th_philos_eat, data);
 }
 
 /**
@@ -28,10 +29,8 @@ void	*th_philo_die(void *info)
 	t_data	*data;
 
 	data = (t_data *)info;
-	printf("1\n");
 	sem_wait(data->sems.sem_die);
-	printf("2\n");
-	close_semaphores(data);
+	exit_program(data);
 	return (NULL);
 }
 
@@ -52,7 +51,20 @@ void	*th_philos_eat(void *info)
 		sem_wait(data->sems.sem_eat);
 		i++;
 	}
-	//printf("EAT\n");
-	exit(0);
+	exit_program(data);
 	return (NULL);
+}
+
+void	exit_program(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	while (i < data->params.n_philo)
+	{
+		kill(data->id_forks[i], SIGSEGV);
+		i++;
+	}
+	unlink_semaphores();
+	exit(0);
 }
