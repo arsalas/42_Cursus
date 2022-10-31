@@ -1,107 +1,106 @@
-CFLAGS 	:= -Wall -Wextra -Werror -pthread -g
-CC		:= gcc
+CFLAGS 	= -Wall -Wextra -Werror -pthread -Iinclude
+CC		= gcc
 
-SRCS 	= main.c \
-		thread.c \
-		init.c \
-		args.c \
-		utils.c \
-		die.c \
-		eat.c \
-		forks.c \
-		sleep.c
+DIR		= philo
+DIR_B	= philo_bonus
+SRC_DIR = src
+OBJ_DIR = obj
 
-SRCS_B 	= main_bonus.c \
-		process_bonus.c \
-		threads_bonus.c \
-		args_bonus.c \
-		init_bonus.c \
-		utils_bonus.c \
-		die_bonus.c \
-		eat_bonus.c \
-		fork_bonus.c \
-		sleep_bonus.c \
-		exit_bonus.c \
-		semaphores_bonus.c \
+F_JOB = jobs
+F_UTILS = utils
+F_ACTIONS = actions
 
-HEADERS 	= includes/colors.h
-HEADERS_M 	= philo/includes/philo.h
-HEADERS_B 	= philo_bonus/includes/philo_bonus.h
+FOLDERS = $(DIR)/$(F_JOB) \
+		$(DIR)/$(F_UTILS) \
+		$(DIR)/$(F_ACTIONS) \
 
-OBJS_DIR	:= obj
+FOLDERS_B = $(DIR_B)/$(F_JOB) \
+			$(DIR_B)/$(F_UTILS) \
+			$(DIR_B)/$(F_ACTIONS) \
 
-INCLUDES 	:=  includes/ philo/includes/ philo_bonus/includes/
-INC 		= $(addprefix -I , $(INCLUDES))
+OBJ_FOLDERS = $(DIR)/$(OBJ_DIR)/$(F_JOB) \
+			$(DIR)/$(OBJ_DIR)/$(F_UTILS) \
+			$(DIR)/$(OBJ_DIR)/$(F_ACTIONS) \
 
-OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
-OBJS_B		= $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.o))
-OBJS_M		= $(addprefix $(OBJS_DIR)/, $(SRCS_M:.c=.o))
+OBJ_FOLDERS_B = $(DIR_B)/$(OBJ_DIR)/$(F_JOB) \
+				$(DIR_B)/$(OBJ_DIR)/$(F_UTILS) \
+				$(DIR_B)/$(OBJ_DIR)/$(F_ACTIONS) \
 
-NAME 	:= philo
+SRCS 	= $(DIR)/$(SRC_DIR)/main.c \
+		$(DIR)/$(SRC_DIR)/$(F_JOB)/thread.c \
+		$(DIR)/$(SRC_DIR)/$(F_UTILS)/init.c \
+		$(DIR)/$(SRC_DIR)/$(F_UTILS)/args.c \
+		$(DIR)/$(SRC_DIR)/$(F_UTILS)/utils.c \
+		$(DIR)/$(SRC_DIR)/$(F_ACTIONS)/die.c \
+		$(DIR)/$(SRC_DIR)/$(F_ACTIONS)/eat.c \
+		$(DIR)/$(SRC_DIR)/$(F_ACTIONS)/fork.c \
+		$(DIR)/$(SRC_DIR)/$(F_ACTIONS)/sleep.c \
 
-NAME_B 	:= philo_bonus
+OBJS 	= $(DIR)/$(OBJ_DIR)/main.o \
+		$(DIR)/$(OBJ_DIR)/$(F_JOB)/thread.o \
+		$(DIR)/$(OBJ_DIR)/$(F_UTILS)/init.o \
+		$(DIR)/$(OBJ_DIR)/$(F_UTILS)/args.o \
+		$(DIR)/$(OBJ_DIR)/$(F_UTILS)/utils.o \
+		$(DIR)/$(OBJ_DIR)/$(F_ACTIONS)/die.o \
+		$(DIR)/$(OBJ_DIR)/$(F_ACTIONS)/eat.o \
+		$(DIR)/$(OBJ_DIR)/$(F_ACTIONS)/fork.o \
+		$(DIR)/$(OBJ_DIR)/$(F_ACTIONS)/sleep.o \
 
-RM 		:= rm -f
+SRCS_B	= $(DIR_B)/$(SRC_DIR)/main.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_JOB)/process.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_UTILS)/args.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_UTILS)/init.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_UTILS)/utils.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_ACTIONS)/die.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_ACTIONS)/eat.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_ACTIONS)/fork.c \
+		$(DIR_B)/$(SRC_DIR)/$(F_ACTIONS)/sleep.c \
 
-vpath %.c philo philo/src philo/src/actions philo/src/jobs philo/src/utils  
-vpath %.c philo_bonus philo_bonus/src philo_bonus/src/actions philo_bonus/src/jobs philo_bonus/src/utils  
-vpath %.h includes philo/includes philo_bonus/includes 
+OBJS_B 	= $(DIR_B)/$(OBJ_DIR)/main.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_JOB)/process.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_UTILS)/args.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_UTILS)/init.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_UTILS)/utils.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_ACTIONS)/die.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_ACTIONS)/eat.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_ACTIONS)/fork.o \
+		$(DIR_B)/$(OBJ_DIR)/$(F_ACTIONS)/sleep.o \
 
-.SECONDEXPANSION:
 
-all:	$(NAME)
+NAME		= philo
 
-$(OBJS_DIR)/%.o: %.c | $$(@D)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+NAME_BONUS	= philo_bonus
 
-$(NAME): $(OBJS) $(HEADERS) $(HEADERS_M)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS) -o ./philo/$(NAME)
-	@echo "\x1b[32m$(NAME) compiled!\x1b[0m"
+RM 			= rm -f
 
-bonus:	$(NAME_B)
+$(DIR)/$(OBJ_DIR)/%.o : $(DIR)/$(SRC_DIR)/%.c
+	mkdir -p $(OBJ_FOLDERS)
+	$(CC) -c -MD ${CFLAGS} $< -o $@
 
-$(NAME_B): $(OBJS_B) $(HEADERS) $(HEADERS_B)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o ./philo_bonus/$(NAME_B)
-	@echo "\x1b[32m$(NAME_B) compiled!\x1b[0m"
+-include *.d
 
-start: $(NAME)
-#	@./philo/philo 1 800 200 200
-#	@./philo/philo 5 800 200 200
-	@./philo/philo 5 800 200 200 7
-#	@./philo/philo 4 410 200 200
-#	@./philo/philo 4 310 200 100
+$(DIR_B)/$(OBJ_DIR)/%.o : $(DIR_B)/$(SRC_DIR)/%.c
+	mkdir -p $(OBJ_FOLDERS_B)
+	$(CC) -c -MD ${CFLAGS} $< -o $@
 
-start_bonus: $(NAME_B)
-#	@./philo_bonus/philo_bonus 1 800 200 200
-#	@./philo_bonus/philo_bonus 5 800 200 200
-#	@./philo_bonus/philo_bonus 5 800 200 200 7
-#	@./philo_bonus/philo_bonus 4 410 200 200
-	@./philo_bonus/philo_bonus 4 310 200 100
+-include *.d
 
-leaks: $(NAME)
-	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
+all:		${NAME}
 
-leaks_bonus: $(NAME_B)
-	@leaks -atExit -- ./philo_bonus/$(NAME_B) 2 800 900 900
-	
-norminette:
-	@echo "\x1b[33mMANDATORY":
-	@norminette philo |  sh ./tests/norminette.sh
-	@echo "\x1b[33mBONUS":
-	@norminette philo_bonus | sh ./tests/norminette.sh
+${NAME}:	${OBJS}
+			$(CC) ${CFLAGS} $(OBJS) -o $(DIR)/$(NAME)
+
+bonus:		${OBJS_B}
+			$(CC) ${CFLAGS} $(OBJS_B) -o $(DIR_B)/$(NAME_BONUS)
 
 clean:
-	@$(RM) $(OBJS)
-	@$(RM) $(OBJS_B)
-	@echo "\x1b[32mcleaned!\x1b[0m"
+			${RM} ${OBJS} ${OBJS:.o=.d}
+			${RM} ${OBJS_B} ${OBJS_B:.o=.d}
 
 fclean:		clean
-	@$(RM) philo/$(NAME)
-	@$(RM) philo_bonus/$(NAME_B)
+			${RM} $(DIR)/${NAME}
+			${RM} $(DIR_B)/${NAME_BONUS}
 
-re:	fclean all
+re:			fclean all
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
-
-.PHONY:		all clean fclean re bonus norminette start start_bonus
+.PHONY:		all clean fclean re bonus
