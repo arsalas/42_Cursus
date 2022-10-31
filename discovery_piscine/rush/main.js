@@ -1,11 +1,12 @@
 const goHome = () => {
-  const ele = document.querySelector("#home").scrollIntoView();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 };
 const goSkills = () => {
-  const ele = document.querySelector("#skill").scrollIntoView();
+  const el = document.querySelector("#skill").getBoundingClientRect();
+  window.scrollTo({top: el.bottom + el.top, behavior: 'smooth'});
 };
 const goContact = () => {
-  const ele = document.querySelector("#contact").scrollIntoView();
+  window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
 };
 
 document.querySelector("#home").addEventListener("click", goHome, false);
