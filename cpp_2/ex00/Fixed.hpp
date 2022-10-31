@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #ifndef FIXED_H
-# define FIXED_H
-# include <iostream>
+#define FIXED_H
+#include <iostream>
 
 class Fixed
 {
@@ -22,9 +22,9 @@ private:
 
 public:
 	Fixed(void);
-	Fixed(Fixed &cpy);
+	Fixed(Fixed &value);
 	~Fixed(void);
-	Fixed &operator=(const Fixed &cpy);
+	Fixed &operator=(const Fixed &f);
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
