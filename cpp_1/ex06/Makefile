@@ -8,7 +8,7 @@ OBJS_DIR	= obj
 
 OBJS		= $(addprefix  $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
-NAME	= karen
+NAME	= karenFilter
 RM 		= rm -f
 
 all:	$(NAME)
@@ -20,7 +20,7 @@ $(OBJS_DIR)/%.o: %.cpp | $$(@D)
 
 $(NAME): $(OBJS) $(HEADERS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "\x1b[32mex05 compiled!\x1b[0m"
+	@echo "\x1b[32mex06 compiled!\x1b[0m"
 
 clean:
 	@$(RM) $(OBJS)
