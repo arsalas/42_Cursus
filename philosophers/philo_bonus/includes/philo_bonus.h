@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/06 16:09:28 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:46:57 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_philo
 	int			id;
 	int			n_eat;
 	bool		is_alive;
-	pid_t		c_pid;
 	long long	last_food;
 	long long	last_sleep;
 	t_status	status;
@@ -60,6 +59,13 @@ typedef struct s_params
 	int	time_eats;
 }	t_params;
 
+typedef struct s_thread
+{
+	pthread_t	die;
+	pthread_t	eat;
+	pthread_t	life;
+}	t_thread;
+
 typedef struct s_sems
 {
 	sem_t			*sem_fork;
@@ -70,15 +76,12 @@ typedef struct s_sems
 
 typedef struct s_data
 {
-	pthread_t		thread;
-	int				i;
 	t_params		params;
-	t_philo			*philos;
-	int				forks;
-	int				finish;
-	long			timestamp;
-	bool			start;
+	t_philo			philo;
+	pid_t			*id_forks;
 	t_sems			sems;
+	t_thread		threads;
+	long long		timestamp;
 }	t_data;
 
 typedef struct s_info
@@ -95,7 +98,7 @@ void		print_log(t_data *data, int philo, t_status action);
 void		create_process(t_data *data);
 void		process_start(t_data *data, int i);
 
-void		*start_eat(void *p_data);
+void		start_eat(t_data *data, int philo_id);
 void		finish_eat(t_data *data, int philo_id);
 void		start_sleep(t_data *data, int philo_id);
 void		finish_sleep(t_data *data, int philo_id);
@@ -105,12 +108,15 @@ void		leave_fork(t_data *data);
 int			next_fork(int pos, int max);
 bool		can_take_fork(t_data *data);
 void		philo_die(t_data *data, int philo_id);
-bool		is_game_over(t_data *data);
+void		*is_game_finish(void *info);
 void		close_program(t_data *data);
 
 void		create_semaphores(t_data *data);
 void		close_semaphores(t_data *data);
 void		unlink_semaphores(t_data *data);
 
+void		*th_philo_die(void *info);
+void		*th_philos_eat(void *info);
+void		start_threads(t_data *data);
 
 #endif

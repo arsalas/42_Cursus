@@ -6,25 +6,21 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:24 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/02 13:10:49 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:47:39 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+//TODO !revisar
 /**
  * El filosofo empieza a comer 
 */
-void	*start_eat(void *p_data)
+void	start_eat(t_data *data, int philo_id)
 {
-	t_data	*data;
-
-	data = (t_data *)p_data;
-	take_fork(data, data->i);
-	data->philos[data->i].last_food = get_timestamp();
-	data->philos[data->i].status = EAT;
-	print_log(data, data->i + 1, EAT);
-	return (NULL);
+	data->philo.last_food = get_timestamp();
+	data->philo.status = EAT;
+	print_log(data, philo_id + 1, EAT);
 }
 
 /**
@@ -33,7 +29,6 @@ void	*start_eat(void *p_data)
 void	finish_eat(t_data *data, int philo_id)
 {
 	leave_fork(data);
-	data->philos[philo_id].last_food = get_timestamp();
-	data->philos[philo_id].n_eat++;
+	data->philo.n_eat++;
 	start_sleep(data, philo_id);
 }

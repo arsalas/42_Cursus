@@ -6,14 +6,17 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:30 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/02 13:11:20 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:30:26 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 /**
- * Recivir argumentos del programa y guardarlos en una estructura
+ * @brief  Recive los argumentos del programa y los guarda en una estructura
+ * 
+ * @param argv 
+ * @return t_params 
  */
 t_params	recive_args(char **argv)
 {

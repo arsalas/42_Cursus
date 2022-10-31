@@ -4,7 +4,10 @@
 		"algorithm": "c",
 		"bitset": "c",
 		"memory": "c",
-		"optional": "c"
+		"optional": "c",
+		"__bit_reference": "c",
+		"chrono": "c",
+		"unordered_map": "c"
 	},
 	"makefile.launchConfigurations": [
 		{
