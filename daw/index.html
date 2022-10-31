@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>Document</title>
+  </head>
+  <body onload="start()">
+    <header>
+      <div>
+        <label for="cars">Numero de participantes</label>
+        <select name="cars" id="nCars">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <div>
+        <label for="cars">Distancia a recorrer</label>
+        <input type="number" id="distance" />
+      </div>
+	  <div>
+		  <button id="start">INICIAR</button>
+	  </div>
+    </header>
+    <div id="app">
+		<div class="road">
+			<div class="car"></div>
+		</div>
+		<div class="road"></div>
+		<div class="road"></div>
+		<div class="road"></div>
+		<div class="road"></div>
+		<div class="road"></div>
+		<div class="road"></div>
+		<div class="road"></div>
+		<div class="road"></div>
+	</div>
+  </body>
+</html>

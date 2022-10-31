@@ -1,0 +1,49 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#app{
+	height: calc(100vh - 100px - 40px);
+	width: 100%;
+	background-color: #7ab361;
+}
+
+header{
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	height: 100px;
+}
+header label{
+	display: block;
+	font-weight: bold;
+	font-size: 30px;
+}
+#cars, input{
+	margin-top: 10px;
+	width: 100%;
+	padding: 5px 20px;
+}
+
+button{
+	padding: 10px 30px;
+	border-radius: 20px;
+	background-color: aquamarine;
+	border: solid blue 4px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.road{
+	height: calc(100% / 9);
+	background-image: url("../images/road.jpeg");
+	background-repeat: repeat;
+	background-size: contain;
+}
+
+.car{
+	width:50px; height: 50px; background-color: red;
+}
