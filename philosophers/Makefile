@@ -21,6 +21,7 @@ SRCS_B 	= main_bonus.c \
 		fork_bonus.c \
 		sleep_bonus.c \
 		exit_bonus.c \
+		semaphores_bonus.c \
 
 HEADERS 	= includes/colors.h
 HEADERS_M 	= philo/includes/philo.h

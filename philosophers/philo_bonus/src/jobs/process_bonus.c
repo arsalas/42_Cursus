@@ -6,14 +6,20 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/03 16:17:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:18:50 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-
 //TODO: Crear un thread para comprobar si los filosofos mueren
+//TODO: Crear un thread para comprobar si todos los filosofos han comido
+//TODO: Crear un listado de acciones.
+
+
+
+
+
 
 
 /**

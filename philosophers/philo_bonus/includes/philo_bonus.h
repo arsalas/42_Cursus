@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/03 15:50:00 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:09:28 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 
 # define SEC 1000000
 # define MS 100000
-# define SEM_NAME1 "/forks"
-# define SEM_NAME2 "/logs"
+# define SEM_FORK "/forks"
+# define SEM_LOGS "/logs"
+# define SEM_DIE "/die"
+# define SEM_EAT "/eat"
 
 typedef enum e_status
 {
@@ -58,6 +60,14 @@ typedef struct s_params
 	int	time_eats;
 }	t_params;
 
+typedef struct s_sems
+{
+	sem_t			*sem_fork;
+	sem_t			*sem_log;
+	sem_t			*sem_die;
+	sem_t			*sem_eat;
+}	t_sems;
+
 typedef struct s_data
 {
 	pthread_t		thread;
@@ -68,8 +78,7 @@ typedef struct s_data
 	int				finish;
 	long			timestamp;
 	bool			start;
-	sem_t			*semaphore;
-	sem_t			*sem_log;
+	t_sems			sems;
 }	t_data;
 
 typedef struct s_info
@@ -98,5 +107,10 @@ bool		can_take_fork(t_data *data);
 void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
 void		close_program(t_data *data);
+
+void		create_semaphores(t_data *data);
+void		close_semaphores(t_data *data);
+void		unlink_semaphores(t_data *data);
+
 
 #endif

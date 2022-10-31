@@ -1,1 +1,0 @@
-gcc main.c gnl.c -D BUFFER_SIZE=100000 && ./a.out
