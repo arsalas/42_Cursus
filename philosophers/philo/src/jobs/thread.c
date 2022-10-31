@@ -6,15 +6,19 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/30 16:38:51 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:42:19 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * Comprueba si ha terminado la partida
-*/
+/**
+ * @brief Comprueba si ha terminado la partida
+ * 
+ * @param data estructura de datos
+ * @return true si la partida ha terminado
+ */
 bool	is_game_over(t_data *data)
 {
 	int	i;
@@ -38,8 +42,11 @@ bool	is_game_over(t_data *data)
 }
 
 /**
- * Logica de las acciones de los filosofos 
-*/
+ * @brief Logica de las acciones de los filosofos 
+ * 
+ * @param data estructura de datos
+ * @param i posicion del filosofo
+ */
 static void	philo_actions(t_data *data, int i)
 {
 	if (get_timestamp() - data->philos[i].last_food > data->params.t_die
@@ -61,7 +68,10 @@ static void	philo_actions(t_data *data, int i)
 }
 
 /**
- * Inicia el proceso de vida de cada filosofo
+ * @brief Inicia el proceso de vida de cada filosofo
+ * 
+ * @param d estructura de datos
+ * @return void* 
  */
 void	*philo_life(void *d)
 {

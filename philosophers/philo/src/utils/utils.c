@@ -6,14 +6,17 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/31 14:17:13 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:47:17 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * Comprueba si el el valor pasado es un digito
+ * @brief Comprueba si el el valor pasado es un digito
+ * 
+ * @param c digito
+ * @return 1 si esun digito, 0 si no lo es
  */
 int	ft_isdigit(int c)
 {
@@ -24,7 +27,10 @@ int	ft_isdigit(int c)
 }
 
 /**
- * Comprueba si el caracter pasado es un delimitador de la funcion atoi
+ * @brief Comprueba si el caracter pasado es un delimitador de la funcion atoi
+ * 
+ * @param d caracter a comprobar
+ * @return 1 si es delimitador 
  */
 static int	is_atoi_delimiter(unsigned char d)
 {
@@ -36,7 +42,10 @@ static int	is_atoi_delimiter(unsigned char d)
 }
 
 /**
- * Transforma un string en un int
+ * @brief Transforma un string en un int
+ * 
+ * @param str string a transformar
+ * @return str pasado a int
  */
 int	ft_atoi(const char *str)
 {
@@ -63,7 +72,9 @@ int	ft_atoi(const char *str)
 }
 
 /**
- * Obtiene el timestamp
+ * @brief Obtiene el timestamp
+ * 
+ * @return timestamp
  */
 long long	get_timestamp(void)
 {
@@ -74,7 +85,11 @@ long long	get_timestamp(void)
 }
 
 /**
- * Imprime por pantalla el log de la accion
+ * @brief Imprime por pantalla el log de la accion
+ * 
+ * @param data estructura de datos
+ * @param philo id del filosofo
+ * @param action accion a printar en el log
  */
 void	print_log(t_data *data, int philo, t_status action)
 {
