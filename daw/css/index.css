@@ -142,26 +142,28 @@ button {
 }
 
 #start {
-  background-image: url("../images/start.png");
+  /* background-image: url("../images/start.png");
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
   width: 175px;
-  height: 75px;
-  border: solid #2a9a59 2px;
-  /*background-color: #4770f7;
-  color: #2a449a;*/
+  height: 75px; */
+  height: 54px;
+  border: solid #457d04 2px;
+  background-color: #71c502;
+  color: #457d04;
 }
 
 #start:hover {
-  /*background-color: #2a449a;
-  border-color: #4770f7;
-  color: #4770f7;*/
+  background-color: #457d04;
+  border-color: #71c502;
+  color: #71c502;
   box-shadow: rgba(42, 154, 89, 0.5) 0px 10px 40px 4px;
 }
 
 #reset {
   display: none;
+  height: 54px;
   background-color: #ff948a;
   border: solid #d54639 4px;
   color: #d54639;

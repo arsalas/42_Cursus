@@ -26,7 +26,7 @@ const tableComponent = () => {
     <th>Position</th>
     <th>Distance</th>
   </tr>`;
-  const carSort = sortByKeyDesc(CarController.cars, "distance");
+  const carSort = sortByKeyDesc(CarController.cars, "position");
   carSort.forEach((row, index) => {
     tableHtml += `
     <tr>
