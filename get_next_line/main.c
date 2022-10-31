@@ -21,11 +21,12 @@ int	main(void)
 {
 	int	fd;
 
-	fd = open("empty", O_RDONLY);
+	fd = open("nl.txt", O_RDONLY);
 	//fd = open("files/empty", O_RDWR);
-	printf("fd: %i\n", fd);
-	close(fd);
-	printf("fd: %i\n", fd);
+	// printf("fd: %i\n", fd);
+	// close(fd);
+	// printf("fd: %i\n", fd);
+	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	/*printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
