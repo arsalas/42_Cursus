@@ -1,5 +1,7 @@
 # Cursus 42 Barcelona
 
+## [Big Mom lifes](https://bigmom.42barcelona.com/?login=aramirez)
+
 [![aramirez's 42 stats](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/stats?cursusId=21&coalitionId=206)](https://github.com/JaeSeoKim/badge42)
 
 ## push_swap 
