@@ -1,6 +1,6 @@
 # Solong
 
-## Compiling
+## Compile
 ```
 make bonus
 ```
