@@ -45,6 +45,9 @@ bonus:		${OBJS_B}
 			ar rc ${NAME} ${OBJS_B}
 			gcc ${CFLAGS} -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a mlx/libmlx.a ${NAME} -o so_long
 
+run:
+	./so_long map.ber
+
 clean:
 			${RM} ${OBJS} ${OBJS_B}
 			make clean -C libft
