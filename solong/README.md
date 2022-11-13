@@ -10,6 +10,9 @@ make bonus
 make run
 ```
 
+## Demo
+![SoLong](https://raw.githubusercontent.com/arsalas/42_Cursus/main/solong/video/demo.gif)
+
 ## Images
 ![SoLong](https://raw.githubusercontent.com/arsalas/42_Cursus/main/solong/images/screen_01.png)
 
