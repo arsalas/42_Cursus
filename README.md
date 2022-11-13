@@ -6,7 +6,7 @@
 [![aramirez's 42 stats](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/stats?cursusId=21&coalitionId=206)](https://github.com/JaeSeoKim/badge42)
 
 ## minishell 
-
+[![aramirez's 42 minishell Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2866738)](https://github.com/JaeSeoKim/badge42)
 ## push_swap 
 [![aramirez's 42 push_swap Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2525109)](https://github.com/JaeSeoKim/badge42)
 ## minitalk
