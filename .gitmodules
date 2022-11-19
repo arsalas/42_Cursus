@@ -1,0 +1,3 @@
+[submodule "minishell"]
+	path = minishekk
+	url = git@github.com:arsalas/minishell.git
