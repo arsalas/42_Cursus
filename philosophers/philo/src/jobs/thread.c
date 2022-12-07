@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/02 13:03:44 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:09:38 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	is_game_over(t_data *data)
 	}
 	if (data->params.time_eats == -1)
 		return (false);
-	if (eats == data->params.n_philo)
+	if (eats >= data->params.n_philo)
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 18:50:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:32:44 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,19 @@ void	print_log(t_data *data, int philo, t_status action)
 
 	sem_wait(data->sems.sem_log);
 	if (action == FORK)
-		desc = BMAG "has taken a fork" RESET;
+		desc = BMAG "🍴 has taken a fork" RESET;
 	else if (action == EAT)
-		desc = BYEL "is eating" RESET;
+		desc = BYEL "🍽️  is eating" RESET;
 	else if (action == SLEEP)
-		desc = BBLU "is sleeping" RESET;
+		desc = BBLU "💤 is sleeping" RESET;
 	else if (action == THINK)
-		desc = BCYN "is thiking" RESET;
+		desc = BCYN "💭 is thiking" RESET;
 	else if (action == DIE)
-		desc = BRED "died" RESET;
+		desc = BRED "💀 died" RESET;
 	else
 		return ;
 	printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
 		get_timestamp() - data->timestamp, philo, desc);
-	sem_post(data->sems.sem_log);
+	if (action != DIE)
+		sem_post(data->sems.sem_log);
 }

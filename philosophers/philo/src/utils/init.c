@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/31 18:44:29 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:25:17 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	create_data_philos(t_data *data)
 		if (i == data->params.n_philo - 1)
 			data->start = true;
 		pthread_create(&data->philos[i].thread, NULL, &philo_life, &info);
-		usleep(10);
+		usleep(1000);
 		i++;
 	}
 	return (1);

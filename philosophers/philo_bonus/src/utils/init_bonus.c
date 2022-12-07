@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 13:48:15 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:21:52 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	create_process(t_data *data)
 			break ;
 		}
 		data->id_forks[i] = pid;
-		usleep(10);
+		usleep(1000);
 		i++;
 	}
 	start_threads(data);
