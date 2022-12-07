@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 00:09:38 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:08:08 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,53 @@ bool	is_game_over(t_data *data)
  * @param data estructura de datos
  * @param i posicion del filosofo
  */
+// static void	philo_actions(t_data *data, int i)
+// {
+// 	if (get_timestamp() - data->philos[i].last_food > data->params.t_die
+// 		&& data->philos[i].status != EAT)
+// 		philo_die(data, i);
+// 	else if (data->philos[i].status == THINK
+// 		&& can_take_fork(data, i))
+// 	{
+// 		start_eat(data, i);
+// 		my_usleep(data->params.t_eat);
+// 	}
+// 	else if (data->philos[i].status == EAT)
+// 	{
+// 		if (get_timestamp() - data->philos[i].last_food > data->params.t_eat)
+// 		{
+// 			finish_eat(data, i);
+// 			my_usleep(data->params.t_sleep);
+// 		}
+// 	}
+// 	else if (data->philos[i].status == SLEEP)
+// 	{
+// 		if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
+// 			finish_sleep(data, i);
+// 	}
+// }
+
+void	ft_action_one(t_data *data, int i)
+{
+	start_eat(data, i);
+	my_usleep(data->params.t_eat);
+}
+
+void	ft_action_two(t_data *data, int i)
+{
+	if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
+		finish_sleep(data, i);
+}
+
+
+
 static void	philo_actions(t_data *data, int i)
 {
 	if (get_timestamp() - data->philos[i].last_food > data->params.t_die
 		&& data->philos[i].status != EAT)
 		philo_die(data, i);
-	else if (data->philos[i].status == THINK
-		&& can_take_fork(data, i))
-		start_eat(data, i);
-	else if (data->philos[i].status == EAT)
-	{
-		if (get_timestamp() - data->philos[i].last_food > data->params.t_eat)
-			finish_eat(data, i);
-	}
-	else if (data->philos[i].status == SLEEP)
-	{
-		if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
-			finish_sleep(data, i);
-	}
+	ft_action_one(data, i);
+	ft_action_two(data, i);
 }
 
 /**
@@ -74,19 +103,23 @@ static void	philo_actions(t_data *data, int i)
  */
 void	*philo_life(void *d)
 {
-	t_info	*info;
-	t_data	*data;
-	int		i;
+	// t_info	*info;
+	t_data		*data;
+	static int	n = 0;
+	int			i = 0;
 
-	info = (t_info *)d;
-	i = info->i;
-	data = info->data;
+	i = n;
+	n++;
+	data = (t_data *)d;
+	//  return (NULL);
+	if (i % 2 != 0)
+		my_usleep(10);
 	while (!is_game_over(data))
 	{
-		if (i >= data->params.n_philo)
-			continue ;
+		// if (i >= data->params.n_philo)
+		// 	continue ;
 		philo_actions(data, i);
-		usleep(10);
+		// my_usleep(10);
 	}
 	return (NULL);
 }

@@ -69,14 +69,14 @@ start: $(NAME)
 #	@./philo/philo 5 800 200 200
 #	@./philo/philo 5 800 200 200 1
 #	@./philo/philo 4 410 200 200
-	@./philo/philo 4 310 200 100 
+	@./philo/philo 180 420 200 200
 
 start_bonus: $(NAME_B)
 #	@./philo_bonus/philo_bonus 1 800 200 200
 #	@./philo_bonus/philo_bonus 5 800 200 200
 #	@./philo_bonus/philo_bonus 5 800 200 200 1
 #	@./philo_bonus/philo_bonus 4 410 200 200
-	@./philo_bonus/philo_bonus 4 310 200 100
+	@./philo_bonus/philo_bonus 46 310 200 100
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900

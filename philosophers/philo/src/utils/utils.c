@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 00:32:03 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:33:11 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,15 @@ void	print_log(t_data *data, int philo, t_status action)
 		printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
 			get_timestamp() - data->timestamp, philo, desc);
 	pthread_mutex_unlock(&data->log);
+}
+
+void	my_usleep(int num)
+{
+	long long int	time;
+	
+	time = get_timestamp();
+	while ((get_timestamp() - time < num))
+	{
+		usleep(num / 2);
+	}
 }

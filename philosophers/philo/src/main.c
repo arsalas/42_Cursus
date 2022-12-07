@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/07 15:34:28 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:35:07 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < data.params.n_philo)
 	{
-		pthread_join(data.philos[i].thread, NULL);
+		if (pthread_join(data.philos[i].thread, NULL) == -1)
+			return (-1);
 		i++;
 	}
 	destroy_data(&data);

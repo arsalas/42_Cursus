@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/03 15:48:26 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:56:26 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define SEC 1000000
 # define MS 100000
+
+typedef struct s_data	t_data;
 
 typedef enum e_status
 {
@@ -92,5 +94,5 @@ bool		can_take_fork(t_data *data, int philo_id);
 void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
 void		destroy_data(t_data *data);
-
+void		my_usleep(int num);
 #endif
