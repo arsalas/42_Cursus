@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:24 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 00:10:50 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:56:50 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	start_eat(t_data *data, int philo_id)
 	take_fork(data, philo_id);
 	data->philos[philo_id].last_food = get_timestamp();
 	data->philos[philo_id].status = EAT;
-	// if (!is_game_over(data))
-		print_log(data, philo_id + 1, EAT);
+	print_log(data, philo_id + 1, EAT);
 	data->philos[philo_id].n_eat++;
 }
 

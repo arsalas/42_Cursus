@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 16:56:26 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/08 00:08:43 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 # define SEC 1000000
 # define MS 100000
-
-typedef struct s_data	t_data;
 
 typedef enum e_status
 {
@@ -69,12 +67,6 @@ typedef struct s_data
 	pthread_mutex_t	log;
 }	t_data;
 
-typedef struct s_info
-{
-	t_data	*data;
-	int		i;
-}	t_info;
-
 int			ft_atoi(const char *str);
 long long	get_timestamp(void);
 t_params	recive_args(char **argv);
@@ -95,4 +87,5 @@ void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
 void		destroy_data(t_data *data);
 void		my_usleep(int num);
+
 #endif

@@ -6,11 +6,20 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 16:35:07 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/08 00:17:18 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	program_error(int error)
+{
+	if (error == 0)
+		printf("Missing arguments\n");
+	else
+		printf("Incorrect format\n");
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -18,14 +27,11 @@ int	main(int argc, char **argv)
 	int		i;
 
 	if (argc < 4)
-		return (0);
+		return (program_error(0));
 	data.finish = 0;
 	data.params = recive_args(argv);
 	if (!data.params.correct_format)
-	{
-		printf("Incorrect format");
-		return (0);
-	}
+		return (program_error(1));
 	data.timestamp = get_timestamp();
 	pthread_mutex_init(&data.fork_mutex, NULL);
 	pthread_mutex_init(&data.log, NULL);

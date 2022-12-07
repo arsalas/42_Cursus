@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 18:55:08 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:58:06 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,14 @@ static t_philo	init_philo_data(int i)
 int	create_data_philos(t_data *data)
 {
 	int		i;
-	// t_info	info;
 
 	data->philos = malloc(sizeof(t_philo) * data->params.n_philo);
 	if (data->philos == NULL)
 		return (0);
 	i = 0;
-		// printf("eats: %i\n", data->params.n_philo);
 	while (i < data->params.n_philo)
 	{
 		data->philos[i] = init_philo_data(i);
-		// info.data = data;
-		// info.i = i;
-		// if (i == data->params.n_philo - 1)
-		// 	data->start = true;
-		// if (pthread_create(&data->philos[i].thread, NULL, &philo_life, &info) == -1)
-		// 	return (-1);
-		// my_usleep(100);
 		i++;
 	}
 	i = 0;
@@ -65,7 +56,8 @@ int	create_data_philos(t_data *data)
 	{
 		if (i == data->params.n_philo - 1)
 			data->start = true;
-		if (pthread_create(&data->philos[i].thread, NULL, &philo_life, data) == -1)
+		if (pthread_create(&data->philos[i].thread,
+				NULL, &philo_life, data) == -1)
 			return (-1);
 		i++;
 	}

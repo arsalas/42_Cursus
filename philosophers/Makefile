@@ -1,3 +1,8 @@
+# COLORS
+GREEN			:= \033[32m
+BLUE			:= \033[34m
+NC				:= \033[m
+
 CFLAGS 	:= -Wall -Wextra -Werror -pthread -g
 CC		:= gcc
 
@@ -6,6 +11,7 @@ SRCS 	= main.c \
 		init.c \
 		args.c \
 		utils.c \
+		time.c \
 		die.c \
 		eat.c \
 		forks.c \
@@ -29,6 +35,7 @@ HEADERS_M 	= philo/includes/philo.h
 HEADERS_B 	= philo_bonus/includes/philo_bonus.h
 
 OBJS_DIR	:= obj
+BIN_DIR		:= bin
 
 INCLUDES 	:=  includes/ philo/includes/ philo_bonus/includes/
 INC 		= $(addprefix -I , $(INCLUDES))
@@ -37,46 +44,54 @@ OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 OBJS_B		= $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.o))
 OBJS_M		= $(addprefix $(OBJS_DIR)/, $(SRCS_M:.c=.o))
 
+DEPS				= $(patsubst %.o, %.d, $(OBJS)) 
+DEPS_B				= $(patsubst %.o, %.d, $(OBJS_B)) 
+DEPFLAGS			= -MMD -MF
+
 NAME 	:= philo
 
 NAME_B 	:= philo_bonus
+
+BIN = $(BIN_DIR)/$(NAME)
+BIN_B = $(BIN_DIR)/$(NAME_B)
 
 RM 		:= rm -f
 
 vpath %.c philo philo/src philo/src/actions philo/src/jobs philo/src/utils  
 vpath %.c philo_bonus philo_bonus/src philo_bonus/src/actions philo_bonus/src/jobs philo_bonus/src/utils  
-vpath %.h includes philo/includes philo_bonus/includes 
 
 .SECONDEXPANSION:
 
-all:	$(NAME)
+all:	$(BIN)
 
 $(OBJS_DIR)/%.o: %.c | $$(@D)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
 
-$(NAME): $(OBJS) $(HEADERS) $(HEADERS_M)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS) -o ./philo/$(NAME)
-	@echo "\x1b[32m$(NAME) compiled!\x1b[0m"
+$(BIN): $(OBJS) $(BIN_DIR)
+	@echo "$(BLUE)$(NAME) compiling...$(NC)"
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(INC) $(OBJS) $(LIBS) -o $(BIN)
+	@echo "$(GREEN)$(NAME) compiled!$(NC)"
 
-bonus:	$(NAME_B)
+bonus:	$(BIN_B)
 
-$(NAME_B): $(OBJS_B) $(HEADERS) $(HEADERS_B)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS_B) -o ./philo_bonus/$(NAME_B)
-	@echo "\x1b[32m$(NAME_B) compiled!\x1b[0m"
+$(BIN_B): $(OBJS_B) $(BIN_DIR)
+	@echo "$(BLUE)$(NAME_B) compiling...$(NC)"
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(INC) $(OBJS_B) $(LIBS) -o $(BIN_B)
+	@echo "$(GREEN)$(NAME_B) compiled!$(NC)"
 
-start: $(NAME)
-#	@./philo/philo 1 800 200 200
-#	@./philo/philo 5 800 200 200
-#	@./philo/philo 5 800 200 200 1
-#	@./philo/philo 4 410 200 200
-	@./philo/philo 180 420 200 200
+run: $(BIN)
+#	@$(BIN) 1 800 200 200
+#	@$(BIN) 5 800 200 200
+	@$(BIN) 5 800 200 200 1
+#	@$(BIN) 4 410 200 200
+#	@$(BIN) 180 420 200 200
 
-start_bonus: $(NAME_B)
-#	@./philo_bonus/philo_bonus 1 800 200 200
-#	@./philo_bonus/philo_bonus 5 800 200 200
-#	@./philo_bonus/philo_bonus 5 800 200 200 1
-#	@./philo_bonus/philo_bonus 4 410 200 200
-	@./philo_bonus/philo_bonus 46 310 200 100
+run_bonus: $(BIN_B)
+#	@$(BIN_B) 1 800 200 200
+#	@$(BIN_B) 5 800 200 200
+#	@$(BIN_B) 5 800 200 200 1
+#	@$(BIN_B) 4 410 200 200
+	@$(BIN_B) 46 310 200 100
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900
@@ -84,24 +99,31 @@ leaks: $(NAME)
 leaks_bonus: $(NAME_B)
 	@leaks -atExit -- ./philo_bonus/$(NAME_B) 2 800 900 900
 	
-norminette:
+norm:
 	@echo "\x1b[33mMANDATORY":
-	@norminette philo |  sh ./tests/norminette.sh
+	@norminette philo
 	@echo "\x1b[33mBONUS":
 	@norminette philo_bonus | sh ./tests/norminette.sh
 
 clean:
-	@$(RM) $(OBJS)
-	@$(RM) $(OBJS_B)
-	@echo "\x1b[32mcleaned!\x1b[0m"
-
+	@$(RM) $(OBJS) $(DEPS)
+	@$(RM) $(OBJS_B) $(DEPS_B)
+	@echo "$(GREEN)$(NAME) cleaned!$(NC)"
+	@echo "$(GREEN)$(NAME_B) cleaned!$(NC)"
 fclean:		clean
-	@$(RM) philo/$(NAME)
-	@$(RM) philo_bonus/$(NAME_B)
+	@$(RM) $(BIN)
+	@$(RM) $(BIN_B)
 
 re:	fclean all
 
 $(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p philo/$(OBJS_DIR)
 
-.PHONY:		all clean fclean re bonus norminette start start_bonus
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+
+-include $(DEPS)
+-include $(DEPS_B)
+
+.PHONY:		all clean fclean re bonus norminette run run_bonus
