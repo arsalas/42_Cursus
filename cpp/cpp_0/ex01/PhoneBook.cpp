@@ -6,10 +6,11 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:36:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/18 18:13:02 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/07 20:44:09 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sstream> 
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 #include "colors.hpp"
@@ -69,7 +70,9 @@ void PhoneBook::truncateText(std::string str)
 
 void PhoneBook::searchContact(void)
 {
-	int i;
+	std::stringstream ss;
+	std::string str;
+	int i, num;
 
 	i = 0;
 	std::cout <<KCYN "|";
@@ -97,8 +100,22 @@ void PhoneBook::searchContact(void)
 	if (i > 0)
 	{
 		std::cout << KYEL "Selecciona contacto: " RST << std::endl;
-		std::cin >> i;
-		if (i <= _len)
-			this->_contacts[i - 1].printContact();
+		std::cin >> str;
+		ss << str;
+		ss >> num;
+		try
+		{
+			if (num <= 0 || num > 8)
+				throw (num);
+		}
+		catch(int myNum)
+		{
+			std::cout << "Muestra  un numero valido " << myNum;
+		}
+		
+		if (num <= 0)
+		 return ;
+		if (num <= _len)
+			this->_contacts[num - 1].printContact();
 	}
 }
