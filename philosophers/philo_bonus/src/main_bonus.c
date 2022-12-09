@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:58:38 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 00:15:24 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:34:45 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int argc, char **argv)
 	data.params = recive_args(argv);
 	if (!data.params.correct_format)
 		return (program_error(1));
+	if (data.params.n_philo == 0 || data.params.time_eats == 0)
+		return (0);
 	data.timestamp = get_timestamp();
 	create_semaphores(&data);
 	create_process(&data);

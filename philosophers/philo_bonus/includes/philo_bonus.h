@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 00:49:29 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:42:11 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_data
 	t_sems			sems;
 	t_thread		threads;
 	long long		timestamp;
+	long long		time_to_start;
+	bool			start;
 }	t_data;
 
 int			ft_atoi(const char *str);

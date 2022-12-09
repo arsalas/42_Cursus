@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 01:23:18 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:30:51 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ void	*is_game_finish(void *info)
 	t_data		*data;
 
 	data = (t_data *)info;
-	while (true)
-	{
-		if (get_timestamp() - data->philo.last_food > data->params.t_die)
-		{
-			philo_die(data, data->philo.id);
-			sem_post(data->sems.sem_die);
-			close_program(data);
-		}
-	}
+	while (data->timestamp - get_timestamp() > 0)
+		my_usleep(5);
+	data->philo.last_food = get_timestamp();
+	while (get_timestamp() - data->philo.last_food <= data->params.t_die + 2)
+		my_usleep(4);
+	philo_die(data, data->philo.id);
+	sem_post(data->sems.sem_die);
+	close_program(data);
 	return (NULL);
 }
 
@@ -43,18 +42,22 @@ void	*is_game_finish(void *info)
  */
 void	process_start(t_data *data, int i)
 {
-	sem_wait(data->sems.sem_start);
-	data->timestamp = get_timestamp();
-	data->philo = start_philo(i);
+	pthread_create(&data->threads.life, NULL, &is_game_finish, data);
+	while (data->timestamp - get_timestamp() > 0)
+		my_usleep(5);
+	data->philo.last_food = get_timestamp();
 	if (i % 2 != 0)
 		my_usleep(10);
-	pthread_create(&data->threads.life, NULL, &is_game_finish, data);
 	while (data->philo.is_alive)
 	{
-		take_fork(data, i);
+		sem_wait(data->sems.sem_fork);
+		print_log(data, i + 1, FORK);
+		data->philo.last_food = get_timestamp();
+		sem_post(data->sems.sem_eat);
 		my_usleep(data->params.t_eat);
-		finish_eat(data, i);
+		print_log(data, i + 1, SLEEP);
+		sem_post(data->sems.sem_fork);
 		my_usleep(data->params.t_sleep);
-		finish_sleep(data, i);
+		print_log(data, i + 1, THINK);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:57:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 01:09:56 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:19:17 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	create_semaphores(t_data *data)
 	data->sems.sem_finish = sem_open(SEM_FINISH,
 			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, data->params.n_philo);
 	data->sems.sem_action = sem_open(SEM_ACTION,
-			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, 0);
+			O_CREAT | O_EXCL, S_IRUSR | S_IRWXU, data->params.n_philo);
 }
 
 /**
