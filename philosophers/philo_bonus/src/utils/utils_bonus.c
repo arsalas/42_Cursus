@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 00:32:44 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 01:10:16 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,6 @@ int	ft_atoi(const char *str)
 }
 
 /**
- * @brief Obtiene el timestamp
- * 
- * @return long long timestamp
- */
-long long	get_timestamp(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-/**
  * @brief Imprime por pantalla el log de la accion
  * 
  * @param data estructura de datos del programa
@@ -95,6 +82,7 @@ void	print_log(t_data *data, int philo, t_status action)
 {
 	char	*desc;
 
+	sem_post(data->sems.sem_action);
 	sem_wait(data->sems.sem_log);
 	if (action == FORK)
 		desc = BMAG "🍴 has taken a fork" RESET;
@@ -112,4 +100,5 @@ void	print_log(t_data *data, int philo, t_status action)
 		get_timestamp() - data->timestamp, philo, desc);
 	if (action != DIE)
 		sem_post(data->sems.sem_log);
+	sem_wait(data->sems.sem_action);
 }

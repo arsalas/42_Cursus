@@ -23,6 +23,7 @@ SRCS_B 	= main_bonus.c \
 		args_bonus.c \
 		init_bonus.c \
 		utils_bonus.c \
+		time_bonus.c \
 		die_bonus.c \
 		eat_bonus.c \
 		fork_bonus.c \
@@ -82,16 +83,17 @@ $(BIN_B): $(OBJS_B) $(BIN_DIR)
 run: $(BIN)
 #	@$(BIN) 1 800 200 200
 #	@$(BIN) 5 800 200 200
-	@$(BIN) 5 800 200 200 1
+#	@$(BIN) 5 800 200 200 1
 #	@$(BIN) 4 410 200 200
-#	@$(BIN) 180 420 200 200
+	@$(BIN) 180 420 200 200
 
 run_bonus: $(BIN_B)
 #	@$(BIN_B) 1 800 200 200
 #	@$(BIN_B) 5 800 200 200
-#	@$(BIN_B) 5 800 200 200 1
+	@$(BIN_B) 5 800 200 200 1
 #	@$(BIN_B) 4 410 200 200
-	@$(BIN_B) 46 310 200 100
+#	@$(BIN_B) 5 420 200 100
+#	@$(BIN_B) 180 420 200 200
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900

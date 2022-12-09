@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:32:09 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 17:03:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 01:04:39 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ void	*th_philos_eat(void *info)
 
 	data = (t_data *)info;
 	i = 0;
-	while (i < data->params.n_philo)
+	while (i < data->params.n_philo * data->params.time_eats)
 	{
 		sem_wait(data->sems.sem_eat);
 		i++;
+		if (i < data->params.n_philo * data->params.time_eats)
+			sem_post(data->sems.sem_log);
 	}
 	exit_program(data);
 	return (NULL);

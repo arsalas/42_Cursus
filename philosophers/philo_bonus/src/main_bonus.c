@@ -6,11 +6,20 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:58:38 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 00:23:16 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:15:24 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+int	program_error(int error)
+{
+	if (error == 0)
+		printf("Missing arguments\n");
+	else
+		printf("Incorrect format\n");
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -21,6 +30,8 @@ int	main(int argc, char **argv)
 	close_semaphores(&data);
 	unlink_semaphores();
 	data.params = recive_args(argv);
+	if (!data.params.correct_format)
+		return (program_error(1));
 	data.timestamp = get_timestamp();
 	create_semaphores(&data);
 	create_process(&data);

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 15:27:46 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:49:29 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define SEM_LOGS "/sem_logs"
 # define SEM_DIE "/sem_die"
 # define SEM_EAT "/sem_eat"
+# define SEM_START "/sem_start"
+# define SEM_FINISH "/sem_finish"
+# define SEM_ACTION "/sem_action"
 
 typedef enum e_status
 {
@@ -53,11 +56,12 @@ typedef struct s_philo
 
 typedef struct s_params
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	time_eats;
+	int		n_philo;
+	int		t_die;
+	int		t_eat;
+	int		t_sleep;
+	int		time_eats;
+	bool	correct_format;
 }	t_params;
 
 typedef struct s_thread
@@ -73,6 +77,9 @@ typedef struct s_sems
 	sem_t			*sem_log;
 	sem_t			*sem_die;
 	sem_t			*sem_eat;
+	sem_t			*sem_start;
+	sem_t			*sem_finish;
+	sem_t			*sem_action;
 }	t_sems;
 
 typedef struct s_data
@@ -84,12 +91,6 @@ typedef struct s_data
 	t_thread		threads;
 	long long		timestamp;
 }	t_data;
-
-typedef struct s_info
-{
-	t_data	*data;
-	int		i;
-}	t_info;
 
 int			ft_atoi(const char *str);
 long long	get_timestamp(void);
@@ -120,5 +121,7 @@ void		*th_philo_die(void *info);
 void		*th_philos_eat(void *info);
 void		start_threads(t_data *data);
 void		exit_program(t_data *data);
+void		my_usleep(int num);
+t_philo		start_philo(int i);
 
 #endif

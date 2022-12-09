@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:16:26 by aramirez          #+#    #+#             */
-/*   Updated: 2022/06/08 16:44:06 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:57:34 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
  */
 void	take_fork(t_data *data, int philo_id)
 {
-	if (data->params.n_philo == 1)
-		return ;
 	data->philo.status = WAITNG_FORK;
 	sem_wait(data->sems.sem_fork);
 	data->philo.status = FORK;

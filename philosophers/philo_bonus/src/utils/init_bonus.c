@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 00:21:52 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:09:58 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,25 @@ static void	wait_process(t_data *data)
 	}
 }
 
+static void	init_process(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->params.n_philo)
+	{
+		sem_post(data->sems.sem_start);
+		i++;
+	}
+}
+
 /**
  * @brief Obtiene la informacion inicial del filosofo
  * 
  * @param i posicion del filosofo
  * @return t_philo estructura del filosofo
  */
-static t_philo	start_philo(int i)
+t_philo	start_philo(int i)
 {
 	t_philo	philo;
 
@@ -62,22 +74,18 @@ void	create_process(t_data *data)
 	data->id_forks = malloc(sizeof(pid_t) * data->params.n_philo);
 	if (data->id_forks == NULL)
 		return ;
+	start_threads(data);
 	i = 0;
 	while (i < data->params.n_philo)
 	{
-		data->philo = start_philo(i);
 		pid = fork();
 		if (pid == -1)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
-		{
 			process_start(data, i);
-			break ;
-		}
 		data->id_forks[i] = pid;
-		usleep(1000);
 		i++;
 	}
-	start_threads(data);
+	init_process(data);
 	wait_process(data);
 }
