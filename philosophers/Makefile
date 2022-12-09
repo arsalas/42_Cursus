@@ -81,11 +81,11 @@ $(BIN_B): $(OBJS_B) $(BIN_DIR)
 	@echo "$(GREEN)$(NAME_B) compiled!$(NC)"
 
 run: $(BIN)
-#	@$(BIN) 1 800 200 200
+	@$(BIN) 1 800 200 200
 #	@$(BIN) 5 800 200 200
 #	@$(BIN) 5 800 200 200 1
 #	@$(BIN) 4 410 200 200
-	@$(BIN) 180 420 200 200
+#	@$(BIN) 180 420 200 200
 
 run_bonus: $(BIN_B)
 #	@$(BIN_B) 1 800 200 200

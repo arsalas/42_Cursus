@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/08 00:53:32 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:44:07 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,36 @@ bool	is_game_over(t_data *data)
 	return (false);
 }
 
-void	ft_action_one(t_data *data, int i)
+bool	ft_action_one(t_data *data, int i)
 {
-	start_eat(data, i);
-	my_usleep(data->params.t_eat);
+	int	forks;
+
+	forks = 0;
+	if (can_take_fork(data, i, 1))
+		forks++;
+	if (data->params.n_philo == 1)
+	{
+		my_usleep(data->params.t_die + 1);
+		return (false);
+	}
+	if (can_take_fork(data, i, 2))
+		forks++;
+	// printf("THE FORKS ARE: %d\n", forks);
+	if (forks == 2)
+	{
+		start_eat(data, i);
+		my_usleep(data->params.t_eat);
+		leave_fork(data, i);
+		return (true);
+	}
+	return (false);
 }
 
 void	ft_action_two(t_data *data, int i)
 {
-	if (get_timestamp() - data->philos[i].last_sleep > data->params.t_sleep)
-		finish_sleep(data, i);
+	print_log(data, i + 1, SLEEP);
+	my_usleep(data->params.t_sleep);
+	finish_sleep(data, i);
 }
 
 /**
@@ -58,12 +78,12 @@ void	ft_action_two(t_data *data, int i)
  * @param data estructura de datos
  * @param i posicion del filosofo
  */
-static void	philo_actions(t_data *data, int i)
+void	philo_actions(t_data *data, int i)
 {
-	if (get_timestamp() - data->philos[i].last_food > data->params.t_die
-		&& data->philos[i].status != EAT)
+	if (get_timestamp() - data->philos[i].last_food > data->params.t_die)
 		philo_die(data, i);
-	ft_action_one(data, i);
+	if (!ft_action_one(data, i))
+		return ;
 	ft_action_two(data, i);
 }
 
@@ -82,11 +102,32 @@ void	*philo_life(void *d)
 	i = n;
 	n++;
 	data = (t_data *)d;
+	data->philos[i].last_food = get_timestamp();
 	if (i % 2 != 0)
-		my_usleep(10);
-	while (!is_game_over(data))
+		my_usleep(data->params.t_eat -1);
+	while (!data->finish)
 	{
-		philo_actions(data, i);
+		pthread_mutex_lock(&data->philos[i].fork_mutex);
+		print_log(data, i + 1, FORK);
+		// if (data->params.n_philo == 1)
+		// {
+		// 	my_usleep(data->params.t_die);
+		// 	printf("1\n");
+		// 	pthread_mutex_unlock(&data->philos[i].fork_mutex);
+		// 	return (NULL);
+		// }
+		pthread_mutex_lock(&data->philos[next_fork(i, data->params.n_philo)].fork_mutex);
+		print_log(data, i + 1, FORK);
+		print_log(data, i + 1, EAT);
+		data->eats--;
+		data->philos[i].last_food = get_timestamp();
+		my_usleep(data->params.t_eat);
+		pthread_mutex_unlock(&data->philos[i].fork_mutex);
+		pthread_mutex_unlock(&data->philos[next_fork(i, data->params.n_philo)].fork_mutex);
+		print_log(data, i + 1, SLEEP);
+		my_usleep(data->params.t_sleep);
+		print_log(data, i + 1, THINK);
 	}
+	n = 0;
 	return (NULL);
 }

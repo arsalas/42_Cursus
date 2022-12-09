@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/08 00:17:18 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:36:36 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	main(int argc, char **argv)
 	pthread_mutex_init(&data.fork_mutex, NULL);
 	pthread_mutex_init(&data.log, NULL);
 	if (create_data_forks(&data) == 0 || create_data_philos(&data) == 0)
+	{
 		return (0);
+	}
 	i = 0;
 	while (i < data.params.n_philo)
 	{

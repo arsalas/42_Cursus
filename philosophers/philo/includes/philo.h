@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/08 00:08:43 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:46:38 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ typedef enum e_status
 
 typedef struct s_philo
 {
-	pthread_t	thread;
-	int			id;
-	int			n_eat;
-	bool		is_alive;
-	long long	last_food;
-	long long	last_sleep;
-	t_status	status;
+	pthread_t		thread;
+	int				id;
+	int				n_eat;
+	bool			is_alive;
+	long long		last_food;
+	long long		last_sleep;
+	t_status		status;
+	pthread_mutex_t	fork_mutex;
 }	t_philo;
 
 typedef struct s_params
@@ -62,6 +63,9 @@ typedef struct s_data
 	int				*forks;
 	int				finish;
 	long			timestamp;
+	int				eats;
+	int				death;
+	pthread_t		thread_die;
 	bool			start;
 	pthread_mutex_t	fork_mutex;
 	pthread_mutex_t	log;
@@ -82,7 +86,7 @@ void		finish_sleep(t_data *data, int philo_id);
 void		take_fork(t_data *data, int philo_id);
 void		leave_fork(t_data *data, int philo_id);
 int			next_fork(int pos, int max);
-bool		can_take_fork(t_data *data, int philo_id);
+bool		can_take_fork(t_data *data, int philo_id, int type);
 void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
 void		destroy_data(t_data *data);
