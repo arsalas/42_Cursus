@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:33:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 01:17:00 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:05:09 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	*check_death(void *d)
 	int		n;
 
 	data = (t_data *)d;
+	while (get_timestamp() < data->timestamp)
+	{
+		usleep(100);
+	}
 	while (!data->finish)
 	{
 		n = 0;
@@ -103,9 +107,12 @@ void	*philo_life(void *d)
 	i = n;
 	n++;
 	data = (t_data *)d;
-	data->philos[i].last_food = get_timestamp();
+	while (get_timestamp() < data->timestamp)
+	{
+		usleep(100);
+	}
 	if (i % 2 != 0)
-		my_usleep(data->params.t_eat);
+		my_usleep(data->params.t_eat / 2);
 	while (!data->finish)
 		philo_routine(data, i);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 23:58:34 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 11:06:07 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:26:03 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	my_usleep(int num)
 	time = get_timestamp();
 	while ((get_timestamp() - time < num))
 	{
-		usleep(num / 2);
+		usleep(150);
 	}
 }

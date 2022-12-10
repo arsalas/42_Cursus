@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 11:10:55 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:39:24 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,19 @@ static void	wait_process(t_data *data)
 	}
 }
 
-static void	init_process(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->params.n_philo)
-	{
-		sem_post(data->sems.sem_start);
-		i++;
-	}
-}
-
 /**
  * @brief Obtiene la informacion inicial del filosofo
  * 
  * @param i posicion del filosofo
  * @return t_philo estructura del filosofo
  */
-t_philo	start_philo(int i)
+t_philo	start_philo(int i, long long int die)
 {
 	t_philo	philo;
 
 	philo.id = i + 1;
 	philo.is_alive = true;
-	philo.last_food = get_timestamp();
+	philo.last_food = die;
 	philo.last_sleep = 0;
 	philo.n_eat = 0;
 	philo.status = THINK;
@@ -76,7 +64,6 @@ void	create_process(t_data *data)
 		return ;
 	start_threads(data);
 	i = 0;
-	data->timestamp = get_timestamp() + (30 * data->params.n_philo);
 	while (i < data->params.n_philo)
 	{
 		pid = fork();
@@ -84,13 +71,11 @@ void	create_process(t_data *data)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
 		{
-			data->philo = start_philo(i);
-			sem_wait(data->sems.sem_start);
+			data->philo = start_philo(i, data->timestamp);
 			process_start(data, i);
 		}
 		data->id_forks[i] = pid;
 		i++;
 	}
-	init_process(data);
 	wait_process(data);
 }

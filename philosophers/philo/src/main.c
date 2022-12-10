@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 11:00:58 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:56:38 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	main(int argc, char **argv)
 	data.params = recive_args(argv);
 	if (!data.params.correct_format)
 		return (program_error(1));
-	data.timestamp = get_timestamp();
+	if (data.params.time_eats == 0)
+		return (0);
+	data.timestamp = get_timestamp() + (30 * data.params.n_philo);
 	pthread_mutex_init(&data.fork_mutex, NULL);
 	pthread_mutex_init(&data.log, NULL);
 	if (create_data_forks(&data) == 0 || create_data_philos(&data) == 0)
-	{
 		return (0);
-	}
 	i = 0;
 	while (i < data.params.n_philo)
 	{

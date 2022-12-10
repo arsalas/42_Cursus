@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 01:17:28 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:58:56 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
  * @param i posicion del filosofo
  * @return t_philo estructura de datos del filosofo
  */
-static t_philo	init_philo_data(int i)
+static t_philo	init_philo_data(int i, long int die)
 {
 	t_philo	philo;
 
 	philo.id = i + 1;
 	philo.is_alive = true;
-	philo.last_food = get_timestamp();
+	philo.last_food = die;
 	philo.last_sleep = 0;
 	philo.n_eat = 0;
 	philo.status = THINK;
@@ -39,7 +39,7 @@ int	init_threads(t_data *data)
 	i = 0;
 	while (i < data->params.n_philo)
 	{
-		data->philos[i] = init_philo_data(i);
+		data->philos[i] = init_philo_data(i, data->timestamp);
 		i++;
 	}
 	i = 0;
@@ -56,6 +56,7 @@ int	init_threads(t_data *data)
 	if (pthread_create(&data->thread_eats,
 			NULL, &check_eats, data) == -1)
 		return (0);
+	data->start = true;
 	return (1);
 }
 
@@ -72,7 +73,6 @@ int	create_data_philos(t_data *data)
 	if (data->philos == NULL)
 		return (0);
 	data->eats = data->params.time_eats * data->params.n_philo;
-	data->start = true;
 	return (init_threads(data));
 }
 

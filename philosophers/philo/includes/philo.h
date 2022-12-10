@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 10:43:44 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 15:47:48 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_data
 	int				death;
 	pthread_t		thread_die;
 	pthread_t		thread_eats;
+	pthread_t		thread_logs;
 	bool			start;
 	pthread_mutex_t	fork_mutex;
 	pthread_mutex_t	log;

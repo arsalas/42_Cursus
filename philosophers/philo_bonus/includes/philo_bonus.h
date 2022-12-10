@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 10:44:04 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:17:41 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void		*th_philos_eat(void *info);
 void		start_threads(t_data *data);
 void		exit_program(t_data *data);
 void		my_usleep(int num);
-t_philo		start_philo(int i);
+t_philo		start_philo(int i, long long int die);
 
 void		print_log(t_data *data, int philo, char	*desc);
 void		print_log_eat(t_data *data, int philo);
