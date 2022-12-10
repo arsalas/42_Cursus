@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:58:38 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 14:34:45 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:01:20 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc < 4)
-		return (0);
+	if (argc < 5)
+		return (program_error(0));
 	close_semaphores(&data);
 	unlink_semaphores();
 	data.params = recive_args(argv);

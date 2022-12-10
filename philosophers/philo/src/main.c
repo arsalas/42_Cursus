@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:26:28 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 18:36:36 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:00:58 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 	int		i;
 
-	if (argc < 4)
+	if (argc < 5)
 		return (program_error(0));
 	data.finish = 0;
 	data.params = recive_args(argv);

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:47:41 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 20:46:38 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:43:44 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
 	int				eats;
 	int				death;
 	pthread_t		thread_die;
+	pthread_t		thread_eats;
 	bool			start;
 	pthread_mutex_t	fork_mutex;
 	pthread_mutex_t	log;
@@ -74,7 +75,6 @@ typedef struct s_data
 int			ft_atoi(const char *str);
 long long	get_timestamp(void);
 t_params	recive_args(char **argv);
-void		print_log(t_data *data, int philo, t_status action);
 int			create_data_philos(t_data *data);
 int			create_data_forks(t_data *data);
 void		*philo_life(void *d);
@@ -91,5 +91,14 @@ void		philo_die(t_data *data, int philo_id);
 bool		is_game_over(t_data *data);
 void		destroy_data(t_data *data);
 void		my_usleep(int num);
+
+void		print_log(t_data *data, int philo, char	*desc);
+void		print_log_eat(t_data *data, int philo);
+void		print_log_sleep(t_data *data, int philo);
+void		print_log_think(t_data *data, int philo);
+void		print_log_die(t_data *data, int philo);
+void		print_log_fork(t_data *data, int philo);
+void		*check_eats(void *d);
+void		*check_death(void *d);
 
 #endif

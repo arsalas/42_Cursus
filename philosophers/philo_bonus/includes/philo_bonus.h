@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:07:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 12:42:11 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:44:04 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ typedef struct s_data
 int			ft_atoi(const char *str);
 long long	get_timestamp(void);
 t_params	recive_args(char **argv);
-void		print_log(t_data *data, int philo, t_status action);
 
 void		create_process(t_data *data);
 void		process_start(t_data *data, int i);
@@ -125,5 +124,14 @@ void		start_threads(t_data *data);
 void		exit_program(t_data *data);
 void		my_usleep(int num);
 t_philo		start_philo(int i);
+
+void		print_log(t_data *data, int philo, char	*desc);
+void		print_log_eat(t_data *data, int philo);
+void		print_log_sleep(t_data *data, int philo);
+void		print_log_think(t_data *data, int philo);
+void		print_log_die(t_data *data, int philo);
+void		print_log_fork(t_data *data, int philo);
+void		*check_eats(void *d);
+void		*check_death(void *d);
 
 #endif

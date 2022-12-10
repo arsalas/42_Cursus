@@ -3,7 +3,7 @@ GREEN			:= \033[32m
 BLUE			:= \033[34m
 NC				:= \033[m
 
-CFLAGS 	:= -Wall -Wextra -Werror -pthread -g
+CFLAGS 	:= -Wall -Wextra -Werror -pthread
 CC		:= gcc
 
 SRCS 	= main.c \
@@ -11,23 +11,19 @@ SRCS 	= main.c \
 		init.c \
 		args.c \
 		utils.c \
+		logs.c \
 		time.c \
-		die.c \
-		eat.c \
 		forks.c \
-		sleep.c
 
 SRCS_B 	= main_bonus.c \
 		process_bonus.c \
 		threads_bonus.c \
+		die_bonus.c \
 		args_bonus.c \
 		init_bonus.c \
 		utils_bonus.c \
 		time_bonus.c \
-		die_bonus.c \
-		eat_bonus.c \
-		fork_bonus.c \
-		sleep_bonus.c \
+		logs_bonus.c \
 		exit_bonus.c \
 		semaphores_bonus.c \
 
@@ -58,8 +54,8 @@ BIN_B = $(BIN_DIR)/$(NAME_B)
 
 RM 		:= rm -f
 
-vpath %.c philo philo/src philo/src/actions philo/src/jobs philo/src/utils  
-vpath %.c philo_bonus philo_bonus/src philo_bonus/src/actions philo_bonus/src/jobs philo_bonus/src/utils  
+vpath %.c philo philo/src philo/src/actions philo/src/jobs philo/src/utils philo/src/logs
+vpath %.c philo_bonus philo_bonus/src philo_bonus/src/actions philo_bonus/src/jobs philo_bonus/src/utils philo_bonus/src/logs  
 
 .SECONDEXPANSION:
 
@@ -81,19 +77,21 @@ $(BIN_B): $(OBJS_B) $(BIN_DIR)
 	@echo "$(GREEN)$(NAME_B) compiled!$(NC)"
 
 run: $(BIN)
-	@$(BIN) 1 800 200 200
+#	@$(BIN) 1 800 200 200
 #	@$(BIN) 5 800 200 200
-#	@$(BIN) 5 800 200 200 1
+#	@$(BIN) 5 800 200 200 5
 #	@$(BIN) 4 410 200 200
+#	@$(BIN) 5 420 200 100
 #	@$(BIN) 180 420 200 200
 
 run_bonus: $(BIN_B)
-#	@$(BIN_B) 1 800 200 200
-#	@$(BIN_B) 100 800 200 200
-#	@$(BIN_B) 5 800 200 200 1
+	@$(BIN_B) 1 800 200 200
+#	@$(BIN_B) 5 800 200 200
+#	@$(BIN_B) 5 800 200 200 5
 #	@$(BIN_B) 4 410 200 200
 #	@$(BIN_B) 5 420 200 100
-	@$(BIN_B) 100 420 200 200
+#	@$(BIN_B) 100 800 200 200
+
 
 leaks: $(NAME)
 	@leaks -atExit -- ./philo/$(NAME) 2 800 900 900

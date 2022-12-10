@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:25:23 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 21:19:57 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:09:11 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*is_game_finish(void *info)
 	while (data->timestamp - get_timestamp() > 0)
 		my_usleep(1);
 	data->philo.last_food = get_timestamp();
-	while (get_timestamp() - data->philo.last_food <= data->params.t_die + 2)
+	while (get_timestamp() - data->philo.last_food <= data->params.t_die)
 		my_usleep(1);
 	philo_die(data, data->philo.id);
 	sem_post(data->sems.sem_die);
@@ -44,20 +44,24 @@ void	process_start(t_data *data, int i)
 {
 	pthread_create(&data->threads.life, NULL, &is_game_finish, data);
 	while (data->timestamp - get_timestamp() > 0)
-		my_usleep(5);
+		my_usleep(1);
 	data->philo.last_food = get_timestamp();
 	if (i % 2 != 0)
 		my_usleep(data->params.t_eat);
-	while (data->philo.is_alive)
+	while (true)
 	{
 		sem_wait(data->sems.sem_fork);
-		print_log(data, i + 1, FORK);
+		print_log_fork(data, i + 1);
+		sem_wait(data->sems.sem_fork);
+		print_log_fork(data, i + 1);
 		data->philo.last_food = get_timestamp();
+		print_log_eat(data, i + 1);
 		sem_post(data->sems.sem_eat);
 		my_usleep(data->params.t_eat);
-		print_log(data, i + 1, SLEEP);
 		sem_post(data->sems.sem_fork);
+		sem_post(data->sems.sem_fork);
+		print_log_sleep(data, i + 1);
 		my_usleep(data->params.t_sleep);
-		print_log(data, i + 1, THINK);
+		print_log_think(data, i + 1);
 	}
 }

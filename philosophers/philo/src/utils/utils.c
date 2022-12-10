@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 21:09:47 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:01:44 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,26 +78,9 @@ int	ft_atoi(const char *str)
  * @param philo id del filosofo
  * @param action accion a printar en el log
  */
-void	print_log(t_data *data, int philo, t_status action)
+void	print_log(t_data *data, int philo, char	*desc)
 {
-	char	*desc;
-	(void)action;
-	// if (action == FORK)
-	// 	desc = BMAG " has taken a fork" RESET;
-	// else if (action == EAT)
-	// 	desc = BYEL " is eating" RESET;
-	// else if (action == SLEEP)
-	// 	desc = BBLU " is sleeping" RESET;
-	// else if (action == THINK)
-	// 	desc = BCYN " is thiking" RESET;
-	// else if (action == DIE)
-	// 	desc = BRED " died" RESET;
-	// else
-	// 	return ;
-	desc =  " died" ;
-	pthread_mutex_lock(&data->log);
 	if (!data->finish)
-		printf( "%lli"  "\t%i\t"  "%s\n",
+		printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
 			get_timestamp() - data->timestamp, philo, desc);
-	pthread_mutex_unlock(&data->log);
 }

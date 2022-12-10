@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:19:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 14:37:18 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:10:55 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	create_process(t_data *data)
 		return ;
 	start_threads(data);
 	i = 0;
-	data->timestamp = get_timestamp() + (50 * data->params.n_philo);
+	data->timestamp = get_timestamp() + (30 * data->params.n_philo);
 	while (i < data->params.n_philo)
 	{
 		pid = fork();

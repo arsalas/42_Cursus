@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:28:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/09 13:17:07 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:43:26 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,8 @@ int	ft_atoi(const char *str)
  * @param philo id del filosofo
  * @param action accion a imprimir
  */
-void	print_log(t_data *data, int philo, t_status action)
+void	print_log(t_data *data, int philo, char	*desc)
 {
-	char	*desc;
-
-	sem_wait(data->sems.sem_log);
-	if (action == FORK)
-		desc = BMAG "🍴 has taken a fork" RESET;
-	else if (action == EAT)
-		desc = BYEL "🍽️  is eating" RESET;
-	else if (action == SLEEP)
-		desc = BBLU "💤 is sleeping" RESET;
-	else if (action == THINK)
-		desc = BCYN "💭 is thiking" RESET;
-	else if (action == DIE)
-		desc = BRED "💀 died" RESET;
-	else
-		return ;
 	printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
 		get_timestamp() - data->timestamp, philo, desc);
-	if (action == FORK)
-	{
-		desc = BYEL "🍽️  is eating" RESET;
-		printf(UGRN "%lli" RESET BHWHT"\t%i\t" RESET "%s\n",
-			get_timestamp() - data->timestamp, philo, desc);
-	}
-	if (action != DIE)
-		sem_post(data->sems.sem_log);
 }
