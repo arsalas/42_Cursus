@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:34:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 11:47:44 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 23:56:47 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	ft_strlen_line(char *s)
 	{
 		i++;
 	}
-	return (i);
+	return (i + 1);
 }
 
 int	ft_have_line(char *s)

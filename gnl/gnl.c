@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 12:53:17 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/10 23:59:16 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*get_next_line(int fd)
 		{
 			line = storage;
 			len = ft_strlen_line(line);
-			aux = ft_substr(line, 0, len + 1);
-			leftover = ft_substr(line, len + 1, ft_strlen(line));
+			aux = ft_substr(line, 0, len);
+			leftover = ft_substr(line, len, ft_strlen(line));
 			free(line);
 			storage = leftover;
 			return (aux);
@@ -56,8 +56,8 @@ char	*get_next_line(int fd)
 		if (ft_have_line(line))
 		{
 			len = ft_strlen_line(line);
-			aux = ft_substr(line, 0, len + 1);
-			leftover = ft_substr(line, len + 1, ft_strlen(line));
+			aux = ft_substr(line, 0, len);
+			leftover = ft_substr(line, len, ft_strlen(line));
 			free(line);
 			storage = leftover;
 			return (aux);
