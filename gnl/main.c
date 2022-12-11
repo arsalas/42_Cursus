@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 12:46:05 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:03:10 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	main(void)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);
+		if (line)
+			free(line);
 	}
+	close(fd);
 	return (0);
 }

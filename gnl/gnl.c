@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 23:59:16 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:02:16 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*get_next_line(int fd)
 	int			len;
 	char		*leftover;
 
+	if (fd < 0)
+		return (NULL);
 	if (storage)
 	{
 		if (ft_have_line(storage))
@@ -68,5 +70,6 @@ char	*get_next_line(int fd)
 		storage = NULL;
 		return (line);
 	}
+	free(line);
 	return (NULL);
 }

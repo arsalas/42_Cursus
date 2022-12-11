@@ -6,13 +6,13 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:33:10 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/10 12:46:32 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:55:10 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GNL_H
 # define GNL_H
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 42
 
 # include <stddef.h>
 # include <stdlib.h>
