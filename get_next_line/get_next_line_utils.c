@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:34:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 12:30:17 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:22:09 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		l_s2;
 	int		c;
 
-	l_s1 = ft_strlen((char *)s1, 0);
-	l_s2 = ft_strlen((char *)s2, 0);
+	if (s1)
+		l_s1 = ft_strlen((char *)s1, 0);
+	else
+		l_s1 = 0;
+	if (s2)
+		l_s2 = ft_strlen((char *)s2, 0);
+	else
+		l_s2 = 0;
 	str = malloc(sizeof(char) * (l_s1 + l_s2 + 1));
 	if (str == NULL)
 		return (NULL);

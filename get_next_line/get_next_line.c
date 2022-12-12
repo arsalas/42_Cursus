@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 12:32:45 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:25:31 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ static t_line	get_line(char *line)
  * 
  * @return t_line 
  */
-static t_line	get_null_line(void)
+static t_line	new_line(char *line, char *storage)
 {
-	t_line	line2;
+	t_line	new_line;
 
-	line2.line = NULL;
-	return (line2);
+	new_line.line = line;
+	new_line.storage = storage;
+	return (new_line);
 }
 
 /**
@@ -64,26 +65,26 @@ static t_line	read_file(int fd, char *line)
 	int		nb;
 	char	buffer[BUFFER_SIZE + 1];
 	char	*aux;
-	t_line	line2;
+	t_line	result_line;
 
 	while (1)
 	{
 		nb = read(fd, buffer, BUFFER_SIZE);
 		if (nb == 0)
-			break ;
+		{
+			if (ft_strlen(line, 0) == 0)
+				return (new_line(NULL, NULL));
+			return (new_line(line, NULL));
+		}
 		buffer[nb] = '\0';
 		aux = ft_strjoin(line, buffer);
 		if (!aux)
-			return (get_null_line());
+			return (new_line(NULL, NULL));
 		free(line);
 		line = aux;
 		if (ft_have_line(line))
-		{
-			line2 = get_line(line);
-			return (line2);
-		}
+			return (get_line(line));
 	}
-	return (get_null_line());
 }
 
 /**
@@ -95,27 +96,27 @@ static t_line	read_file(int fd, char *line)
  */
 static t_line	get_line_file(int fd, char *line)
 {
-	t_line	line2;
+	t_line	new_line;
 
 	if (!line)
 	{
 		line = malloc(sizeof(char));
 		line[0] = '\0';
 	}
-	line2 = read_file(fd, line);
-	if (line2.line)
-		return (line2);
+	new_line = read_file(fd, line);
+	if (new_line.line)
+		return (new_line);
 	if (ft_strlen(line, 0) == 0)
 	{
-		line2.line = NULL;
+		new_line.line = NULL;
 		free(line);
 	}
 	else
 	{
-		line2.line = line;
-		line2.storage = NULL;
+		new_line.line = line;
+		new_line.storage = NULL;
 	}
-	return (line2);
+	return (new_line);
 }
 
 /**
