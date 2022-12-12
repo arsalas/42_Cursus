@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 11:09:14 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:25:06 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ t_line	get_line(char *line)
 	len = ft_strlen_line(line);
 	result.line = ft_substr(line, 0, len);
 	leftover = ft_substr(line, len, ft_strlen(line));
+	if (!result.line || !leftover)
+	{
+		result.line = NULL;
+		return (result);
+	}
 	free(line);
 	result.storage = leftover;
 	return (result);
@@ -75,35 +80,43 @@ t_line	read_file(int fd, char *line)
 			return (line2);
 		}
 	}
-	line2.line = NULL;
-	free(line);
+	if (ft_strlen(line) == 0)
+	{
+		line2.line = NULL;
+		free(line);
+	}
+	else
+	{
+		line2.line = line;
+		line2.storage = NULL;
+	}
 	return (line2);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*storage = NULL;
-	t_line		line2;
+	t_line		line;
 
 	if (fd < 0)
 		return (NULL);
 	if (storage && ft_have_line(storage))
 	{
-		line2 = get_line(storage);
-		storage = line2.storage;
-		return (line2.line);
+		line = get_line(storage);
+		storage = line.storage;
+		return (line.line);
 	}
-	line2 = read_file(fd, storage);
-	if (line2.line)
+	line = read_file(fd, storage);
+	if (line.line)
 	{
-		storage = line2.storage;
-		return (line2.line);
+		storage = line.storage;
+		return (line.line);
 	}
 	if (storage)
 	{
-		line2.line = storage;
+		line.line = storage;
 		storage = NULL;
-		return (line2.line);
+		return (line.line);
 	}
 	return (NULL);
 }
