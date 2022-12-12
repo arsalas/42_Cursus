@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:28:47 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/04 14:13:56 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:35:49 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "HumanB.hpp"
 #include "Weapon.hpp"
 
-int	main()
+int main()
 {
 	Weapon club = Weapon("crude spiked club");
 	HumanA bob("Bob", club);

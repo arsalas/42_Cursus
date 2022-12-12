@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 17:21:15 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/02 18:01:46 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:00:43 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 Zombie	*newZombie(std::string name)
 {
-	Zombie	zombie(name);
-	Zombie	*zomb;
+	Zombie	*zombie;
 
-	zomb = &zombie;
-	return (zomb);
+	zombie = new Zombie(name);
+	return (zombie);
 }

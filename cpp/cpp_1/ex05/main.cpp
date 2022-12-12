@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:41:21 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 18:42:57 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:20:24 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int main(void)
 	karen.complain("info");
 	karen.complain("warning");
 	karen.complain("error");
-	return(0);
+	return (0);
 }

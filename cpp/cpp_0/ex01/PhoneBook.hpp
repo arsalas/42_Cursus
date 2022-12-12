@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:48:54 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 20:22:14 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:28:37 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ public:
 	void selectAction(std::string action);
 	void addContact(void);
 	void searchContact(void);
+
+private:
+	int	getContactAgend(void);
+	
 };
 
 #endif

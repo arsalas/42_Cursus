@@ -6,22 +6,13 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 18:42:16 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:26:20 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KAREN_H
 #define KAREN_H
 #include <iostream>
-
-// enum class e_filters
-// {
-// 	DEBUG,
-// 	INFO,
-// 	WARNING,
-// 	ERROR,
-// 	NONE
-// };
 
 typedef enum filters
 {
@@ -42,7 +33,7 @@ class Karen
 	} level_s;
 
 private:
-	level_s levels[4];
+	level_s _levels[4];
 	e_filters _filter;
 
 private:

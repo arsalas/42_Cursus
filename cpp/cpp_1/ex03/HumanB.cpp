@@ -6,18 +6,18 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:19:14 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/04 14:14:19 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:11:07 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-void	HumanB::attack(void)
+void HumanB::attack(void)
 {
-	std::cout << this->name << " attacks with his " << this->weapon->getType() << std::endl;
+	std::cout << _name << " attacks with his " << _weapon->getType() << std::endl;
 }
 
-void	HumanB::setWeapon(Weapon *weapon)
+void HumanB::setWeapon(Weapon *weapon)
 {
-	this->weapon = weapon;
+	_weapon = weapon;
 }

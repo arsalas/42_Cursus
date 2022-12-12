@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 17:05:30 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/02 18:00:22 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:00:29 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	main(void)
 {
-	newZombie("Zomb1");
+	Zombie *zombie;
+	
+	zombie = newZombie("Zomb1");
 	randomChump("Zomb2");
+	delete zombie;
 	return (0);
 }

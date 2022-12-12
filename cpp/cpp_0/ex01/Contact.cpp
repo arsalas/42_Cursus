@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:08 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/18 17:52:30 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:38:54 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 void Contact::setData(void)
 {
 	std::cout << KBLU "Introduce nombre:" RST << std::endl;
-	std::cin >> this->_name;
+	std::getline(std::cin, this->_name);
 	std::cout << KBLU "Introduce apellido:" RST << std::endl;
-	std::cin >> this->_lastName;
+	std::getline(std::cin, this->_lastName);
 	std::cout << KBLU "Introduce apodo:" RST << std::endl;
-	std::cin >> this->_nickname;
+	std::getline(std::cin, this->_nickname);
 	std::cout << KBLU "Introduce telefono:" RST << std::endl;
-	std::cin >> this->_phone;
+	std::getline(std::cin, this->_phone);
 	std::cout << KBLU "Introduce secreto mas oscuro:" RST << std::endl;
-	std::cin >> this->_secret;
+	std::getline(std::cin, this->_secret);
 }
 
 void Contact::printContact(void)

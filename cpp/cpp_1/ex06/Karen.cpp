@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:21:45 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 18:47:12 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:26:41 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ Karen::Karen(std::string filter)
 		_filter = ERROR;
 	else
 		_filter = NONE;
-	levels[0].level = "debug";
-	levels[0].ptr = &Karen::debug;
-	levels[1].level = "info";
-	levels[1].ptr = &Karen::info;
-	levels[2].level = "warning";
-	levels[2].ptr = &Karen::warning;
-	levels[3].level = "error";
-	levels[3].ptr = &Karen::error;
+	_levels[0].level = "debug";
+	_levels[0].ptr = &Karen::debug;
+	_levels[1].level = "info";
+	_levels[1].ptr = &Karen::info;
+	_levels[2].level = "warning";
+	_levels[2].ptr = &Karen::warning;
+	_levels[3].level = "error";
+	_levels[3].ptr = &Karen::error;
 }
 
 void Karen::complain(std::string level)
@@ -67,10 +67,10 @@ void Karen::complain(std::string level)
 	}
 	for (int i = 0; i < 4; i++)
 	{
-		if (levels[i].level == level)
+		if (_levels[i].level == level)
 		{
 			if (i >= _filter)
-				(this->*(levels[i].ptr))();
+				(this->*(_levels[i].ptr))();
 		}
 	}
 }

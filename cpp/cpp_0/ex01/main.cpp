@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:01:05 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/07 20:56:35 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:44:39 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int main(void)
 	while (true)
 	{
 		std::cout << KMAG "Introduce instruccion: (ADD | SEARCH | EXIT)" RST << "\n";
-		std::cin >> action;
+		std::getline(std::cin, action);
+		if (action == "")
+			exit(0);
 		phoneBook.selectAction(action);
 	}
 	return (0);

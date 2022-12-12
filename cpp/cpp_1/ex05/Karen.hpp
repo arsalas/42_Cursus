@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 18:42:16 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:20:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Karen
 	} level_s;
 
 private:
-	level_s levels[4];
+	level_s _levels[4];
 	void debug(void);
 	void info(void);
 	void warning(void);

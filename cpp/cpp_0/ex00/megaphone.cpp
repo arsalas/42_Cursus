@@ -6,13 +6,13 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:47:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/01 14:47:45 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:37:34 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iostream"
 
-void toUpper(char *str)
+void toUpperString(char *str)
 {
     int i;
 
@@ -31,10 +31,8 @@ void megaphone(int len, char **words)
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
     for (int i = 1; i < len; i++)
     {
-        toUpper(words[i]);
+        toUpperString(words[i]);
         std::cout << words[i];
-        if (i < len - 1)
-            std::cout << " ";
     }
     std::cout << std::endl;
 }

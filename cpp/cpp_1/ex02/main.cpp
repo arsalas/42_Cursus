@@ -6,18 +6,18 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:21:37 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 16:52:19 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:29:59 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-int	main(void)
+int main(void)
 {
-	std::string	name;
-	std::string	*stringPTR;
-	std::string	&stringREF = name;
-	
+	std::string name;
+	std::string *stringPTR;
+	std::string &stringREF = name;
+
 	name = "HI THIS IS BRAIN";
 	stringPTR = &name;
 	std::cout << "variable: " << &name << std::endl;
