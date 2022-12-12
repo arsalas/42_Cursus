@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 11:02:40 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:09:14 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ t_line	get_line(char *line)
 	return (result);
 }
 
+char	*get_empty_line(void)
+{
+	char	*line;
+
+	line = malloc(sizeof(char));
+	line[0] = '\0';
+	return (line);
+}
+
 t_line	read_file(int fd, char *line)
 {
 	int		nb;
@@ -49,8 +58,9 @@ t_line	read_file(int fd, char *line)
 	char	*aux;
 	t_line	line2;
 
-	nb = 1;
-	while (nb > 0)
+	if (!line)
+		line = get_empty_line();
+	while (1)
 	{
 		nb = read(fd, buffer, BUFFER_SIZE);
 		if (nb == 0)
@@ -66,23 +76,14 @@ t_line	read_file(int fd, char *line)
 		}
 	}
 	line2.line = NULL;
+	free(line);
 	return (line2);
-}
-
-char	*get_empty_line(void)
-{
-	char	*line;
-
-	line = malloc(sizeof(char));
-	line[0] = '\0';
-	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*storage = NULL;
 	t_line		line2;
-	char		*line;
 
 	if (fd < 0)
 		return (NULL);
@@ -92,11 +93,7 @@ char	*get_next_line(int fd)
 		storage = line2.storage;
 		return (line2.line);
 	}
-	else if (storage)
-		line = storage;
-	else
-		line = get_empty_line();
-	line2 = read_file(fd, line);
+	line2 = read_file(fd, storage);
 	if (line2.line)
 	{
 		storage = line2.storage;
@@ -104,9 +101,9 @@ char	*get_next_line(int fd)
 	}
 	if (storage)
 	{
+		line2.line = storage;
 		storage = NULL;
-		return (line);
+		return (line2.line);
 	}
-	free(line);
 	return (NULL);
 }
