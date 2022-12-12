@@ -6,13 +6,19 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 12:20:43 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:32:45 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "get_next_line.h"
 
+/**
+ * @brief Get the line of string and storage leftover 
+ * 
+ * @param line 
+ * @return t_line 
+ */
 static t_line	get_line(char *line)
 {
 	int			len;
@@ -33,23 +39,33 @@ static t_line	get_line(char *line)
 	return (result);
 }
 
-static t_line	read_file(int fd)
+/**
+ * @brief Get the null line object
+ * 
+ * @return t_line 
+ */
+static t_line	get_null_line(void)
 {
-	
+	t_line	line2;
+
+	line2.line = NULL;
+	return (line2);
 }
 
-static t_line	get_line_file(int fd, char *line)
+/**
+ * @brief Read file until enf of file or find end of line
+ * 
+ * @param fd 
+ * @param line 
+ * @return t_line 
+ */
+static t_line	read_file(int fd, char *line)
 {
 	int		nb;
 	char	buffer[BUFFER_SIZE + 1];
 	char	*aux;
 	t_line	line2;
 
-	if (!line)
-	{
-		line = malloc(sizeof(char));
-		line[0] = '\0';
-	}
 	while (1)
 	{
 		nb = read(fd, buffer, BUFFER_SIZE);
@@ -57,6 +73,8 @@ static t_line	get_line_file(int fd, char *line)
 			break ;
 		buffer[nb] = '\0';
 		aux = ft_strjoin(line, buffer);
+		if (!aux)
+			return (get_null_line());
 		free(line);
 		line = aux;
 		if (ft_have_line(line))
@@ -65,6 +83,28 @@ static t_line	get_line_file(int fd, char *line)
 			return (line2);
 		}
 	}
+	return (get_null_line());
+}
+
+/**
+ * @brief Get the line file object
+ * 
+ * @param fd 
+ * @param line 
+ * @return t_line 
+ */
+static t_line	get_line_file(int fd, char *line)
+{
+	t_line	line2;
+
+	if (!line)
+	{
+		line = malloc(sizeof(char));
+		line[0] = '\0';
+	}
+	line2 = read_file(fd, line);
+	if (line2.line)
+		return (line2);
 	if (ft_strlen(line, 0) == 0)
 	{
 		line2.line = NULL;
@@ -78,6 +118,12 @@ static t_line	get_line_file(int fd, char *line)
 	return (line2);
 }
 
+/**
+ * @brief Get the next line object
+ * 
+ * @param fd 
+ * @return char* 
+ */
 char	*get_next_line(int fd)
 {
 	static char	*storage = NULL;

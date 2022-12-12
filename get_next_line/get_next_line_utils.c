@@ -6,12 +6,20 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:34:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 11:55:52 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:30:17 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/**
+ * @brief Get a copy of string
+ * 
+ * @param dst 
+ * @param src 
+ * @param dstsize 
+ * @return size_t 
+ */
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
 	unsigned long	d;
@@ -35,6 +43,13 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	return (s);
 }
 
+/**
+ * @brief Join two string in a new string
+ * 
+ * @param s1 
+ * @param s2 
+ * @return char* 
+ */
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
@@ -42,8 +57,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		l_s2;
 	int		c;
 
-	l_s1 = ft_strlen((char *)s1);
-	l_s2 = ft_strlen((char *)s2);
+	l_s1 = ft_strlen((char *)s1, 0);
+	l_s2 = ft_strlen((char *)s2, 0);
 	str = malloc(sizeof(char) * (l_s1 + l_s2 + 1));
 	if (str == NULL)
 		return (NULL);
@@ -60,13 +75,21 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
+/**
+ * @brief Get a new string cuting a string
+ * 
+ * @param s 
+ * @param start 
+ * @param len 
+ * @return char* 
+ */
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	str_l;
 	size_t	l;
 
-	str_l = ft_strlen(s);
+	str_l = ft_strlen(s, 0);
 	if (str_l - start >= len)
 		l = len + 1;
 	else
@@ -86,6 +109,13 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (str);
 }
 
+/**
+ * @brief Get len of string or len to end line of string
+ * 
+ * @param s 
+ * @param is_line 
+ * @return int 
+ */
 int	ft_strlen(char *s, int is_line)
 {
 	int	i;
@@ -102,6 +132,12 @@ int	ft_strlen(char *s, int is_line)
 	return (i);
 }
 
+/**
+ * @brief get a flag for know if string have a end line
+ * 
+ * @param s 
+ * @return int 
+ */
 int	ft_have_line(char *s)
 {
 	int	i;
