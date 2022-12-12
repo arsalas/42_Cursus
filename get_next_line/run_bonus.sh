@@ -1,0 +1,1 @@
+gcc main.c get_next_line_bonus.c get_next_line_utils_bonus.c -D BUFFER_SIZE=1000; leaks -atExit -- ./a.out
