@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 11:35:58 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/11 23:06:32 by aramirez         ###   ########.fr       */
+/*   Created: 2022/01/25 15:57:53 by aramirez          #+#    #+#             */
+/*   Updated: 2022/02/08 12:11:08 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <stdlib.h>
+# include <unistd.h>
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
+int		contain_line(char *str);
+int		get_len(char *str);
+char	*concat_str(char *storage, char *buffer, int len_b);
+int		count_line_words(char *str);
+void	clean_storage(char *storage);
+char	*get_next_line(int fd);
+char	*free_malloc(char *str);
 
-	line = "";
-	fd = open("file.txt", O_RDONLY);
-	while (line)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		if (line)
-			free(line);
-	}
-	close(fd);
-	return (0);
-}
+#endif

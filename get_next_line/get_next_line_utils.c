@@ -5,78 +5,107 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 12:23:05 by aramirez          #+#    #+#             */
-/*   Updated: 2022/02/08 12:10:29 by aramirez         ###   ########.fr       */
+/*   Created: 2022/12/10 11:34:44 by aramirez          #+#    #+#             */
+/*   Updated: 2022/12/11 23:07:35 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	contain_line(char *str)
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
-	int	i;
+	unsigned long	d;
+	unsigned long	s;
 
-	i = 0;
-	while (str[i])
+	d = 0;
+	s = 0;
+	while (src[s] != '\0')
 	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
+		s++;
 	}
-	return (0);
+	if (dstsize != 0)
+	{
+		while (d < dstsize - 1 && src[d] != '\0')
+		{
+			dst[d] = src[d];
+			d++;
+		}
+		dst[d] = '\0';
+	}
+	return (s);
 }
 
-int	get_len(char *str)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	get_storage_len(char *storage)
-{
-	if (storage)
-		return (get_len(storage));
-	else
-		return (0);
-}
-
-char	*concat_str(char *storage, char *buffer, int len_b)
-{
-	int		i;
-	int		len_s;
 	char	*str;
+	int		l_s1;
+	int		l_s2;
+	int		c;
 
-	len_s = get_storage_len(storage);
-	str = malloc(sizeof(char) * (len_s + len_b + 1));
+	l_s1 = ft_strlen((char *)s1);
+	l_s2 = ft_strlen((char *)s2);
+	str = malloc(sizeof(char) * (l_s1 + l_s2 + 1));
 	if (str == NULL)
-		return (free_malloc(storage));
-	i = 0;
-	while (i < len_s)
+		return (NULL);
+	c = 0;
+	while (c < l_s2 || c < l_s1)
 	{
-		str[i] = storage[i];
-		i++;
+		if (c < l_s1)
+			str[c] = s1[c];
+		if (c < l_s2)
+			str[l_s1 + c] = s2[c];
+		c++;
 	}
-	i = 0;
-	while (i < len_b)
-	{
-		str[len_s + i] = buffer[i];
-		i++;
-	}
-	str[len_s + i] = '\0';
-	free(storage);
+	str[l_s1 + l_s2] = '\0';
 	return (str);
 }
 
-int	count_line_words(char *str)
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	str_l;
+	size_t	l;
+
+	str_l = ft_strlen(s);
+	if (str_l - start >= len)
+		l = len + 1;
+	else
+		l = str_l - start + 1;
+	if (len == 0 || str_l == 0 || start > str_l)
+	{
+		str = malloc(sizeof(char));
+		if (str == NULL)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	str = malloc(sizeof(char) * l);
+	if (str == NULL)
+		return (NULL);
+	ft_strlcpy(str, (s + start), l);
+	return (str);
+}
+
+int	ft_strlen(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\n')
+	while (s[i] != '\0')
+	{
 		i++;
+	}
+	return (i);
+}
+
+int	ft_strlen_line(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\n')
+	{
+		i++;
+	}
 	return (i + 1);
 }
