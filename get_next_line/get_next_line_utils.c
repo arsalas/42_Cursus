@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:34:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/11 23:07:35 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:55:52 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,32 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (str);
 }
 
-int	ft_strlen(char *s)
+int	ft_strlen(char *s, int is_line)
+{
+	int	i;
+
+	i = 0;
+	if (is_line)
+	{
+		while (s[i] != '\n')
+			i++;
+		return (i + 1);
+	}
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+int	ft_have_line(char *s)
 {
 	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
 	{
+		if (s[i] == '\n')
+			return (1);
 		i++;
 	}
-	return (i);
-}
-
-int	ft_strlen_line(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\n')
-	{
-		i++;
-	}
-	return (i + 1);
+	return (0);
 }

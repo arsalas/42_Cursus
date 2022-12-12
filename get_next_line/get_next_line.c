@@ -6,37 +6,23 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 11:25:06 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:20:43 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "get_next_line.h"
 
-int	ft_have_line(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-t_line	get_line(char *line)
+static t_line	get_line(char *line)
 {
 	int			len;
 	char		*leftover;
 	char		*aux;
 	t_line		result;
 
-	len = ft_strlen_line(line);
+	len = ft_strlen(line, 1);
 	result.line = ft_substr(line, 0, len);
-	leftover = ft_substr(line, len, ft_strlen(line));
+	leftover = ft_substr(line, len, ft_strlen(line, 0));
 	if (!result.line || !leftover)
 	{
 		result.line = NULL;
@@ -47,16 +33,12 @@ t_line	get_line(char *line)
 	return (result);
 }
 
-char	*get_empty_line(void)
+static t_line	read_file(int fd)
 {
-	char	*line;
-
-	line = malloc(sizeof(char));
-	line[0] = '\0';
-	return (line);
+	
 }
 
-t_line	read_file(int fd, char *line)
+static t_line	get_line_file(int fd, char *line)
 {
 	int		nb;
 	char	buffer[BUFFER_SIZE + 1];
@@ -64,7 +46,10 @@ t_line	read_file(int fd, char *line)
 	t_line	line2;
 
 	if (!line)
-		line = get_empty_line();
+	{
+		line = malloc(sizeof(char));
+		line[0] = '\0';
+	}
 	while (1)
 	{
 		nb = read(fd, buffer, BUFFER_SIZE);
@@ -80,7 +65,7 @@ t_line	read_file(int fd, char *line)
 			return (line2);
 		}
 	}
-	if (ft_strlen(line) == 0)
+	if (ft_strlen(line, 0) == 0)
 	{
 		line2.line = NULL;
 		free(line);
@@ -106,7 +91,7 @@ char	*get_next_line(int fd)
 		storage = line.storage;
 		return (line.line);
 	}
-	line = read_file(fd, storage);
+	line = get_line_file(fd, storage);
 	if (line.line)
 	{
 		storage = line.storage;

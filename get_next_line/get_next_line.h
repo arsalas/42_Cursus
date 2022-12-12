@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:33:10 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/11 23:22:23 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:56:14 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ typedef struct s_line
 
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
-int		ft_strlen(char *s);
-int		ft_strlen_line(char *s);
+int		ft_strlen(char *s, int is_line);
 int		ft_have_line(char *s);
 char	*get_next_line(int fd);
 
