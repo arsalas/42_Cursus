@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 12:36:36 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:36:56 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_line	get_line(char *line)
 {
 	int			len;
 	char		*leftover;
-	char		*aux;
 	t_line		result;
 
 	len = ft_strlen(line, 1);

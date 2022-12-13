@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 11:35:04 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 21:25:31 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:37:16 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_line	get_line(char *line)
 {
 	int			len;
 	char		*leftover;
-	char		*aux;
 	t_line		result;
 
 	len = ft_strlen(line, 1);
@@ -65,7 +64,6 @@ static t_line	read_file(int fd, char *line)
 	int		nb;
 	char	buffer[BUFFER_SIZE + 1];
 	char	*aux;
-	t_line	result_line;
 
 	while (1)
 	{
