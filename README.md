@@ -5,6 +5,10 @@
 ## Stats
 [![aramirez's 42 stats](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/stats?cursusId=21&coalitionId=206)](https://github.com/JaeSeoKim/badge42)
 
+## NetPractice
+[![aramirez's 42 NetPractice Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2911876)](https://github.com/JaeSeoKim/badge42)
+## CPP Module 01
+[![aramirez's 42 CPP Module 01 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2911877)](https://github.com/JaeSeoKim/badge42)
 ## CPP Module 00
 [![aramirez's 42 CPP Module 00 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2911287)](https://github.com/JaeSeoKim/badge42)
 ## cub3d
