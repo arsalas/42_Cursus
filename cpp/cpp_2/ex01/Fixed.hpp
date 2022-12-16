@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/06 16:02:16 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:24:01 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 class Fixed
 {
 private:
-	int point;
-	static int const nbits = 8;
+	int _point;
+	static int const _nbits = 8;
 
 public:
 	Fixed(void);
@@ -28,6 +28,9 @@ public:
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
+
+	float toFloat(void) const;
+	int toInt(void) const;
 };
 
 #endif
