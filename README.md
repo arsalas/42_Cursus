@@ -7,7 +7,7 @@
 
 | Proyect       | Score       | Link        |
 | --------------|-------------|-------------|
-| Libft  | [![aramirez's 42 Libft Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2454054)](https://github.com/JaeSeoKim/badge42)|             [https://github.com/arsalas/42_Cursus/tree/main/libft](https://github.com/arsalas/42_Cursus/tree/main/libft)|
+| Libft  | [![aramirez's 42 Libft Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2454054)](https://github.com/JaeSeoKim/badge42)|             [code](https://github.com/arsalas/42_Cursus/tree/main/libft)|
 | Get next line  | [![aramirez's 42 get_next_line Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2491127)](https://github.com/JaeSeoKim/badge42)|             |
 | ft_printf  | [![aramirez's 42 ft_printf Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2492471)](https://github.com/JaeSeoKim/badge42)|             |
 | Born2beroot  | [![aramirez's 42 Born2beroot Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2515338)](https://github.com/JaeSeoKim/badge42)|             |
