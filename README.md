@@ -5,6 +5,8 @@
 ## Stats
 [![aramirez's 42 stats](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/stats?cursusId=21&coalitionId=206)](https://github.com/JaeSeoKim/badge42)
 
+## Exam Rank 04
+[![aramirez's 42 Exam Rank 04 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2916771)](https://github.com/JaeSeoKim/badge42)
 ## NetPractice
 [![aramirez's 42 NetPractice Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2911876)](https://github.com/JaeSeoKim/badge42)
 ## CPP Module 01
