@@ -22,7 +22,7 @@ BIN_DIR			:= bin
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 #INCLUDES
-INCLUDES 		:= File.hpp
+INCLUDES 		:= 
 
 INC			= $(addprefix -I , $(INCLUDES))
 

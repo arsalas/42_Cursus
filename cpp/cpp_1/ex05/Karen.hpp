@@ -16,7 +16,6 @@
 
 class Karen
 {
-
 	typedef struct s_status
 	{
 		std::string level;
