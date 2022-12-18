@@ -6,7 +6,7 @@
 [![aramirez's 42 stats](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/stats?cursusId=21&coalitionId=206)](https://github.com/JaeSeoKim/badge42)
 
 |*Project*       | *Description* | *Score*       | 
-|------         |-----------  |:-----------:|
+|---------------------|--|:---------------------:|
 |[Libft](https://github.com/arsalas/42_Cursus/tree/main/libft) | This project is your very first project as a student at 42. You will need to recode a few functions of the C standard library as well as some other utility functions that you will use during your whole cursus.|[![aramirez's 42 Libft Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2454054)](https://github.com/JaeSeoKim/badge42)|
 | [get_next_line](https://github.com/arsalas/42_Cursus/tree/main/get_next_line) |May it be a file, stdin, or even later a network connection, you will always need a way to read content line by line. It is time to start working on this function, which will be essential for your future projects.| [![aramirez's 42 get_next_line Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2491127)](https://github.com/JaeSeoKim/badge42)|  
 | [ft_printf](https://github.com/arsalas/42_Cursus/tree/main/printf)  |This project is pretty straightforward, you have to recode printf. You will learn what is and how to implement variadic functions. Once you validate it, you will reuse this function in your future projects.| [![aramirez's 42 ft_printf Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2492471)](https://github.com/JaeSeoKim/badge42)|   
