@@ -39,7 +39,7 @@ all:$(BIN)
 
 $(OBJS_DIR)/%.o: %.cpp | $$(@D)
 	@printf "\r$(BLUE)Generating $(NAME) objects... %-38.38s$(NC)" $@
-	@$(CC) $(FLAGS)-c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
+	@$(CC) $(FLAGS) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
 
 
 $(BIN): $(OBJS) $(BIN_DIR)
