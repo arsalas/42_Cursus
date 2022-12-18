@@ -12,25 +12,32 @@
 
 #ifndef FIXED_H
 #define FIXED_H
+
 #include <iostream>
+#include <cmath>
 
 class Fixed
 {
 private:
 	int _point;
-	static int const _nbits = 8;
+	static const int _nbits = 8;
 
 public:
 	Fixed(void);
-	Fixed(Fixed &value);
+	Fixed(const int point);
+	Fixed(const float point);
+	Fixed(Fixed &cpy);
+
 	~Fixed(void);
-	Fixed &operator=(const Fixed &f);
+
+	Fixed &operator=(const Fixed &cpy);
+	std::ostream &operator<<(std::ostream &out, Fixed const &value);
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 
-	float toFloat(void) const;
-	int toInt(void) const;
+	float toFloat(void);
+	int toInt(void);
 };
 
 #endif

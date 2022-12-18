@@ -18,13 +18,13 @@ class Fixed
 {
 private:
 	int _point;
-	static int const _nbits = 8;
+	static const int _nbits = 8;
 
 public:
 	Fixed(void);
 	Fixed(Fixed &cpy);
-	~Fixed(void);
 	Fixed &operator=(const Fixed &cpy);
+	~Fixed(void);
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
