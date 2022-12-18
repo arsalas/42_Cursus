@@ -6,28 +6,37 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/12/12 21:32:17 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:24:01 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_H
-#define FIXED_H
-#include <iostream>
+#ifndef POINT_H
+#define POINT_H
 
-class Fixed
+#include <iostream>
+#include "Fixed.hpp"
+
+class Point
 {
 private:
-	int _value;
-	static const int _bits = 8;
+	Fixed const _x;
+	Fixed const _y;
 
 public:
-	Fixed(void);
-	Fixed(Fixed &fixed);
-	Fixed &operator=(const Fixed &fixed);
-	~Fixed(void);
+	Point();
+	Point(const Fixed x, const Fixed y);
+	Point(const Point &point);
+	~Point();
 
-	int getRawBits(void) const;
-	void setRawBits(int const raw);
+	Point &operator=(const Point &point);
+
+	Fixed getX() const;
+	Fixed getY() const;
+	float getXtoFloat() const;
+	float getYtoFloat() const;
+
 };
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif

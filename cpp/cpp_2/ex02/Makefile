@@ -31,7 +31,7 @@ DEPS				= $(patsubst %.o, %.d, $(OBJS))
 DEPFLAGS			= -MMD -MF
 
 # PROGRAM NAME
-NAME 				:= ex01
+NAME 				:= ex02
 
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)

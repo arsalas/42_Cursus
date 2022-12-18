@@ -11,7 +11,7 @@ FLAGS 			:= -Wall -Wextra -Werror -std=c++98
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp Fixed.cpp
+SRCS 			=  main.cpp Fixed.cpp Point.cpp bsp.cpp
 
 # FOLDERS
 OBJS_DIR		:= obj
@@ -31,7 +31,7 @@ DEPS				= $(patsubst %.o, %.d, $(OBJS))
 DEPFLAGS			= -MMD -MF
 
 # PROGRAM NAME
-NAME 				:= ex01
+NAME 				:= ex03
 
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
