@@ -3,6 +3,5 @@
 *.a
 *.out
 .vscode/
-
-./**/bin/*
-./**/obj/*
+**/bin/
+**/obj/
