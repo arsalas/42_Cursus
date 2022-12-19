@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 16:00:55 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/06 16:01:11 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:55:54 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void testPoints(std::string title, float pX, float pY)
 	Point p1(1.0f, 1.0f);
 	Point p2(2.0f, 1.0f);
 	Point p3(1.5f, 2.0f);
-
+new Point;
 	Point point(pX, pY);
 	std::cout << title << std::endl;
 	std::cout << "p1 is in: " << p1.getX() << ", " << p1.getY() << std::endl;
