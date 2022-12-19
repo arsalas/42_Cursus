@@ -13,17 +13,19 @@
 #include "FragTrap.hpp"
 #include "ClapTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap()
+FragTrap::FragTrap() : ClapTrap("default", 100, 100, 30)
 {
+	FragTrap::_hp = 100;
+	FragTrap::_ep = 100;
+	FragTrap::_atk = 30;
 	std::cout << "FragTrap default construct" << std::endl;
+
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30)
 {
 	std::cout << "FragTrap construct" << std::endl;
-	_hp = 100;
-	_ep = 100;
-	_atk = 30;
+
 }
 
 FragTrap::FragTrap(const FragTrap &scravTrap) : ClapTrap(scravTrap.getName())
@@ -54,3 +56,5 @@ void FragTrap::hightFivesGuys()
 {
 	std::cout << "FragTrap " << getName() << " give me a hight five" << std::endl;
 }
+
+

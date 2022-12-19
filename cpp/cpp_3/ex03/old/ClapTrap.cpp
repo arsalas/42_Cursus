@@ -12,7 +12,7 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap(): _name(""), _hp(10), _ep(10), _atk(0)
 {
 	std::cout << "ClapTrap default construct" << std::endl;
 }
@@ -20,6 +20,11 @@ ClapTrap::ClapTrap()
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _atk(0)
 {
 	std::cout << "ClapTrap construct" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int atk) : _name(name), _hp(hp), _ep(ep), _atk(atk)
+{
+	std::cout << "ClapTrap params construct" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &clapTrap) : _name(clapTrap.getName()), _hp(clapTrap.getHp()), _ep(clapTrap.getEp()), _atk(clapTrap.getAtk())
@@ -32,13 +37,13 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap destroy" << std::endl;
 }
 
-ClapTrap &ClapTrap::operator=(const ClapTrap &clapclap)
+ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
 {
 	std::cout << "ClapTrap copy assignment operator called" << std::endl;
-	_name = clapclap.getName();
-	_hp = clapclap.getHp();
-	_ep = clapclap.getEp();
-	_atk = clapclap.getAtk();
+	_name = clapTrap.getName();
+	_hp = clapTrap.getHp();
+	_ep = clapTrap.getEp();
+	_atk = clapTrap.getAtk();
 
 	return *this;
 }

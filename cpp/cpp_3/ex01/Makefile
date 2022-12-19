@@ -11,7 +11,7 @@ FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp ClapTrap.cpp
+SRCS 			=  main.cpp ClapTrap.cpp ScavTrap.cpp
 
 # FOLDERS
 OBJS_DIR		:= obj

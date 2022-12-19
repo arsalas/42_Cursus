@@ -24,8 +24,8 @@ protected:
 	unsigned int _atk;
 
 public:
-	ClapTrap();
 	ClapTrap(std::string name);
+	ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int atk);
 	ClapTrap(const ClapTrap &clapTrap);
 	~ClapTrap(void);
 
@@ -44,6 +44,9 @@ public:
 	void attack(std::string const &target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
+
+protected:
+	ClapTrap();
 };
 
 #endif

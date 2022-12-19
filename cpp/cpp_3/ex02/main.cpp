@@ -12,12 +12,18 @@
 
 #include "FragTrap.hpp"
 
-int	main(void)
+int main(void)
 {
-	FragTrap fragTrap("Arma 1");
+	FragTrap fragTrap("Sword");
 	std::cout << "Name:\t" << fragTrap.getName() << std::endl;
 	std::cout << "Hp:\t" << fragTrap.getHp() << std::endl;
 	std::cout << "Ep:\t" << fragTrap.getEp() << std::endl;
 	std::cout << "Atk:\t" << fragTrap.getAtk() << std::endl;
+
+	fragTrap.attack("Human");
+	fragTrap.takeDamage(9999);
+	fragTrap.beRepaired(1000);
+	fragTrap.hightFivesGuys();
+
 	return (0);
 }

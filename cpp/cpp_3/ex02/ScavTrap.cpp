@@ -13,20 +13,44 @@
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 
+ScavTrap::ScavTrap() : ClapTrap()
+{
+	std::cout << "ScavTrap default construct" << std::endl;
+}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "ScravTrap construct" << std::endl;
-	ScavTrap::setHp(100);
-	ScavTrap::setEp(50);
-	ScavTrap::setAtk(20);
+	std::cout << "ScavTrap construct" << std::endl;
+	_hp = 100;
+	_ep = 50;
+	_atk = 20;
+}
+
+ScavTrap::ScavTrap(const ScavTrap &scavTrap) : ClapTrap(scavTrap.getName())
+{
+	std::cout << "ClapTrap copy construct" << std::endl;
+	_hp = scavTrap.getHp();
+	_ep = scavTrap.getEp();
+	_atk = scavTrap.getAtk();
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &scavTrap)
+{
+	std::cout << "ScavTrap copy assignment operator called" << std::endl;
+	_name = scavTrap.getName();
+	_hp = scavTrap.getHp();
+	_ep = scavTrap.getEp();
+	_atk = scavTrap.getAtk();
+
+	return *this;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScravTrap destroy" << std::endl;
+	std::cout << "ScavTrap destroy" << std::endl;
 }
 
 void ScavTrap::guardGate()
 {
-	std::cout << "ScravTrap have enterred in Gate keeper mode" << std::endl;
+	std::cout << "ScavTrap " << getName() << " have enterred in Gate keeper mode" << std::endl;
 }
