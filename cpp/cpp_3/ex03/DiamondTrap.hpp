@@ -23,8 +23,16 @@ private:
 	std::string _name;
 
 public:
+	DiamondTrap();
 	DiamondTrap(std::string name);
+	DiamondTrap(const DiamondTrap &diamondTrap);
 	~DiamondTrap(void);
+
+	DiamondTrap &operator=(const DiamondTrap &diamondTrap);
+
+	void whoAmI();
+
+	std::string getName() const;
 };
 
 #endif

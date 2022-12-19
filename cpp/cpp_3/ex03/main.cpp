@@ -12,12 +12,16 @@
 
 #include "DiamondTrap.hpp"
 
-int	main(void)
+int main(void)
 {
 	DiamondTrap diamondTrap("Arma 1");
-	std::cout << "Name:\t" << diamondTrap.getName() << std::endl;
+	std::cout << "Name:\t" << diamondTrap.DiamondTrap::getName() << std::endl;
+	std::cout << "Clap:\t" << diamondTrap.ClapTrap::getName() << std::endl;
 	std::cout << "Hp:\t" << diamondTrap.getHp() << std::endl;
 	std::cout << "Ep:\t" << diamondTrap.getEp() << std::endl;
 	std::cout << "Atk:\t" << diamondTrap.getAtk() << std::endl;
-	return (0);
+
+	diamondTrap.whoAmI();
+
+	return 0;
 }
