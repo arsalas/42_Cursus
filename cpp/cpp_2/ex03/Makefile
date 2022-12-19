@@ -6,7 +6,7 @@ NC				:= \033[m
 
 # FLAGS
 CC				:= c++
-FLAGS 			:= -Wall -Wextra -Werror -std=c++98
+FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g
 
 RM 				:= rm -f
 
@@ -57,6 +57,8 @@ run: $(BIN)
 
 
 leaks: $(BIN)
+	@which valgrind | grep -o valgrind > /dev/null && \
+	valgrind --leak-check=yes ./$(BIN) || \
 	leaks -atExit -- ./$(BIN)
 
 clean:

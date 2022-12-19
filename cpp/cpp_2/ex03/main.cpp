@@ -21,7 +21,6 @@ void testPoints(std::string title, float pX, float pY)
 	Point p3(1.5f, 2.0f);
 
 	Point point(pX, pY);
-
 	std::cout << title << std::endl;
 	std::cout << "p1 is in: " << p1.getX() << ", " << p1.getY() << std::endl;
 	std::cout << "p2 is in: " << p2.getX() << ", " << p2.getY() << std::endl;
@@ -34,7 +33,6 @@ void testPoints(std::string title, float pX, float pY)
 
 int main(void)
 {
-
 	testPoints("Point inside the triangle", 1.5f, 1.5f);
 	testPoints("Point in one vertex", 1.0f, 1.0f);
 	testPoints("Point in one edge", 1.5f, 1.0f);
