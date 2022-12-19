@@ -12,10 +12,19 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap()
+{
+	std::cout << "ClapTrap default construct" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _atk(0)
 {
 	std::cout << "ClapTrap construct" << std::endl;
-	_name = name;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &clapTrap) : _name(clapTrap.getName()), _hp(clapTrap.getHp()), _ep(clapTrap.getEp()), _atk(clapTrap.getAtk())
+{
+	std::cout << "ClapTrap copy construct" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
@@ -23,17 +32,33 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap destroy" << std::endl;
 }
 
-unsigned int ClapTrap::getHp(void)
+ClapTrap &ClapTrap::operator=(const ClapTrap &clapclap)
+{
+	std::cout << "ClapTrap copy assignment operator called" << std::endl;
+	_name = clapclap.getName();
+	_hp = clapclap.getHp();
+	_ep = clapclap.getEp();
+	_atk = clapclap.getAtk();
+
+	return *this;
+}
+
+std::string ClapTrap::getName() const
+{
+	return (_name);
+}
+
+unsigned int ClapTrap::getHp() const
 {
 	return (_hp);
 }
 
-unsigned int ClapTrap::getEp(void)
+unsigned int ClapTrap::getEp() const
 {
 	return (_ep);
 }
 
-unsigned int ClapTrap::getAtk(void)
+unsigned int ClapTrap::getAtk() const
 {
 	return (_atk);
 }
@@ -53,13 +78,19 @@ void ClapTrap::setAtk(unsigned int atk)
 
 void ClapTrap::attack(std::string const &target)
 {
-	std::cout << "ClapTrap " << _name << " attack " << target << std::endl;
+	std::cout << "ClapTrap " << _name << " attack " << target << ", causing " << _atk << " points of damage!" << std::endl;
 }
+
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "ClapTrap " << _name << " causing " << amount << " points of damage!" << std::endl;
+	int damage = amount < _hp ? _hp - amount : _hp;
+	_hp -= damage;
+	std::cout << "ClapTrap " << _name << " take " << damage << " points of damage!" << std::endl;
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	std::cout << "ClapTrap " << _name << " repaired " << amount << " points of damage!" << std::endl;
+	int repaired = _ep > amount ? amount : _ep;
+	_hp += repaired;
+	_ep -= amount;
+	std::cout << "ClapTrap " << _name << " repaired " << repaired << " points of damage!" << std::endl;
 }

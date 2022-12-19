@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef ClapTrap_HPP
-# define ClapTrap_HPP
+#define ClapTrap_HPP
 
-# include "iostream"
+#include <iostream>
 
 class ClapTrap
 {
@@ -24,16 +24,23 @@ private:
 	unsigned int _atk;
 
 public:
+	ClapTrap();
 	ClapTrap(std::string name);
+	ClapTrap(const ClapTrap &clapTrap);
 	~ClapTrap(void);
 
+	ClapTrap &operator=(const ClapTrap &clapTrap);
+
+	// GETTERS
+	std::string getName() const;
+	unsigned int getHp() const;
+	unsigned int getEp() const;
+	unsigned int getAtk() const;
+	// SETTERS
 	void setHp(unsigned int hp);
 	void setEp(unsigned int ep);
 	void setAtk(unsigned int atk);
-	unsigned int getHp(void);
-	unsigned int getEp(void);
-	unsigned int getAtk(void);
-	
+
 	void attack(std::string const &target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);

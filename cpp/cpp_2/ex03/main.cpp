@@ -19,7 +19,7 @@ void testPoints(std::string title, float pX, float pY)
 	Point p1(1.0f, 1.0f);
 	Point p2(2.0f, 1.0f);
 	Point p3(1.5f, 2.0f);
-new Point;
+
 	Point point(pX, pY);
 	std::cout << title << std::endl;
 	std::cout << "p1 is in: " << p1.getX() << ", " << p1.getY() << std::endl;

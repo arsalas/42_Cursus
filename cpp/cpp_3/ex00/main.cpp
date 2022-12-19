@@ -14,8 +14,8 @@
 
 int	main(void)
 {
-	ClapTrap clapTrap("Arma 1");
-	clapTrap.attack("humano");
+	ClapTrap clapTrap("Sword");
+	clapTrap.attack("Human");
 	clapTrap.takeDamage(9999);
 	clapTrap.beRepaired(1000);
 	return (0);
