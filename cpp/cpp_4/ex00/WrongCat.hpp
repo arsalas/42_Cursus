@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Cat_H
-#define Cat_H
+#ifndef WrongCat_H
+#define WrongCat_H
 #include <iostream>
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-class Cat : public Animal
+class WrongCat : public WrongAnimal
 {
 
 public:
-	~Cat();
-	Cat();
-	Cat(const Cat &cat);
+	~WrongCat();
+	WrongCat();
+	WrongCat(const WrongCat &cat);
 
-	Cat &operator=(const Cat &cat);
+	WrongCat &operator=(const WrongCat &cat);
 
 	void makeSound() const;
 };

@@ -12,18 +12,29 @@
 
 #include "Cat.hpp"
 
-Cat::Cat(void)
+Cat::Cat() : Animal("Cat")
 {
-	type = "Cat";
-	std::cout << "Cat construct" << std::endl;
+	std::cout << "Cat default construct" << std::endl;
 }
 
-Cat::~Cat(void)
+Cat::~Cat()
 {
 	std::cout << "Cat destroy" << std::endl;
 }
 
-void Cat::makeSound(void) const
+Cat::Cat(const Cat &cat) : Animal()
+{
+	_type = cat.getType();
+	std::cout << "Cat copy construct" << std::endl;
+}
+
+Cat &Cat::operator=(const Cat &cat)
+{
+	_type = cat.getType();
+	return *this;
+}
+
+void Cat::makeSound() const
 {
 	std::cout << "miau!" << std::endl;
 }

@@ -10,42 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-Animal::Animal()
+WrongAnimal::WrongAnimal()
 {
-	std::cout << "Animal default construct" << std::endl;
+	std::cout << "WrongAnimal default construct" << std::endl;
 }
 
-Animal::Animal(std::string type) : _type(type)
+WrongAnimal::WrongAnimal(std::string type) : _type(type)
 {
-	std::cout << "Animal construct" << std::endl;
+	std::cout << "WrongAnimal construct" << std::endl;
 }
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-	std::cout << "Animal destroy " << std::endl;
+	std::cout << "WrongAnimal destroy " << std::endl;
 }
 
-Animal::Animal(const Animal &animal)
+WrongAnimal::WrongAnimal(const WrongAnimal &animal)
 {
 	_type = animal.getType();
-	std::cout << "Animal copy construct" << std::endl;
+	std::cout << "WrongAnimal copy construct" << std::endl;
 }
 
-Animal &Animal::operator=(const Animal &animal)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &animal)
 {
 	_type = animal.getType();
 
 	return *this;
 }
 
-std::string Animal::getType() const
+std::string WrongAnimal::getType() const
 {
 	return _type;
 }
 
-void Animal::makeSound() const
+void WrongAnimal::makeSound() const
 {
 	std::cout << " " << std::endl;
 }
