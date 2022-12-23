@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:30:30 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/21 14:40:20 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:56:42 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@
 
 int main()
 {
-	Animal *meta = new Animal();
-	Animal *j = new Dog();
-	Animal *i = new Cat();
+	size_t number = 10;
+	Animal *animals[number];
 
-	std::cout << j->getType() << std::endl;
-	std::cout << i->getType() << std::endl;
-	i->makeSound();
-	j->makeSound();
-	meta->makeSound();
-	delete j;
-	delete i;
+	for (size_t i = 0; i < number; i++)
+	{
+		if (i % 2 == 0)
+			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
+	}
 	
-	
+	for (size_t i = 0; i < number; i++)
+	{
+		delete animals[i];
+	}
+
 	return (0);
 }

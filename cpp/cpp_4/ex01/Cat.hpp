@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/21 16:30:06 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:18:42 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ class Cat : public Animal
 {
 
 private:
-	Brain *brain;
+	Brain *_brain;
 
 public:
-	Cat(void) override;
-	~Cat(void);
-	void makeSound(void) const;
+	~Cat();
+	Cat();
+	Cat(const Cat &cat);
+
+	Cat &operator=(const Cat &cat);
+
+	void makeSound() const;
 };
 
 #endif

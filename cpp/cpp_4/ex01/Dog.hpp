@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/21 16:29:56 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:19:12 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ class Dog : public Animal
 {
 
 private:
-	Brain *brain;
+	Brain *_brain;
 
 public:
-	Dog(void) override;
-	~Dog(void);
-	void makeSound(void) const;
-	
+	~Dog();
+	Dog();
+	Dog(const Dog &dog);
+
+	Dog &operator=(const Dog &dog);
+
+	void makeSound() const;
 };
 
 #endif

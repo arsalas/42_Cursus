@@ -6,26 +6,36 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:27:50 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/21 16:24:15 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:22:42 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat(void)
+Cat::Cat() : Animal("Cat"), _brain(new Brain)
 {
-	type = "Cat";
-	std::cout << "Cat construct" << std::endl;
-	brain = new Brain();
+	std::cout << "Cat default construct" << std::endl;
 }
 
-Cat::~Cat(void)
+Cat::~Cat()
 {
+	delete _brain;
 	std::cout << "Cat destroy" << std::endl;
-	delete brain;
 }
 
-void Cat::makeSound(void) const
+Cat::Cat(const Cat &cat) : Animal()
+{
+	_type = cat.getType();
+	std::cout << "Cat copy construct" << std::endl;
+}
+
+Cat &Cat::operator=(const Cat &cat)
+{
+	_type = cat.getType();
+	return *this;
+}
+
+void Cat::makeSound() const
 {
 	std::cout << "miau!" << std::endl;
 }

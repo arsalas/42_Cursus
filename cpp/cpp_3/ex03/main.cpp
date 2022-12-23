@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:23:50 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/10 15:12:55 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:10:59 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int main(void)
 	std::cout << "Atk:\t" << diamondTrap.getAtk() << std::endl;
 
 	diamondTrap.whoAmI();
+
+	diamondTrap.attack("Human");
+	diamondTrap.takeDamage(9999);
+	diamondTrap.beRepaired(1000);
+	diamondTrap.hightFivesGuys();
 
 	return 0;
 }

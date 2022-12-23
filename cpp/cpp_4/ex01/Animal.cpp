@@ -12,22 +12,40 @@
 
 #include "Animal.hpp"
 
-Animal::Animal(void)
+Animal::Animal()
+{
+	std::cout << "Animal default construct" << std::endl;
+}
+
+Animal::Animal(std::string type) : _type(type)
 {
 	std::cout << "Animal construct" << std::endl;
 }
 
-Animal::~Animal(void)
+Animal::~Animal()
 {
 	std::cout << "Animal destroy " << std::endl;
 }
 
-std::string Animal::getType(void)
+Animal::Animal(const Animal &animal)
 {
-	return (type);
+	_type = animal.getType();
+	std::cout << "Animal copy construct" << std::endl;
 }
 
-void Animal::makeSound(void) const
+Animal &Animal::operator=(const Animal &animal)
+{
+	_type = animal.getType();
+
+	return *this;
+}
+
+std::string Animal::getType() const
+{
+	return _type;
+}
+
+void Animal::makeSound() const
 {
 	std::cout << " " << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/21 16:30:45 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:53:53 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@
 class Brain
 {
 private:
-	std::string ideas[100];
+	static const int numberIdeas = 100;
+	std::string _ideas[numberIdeas];
 
 public:
-	Brain(void);
-	~Brain(void);
+	Brain();
+	~Brain();
+
+	Brain(const Brain &brain);
+
+	Brain &operator=(const Brain &brain);
 };
 
 #endif
