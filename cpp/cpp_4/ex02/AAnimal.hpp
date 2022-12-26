@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/25 14:40:29 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:40:57 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 #define Animal_H
 #include <iostream>
 
-class Animal
+class AAnimal
 {
 protected:
-	std::string type;
+	std::string _type;
 
-private:
-	Animal(void);
-	
 public:
-	virtual ~Animal(void);
-	virtual std::string getType();
-	virtual void makeSound() const;
-	
+	virtual void makeSound() const = 0;
+	virtual std::string getType() const = 0;
 };
 
 #endif

@@ -11,7 +11,9 @@ FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp Cat.cpp Dog.cpp Brain.cpp
+SRCS 			=  main.cpp \
+				AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp \
+				Character.cpp
 
 # FOLDERS
 OBJS_DIR		:= obj
@@ -22,7 +24,7 @@ BIN_DIR			:= bin
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 #INCLUDES
-INCLUDES 		:= 
+INCLUDES 		:= src/character/ src/materias
 
 INC			= $(addprefix -I , $(INCLUDES))
 
@@ -36,7 +38,7 @@ NAME 				:= ex02
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.cpp
+vpath %.cpp src/ src/character src/materias
 
 .SECONDEXPANSION:
 

@@ -6,27 +6,32 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:32:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/07/21 16:22:21 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:19:12 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef Dog_H
 #define Dog_H
 #include <iostream>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal
+class Dog : public AAnimal
 {
 
 private:
-	Brain *brain;
+	Brain *_brain;
 
 public:
-	Dog(void);
-	~Dog(void);
-	void makeSound(void) const;
-	
+	virtual ~Dog();
+	Dog();
+	Dog(const Dog &dog);
+
+	Dog &operator=(const Dog &dog);
+
+	void makeSound() const;
+	std::string getType() const;
+
 };
 
 #endif
