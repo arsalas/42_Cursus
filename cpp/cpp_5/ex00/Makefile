@@ -11,9 +11,7 @@ FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp \
-				AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp \
-				Character.cpp
+SRCS 			=  main.cpp Bureaucrat.cpp
 
 # FOLDERS
 OBJS_DIR		:= obj
@@ -33,12 +31,12 @@ DEPS				= $(patsubst %.o, %.d, $(OBJS))
 DEPFLAGS			= -MMD -MF
 
 # PROGRAM NAME
-NAME 				:= ex03
+NAME 				:= ex00
 
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.cpp src/ src/character src/materias
+vpath %.cpp
 
 .SECONDEXPANSION:
 
