@@ -6,7 +6,7 @@ NC				:= \033[m
 
 # FLAGS
 CC				:= c++
-FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g 
+FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 
 RM 				:= rm -f
 

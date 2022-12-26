@@ -7,10 +7,11 @@ Character::Character(const Character &other) : _name(other.getName()), _quantity
 	copyMaterias(other);
 }
 
-Character &Character::operator=(const Character &other)
+Character &Character::operator=(Character &other)
 {
+	if (this == &other)
+		return *this;
 	_name = other._name;
-	_quantityMaterias = other._quantityMaterias;
 	copyMaterias(other);
 	return *this;
 }
@@ -46,7 +47,7 @@ void Character::copyMaterias(const Character &other)
 
 bool Character::isMateriaIndexValid(int idx) const
 {
-	if (idx < 0 || idx >= maxMaterias)
+	if (idx < 0 || idx >= _quantityMaterias)
 		return false;
 	return true;
 }

@@ -16,7 +16,7 @@ private:
 public:
 	Character(std::string name);
 	Character(const Character &other);
-	Character &operator=(const Character &other);
+	Character &operator=(Character &other);
 	~Character();
 
 	std::string const &getName() const;
@@ -25,6 +25,7 @@ public:
 	void use(int idx, ICharacter &target);
 
 private:
+	Character();
 	void deleteInventary();
 	bool isMateriaIndexValid(int idx) const;
 	void copyMaterias(const Character &other);
