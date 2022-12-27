@@ -55,13 +55,13 @@ int main()
 	// Crear dos personas. Equipar a una. Igualarlas. Cerrar.
 	{
 		IMateriaSource *src = new MateriaSource();
-		Character *p1 = new Character("Player_1");
-		Character *p2 = new Character("Player_2");
+		ICharacter *p1 = new Character("Player_1");
+		ICharacter *p2 = new Character("Player_2");
 		AMateria *tmp;
 		src->learnMateria(new Ice());	 // Aprendemos la materia "ice"
 		tmp = src->createMateria("ice"); // Creamos la materia "ice"
 		p1->equip(tmp);					 // Equipamos el player_1
-		p2[0] = p1[0];						 // Igualamos el player_2 al player_1
+		*p2 = *p1;						 // Igualamos el player_2 al player_1
 		p1->use(0, *p2);				 // Ice ice used on bob
 		p2->use(0, *p1);				 // Ice ice used on bob
 		delete p1;
@@ -75,7 +75,7 @@ int main()
 	{
 		IMateriaSource *src = new MateriaSource();
 		Character *p1 = new Character("Player_1");
-		Character p2(p1[0]);
+		Character p2(*p1);
 		AMateria *tmp;
 		src->learnMateria(new Ice());
 		tmp = src->createMateria("ice");
