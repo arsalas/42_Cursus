@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:16:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/09 13:30:50 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:24:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ void ClapTrap::setAtk(unsigned int atk)
 
 void ClapTrap::attack(std::string const &target)
 {
+	if (_ep == 0)
+	{
+		std::cout << "Not Enought energy points for attack" << std::endl;
+		return;
+	}
+	_ep--;
 	std::cout << "ClapTrap " << _name << " attack " << target << ", causing " << _atk << " points of damage!" << std::endl;
 }
 
