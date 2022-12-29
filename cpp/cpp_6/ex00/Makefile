@@ -11,7 +11,8 @@ FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp 
+SRCS 			=  main.cpp \
+					Conversor.cpp
 # FOLDERS
 OBJS_DIR		:= obj
 BIN_DIR			:= bin
@@ -21,7 +22,7 @@ BIN_DIR			:= bin
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 #INCLUDES
-INCLUDES 		:= src/character/ src/materias
+INCLUDES 		:= src
 
 INC			= $(addprefix -I , $(INCLUDES))
 
