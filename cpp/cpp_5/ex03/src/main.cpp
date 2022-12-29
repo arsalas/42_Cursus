@@ -7,20 +7,20 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-void testForm(AForm& f)
+void testForm(AForm &f)
 {
-	Bureaucrat b1("John_5", 5);
-	Bureaucrat b2("John_6", 6);
-	Bureaucrat b3("John_25", 25);
-	Bureaucrat b4("John_26", 26);
-	Bureaucrat b5("John_45", 45);
-	Bureaucrat b6("John_46", 46);
-	Bureaucrat b7("John_72", 72);
-	Bureaucrat b8("John_73", 73);
-	Bureaucrat b9("John_137", 137);
-	Bureaucrat b10("John_138", 138);
-	Bureaucrat b11("John_145", 145);
-	Bureaucrat b12("John_146", 146);
+	Bureaucrat b1("Bureaucrat_5", 5);
+	Bureaucrat b2("Bureaucrat_6", 6);
+	Bureaucrat b3("Bureaucrat_25", 25);
+	Bureaucrat b4("Bureaucrat_26", 26);
+	Bureaucrat b5("Bureaucrat_45", 45);
+	Bureaucrat b6("Bureaucrat_46", 46);
+	Bureaucrat b7("Bureaucrat_72", 72);
+	Bureaucrat b8("Bureaucrat_73", 73);
+	Bureaucrat b9("Bureaucrat_137", 137);
+	Bureaucrat b10("Bureaucrat_138", 138);
+	Bureaucrat b11("Bureaucrat_145", 145);
+	Bureaucrat b12("Bureaucrat_146", 146);
 
 	std::cout << f << std::endl;
 	std::cout << b1 << std::endl;
@@ -83,16 +83,15 @@ void testForm(AForm& f)
 	b3.executeForm(f);
 	b2.executeForm(f);
 	b1.executeForm(f);
-
 }
 
 void testMake(std::string form, std::string target)
 {
 	std::cout << std::endl;
-	AForm* f = Intern().makeForm(form, target);
+	AForm *f = Intern().makeForm(form, target);
 	if (f)
 	{
-		testForm(dynamic_cast<AForm&>(*f));
+		testForm(dynamic_cast<AForm &>(*f));
 		delete f;
 	}
 }

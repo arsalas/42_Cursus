@@ -23,7 +23,7 @@ BIN_DIR			:= bin
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 #INCLUDES
-INCLUDES 		:= src/character/ src/materias
+INCLUDES 		:= src/forms/ src/
 
 INC			= $(addprefix -I , $(INCLUDES))
 
@@ -37,7 +37,7 @@ NAME 				:= ex03
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.cpp
+vpath %.cpp src/ src/forms
 
 .SECONDEXPANSION:
 
