@@ -1,4 +1,7 @@
 #include <iostream>
+#include <math.h>
+#include <limits>
+
 #include "Conversor.hpp"
 
 int main(int argc, char const *argv[])
@@ -8,7 +11,7 @@ int main(int argc, char const *argv[])
 		std::cout << "Incorrect arguments number" << std::endl;
 		return 1;
 	}
-	Conversor a = Conversor(argv[1]);
-	std::cout << "char: " << a.parseChar() << std::endl;
+	Conversor conv = Conversor(argv[1]);
+	std::cout << conv << std::endl;
 	return 0;
 }

@@ -5,6 +5,13 @@
 #include <iostream>
 #include <sstream>
 
+enum status
+{
+	SUCCESS,
+	IMPOSSIBLE,
+	NON_DISPLAYABLE
+};
+
 class Conversor
 {
 private:
@@ -13,11 +20,15 @@ private:
 	int _int;
 	float _float;
 	double _double;
+	status fsdf;
 
 	// Constructors
 	Conversor();
 	// Methods
 	bool isPrintable(char c) const;
+	bool isNaN(std::string value) const;
+	bool isInfPos(std::string value) const;
+	bool isInfNeg(std::string value) const;
 
 public:
 	// Constructors
@@ -33,12 +44,15 @@ public:
 	// Getters / Setters
 	std::string getValue() const;
 	char getChar() const;
+	int getInt() const;
+	double getDouble() const;
+	float getFloat() const;
 
 	// Methods
 	char parseChar();
-	int parseInt() const;
-	float parseFloat() const;
-	double parseDouble() const;
+	int parseInt();
+	float parseFloat();
+	double parseDouble();
 
 	// Exceptions
 	class ImpossibleException : public std::exception
@@ -53,6 +67,6 @@ public:
 };
 
 // Stream operators
-std::ostream &operator<<(std::ostream &stream, const Conversor &object);
+std::ostream &operator<<(std::ostream &stream, Conversor &object);
 
 #endif
