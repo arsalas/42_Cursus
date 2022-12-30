@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KAREN_H
-#define KAREN_H
+#ifndef HARL_H
+#define HARL_H
 #include <iostream>
 
-class Karen
+class Harl
 {
 	typedef struct s_status
 	{
 		std::string level;
-		void (Karen::*ptr)(void);
+		void (Harl::*ptr)(void);
 
 	} level_s;
 
@@ -31,7 +31,7 @@ private:
 	void error(void);
 
 public:
-	Karen(void);
+	Harl(void);
 	void complain(std::string level);
 };
 

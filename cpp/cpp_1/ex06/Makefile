@@ -11,7 +11,7 @@ FLAGS 			:= -Wall -Wextra -Werror -std=c++98
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp Karen.cpp
+SRCS 			=  main.cpp Harl.cpp
 
 # FOLDERS
 OBJS_DIR		:= obj
@@ -31,7 +31,7 @@ DEPS				= $(patsubst %.o, %.d, $(OBJS))
 DEPFLAGS			= -MMD -MF
 
 # PROGRAM NAME
-NAME 				:= karen
+NAME 				:= harlFilter
 
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Karen.hpp"
+#include "Harl.hpp"
 
 int main(int argc, char **argv)
 {
@@ -19,10 +19,10 @@ int main(int argc, char **argv)
 		std::cout << "Missing filter" << std::endl;
 		return (1);
 	}
-	Karen karen(argv[1]);
-	karen.complain("debug");
-	karen.complain("info");
-	karen.complain("warning");
-	karen.complain("error");
+	Harl harl(argv[1]);
+	harl.complain("debug");
+	harl.complain("info");
+	harl.complain("warning");
+	harl.complain("error");
 	return (0);
 }

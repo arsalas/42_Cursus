@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Karen.hpp                                          :+:      :+:    :+:   */
+/*   Harl.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KAREN_H
-#define KAREN_H
+#ifndef HARL_H
+#define HARL_H
 #include <iostream>
 
 typedef enum filters
@@ -23,12 +23,12 @@ typedef enum filters
 	NONE
 } e_filters;
 
-class Karen
+class Harl
 {
 	typedef struct s_status
 	{
 		std::string level;
-		void (Karen::*ptr)(void);
+		void (Harl::*ptr)(void);
 
 	} level_s;
 
@@ -43,7 +43,7 @@ private:
 	void error(void);
 
 public:
-	Karen(std::string filter);
+	Harl(std::string filter);
 	void complain(std::string level);
 };
 
