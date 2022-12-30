@@ -53,11 +53,11 @@ $(BIN): $(OBJS) $(BIN_DIR)
 	@echo "$(GREEN)$(NAME) compiled!$(NC)"
 
 run: $(BIN)
-	@./$(BIN)
+	@./$(BIN) INFO
 
 
 leaks: $(BIN)
-	leaks -atExit -- ./$(BIN)
+	@leaks -atExit -- ./$(BIN) INFO
 
 clean:
 	@$(RM) $(OBJS) $(DEPS)

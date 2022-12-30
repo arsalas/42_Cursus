@@ -62,7 +62,12 @@ run: $(BIN)
 
 
 leaks: $(BIN)
-	leaks -atExit -- ./$(BIN)
+	@leaks -atExit -- ./$(BIN) test.txt mundo replace
+	@echo ORIGINAL:
+	@cat test.txt
+	@echo "\n"
+	@echo RESULT:
+	@cat test.txt.replace
 
 clean:
 	@$(RM) $(OBJS) $(DEPS)
