@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string>
 #include "Zombie.hpp"
 
 Zombie *zombieHorde(int N, std::string name)
@@ -18,7 +19,7 @@ Zombie *zombieHorde(int N, std::string name)
 
     for (int i = 0; i < N; ++i)
     {
-        zombies[i].setName(name + "_" + std::to_string(i + 1));
+        zombies[i].setName(name);
     }
     return (zombies);
 }

@@ -12,8 +12,9 @@
 
 #ifndef FILE_H
 #define FILE_H
-# include <iostream>
-# include <fstream>
+#include <iostream>
+#include <fstream>
+// #include <sstream>
 
 class File
 {
@@ -22,9 +23,9 @@ private:
 	std::ifstream _file;
 
 public:
-	File(std::string filename) : _filename(filename){};
-	std::string getFilename(void) { return (_filename); }
-	void setFilename(std::string value) { _filename = value; }
+	File(std::string filename);
+	std::string getFilename();
+	void setFilename(std::string value);
 	void replaceFile(std::string s1, std::string s2);
 	std::string transform_line(std::string s, std::string s1, std::string s2);
 };

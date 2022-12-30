@@ -54,7 +54,7 @@ $(BIN): $(OBJS) $(BIN_DIR)
 	@echo "$(GREEN)$(NAME) compiled!$(NC)"
 
 run: $(BIN)
-	@./$(BIN)
+	@./$(BIN) 42.5
 
 
 leaks: $(BIN)

@@ -57,7 +57,7 @@ run: all
 
 
 leaks: $(BIN)
-	leaks -atExit -- ./$(BIN)
+	@leaks -atExit -- ./$(BIN)
 
 clean:
 	@$(RM) $(OBJS) $(DEPS)

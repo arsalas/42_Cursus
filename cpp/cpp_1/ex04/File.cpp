@@ -12,6 +12,18 @@
 
 #include "File.hpp"
 
+File::File(std::string filename) : _filename(filename){};
+
+std::string File::getFilename()
+{
+	return (_filename);
+}
+
+void File::setFilename(std::string value)
+{
+	_filename = value;
+}
+
 void File::replaceFile(std::string s1, std::string s2)
 {
 	_file.open(_filename);
@@ -59,4 +71,3 @@ std::string File::transform_line(std::string s, std::string s1, std::string s2)
 	new_line += "\n";
 	return (new_line);
 }
-
