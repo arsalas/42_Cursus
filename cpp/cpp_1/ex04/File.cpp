@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file.cpp                                           :+:      :+:    :+:   */
+/*   File.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:31:44 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/05 15:16:36 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:28:33 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void File::setFilename(std::string value)
 
 void File::replaceFile(std::string s1, std::string s2)
 {
+	int lines = 0;
 	_file.open(_filename);
 	if (!_file)
 	{
@@ -40,7 +41,10 @@ void File::replaceFile(std::string s1, std::string s2)
 	{
 		while (!_file.eof())
 		{
+			lines++;
 			std::getline(_file, line);
+			if (lines > 1)
+				new_file << "\n";
 			new_file << transform_line(line, s1, s2);
 		}
 	}
@@ -54,6 +58,8 @@ std::string File::transform_line(std::string s, std::string s1, std::string s2)
 	int start = 0;
 	std::string del = " ";
 	int end = s.find(del);
+	if (s1.length() == 0)
+		return s;
 	while (end != -1)
 	{
 		if (s.substr(start, end - start) == s1)
@@ -68,6 +74,5 @@ std::string File::transform_line(std::string s, std::string s1, std::string s2)
 		new_line += s2;
 	else
 		new_line += s.substr(start, end - start);
-	new_line += "\n";
 	return (new_line);
 }

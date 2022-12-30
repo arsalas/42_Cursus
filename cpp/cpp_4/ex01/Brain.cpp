@@ -13,7 +13,10 @@ Brain::~Brain(void)
 
 Brain::Brain(const Brain &brain)
 {
-	*this = brain;
+	for (size_t i = 0; i < numberIdeas; i++)
+	{
+		_ideas[i] = brain._ideas[i];
+	}
 }
 
 Brain &Brain::operator=(const Brain &brain)
