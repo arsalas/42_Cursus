@@ -11,12 +11,17 @@ int main(int argc, char const *argv[])
 		std::cout << "Incorrect arguments number" << std::endl;
 		return 1;
 	}
-	std::cout << atoi(argv[1]) << std::endl;
-	std::cout << atof("-inff") << std::endl;
-	std::cout << static_cast<char>(42) << std::endl;
-	std::cout << atof(argv[1]) << std::endl;
-	std::cout << 42.10f << std::endl;
-	// Conversor conv = Conversor(argv[1]);
-	// std::cout << conv << std::endl;
+	// float f = atof("-inff");
+	// std::cout << atoi(argv[1]) << std::endl;
+	// std::cout << f << std::endl;
+	// char c = static_cast<char>(f);
+	// if (c == 0)
+	// 	std::cout << "NULL" << std::endl;
+	// std::cout << c << std::endl;
+
+	// std::cout << atof(argv[1]) << std::endl;
+	// std::cout << 42.10f << std::endl;
+	Conversor conv = Conversor(argv[1]);
+	std::cout << conv << std::endl;
 	return 0;
 }

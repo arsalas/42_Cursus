@@ -5,30 +5,36 @@
 #include <iostream>
 #include <sstream>
 
-enum status
+enum numberType
 {
-	SUCCESS,
-	IMPOSSIBLE,
-	NON_DISPLAYABLE
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	OTHER
 };
 
 class Conversor
 {
+
 private:
 	std::string _value;
 	char _char;
 	int _int;
 	float _float;
 	double _double;
-	status fsdf;
+	numberType _type;
 
 	// Constructors
 	Conversor();
 	// Methods
+	size_t countOccurrences(char c, std::string const &str) const;
+	bool isNumeric(std::string const &str) const;
+	bool isFloat(std::string const &str) const;
+	bool isDouble(std::string const &str) const;
+	numberType getValueType() const;
+	void parseType();
 	bool isPrintable(char c) const;
-	bool isNaN(std::string value) const;
-	bool isInfPos(std::string value) const;
-	bool isInfNeg(std::string value) const;
 
 public:
 	// Constructors
@@ -47,6 +53,7 @@ public:
 	int getInt() const;
 	double getDouble() const;
 	float getFloat() const;
+	numberType getType() const;
 
 	// Methods
 	char parseChar();
@@ -61,6 +68,11 @@ public:
 	};
 
 	class NonDisplayableException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+
+	class ErrorException : public std::exception
 	{
 		virtual const char *what() const throw();
 	};
