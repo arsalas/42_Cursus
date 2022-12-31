@@ -149,9 +149,9 @@ void Conversor::parseType()
 
 numberType Conversor::getValueType() const
 {
-	if (_value == "nan" || _value == "+inf" || _value == "-inf")
+	if (_value == "nan" || _value == "+inf" || _value == "-inf" || _value == "inf")
 		return DOUBLE;
-	if (_value == "nanf" || _value == "+inff" || _value == "-inff")
+	if (_value == "nanf" || _value == "+inff" || _value == "-inff" || _value == "inff")
 		return FLOAT;
 	if (isFloat(_value))
 		return FLOAT;
