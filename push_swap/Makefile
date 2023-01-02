@@ -112,4 +112,4 @@ re:	fclean all
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-.PHONY:		all clean fclean re bonus0 make_libs test test5 test100 test500 visualizer100 visualizer500 leaks random10 random100 random500 norminette
+.PHONY:		all clean fclean re bonus make_libs test test5 test100 test500 visualizer100 visualizer500 leaks random10 random100 random500 norminette
