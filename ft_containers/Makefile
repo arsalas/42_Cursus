@@ -5,9 +5,17 @@ YELLOW			:= \033[33m
 BLUE			:= \033[34m
 NC				:= \033[m
 
+
+
+CXX				:= c++
+DEBUG_MSG		:= true
+
 # FLAGS
-CC				:= c++
-FLAGS 			:= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+W_FLAGS			:= -Wall -Wextra -Werror
+VERSION			:= -std=c++98 
+SANITIZER		:= -g -fsanitize=address
+FDEBUG			:=  -D DEBUG=$(DEBUG_MSG)
+FLAGS			:= $(W_FLAGS) $(VERSION) $(SANITIZER) $(FDEBUG)
 
 RM 				:= rm -f
 
@@ -45,11 +53,10 @@ all:$(BIN)
 
 $(OBJS_DIR)/%.o: %.cpp | $$(@D)
 	@echo "🔃 $(YELLOW)Compiling" $(basename $(notdir $@)) 
-	@$(CC) $(FLAGS) $(INC) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
-
+	@$(CXX) $(FLAGS) $(INC) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
 
 $(BIN): $(OBJS) $(BIN_DIR)
-	@$(CC) $(FLAGS) $(INC) $(OBJS) -o $(BIN)
+	@$(CXX) $(FLAGS) $(INC) $(OBJS) -o $(BIN)
 	@echo "✅ $(GREEN)$(NAME) compiled!$(NC)"
 
 run: $(BIN)

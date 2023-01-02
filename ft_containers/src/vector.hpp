@@ -1,6 +1,10 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 #include <iostream>
 #include <memory>
 #include <iterator>
@@ -10,7 +14,7 @@ namespace ft
 {
 
 	template <typename T>
-	class vector
+	class Vector
 	{
 	private:
 		int value_type;
@@ -27,25 +31,29 @@ namespace ft
 
 	public:
 		// Constructors
-		vector()
+		Vector()
 		{
-			std::cout << "\e[0;33mDefault Constructor called of vector\e[0m" << std::endl;
+			if (DEBUG)
+				std::cout << "\e[0;33mDefault Constructor called of Vector\e[0m" << std::endl;
 		}
 
-		vector(unsigned int n)
+		Vector(unsigned int n)
 		{
-			std::cout << "\e[0;33mParameters Constructor called of vector\e[0m" << std::endl;
+			if (DEBUG)
+				std::cout << "\e[0;33mParameters Constructor called of Vector\e[0m" << std::endl;
 		}
 
-		vector(const vector &copy)
+		Vector(const Vector &copy)
 		{
-			std::cout << "\e[0;33mCopy Constructor called of vector\e[0m" << std::endl;
+			if (DEBUG)
+				std::cout << "\e[0;33mCopy Constructor called of Vector\e[0m" << std::endl;
 		}
 
 		// Destructor
-		~vector()
+		~Vector()
 		{
-			std::cout << "\e[0;31mDestructor called of vector\e[0m" << std::endl;
+			if (DEBUG)
+				std::cout << "\e[0;31mDestructor called of Vector\e[0m" << std::endl;
 		}
 
 		// Methods

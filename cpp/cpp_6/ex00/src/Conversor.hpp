@@ -32,6 +32,7 @@ private:
 	bool isNumeric(std::string const &str) const;
 	bool isFloat(std::string const &str) const;
 	bool isDouble(std::string const &str) const;
+	bool isIntInLimits(const char *str) const;
 	numberType getValueType() const;
 	void parseType();
 	bool isPrintable(char c) const;
@@ -56,6 +57,7 @@ public:
 	numberType getType() const;
 
 	// Methods
+	bool isDecimalPrintable() const;
 	char parseChar();
 	int parseInt();
 	float parseFloat();

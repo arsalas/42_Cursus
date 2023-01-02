@@ -1,5 +1,5 @@
 #include <math.h>
-#include <limits>
+#include <limits.h>
 #include <string>
 #include <iostream>
 
@@ -123,6 +123,21 @@ bool Conversor::isDouble(std::string const &str) const
 	return !str.empty() && str.find_first_not_of("0123456789.", start) == std::string::npos;
 }
 
+bool Conversor::isIntInLimits(const char *str) const
+{
+	long num = strtol(str, NULL, 10);
+	return !(num > INT_MAX || num < INT_MIN);
+}
+
+bool Conversor::isDecimalPrintable() const
+{
+	if (_value == "nan" || _value == "+inf" || _value == "-inf" || _value == "inf")
+		return false;
+	if (_value == "nanf" || _value == "+inff" || _value == "-inff" || _value == "inff")
+		return false;
+	return !((_value.length() >= 8 && _value[0] == '-') || (_value.length() >= 7 && _value[0] != '-'));
+}
+
 void Conversor::parseType()
 {
 	switch (_type)
@@ -132,7 +147,7 @@ void Conversor::parseType()
 		break;
 	case INT:
 		_int = atoi(_value.c_str());
-		if ((_int < 0 && _value[0] != '-') || (_int > 0 && _value[0] == '-'))
+		if (!isIntInLimits(_value.c_str()))
 			throw ErrorException();
 		break;
 	case FLOAT:
@@ -216,7 +231,7 @@ int Conversor::parseInt()
 		throw ImpossibleException();
 		break;
 	}
-	if ((_int < 0 && _value[0] != '-') || (_int > 0 && _value[0] == '-'))
+	if (!isIntInLimits(_value.c_str()))
 		throw ImpossibleException();
 	return _int;
 }
@@ -316,8 +331,7 @@ std::ostream &operator<<(std::ostream &out, Conversor &object)
 	try
 	{
 		object.parseFloat();
-		double intPart;
-		out << "float: " << object.getFloat() << ((std::modf(object.getFloat(), &intPart) == 0 && object.getFloat() != INFINITY && object.getFloat() != -INFINITY) ? ".0" : "") << "f" << std::endl;
+		out << "float: " << object.getFloat() << ((object.isDecimalPrintable()) ? ".0" : "") << "f" << std::endl;
 	}
 	catch (const std::exception &ex)
 	{
@@ -326,8 +340,7 @@ std::ostream &operator<<(std::ostream &out, Conversor &object)
 	try
 	{
 		object.parseDouble();
-		double intPart;
-		out << "double: " << object.getDouble() << ((std::modf(object.getDouble(), &intPart) == 0 && object.getDouble() != INFINITY && object.getDouble() != -INFINITY) ? ".0" : "") << std::endl;
+		out << "double: " << object.getDouble() << ((object.isDecimalPrintable()) ? ".0" : "") << std::endl;
 	}
 	catch (const std::exception &ex)
 	{
