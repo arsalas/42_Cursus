@@ -14,7 +14,7 @@ This first module of C++ is designed to help you understand the specifities of t
 `Rigor`
 `Object-oriented programming`
 
-## Instrucctions for every exercice folder
+## Makefile rules for every exercice folder
 
 ### Compile
 ```sh
@@ -24,7 +24,7 @@ make
 ```sh
 make run
 ```
-### Execute program and detect leaks
+### Execute program and detector leaks
 ```sh
 make leaks
 ```
