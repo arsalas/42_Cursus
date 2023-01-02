@@ -13,3 +13,26 @@ This first module of C++ is designed to help you understand the specifities of t
 `Imperative programming`
 `Rigor`
 `Object-oriented programming`
+
+## Instrucctions for every exercice folder
+
+### Compile
+```sh
+make
+```
+### Execute program
+```sh
+make run
+```
+### Execute program and detect leaks
+```sh
+make leaks
+```
+### Clean files
+```sh
+make fclean
+```
+### Clean files and compile
+```sh
+make re
+```
