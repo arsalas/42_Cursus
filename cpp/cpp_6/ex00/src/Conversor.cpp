@@ -147,7 +147,7 @@ bool Conversor::isDotDecimalPrintable() const
 int Conversor::quantityDecimalZeroPrintable() const
 {
 	if (_type == CHAR || _type == INT)
-		return 2;
+		return 1;
 	int start = _value.find('.');
 	std::string decimals = _value.substr(start + 1, _value.length() - 1);
 	int zeros = 0;
