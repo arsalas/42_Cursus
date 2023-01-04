@@ -5,6 +5,7 @@
 
 int main()
 {
+	std::cout << "--------------------" << std::endl;
 	{
 		IMateriaSource *src = new MateriaSource(); // Default MateriaSource constructor called
 		src->learnMateria(new Ice());			   // Default ice from AMateria constructor called & Default Ice constructor called
@@ -17,7 +18,8 @@ int main()
 		me->equip(tmp);							// Character me is equiped with cure
 		ICharacter *bob = new Character("bob"); // Default character bob created
 		me->use(0, *bob);						// Ice ice used on bob
-		me->use(1, *bob);						// Cure cure used on bob
+		me->use(1, *bob);
+		me->unequip(0); // Cure cure used on bob
 		delete bob;
 		delete me;
 		delete src;
@@ -25,6 +27,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << std::endl;
+	std::cout << "--------------------" << std::endl;
 
 	{
 		ICharacter *me = new Character("player_1");
@@ -34,6 +37,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << std::endl;
+	std::cout << "--------------------" << std::endl;
 
 	{
 		ICharacter *me = new Character("player_1");
@@ -50,6 +54,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << std::endl;
+	std::cout << "--------------------" << std::endl;
 
 	// Asignación (igualación)
 	// Crear dos personas. Equipar a una. Igualarlas. Cerrar.
@@ -70,6 +75,7 @@ int main()
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
+	std::cout << "--------------------" << std::endl;
 
 	// Constructor copia
 	{
@@ -82,11 +88,12 @@ int main()
 		p1->use(0, p2); // Ice ice used on bob
 		p2.use(0, *p1); // Ice ice used on bob
 		delete p1;
-		delete src;
 		delete tmp;
+		delete src;
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
+	std::cout << "--------------------" << std::endl;
 
 	// Utilizar p1 sin haber creado una materia
 	{

@@ -7,11 +7,14 @@
 
 class Character : public ICharacter
 {
+
 private:
 	std::string _name;
 	static const int maxMaterias = 4;
 	AMateria *_inventary[maxMaterias];
 	int _quantityMaterias;
+	AMateria **_trash;
+	int _quantityTrash;
 
 public:
 	Character(std::string name);
@@ -29,6 +32,10 @@ private:
 	void deleteInventary();
 	bool isMateriaIndexValid(int idx) const;
 	void copyMaterias(const Character &other);
+
+	void pushTrash(AMateria *materia);
+	void deleteTrash();
+	void copyTrash(const Character &other);
 };
 
 #endif

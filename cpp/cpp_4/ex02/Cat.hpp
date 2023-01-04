@@ -31,6 +31,9 @@ public:
 
 	void makeSound() const;
 	std::string getType() const;
+
+	void setIdea(std::string str) const;
+	std::string getIdea(unsigned int position) const;
 };
 
 #endif

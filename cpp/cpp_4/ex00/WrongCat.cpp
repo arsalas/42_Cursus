@@ -22,9 +22,8 @@ WrongCat::~WrongCat()
 	std::cout << "WrongCat destroy" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &cat) : WrongAnimal()
+WrongCat::WrongCat(const WrongCat &cat) : WrongAnimal(cat.getType())
 {
-	_type = cat.getType();
 	std::cout << "WrongCat copy construct" << std::endl;
 }
 
@@ -36,5 +35,5 @@ WrongCat &WrongCat::operator=(const WrongCat &cat)
 
 void WrongCat::makeSound() const
 {
-	std::cout << "miauuuu!" << std::endl;
+	std::cout << "wrong miauuuu!" << std::endl;
 }

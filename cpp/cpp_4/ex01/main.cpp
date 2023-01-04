@@ -16,9 +16,10 @@
 
 int main()
 {
-	size_t number = 10;
+	const size_t number = 10;
 	Animal *animals[number];
 
+	std::cout << "-----Create animals-----" << std::endl;
 	for (size_t i = 0; i < number; i++)
 	{
 		if (i % 2 == 0)
@@ -26,11 +27,21 @@ int main()
 		else
 			animals[i] = new Cat();
 	}
-	
+
+	std::cout << "-----Delete animals-----" << std::endl;
 	for (size_t i = 0; i < number; i++)
 	{
 		delete animals[i];
 	}
 
+	std::cout << "-----Copy-----" << std::endl;
+	Cat cat = Cat();
+	cat.setIdea("Idea 1");
+	cat.setIdea("Idea 2");
+	Cat copy = Cat(cat);
+	std::cout << "Cat: " << cat.getIdea(0) << std::endl;
+	std::cout << "Cat copy: " << copy.getIdea(0) << std::endl;
+	std::cout << "Cat: " << cat.getIdea(1) << std::endl;
+	std::cout << "Cat copy: " << copy.getIdea(1) << std::endl;
 	return (0);
 }

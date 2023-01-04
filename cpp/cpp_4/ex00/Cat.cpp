@@ -22,9 +22,8 @@ Cat::~Cat()
 	std::cout << "Cat destroy" << std::endl;
 }
 
-Cat::Cat(const Cat &cat) : Animal()
+Cat::Cat(const Cat &cat) : Animal(cat.getType())
 {
-	_type = cat.getType();
 	std::cout << "Cat copy construct" << std::endl;
 }
 

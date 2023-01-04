@@ -30,6 +30,9 @@ public:
 	Dog &operator=(const Dog &dog);
 
 	void makeSound() const;
+
+	void setIdea(std::string str) const;
+	std::string getIdea(unsigned int position) const;
 };
 
 #endif

@@ -26,5 +26,18 @@ int main()
 	delete dog;
 	delete cat;
 
+	{
+		std::cout << "-----Copy-----" << std::endl;
+		Cat cat = Cat();
+		cat.setIdea("Idea 1");
+		cat.setIdea("Idea 2");
+		Cat copy = Cat(cat);
+		std::cout << "Cat: " << cat.getIdea(0) << std::endl;
+		std::cout << "Cat copy: " << copy.getIdea(0) << std::endl;
+		std::cout << "Cat: " << cat.getIdea(1) << std::endl;
+		std::cout << "Cat copy: "
+				  << copy.getIdea(1) << std::endl;
+	}
+
 	return 0;
 }

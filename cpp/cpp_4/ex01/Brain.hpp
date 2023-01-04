@@ -19,6 +19,7 @@ class Brain
 private:
 	static const int numberIdeas = 100;
 	std::string _ideas[numberIdeas];
+	int	_qIdeas;
 
 public:
 	Brain();
@@ -27,6 +28,9 @@ public:
 	Brain(const Brain &brain);
 
 	Brain &operator=(const Brain &brain);
+
+	void setIdea(std::string str);
+	std::string getIdea(unsigned int position) const;
 };
 
 #endif

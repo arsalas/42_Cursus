@@ -31,6 +31,7 @@ int main()
 	delete cat;
 	delete animal;
 
+	std::cout << "-----Wrong animal-----" << std::endl;
 	WrongAnimal *wAnimal = new WrongAnimal();
 	WrongAnimal *wCat = new WrongCat();
 
@@ -39,6 +40,13 @@ int main()
 	wAnimal->makeSound();
 	delete wCat;
 	delete wAnimal;
+	{
+		std::cout << "-----Copy-----" << std::endl;
+		Cat cat = Cat();
+		Cat copy = Cat(cat);
+		cat.makeSound();
+		copy.makeSound();
+	}
 
 	return 0;
 }

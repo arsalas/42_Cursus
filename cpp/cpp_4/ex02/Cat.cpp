@@ -24,7 +24,7 @@ Cat::~Cat()
 	std::cout << "Cat destroy" << std::endl;
 }
 
-Cat::Cat(const Cat &cat)
+Cat::Cat(const Cat &cat) : _brain(new Brain(*cat._brain))
 {
 	_type = cat.getType();
 	std::cout << "Cat copy construct" << std::endl;
@@ -33,6 +33,7 @@ Cat::Cat(const Cat &cat)
 Cat &Cat::operator=(const Cat &cat)
 {
 	_type = cat.getType();
+	*_brain = *cat._brain;
 	return *this;
 }
 
@@ -45,3 +46,13 @@ std::string Cat::getType() const
 {
 	return _type;
 }
+
+void Cat::setIdea(std::string str) const
+{
+	_brain->setIdea(str);
+}
+
+std::string Cat::getIdea(unsigned int position) const
+{
+	return _brain->getIdea(position);
+};

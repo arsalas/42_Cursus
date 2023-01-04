@@ -27,9 +27,8 @@ WrongAnimal::~WrongAnimal()
 	std::cout << "WrongAnimal destroy " << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &animal)
+WrongAnimal::WrongAnimal(const WrongAnimal &animal) : _type(animal.getType())
 {
-	_type = animal.getType();
 	std::cout << "WrongAnimal copy construct" << std::endl;
 }
 

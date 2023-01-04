@@ -22,9 +22,9 @@ Dog::~Dog()
 	std::cout << "Dog destroy" << std::endl;
 }
 
-Dog::Dog(const Dog &dog) : Animal()
+Dog::Dog(const Dog &dog) : Animal(dog.getType())
 {
-	_type = dog.getType();
+	std::cout << "Dog copy constructor" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &dog)

@@ -30,6 +30,9 @@ public:
 	Cat &operator=(const Cat &cat);
 
 	void makeSound() const;
+
+	void setIdea(std::string str) const;
+	std::string getIdea(unsigned int position) const;
 };
 
 #endif

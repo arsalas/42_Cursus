@@ -27,9 +27,8 @@ Animal::~Animal()
 	std::cout << "Animal destroy " << std::endl;
 }
 
-Animal::Animal(const Animal &animal)
+Animal::Animal(const Animal &animal) : _type(animal.getType())
 {
-	_type = animal.getType();
 	std::cout << "Animal copy construct" << std::endl;
 }
 

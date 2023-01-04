@@ -23,14 +23,15 @@ Dog::~Dog()
 	std::cout << "Dog destroy" << std::endl;
 }
 
-Dog::Dog(const Dog &dog) : Animal()
+Dog::Dog(const Dog &dog) : Animal(dog.getType()), _brain(new Brain(*dog._brain))
 {
-	_type = dog.getType();
+	std::cout << "Dog copy construct" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &dog)
 {
 	_type = dog.getType();
+	*_brain = *dog._brain;
 	return *this;
 }
 
@@ -38,3 +39,13 @@ void Dog::makeSound() const
 {
 	std::cout << "guau!" << std::endl;
 }
+
+void Dog::setIdea(std::string str) const
+{
+	_brain->setIdea(str);
+}
+
+std::string Dog::getIdea(unsigned int position) const
+{
+	return _brain->getIdea(position);
+};
