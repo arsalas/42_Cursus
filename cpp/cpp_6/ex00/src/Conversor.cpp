@@ -101,7 +101,7 @@ bool Conversor::isNumeric(std::string const &str) const
 
 bool Conversor::isFloat(std::string const &str) const
 {
-	if (countOccurrences('.', str) > 1)
+	if (countOccurrences('.', str) != 1)
 		return false;
 	if (str[str.length() - 1] != 'f')
 		return false;
@@ -129,13 +129,35 @@ bool Conversor::isIntInLimits(const char *str) const
 	return !(num > INT_MAX || num < INT_MIN);
 }
 
-bool Conversor::isDecimalPrintable() const
+bool Conversor::isDotDecimalPrintable() const
 {
+	if (_type == CHAR || _type == INT)
+		return true;
 	if (_value == "nan" || _value == "+inf" || _value == "-inf" || _value == "inf")
 		return false;
 	if (_value == "nanf" || _value == "+inff" || _value == "-inff" || _value == "inff")
 		return false;
-	return !((_value.length() >= 8 && _value[0] == '-') || (_value.length() >= 7 && _value[0] != '-'));
+	if ((_value.length() >= 8 && _value[0] == '-') || (_value.length() >= 7 && _value[0] != '-'))
+		return false;
+	int start = _value.find('.');
+	std::string decimals = _value.substr(start + 1, _value.length() - 1);
+	unsigned int zeros = quantityDecimalZeroPrintable();
+	return (decimals.length() == zeros);
+}
+int Conversor::quantityDecimalZeroPrintable() const
+{
+	if (_type == CHAR || _type == INT)
+		return 2;
+	int start = _value.find('.');
+	std::string decimals = _value.substr(start + 1, _value.length() - 1);
+	int zeros = 0;
+	for (int i = decimals.length() - 1; i >= 0; i--)
+	{
+		if (decimals[i] != '0')
+			return zeros;
+		zeros++;
+	}
+	return zeros;
 }
 
 void Conversor::parseType()
@@ -169,12 +191,20 @@ numberType Conversor::getValueType() const
 	if (_value == "nanf" || _value == "+inff" || _value == "-inff" || _value == "inff")
 		return FLOAT;
 	if (isFloat(_value))
+	{
+		if (_value[_value.length() - 2] == '.')
+			throw ErrorException();
 		return FLOAT;
+	}
 	if (isDouble(_value))
+	{
+		if (_value[_value.length() - 1] == '.')
+			throw ErrorException();
 		return DOUBLE;
+	}
 	if (isNumeric(_value))
 		return INT;
-	if (_value.length() == 1)
+	if (_value.length() == 3 && _value[0] == '\'' && _value[2] == '\'')
 		return CHAR;
 	throw ErrorException();
 	return OTHER;
@@ -185,6 +215,7 @@ char Conversor::parseChar()
 	switch (_type)
 	{
 	case CHAR:
+		_char = _value[1];
 		break;
 	case INT:
 		_char = static_cast<char>(_int);
@@ -245,7 +276,6 @@ float Conversor::parseFloat()
 		break;
 	case INT:
 		_float = static_cast<float>(_int);
-
 		break;
 	case FLOAT:
 		break;
@@ -331,7 +361,13 @@ std::ostream &operator<<(std::ostream &out, Conversor &object)
 	try
 	{
 		object.parseFloat();
-		out << "float: " << object.getFloat() << ((object.isDecimalPrintable()) ? ".0" : "") << "f" << std::endl;
+		out << "float: " << object.getFloat() << ((object.isDotDecimalPrintable()) ? "." : "");
+		int zeros = object.quantityDecimalZeroPrintable();
+		for (int i = 0; i < zeros; i++)
+		{
+			out << "0";
+		}
+		out << "f" << std::endl;
 	}
 	catch (const std::exception &ex)
 	{
@@ -340,7 +376,13 @@ std::ostream &operator<<(std::ostream &out, Conversor &object)
 	try
 	{
 		object.parseDouble();
-		out << "double: " << object.getDouble() << ((object.isDecimalPrintable()) ? ".0" : "") << std::endl;
+		out << "double: " << object.getDouble() << ((object.isDotDecimalPrintable()) ? "." : "");
+		int zeros = object.quantityDecimalZeroPrintable();
+		for (int i = 0; i < zeros; i++)
+		{
+			out << "0";
+		}
+		out << std::endl;
 	}
 	catch (const std::exception &ex)
 	{

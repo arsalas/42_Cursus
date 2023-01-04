@@ -57,7 +57,10 @@ public:
 	numberType getType() const;
 
 	// Methods
-	bool isDecimalPrintable() const;
+	// bool isDecimalPrintable() const;
+	bool isDotDecimalPrintable() const;
+	int quantityDecimalZeroPrintable() const;
+
 	char parseChar();
 	int parseInt();
 	float parseFloat();
