@@ -137,27 +137,34 @@ bool Conversor::isDotDecimalPrintable() const
 		return false;
 	if (_value == "nanf" || _value == "+inff" || _value == "-inff" || _value == "inff")
 		return false;
-	if ((_value.length() >= 8 && _value[0] == '-') || (_value.length() >= 7 && _value[0] != '-'))
+
+	int integers = getIntDigits();
+	if (integers > 6)
 		return false;
-	int start = _value.find('.');
-	std::string decimals = _value.substr(start + 1, _value.length() - 1);
-	unsigned int zeros = quantityDecimalZeroPrintable();
-	return (decimals.length() == zeros);
+	return isZeroPrintable();
 }
-int Conversor::quantityDecimalZeroPrintable() const
+
+int Conversor::getIntDigits() const
 {
-	if (_type == CHAR || _type == INT)
-		return 1;
+	int quantity = _value.find('.');
+	if (_value[0] == '-')
+		quantity--;
+	return quantity;
+}
+
+bool Conversor::isZeroPrintable() const
+{
 	int start = _value.find('.');
 	std::string decimals = _value.substr(start + 1, _value.length() - 1);
-	int zeros = 0;
-	for (int i = decimals.length() - 1; i >= 0; i--)
+	int end = decimals.length() - 1;
+	if (decimals[end - 1] == 'f')
+		end--;
+	for (int i = 0; i <= end; i++)
 	{
 		if (decimals[i] != '0')
-			return zeros;
-		zeros++;
+			return false;
 	}
-	return zeros;
+	return true;
 }
 
 void Conversor::parseType()
@@ -165,7 +172,7 @@ void Conversor::parseType()
 	switch (_type)
 	{
 	case CHAR:
-		_char = _value[0];
+		_char = _value[1];
 		break;
 	case INT:
 		_int = atoi(_value.c_str());
@@ -361,12 +368,7 @@ std::ostream &operator<<(std::ostream &out, Conversor &object)
 	try
 	{
 		object.parseFloat();
-		out << "float: " << object.getFloat() << ((object.isDotDecimalPrintable()) ? "." : "");
-		int zeros = object.quantityDecimalZeroPrintable();
-		for (int i = 0; i < zeros; i++)
-		{
-			out << "0";
-		}
+		out << "float: " << object.getFloat() << ((object.isDotDecimalPrintable()) ? ".0" : "");
 		out << "f" << std::endl;
 	}
 	catch (const std::exception &ex)
@@ -376,12 +378,7 @@ std::ostream &operator<<(std::ostream &out, Conversor &object)
 	try
 	{
 		object.parseDouble();
-		out << "double: " << object.getDouble() << ((object.isDotDecimalPrintable()) ? "." : "");
-		int zeros = object.quantityDecimalZeroPrintable();
-		for (int i = 0; i < zeros; i++)
-		{
-			out << "0";
-		}
+		out << "double: " << object.getDouble() << ((object.isDotDecimalPrintable()) ? ".0" : "");
 		out << std::endl;
 	}
 	catch (const std::exception &ex)

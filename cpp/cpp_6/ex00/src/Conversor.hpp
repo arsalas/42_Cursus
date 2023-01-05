@@ -59,7 +59,8 @@ public:
 	// Methods
 	// bool isDecimalPrintable() const;
 	bool isDotDecimalPrintable() const;
-	int quantityDecimalZeroPrintable() const;
+	bool isZeroPrintable() const;
+	int getIntDigits() const;
 
 	char parseChar();
 	int parseInt();
