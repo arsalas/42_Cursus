@@ -57,12 +57,16 @@ void Span::addNumber(int number)
 int Span::shortestSpan()
 {
 	int shortest, distance;
-	shortest = getDistance(_elements[1], _elements[0]);
+	std::vector<int> sorter(_elements);
+	if (_elements.size() < 2)
+		throw NotNumbersStoredException();
+	sort(sorter.begin(), sorter.end());
+	shortest = getDistance(sorter[1], sorter[0]);
 	if (_elements.size() == 2)
 		return shortest;
-	for (size_t i = 1; i < _elements.size() - 1; i++)
+	for (std::vector<int>::iterator iter = sorter.begin(); iter < sorter.end() - 1; iter++)
 	{
-		distance = getDistance(_elements[i + 1], _elements[i]);
+		distance = getDistance(*(iter + 1), *iter);
 		if (distance < shortest)
 			shortest = distance;
 	}
@@ -71,27 +75,21 @@ int Span::shortestSpan()
 
 int Span::longestSpan()
 {
-	int longest, distance;
-	longest = getDistance(_elements[1], _elements[0]);
-	if (_elements.size() == 2)
-		return longest;
-	for (size_t i = 1; i < _elements.size() - 1; i++)
-	{
-		distance = getDistance(_elements[i + 1], _elements[i]);
-		if (distance > longest)
-			longest = distance;
-	}
-	return longest;
+	int max, min;
+	std::vector<int> sorter(_elements);
+	if (_elements.size() < 2)
+		throw NotNumbersStoredException();
+	sort(sorter.begin(), sorter.end());
+	max = *max_element(_elements.begin(), _elements.end());
+	min = *min_element(_elements.begin(), _elements.end());
+	return getDistance(min, max);
 }
 
 unsigned int Span::getDistance(int n1, int n2)
 {
-	int distance = n2 - n1;
-	if (distance < 0)
-		distance *= -1;
+	int distance = abs(n2 - n1);
 	return distance;
 }
-
 
 // Exceptions
 const char *Span::MaxNumbersStoredException::what() const throw()
