@@ -72,7 +72,7 @@ void AForm::checkRangeGrade(int grade) const
 
 void AForm::checkExecute(int grade) const
 {
-	if (_isSigned)
+	if (!_isSigned)
 		throw SignedFormException();
 	if (_gradeExecute < grade)
 		throw ExecuteGradeTooLowException();

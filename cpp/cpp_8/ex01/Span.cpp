@@ -47,6 +47,16 @@ std::vector<int> Span::getElements() const
 }
 
 // Methods
+void Span::addRange(int start, int end)
+{
+	if (start > end)
+		throw IncorrectRangeException();
+	for (int i = start; i <= end; i++)
+	{
+		addNumber(i);
+	}
+}
+
 void Span::addNumber(int number)
 {
 	if (_elements.size() == _max)
@@ -54,9 +64,9 @@ void Span::addNumber(int number)
 	_elements.push_back(number);
 }
 
-int Span::shortestSpan()
+long Span::shortestSpan() const
 {
-	int shortest, distance;
+	long shortest, distance;
 	std::vector<int> sorter(_elements);
 	if (_elements.size() < 2)
 		throw NotNumbersStoredException();
@@ -73,7 +83,7 @@ int Span::shortestSpan()
 	return shortest;
 }
 
-int Span::longestSpan()
+long Span::longestSpan() const
 {
 	int max, min;
 	std::vector<int> sorter(_elements);
@@ -85,7 +95,7 @@ int Span::longestSpan()
 	return getDistance(min, max);
 }
 
-unsigned int Span::getDistance(int n1, int n2)
+long Span::getDistance(int n1, int n2) const
 {
 	int distance = abs(n2 - n1);
 	return distance;
@@ -100,4 +110,9 @@ const char *Span::MaxNumbersStoredException::what() const throw()
 const char *Span::NotNumbersStoredException::what() const throw()
 {
 	return "Not enough numbers stored to provide a span";
+}
+
+const char *Span::IncorrectRangeException::what() const throw()
+{
+	return "Incorrect range, must use addRange(int min, int max)";
 }

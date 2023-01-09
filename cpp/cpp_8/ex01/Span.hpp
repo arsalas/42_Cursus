@@ -29,8 +29,9 @@ public:
 
 	// Methods
 	void addNumber(int number);
-	int shortestSpan();
-	int longestSpan();
+	void addRange(int start, int end);
+	long shortestSpan() const;
+	long longestSpan() const;
 
 	// Exceptions
 	class MaxNumbersStoredException : public std::exception
@@ -43,9 +44,14 @@ public:
 		virtual const char *what() const throw();
 	};
 
+	class IncorrectRangeException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+
 private:
 	// Methods
-	unsigned int getDistance(int n1, int n2);
+	long getDistance(int n1, int n2) const;
 
 };
 
