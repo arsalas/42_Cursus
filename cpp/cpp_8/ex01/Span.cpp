@@ -31,7 +31,7 @@ Span &Span::operator=(const Span &assign)
 	if (this == &assign)
 		return *this;
 	_max = assign.getMax();
-	_elements = assign.getElements();
+	_elements = assign._elements;
 	return *this;
 }
 
