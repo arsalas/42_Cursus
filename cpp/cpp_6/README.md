@@ -1,5 +1,7 @@
 # CPP Module 06
 
+[![aramirez's 42 CPP Module 06 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2929393)](https://github.com/JaeSeoKim/badge42)
+
 ## Description
 This module is designed to help you understand the different casts in CPP.
 
