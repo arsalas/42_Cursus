@@ -1,5 +1,7 @@
 # CPP Module 05
 
+[![aramirez's 42 CPP Module 05 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2929337)](https://github.com/JaeSeoKim/badge42)
+
 ## Description
 This module is designed to help you understand Try/Catch and Exceptions in CPP.
 
