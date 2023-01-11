@@ -95,9 +95,9 @@ long Span::longestSpan() const
 	return getDistance(min, max);
 }
 
-long Span::getDistance(int n1, int n2) const
+long Span::getDistance(long n1, long n2) const
 {
-	int distance = abs(n2 - n1);
+	long distance = abs(n2 - n1);
 	return distance;
 }
 

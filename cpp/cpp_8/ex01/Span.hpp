@@ -51,7 +51,7 @@ public:
 
 private:
 	// Methods
-	long getDistance(int n1, int n2) const;
+	long getDistance(long n1, long n2) const;
 
 };
 
