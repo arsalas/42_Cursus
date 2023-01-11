@@ -10,7 +10,7 @@ The multiple available containers in C++ all have a very different usage. To mak
 `Rigor`
 `Object-oriented programming`
 
-## Makefile rules for every exercice folder
+## Makefile rules
 
 ### Compile
 ```sh
