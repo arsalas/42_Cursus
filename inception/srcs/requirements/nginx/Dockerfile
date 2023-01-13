@@ -11,10 +11,10 @@ RUN apt-get install -y nginx openssl
 RUN mkdir -p /etc/nginx/ssl
 
 # Genera el certificado ssl y sus claves
-RUN openssl req -newkey rsa:4096 -days 42 -nodes -x509 \
--subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=aramirez.42.fr/UID=aramirez" \
+RUN openssl req -newkey rsa:4096 -sha256 -days 365 -x509 -nodes \
 -out /etc/nginx/ssl/aramirez.42.fr.crt \
--keyout /etc/nginx/ssl/aramirez.42.fr.key
+-keyout /etc/nginx/ssl/aramirez.42.fr.key \
+-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=aramirez.42.fr/UID=aramirez"
 
 # Copiamos el archivo de configuracion en el contenedor
 COPY conf/aramirez.42.fr /etc/nginx/sites-available
@@ -25,6 +25,7 @@ RUN ln -s /etc/nginx/sites-available/aramirez.42.fr /etc/nginx/sites-enabled
 RUN mkdir -p /var/www/aramirez
 COPY tools/index.html /var/www/aramirez
 
+EXPOSE 443
 
 # Ejecutamos nginx para levantar el servidor
 CMD ["nginx", "-g", "daemon off;"]
