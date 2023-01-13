@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    networks:
+      - inception
+    volumes:
+      - mariadb:/var/lib/mysql
+    build: 
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PWD:   ${MYSQL_ROOT_PWD}
+      WP_DATABASE_NAME: ${WP_DATABASE_NAME}
+      WP_DATABASE_USR:  ${WP_DATABASE_USR}
+      WP_DATABASE_PWD:  ${WP_DATABASE_PWD}
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    depends_on:  
+      - wordpress
+    build: 
+      context: requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www/html
+    build: 
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    expose: 
+      - "9000"
+    depends_on: 
+     - mariadb
+    restart: always
+    environment:
+      MYSQL_HOST:       ${MYSQL_HOST}
+      WP_DATABASE_NAME: ${WP_DATABASE_NAME}
+      WP_DATABASE_USR:  ${WP_DATABASE_USR}
+      WP_DATABASE_PWD:  ${WP_DATABASE_PWD}
+      DOMAIN_NAME:      ${DOMAIN_NAME}
+      WP_TITLE:         ${WP_TITLE}
+      WP_ADMIN_USR:     ${WP_ADMIN_USR}
+      WP_ADMIN_PWD:     ${WP_ADMIN_PWD}
+      WP_ADMIN_EMAIL:   ${WP_ADMIN_EMAIL}
+      WP_USR:           ${WP_USR}
+      WP_PWD:           ${WP_PWD}
+      WP_EMAIL:         ${WP_EMAIL}
+      REDIS_HOST:       ${REDIS_HOST}
+      REDIS_PWD:        ${REDIS_PWD}
+
+volumes:
+  wordpress:
+    external: false
+
+  mariadb:
+    external: false
+
+networks:
+    inception:
