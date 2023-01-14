@@ -2,11 +2,11 @@
 # Iniciamos mysql para poder ejecutar comandos (si no ponemos el ; no lee bien el comando)
 service mysql start;
 # Creamos la tabla a partir de las variables de entorno
-mysql -e "CREATE DATABASE IF NOT EXISTS ${SQL_DATABASE};"
+mysql -e "CREATE DATABASE IF NOT EXISTS ${DB_DATABASE};"
 # Creamos un usuario
-mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
+mysql -e "CREATE USER IF NOT EXISTS \`${DB_USER}\`@'%' IDENTIFIED BY '${DB_PASSWORD}';"
 # Damos derechos al usuario
-mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
+mysql -e "GRANT ALL PRIVILEGES ON \`${DB_DATABASE}\`.* TO \`${DB_USER}\`@'%' IDENTIFIED BY '${DB_PASSWORD}';"
 # Recargarmos la tabla de privilegios
 mysql -e "FLUSH PRIVILEGES;"
 # Paramos mysql

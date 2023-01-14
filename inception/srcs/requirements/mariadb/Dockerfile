@@ -1,11 +1,5 @@
 FROM debian:buster
 
-# Borrar lo pasaremos en el .env
-ARG SQL_DATABASE inception
-ARG SQL_USER inception_user
-ARG SQL_PASSWORD inception_pass
-ARG SQL_ROOT_PASSWORD rootpass
-
 # Actualizamos el gestor de paquetes apt
 RUN apt update -y && apt upgrade -y
 
