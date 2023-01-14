@@ -72,13 +72,15 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: './data/mariadb'
+      # TODO cambiar por el path del subject
+      device: '/d/Proyectos/Cursus/inception/srcs/data/mariadb'
   wordpress_volume:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: './data/wordpress'
+      # TODO cambiar por el path del subject
+      device: '/d/Proyectos/Cursus/inception/srcs/data/wordpress'
 
 networks:
   inception:
