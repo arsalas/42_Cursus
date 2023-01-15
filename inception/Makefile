@@ -1,16 +1,16 @@
+all: up
 
+up:
+	@docker-compose -f srcs/docker-compose.yml up --build
 
-all:
-	docker-compose -f srcs/docker-compose.yml up --build
+down:
+	@docker-compose -f srcs/docker-compose.yml down -v
 
-stop:
-	docker-compose -f srcs/docker-compose.yml down -v
+re: clean up
 
-re: clean all
-
-clean: stop
-	@docker image rm nginx wordpress mariadb
-	@docker volume rm srcs_mariadb_data srcs_wordpress_data
+clean: down
+	@docker image rm -f nginx wordpress mariadb
+	@docker volume rm -f srcs_mariadb_data srcs_wordpress_data
 
 .PHONY:
-	all stop clean
+	all down clean re up
