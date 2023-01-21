@@ -31,7 +31,8 @@ BIN_DIR			:= bin
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 #INCLUDES
-INCLUDES 		:= src/
+INCLUDES 		:= src/ \
+				src/vector/
 
 INC			= $(addprefix -I , $(INCLUDES))
 
