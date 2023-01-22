@@ -20,7 +20,9 @@ FLAGS			:= $(W_FLAGS) $(VERSION) $(SANITIZER) $(FDEBUG)
 RM 				:= rm -f
 
 # SRC
-SRCS 			=  main.cpp
+SRCS 			=  main.cpp \
+				vectorTest.cpp
+
 
 # FOLDERS
 OBJS_DIR		:= obj
@@ -32,7 +34,11 @@ OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 #INCLUDES
 INCLUDES 		:= src/ \
-				src/vector/
+				src/utils/ \
+				src/vector/ \
+				src/map/ \
+				src/iterators/ \
+				test/ \
 
 INC			= $(addprefix -I , $(INCLUDES))
 
@@ -46,7 +52,7 @@ NAME 				:= ft_containers
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.cpp src
+vpath %.cpp src test
 
 .SECONDEXPANSION:
 
