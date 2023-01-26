@@ -683,11 +683,11 @@ namespace ft
 		 * @param key
 		 * @return tree*
 		 */
+		// TODO intentar mejorar la velocidad
 		tree *existKey(tree *root, key_type key) const
 		{
 			// Obtiene el root del nodo
 			tree *found = getRoot();
-
 			if (!root)
 				return NULL;
 			// Se desplaza a la izquierda en el arbol

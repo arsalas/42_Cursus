@@ -738,11 +738,31 @@ namespace ft
 		 */
 		iterator erase(iterator first, iterator last)
 		{
-			// TODO comprobar que esta bien
-			iterator start = first;
+			// Calculamos la posicion inicial del vector a borrar
+			size_type start = first - begin();
+			// Cantidad de elementos a borrar
+			difference_type offset = last - first;
+			// Si el primer elemento y el ultimo es el mismo no hay que borrar nada
+			if (first == last)
+       			 return iterator(first);
+			// Recorremos las posiciones a borrar
 			for (iterator it = first; it != last; it++)
-				start = erase(it);
-			return start;
+			{
+        		_alloc.destroy(&(*it));
+			}
+			// Restamos al size todos los elementos que hemos borrado
+			_size -= offset;
+			// Si la posicion inicial es mas pequena que el size desplazamos la memoria al inicio
+			if (start < _size)
+			{
+        		for (size_type i = start; i < _size; i++)
+				{
+          			_alloc.construct(&_vector[i], _vector[i + offset]);
+          			_alloc.destroy(&_vector[i + offset]);
+        		}
+      		}
+			// Retornamos un iterador a la posicion inicial
+ 			return iterator(&_vector[start]);
 		}
 
 		/**
@@ -758,12 +778,12 @@ namespace ft
 			size_type xSize = x._size;
 			size_type xCapacity = x._capacity;
 			// Intercambiamos los valores entre los vectores
-			_vector = xVector;
-			_size = xSize;
-			_capacity = xCapacity;
 			x._vector = _vector;
 			x._size = _size;
 			x._capacity = _capacity;
+			_vector = xVector;
+			_size = xSize;
+			_capacity = xCapacity;
 		}
 
 		/**

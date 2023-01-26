@@ -66,14 +66,12 @@ int main(int argc, char** argv) {
 	{
 		vector_buffer.push_back(Buffer());
 	}
-
 	for (int i = 0; i < COUNT; i++)
 	{
 		const int idx = rand() % COUNT;
 		vector_buffer[idx].idx = 5;
 	}
 	ft::vector<Buffer>().swap(vector_buffer);
-
 	try
 	{
 		for (int i = 0; i < COUNT; i++)
@@ -87,7 +85,6 @@ int main(int argc, char** argv) {
 	{
 		//NORMAL ! :P
 	}
-	
 	for (int i = 0; i < COUNT; ++i)
 	{
 		map_int.insert(ft::make_pair(rand(), rand()));
