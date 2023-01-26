@@ -9,12 +9,15 @@ int main(int argc, char *argv[])
 			vectorTest();
 		if ((std::string)argv[i] == "map")
 			mapTest();
+		if ((std::string)argv[i] == "stack")
+			stackTest();
 	}
 
 	if (argc == 1)
 	{
 		vectorTest();
 		mapTest();
+		stackTest();
 	}
 
 	return 0;

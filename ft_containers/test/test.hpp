@@ -3,5 +3,6 @@
 
 void vectorTest();
 void mapTest();
+void stackTest();
 
 #endif
