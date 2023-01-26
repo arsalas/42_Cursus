@@ -13,7 +13,6 @@ namespace ft
 	struct Tree
 	{
 		bool unused_;
-
 		Tree *_left;
 		Tree *_right;
 		Tree *_parent;

@@ -20,7 +20,6 @@ namespace ft
 	};
 
 	template <class T>
-
 	struct less
 	{
 		typedef bool result_type;
@@ -37,11 +36,14 @@ namespace ft
 	class Comp
 	{
 	public:
-		Comp(Compare c) : comp_(c){};
+		Comp(Compare c) : _comp(c) {}
 
-		bool operator()(const T &x, const T &y) const { return comp_(x.first, y.first); };
+		bool operator()(const T &x, const T &y) const
+		{
+			return _comp(x.first, y.first);
+		}
 
-		Compare comp_;
+		Compare _comp;
 	};
 
 }
