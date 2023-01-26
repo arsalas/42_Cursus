@@ -21,7 +21,7 @@ RM 				:= rm -f
 
 # SRC
 SRCS 			=  main.cpp \
-				vectorTest.cpp
+				vectorTest.cpp mapTest.cpp
 
 
 # FOLDERS
@@ -69,6 +69,14 @@ $(BIN): $(OBJS) $(BIN_DIR)
 run: $(BIN)
 	@./$(BIN)
 
+test: $(BIN)
+	@./$(BIN) vector map
+
+test_vector: $(BIN)
+	@./$(BIN) vector
+
+test_map: $(BIN)
+	@./$(BIN) map
 
 leaks: $(BIN)
 	@which valgrind | grep -o valgrind > /dev/null && \
@@ -98,4 +106,4 @@ $(BIN_DIR):
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re leaks run re_bonus
+.PHONY: all clean fclean re leaks run re_bonus test test_vector test_map

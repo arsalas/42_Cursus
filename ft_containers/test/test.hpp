@@ -2,5 +2,6 @@
 #define TEST_H
 
 void vectorTest();
+void mapTest();
 
 #endif

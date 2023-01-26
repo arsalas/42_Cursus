@@ -126,12 +126,12 @@ namespace ft
 
 		reference operator*() const
 		{
-			return _pointer->pair_;
+			return _pointer->_pair;
 		}
 		
 		pointer operator->() const
 		{
-			return &_pointer->pair_;
+			return &_pointer->_pair;
 		}
 
 		nodeptr _pointer;

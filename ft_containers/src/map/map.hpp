@@ -1,10 +1,16 @@
 #ifndef MAP_H
 #define MAP_H
 
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 #include <memory>
 
 #include "pair.hpp"
 #include "utils.hpp"
+#include "enable_if.hpp"
+#include "is_integral.hpp"
 
 #include "map_iterator.hpp"
 #include "reverse_iterator.hpp"
@@ -12,7 +18,7 @@
 namespace ft
 {
 	template <class Key, class T, class Compare = ft::less<Key>,
-			  class Alloc = std::allocator<ft::pair<const Key, T>>>
+			  class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
 	public:
@@ -54,10 +60,8 @@ namespace ft
 		explicit map(
 			const key_compare &comp = key_compare(),
 			const allocator_type &alloc = allocator_type())
+			: _alloc(alloc), _comp(comp), _size(0)
 		{
-			_alloc = alloc;
-			_comp = comp;
-			_size = 0;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -65,6 +69,9 @@ namespace ft
 			_map->_parent = NULL;
 			// Reservamos la memoria para el nodo
 			_alloc.construct(&_map->_pair, value_type());
+			if (DEBUG)
+				std::cout << "\e[0;33mDefault Constructor called of map\e[0m" << std::endl;
+
 		}
 
 		/**
@@ -81,12 +88,10 @@ namespace ft
 			InputIterator first, InputIterator last,
 			const key_compare &comp = key_compare(),
 			const allocator_type &alloc = allocator_type())
+			: _alloc(alloc), _comp(comp), _size(0)
 		{
-			_alloc = alloc;
-			_comp = comp;
-			_size = 0;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
-			_map = alloc_node_.allocate(1);
+			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
 			_map->_right = _map;
 			_map->_parent = NULL;
@@ -94,6 +99,8 @@ namespace ft
 			_alloc.construct(&_map->_pair, value_type());
 			// Insertamos todos los nodos que recive el constructor
 			insert(first, last);
+			if (DEBUG)
+				std::cout << "\e[0;33mElements Constructor called of map\e[0m" << std::endl;
 		}
 
 		/**
@@ -101,13 +108,10 @@ namespace ft
 		 *
 		 * @param x Another map object of the same type (with the same class template arguments Key, T, Compare and Alloc), whose contents are either copied or acquired.
 		 */
-		map(const map &x)
+		map(const map &x) : _comp(x._comp), _size(0), _alloc(x._alloc)
 		{
-			_comp = x._comp;
-			_size = 0;
-			_alloc = x._alloc;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
-			_map = alloc_node_.allocate(1);
+			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
 			_map->_right = _map;
 			_map->_parent = NULL;
@@ -115,6 +119,8 @@ namespace ft
 			_alloc.construct(&_map->_pair, value_type());
 			// Insertamos todos los nodos que tiene el map que queremos copiar
 			insert(x.begin(), x.end());
+			if (DEBUG)
+				std::cout << "\e[0;33mCopy Constructor called of map\e[0m" << std::endl;
 		}
 
 		/**
@@ -128,6 +134,8 @@ namespace ft
 			// Libera la memoria reservada
 			_alloc.destroy(&_map->_pair);
 			_alloc_node.deallocate(_map, 1);
+			if (DEBUG)
+				std::cout << "\e[0;31mDestructor called of map\e[0m" << std::endl;
 		}
 
 		/**
@@ -157,7 +165,7 @@ namespace ft
 		 */
 		iterator begin()
 		{
-			return iterator(get_left());
+			return iterator(getLeft());
 		}
 		/**
 		 * @brief Returns an iterator referring to the first element in the map container.
@@ -167,7 +175,7 @@ namespace ft
 		 */
 		const_iterator begin() const
 		{
-			return const_iterator(get_left());
+			return const_iterator(getLeft());
 		}
 
 		/**
@@ -312,14 +320,14 @@ namespace ft
 		pair<iterator, bool> insert(const value_type &val)
 		{
 			// Comprueba si existe la key
-			tree *exist = key_exists_recurse(get_root(), val.first);
+			tree *exist = existKey(getRoot(), val.first);
 			// Si existe retorna el nodo
 			if (exist)
 				return ft::make_pair(iterator(exist), false);
 			// Incrementa el size del map
 			_size++;
 			// Inserta un nuevo nodo con el pair dado
-			return ft::make_pair(iterator(insert_node(_map, _comp, val)), true);
+			return ft::make_pair(iterator(insertNode(_map, _comp, val)), true);
 		}
 
 		/**
@@ -333,14 +341,14 @@ namespace ft
 		{
 			(void)position;
 			// Comprueba si existe la key
-			tree *exist = key_exists_recurse(get_root(), val.first);
+			tree *exist = existKey(getRoot(), val.first);
 			// Si existe retorna el nodo
 			if (exist)
 				return iterator(exist);
 			// Incrementa el size del map
 			_size++;
 			// Inserta un nuevo nodo con el pair dado
-			return iterator(insert_node(_map, _comp, val));
+			return iterator(insertNode(_map, _comp, val));
 		}
 
 		/**
@@ -372,7 +380,7 @@ namespace ft
 		void erase(iterator position)
 		{
 			// Guardamos una referencia del inicio que queremos borrar
-			tree *current = position._ptr;
+			tree *current = position._pointer;
 			tree *tmp = NULL;
 			// Si tiene un nodo a la izquierda (menor)
 			if (current->_left)
@@ -414,12 +422,12 @@ namespace ft
 				current->_parent->_left = tmp;
 			else
 				current->_parent->_right = tmp;
-			if (current == get_root())
+			if (current == getRoot())
 				_map->_parent = tmp;
 			_alloc.destroy(&current->_pair);
 			_alloc_node.deallocate(current, 1);
 			_size--;
-			set_left_right();
+			setLeftRight();
 		}
 
 		/**
@@ -535,7 +543,7 @@ namespace ft
 		iterator find(const key_type &k)
 		{
 			// Comprueba si existe la key
-			tree *found = key_exists_recurse(get_root(), k);
+			tree *found = existKey(getRoot(), k);
 			// Si encuentra la key retorna un iterador a ese nodo
 			if (found)
 				return iterator(found);
@@ -553,7 +561,7 @@ namespace ft
 		const_iterator find(const key_type &k) const
 		{
 			// Comprueba si existe la key
-			tree *found = key_exists_recurse(get_root(), k);
+			tree *found = existKey(getRoot(), k);
 			// Si encuentra la key retorna un iterador constante a ese nodo
 			if (found)
 				return const_iterator(found);
@@ -570,7 +578,7 @@ namespace ft
 		 */
 		size_type count(const key_type &k) const
 		{
-			return key_count_recurse(get_root(), k);
+			return countKey(getRoot(), k);
 		}
 
 		/**
@@ -661,10 +669,6 @@ namespace ft
 		// TODO equal range
 
 	private:
-		tree *_container;
-		allocator_type _alloc;
-		key_compare _comp;
-		size_type _size;
 
 		// ==============================================================
 		// 							TREE
@@ -679,20 +683,20 @@ namespace ft
 		 * @param key
 		 * @return tree*
 		 */
-		tree *key_exists_recurse(tree *root, key_type key) const
+		tree *existKey(tree *root, key_type key) const
 		{
 			// Obtiene el root del nodo
-			tree *found = get_root();
+			tree *found = getRoot();
 
 			if (!root)
 				return NULL;
 			// Se desplaza a la izquierda en el arbol
-			found = key_exists_recurse(root->_left, key);
+			found = existKey(root->_left, key);
 			if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
 				found = root;
 			// Si no encuentra la key hacia la izquierda se desplaza a la derecha
 			if (!found)
-				found = key_exists_recurse(root->_right, key);
+				found = existKey(root->_right, key);
 			return found;
 		}
 
@@ -703,22 +707,22 @@ namespace ft
 		 * @param key
 		 * @return size_type
 		 */
-		size_type key_count_recurse(tree *root, key_type key) const
+		size_type countKey(tree *root, key_type key) const
 		{
 			if (!root)
 				return 0;
 			if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
 				return 1;
-			return key_count_recurse(root->_left, key) + key_count_recurse(root->_right, key);
+			return countKey(root->_left, key) + countKey(root->_right, key);
 		}
 
 		/**
 		 * @brief Encuentra el nodo mayor y menor
 		 *
 		 */
-		void set_left_right()
+		void setLeftRight()
 		{
-			tree *tmp = get_root();
+			tree *tmp = getRoot();
 
 			if (!tmp)
 			{
@@ -731,14 +735,14 @@ namespace ft
 				tmp = tmp->_left;
 			_map->_left = tmp;
 
-			tmp = get_root();
+			tmp = getRoot();
 			// Recorre el arbol hacia la derecha
 			while (tmp && tmp->_right)
 				tmp = tmp->_right;
 			_map->_right = tmp;
 		}
 
-		tree *insert_node(tree *node, key_compare comp, value_type pair)
+		tree *insertNode(tree *node, key_compare comp, value_type pair)
 		{
 			// Miramos si el nodo que nos pasan es el map
 			if (node == _map)
@@ -752,7 +756,7 @@ namespace ft
 					node->_parent->_right = NULL;
 					node->_parent->_parent = node;
 					_alloc.construct(&node->_parent->_pair, pair);
-					set_left_right();
+					setLeftRight();
 					return node->_parent;
 				}
 				else
@@ -768,27 +772,27 @@ namespace ft
 					node->_left->_parent = node;
 					_alloc.construct(&node->_left->_pair, pair);
 
-					set_left_right();
+					setLeftRight();
 					return node->_left;
 				}
 				else
-					node = insert_node(node->_left, comp, pair);
+					node = insertNode(node->_left, comp, pair);
 			}
 			else
 			{
 				if (!node->_right)
 				{
 					node->_right = _alloc_node.allocate(1);
-					node->_right->left_ = NULL;
+					node->_right->_left = NULL;
 					node->_right->_right = NULL;
 					node->_right->_parent = node;
-					alloc_.construct(&node->_right->_pair, pair);
+					_alloc.construct(&node->_right->_pair, pair);
 
-					set_left_right();
+					setLeftRight();
 					return node->_right;
 				}
 				else
-					node = insert_node(node->_right, comp, pair);
+					node = insertNode(node->_right, comp, pair);
 			}
 			return node;
 		}
@@ -798,7 +802,7 @@ namespace ft
 		 *
 		 * @return tree*
 		 */
-		tree *get_root() const
+		tree *getRoot() const
 		{
 			return _map->_parent;
 		}
@@ -808,7 +812,7 @@ namespace ft
 		 *
 		 * @return tree*
 		 */
-		tree *get_left() const
+		tree *getLeft() const
 		{
 			return _map->_left;
 		}
@@ -818,12 +822,18 @@ namespace ft
 		 *
 		 * @return tree*
 		 */
-		tree *get_right() const
+		tree *getRight() const
 		{
 			return _map->_right;
 		}
 
-		typename allocator_type::template rebind<tree>::other alloc_node_;
+		typename allocator_type::template rebind<tree>::other _alloc_node;
+		tree *_map;
+		allocator_type _alloc;
+		key_compare _comp;
+		size_type _size;
+
+	
 	};
 
 }

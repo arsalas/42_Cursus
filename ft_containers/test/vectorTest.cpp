@@ -3,6 +3,10 @@
 
 void vectorTest()
 {
+	std::cout << "====================" << std::endl;
+	std::cout << "\tVECTOR" << std::endl;
+	std::cout << "====================" << std::endl;
+
 	ft::vector<int> vect(10);
 	ft::vector<std::string> vect2(10, "HOLA");
 
