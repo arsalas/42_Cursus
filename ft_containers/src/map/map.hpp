@@ -108,7 +108,7 @@ namespace ft
 		 *
 		 * @param x Another map object of the same type (with the same class template arguments Key, T, Compare and Alloc), whose contents are either copied or acquired.
 		 */
-		map(const map &x) : _comp(x._comp), _size(0), _alloc(x._alloc)
+		map(const map &x) :  _alloc(x._alloc), _comp(x._comp),  _size(0)
 		{
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);

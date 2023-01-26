@@ -31,7 +31,7 @@ namespace ft
 		 * @param ctnr Container object.
 		 */
 		explicit stack(const container_type &ctnr = container_type())
-			: _stack(ctnr)
+			: c(ctnr)
 		{
 			if (DEBUG)
 				std::cout << "\e[0;33mDefault Constructor called of stack\e[0m" << std::endl;
@@ -54,7 +54,7 @@ namespace ft
 		 */
 		bool empty() const
 		{
-			return _stack.empty();
+			return c.empty();
 		}
 
 		/**
@@ -63,7 +63,7 @@ namespace ft
 		 */
 		size_type size() const
 		{
-			return _stack.size();
+			return c.size();
 		}
 
 		/**
@@ -73,7 +73,7 @@ namespace ft
 		 */
 		value_type &top()
 		{
-			return _stack.back();
+			return c.back();
 		}
 
 		/**
@@ -83,7 +83,7 @@ namespace ft
 		 */
 		const value_type &top() const
 		{
-			return _stack.back();
+			return c.back();
 		}
 
 		/**
@@ -93,7 +93,7 @@ namespace ft
 		 */
 		void push(const value_type &val)
 		{
-			_stack.push_back();
+			c.push_back(val);
 		}
 
 		/**
@@ -102,7 +102,7 @@ namespace ft
 		 */
 		void pop()
 		{
-			_stack.pop_back();
+			c.pop_back();
 		}
 
 		// TODO comprobar que es de c++98 npexcept es c++11 
@@ -111,8 +111,8 @@ namespace ft
 		// 	_stack.swap(x);
 		// }
 
-	private:
-		container_type _stack;
+	protected:
+		container_type c;
 	};
 
 	// ==============================================================

@@ -16,7 +16,7 @@ void stackTest()
 	ft::vector<int> myvector(2, 200); // vector with 2 elements
 
 	ft::stack<int> first;			 // empty stack
-	std::stack<int> second(mydeque); // stack initialized to copy of deque
+	std::stack<int, std::deque<int> > second(mydeque); // stack initialized to copy of deque
 
 	ft::stack<int, ft::vector<int> > third; // empty stack using vector
 	ft::stack<int, ft::vector<int> > fourth(myvector);
