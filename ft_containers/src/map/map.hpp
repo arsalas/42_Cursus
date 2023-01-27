@@ -62,6 +62,8 @@ namespace ft
 			const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _comp(comp), _size(0)
 		{
+			if (DEBUG)
+				std::cout << "\e[0;33mDefault Constructor called of map\e[0m" << std::endl;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -69,9 +71,6 @@ namespace ft
 			_map->_parent = NULL;
 			// Reservamos la memoria para el nodo
 			_alloc.construct(&_map->_pair, value_type());
-			if (DEBUG)
-				std::cout << "\e[0;33mDefault Constructor called of map\e[0m" << std::endl;
-
 		}
 
 		/**
@@ -90,6 +89,8 @@ namespace ft
 			const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _comp(comp), _size(0)
 		{
+			if (DEBUG)
+				std::cout << "\e[0;33mElements Constructor called of map\e[0m" << std::endl;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -99,8 +100,6 @@ namespace ft
 			_alloc.construct(&_map->_pair, value_type());
 			// Insertamos todos los nodos que recive el constructor
 			insert(first, last);
-			if (DEBUG)
-				std::cout << "\e[0;33mElements Constructor called of map\e[0m" << std::endl;
 		}
 
 		/**
@@ -108,8 +107,10 @@ namespace ft
 		 *
 		 * @param x Another map object of the same type (with the same class template arguments Key, T, Compare and Alloc), whose contents are either copied or acquired.
 		 */
-		map(const map &x) :  _alloc(x._alloc), _comp(x._comp),  _size(0)
+		map(const map &x) : _alloc(x._alloc), _comp(x._comp), _size(0)
 		{
+			if (DEBUG)
+				std::cout << "\e[0;33mCopy Constructor called of map\e[0m" << std::endl;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -119,8 +120,6 @@ namespace ft
 			_alloc.construct(&_map->_pair, value_type());
 			// Insertamos todos los nodos que tiene el map que queremos copiar
 			insert(x.begin(), x.end());
-			if (DEBUG)
-				std::cout << "\e[0;33mCopy Constructor called of map\e[0m" << std::endl;
 		}
 
 		/**
@@ -129,13 +128,13 @@ namespace ft
 		 */
 		~map()
 		{
+			if (DEBUG)
+				std::cout << "\e[0;31mDestructor called of map\e[0m" << std::endl;
 			// Destruye todos los nodos del map
 			clear();
 			// Libera la memoria reservada
 			_alloc.destroy(&_map->_pair);
 			_alloc_node.deallocate(_map, 1);
-			if (DEBUG)
-				std::cout << "\e[0;31mDestructor called of map\e[0m" << std::endl;
 		}
 
 		/**
@@ -146,6 +145,8 @@ namespace ft
 		 */
 		map &operator=(const map &x)
 		{
+			if (&x == this)
+				return *this;
 			// Borramos todos los nodos del map
 			clear();
 			// Copiamos los nodos del map que queremos igualar
@@ -365,11 +366,20 @@ namespace ft
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 		{
 			// Recorre los iteradores insertando los nodos
+			int i = 0;
 			while (first != last)
 			{
-				insert(*first);
+				if (first != NULL)
+				{
+					std::cout << "insert i: " << i;
+					std::cout << " | value i: " << first->first << std::endl;
+					insert(*first);
+				}
 				first++;
+				i++;
 			}
+			// 1047552
+			std::cout << "END" << std::endl;
 		}
 
 		/**
@@ -669,7 +679,6 @@ namespace ft
 		// TODO equal range
 
 	private:
-
 		// ==============================================================
 		// 							TREE
 		// ==============================================================
@@ -690,14 +699,36 @@ namespace ft
 			tree *found = getRoot();
 			if (!root)
 				return NULL;
-			// Se desplaza a la izquierda en el arbol
-			found = existKey(root->_left, key);
-			if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
-				found = root;
-			// Si no encuentra la key hacia la izquierda se desplaza a la derecha
-			if (!found)
-				found = existKey(root->_right, key);
-			return found;
+			while (found)
+			{
+				if (found->_pair.first == key)
+					return found;
+				if (key < found->_pair.first)
+					found = found->_left;
+				else
+					found = found->_right;
+			}
+			return NULL;
+			// std::cout << "1 - " << found->_pair.first << std::endl;
+			// std::cout << "1.L - " << found->_left << std::endl;
+			// std::cout << "1.R - " << found->_right << std::endl;
+			// // Se desplaza a la izquierda en el arbol
+			// found = existKey(root->_left, key);
+			// (found) ?
+			// std::cout << "2 - " << found->_pair.first  << std::endl
+			// : std::cout << "2 - NOT FOUND"   << std::endl;
+			// if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
+			// 	found = root;
+			// (found) ?
+			// std::cout << "3 - " << found->_pair.first  << std::endl
+			// : std::cout << "3 - NOT FOUND"   << std::endl;
+			// // Si no encuentra la key hacia la izquierda se desplaza a la derecha
+			// if (!found)
+			// 	found = existKey(root->_right, key);
+			// (found) ?
+			// std::cout << "4 - " << found->_pair.first  << std::endl
+			// : std::cout << "4 - NOT FOUND"   << std::endl;
+			// return found;
 		}
 
 		/**
@@ -742,6 +773,7 @@ namespace ft
 			_map->_right = tmp;
 		}
 
+		// TODO REVISAR
 		tree *insertNode(tree *node, key_compare comp, value_type pair)
 		{
 			// Miramos si el nodo que nos pasan es el map
@@ -787,7 +819,6 @@ namespace ft
 					node->_right->_right = NULL;
 					node->_right->_parent = node;
 					_alloc.construct(&node->_right->_pair, pair);
-
 					setLeftRight();
 					return node->_right;
 				}
@@ -832,10 +863,26 @@ namespace ft
 		allocator_type _alloc;
 		key_compare _comp;
 		size_type _size;
-
-	
 	};
+	// TODO terminar funciones no miembro
+	template <class Key, class T>
+	bool operator==(const map<Key, T> &lhs, const map<Key, T> &rhs)
+	{
+		std::cout << "ASIGN" << std::endl;
+		if (lhs.size() != rhs.size())
+			return false;
+		typename map<Key, T>::const_iterator it1 = lhs.begin();
+		typename map<Key, T>::const_iterator it2 = rhs.begin();
 
+		while (it1 != lhs.end() && it2 != rhs.end())
+		{
+			if (*it1 != *it2)
+				return false;
+			it1++;
+			it2++;
+		}
+		return (it1 == lhs.end()) && (it2 == rhs.end());
+	};
 }
 
 #endif
