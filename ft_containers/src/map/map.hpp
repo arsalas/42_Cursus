@@ -779,6 +779,7 @@ namespace ft
 			// Miramos si el nodo que nos pasan es el map
 			if (node == _map)
 			{
+				std::cout << "ES MAP\n";
 				// Comprobamos si no tiene un nodo padre
 				if (!node->_parent)
 				{
@@ -794,6 +795,7 @@ namespace ft
 				else
 					node = node->_parent;
 			}
+				std::cout << "NO ES MAP\n";
 			if (comp(pair.first, node->_pair.first))
 			{
 				if (!node->_left)

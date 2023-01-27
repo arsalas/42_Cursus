@@ -13,7 +13,7 @@ DEBUG_MSG		:= true
 # FLAGS
 W_FLAGS			:= -Wall -Wextra -Werror
 VERSION			:= -std=c++98 
-SANITIZER		:= -g 
+SANITIZER		:= -g -fsanitize=address
 FDEBUG			:=  -D DEBUG=$(DEBUG_MSG)
 FLAGS			:= $(W_FLAGS) $(VERSION) $(SANITIZER) $(FDEBUG)
 
