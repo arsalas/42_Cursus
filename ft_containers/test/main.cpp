@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 1 //CREATE A REAL STL EXAMPLE
+#if 0 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 	}
 	for (int i = 0; i < COUNT; ++i)
 	{
-		std::cout << "COUNT: " << COUNT << " - " << i << std::endl;
+		// std::cout << "COUNT: " << COUNT << " - " << i << std::endl;
 		map_int.insert(ft::make_pair(rand(), rand()));
 	}
 

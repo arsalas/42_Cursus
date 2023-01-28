@@ -21,7 +21,7 @@ RM 				:= rm -f
 
 # SRC
 SRCS 			=  main.cpp \
-				vectorTest.cpp mapTest.cpp stackTest.cpp
+				debug.cpp vectorTest.cpp mapTest.cpp stackTest.cpp 
 
 
 # FOLDERS
@@ -53,7 +53,7 @@ NAME 				:= ft_containers
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.cpp src test
+vpath %.cpp src test src/utils
 
 .SECONDEXPANSION:
 

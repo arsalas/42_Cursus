@@ -1,10 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
 
-#ifndef DEBUG
-#define DEBUG 0
-#endif
-
 #include <memory>
 
 #include "pair.hpp"
@@ -14,6 +10,8 @@
 
 #include "map_iterator.hpp"
 #include "reverse_iterator.hpp"
+#include "debug.hpp"
+
 
 namespace ft
 {
@@ -62,8 +60,9 @@ namespace ft
 			const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _comp(comp), _size(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mDefault Constructor called of map\e[0m" << std::endl;
+			printDebug("\e[0;33mDefault Constructor called of map\e[0m");
+			//if (DEBUG)
+			//	std::cout << "\e[0;33mDefault Constructor called of map\e[0m" << std::endl;
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -369,17 +368,10 @@ namespace ft
 			int i = 0;
 			while (first != last)
 			{
-				if (first != NULL)
-				{
-					std::cout << "insert i: " << i;
-					std::cout << " | value i: " << first->first << std::endl;
-					insert(*first);
-				}
+				insert(*first);
 				first++;
 				i++;
 			}
-			// 1047552
-			std::cout << "END" << std::endl;
 		}
 
 		/**
@@ -904,7 +896,6 @@ namespace ft
 	template <class Key, class T>
 	bool operator==(const map<Key, T> &lhs, const map<Key, T> &rhs)
 	{
-		std::cout << "ASIGN" << std::endl;
 		if (lhs.size() != rhs.size())
 			return false;
 		typename map<Key, T>::const_iterator it1 = lhs.begin();
