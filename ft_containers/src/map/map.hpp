@@ -699,6 +699,17 @@ namespace ft
 			tree *found = getRoot();
 			if (!root)
 				return NULL;
+
+			// while(found)
+			// {
+			// 	if (!_comp(found->_pair.first, key) && !_comp(key, found->_pair.first))
+			// 		return found;
+			// 	if (_comp(key, found->_pair.first))
+			// 		found = found->_left;
+			// 	else
+			// 		found = found->_right;
+			// }
+			// return NULL;
 			while (found)
 			{
 				if (found->_pair.first == key)
@@ -709,26 +720,16 @@ namespace ft
 					found = found->_right;
 			}
 			return NULL;
-			// std::cout << "1 - " << found->_pair.first << std::endl;
-			// std::cout << "1.L - " << found->_left << std::endl;
-			// std::cout << "1.R - " << found->_right << std::endl;
-			// // Se desplaza a la izquierda en el arbol
-			// found = existKey(root->_left, key);
-			// (found) ?
-			// std::cout << "2 - " << found->_pair.first  << std::endl
-			// : std::cout << "2 - NOT FOUND"   << std::endl;
-			// if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
-			// 	found = root;
-			// (found) ?
-			// std::cout << "3 - " << found->_pair.first  << std::endl
-			// : std::cout << "3 - NOT FOUND"   << std::endl;
-			// // Si no encuentra la key hacia la izquierda se desplaza a la derecha
-			// if (!found)
-			// 	found = existKey(root->_right, key);
-			// (found) ?
-			// std::cout << "4 - " << found->_pair.first  << std::endl
-			// : std::cout << "4 - NOT FOUND"   << std::endl;
-			// return found;
+
+
+			// Se desplaza a la izquierda en el arbol
+			found = existKey(root->_left, key);
+			if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
+				found = root;
+			// Si no encuentra la key hacia la izquierda se desplaza a la derecha
+			if (!found)
+				found = existKey(root->_right, key);
+			return found;
 		}
 
 		/**
@@ -748,7 +749,7 @@ namespace ft
 		}
 
 		/**
-		 * @brief Encuentra el nodo mayor y menor
+		 * @brief Setea el nodo mayor y menor el _left y _right
 		 *
 		 */
 		void setLeftRight()
@@ -779,7 +780,6 @@ namespace ft
 			// Miramos si el nodo que nos pasan es el map
 			if (node == _map)
 			{
-				std::cout << "ES MAP\n";
 				// Comprobamos si no tiene un nodo padre
 				if (!node->_parent)
 				{
@@ -795,38 +795,72 @@ namespace ft
 				else
 					node = node->_parent;
 			}
-				std::cout << "NO ES MAP\n";
-			if (comp(pair.first, node->_pair.first))
-			{
-				if (!node->_left)
-				{
-					node->_left = _alloc_node.allocate(1);
-					node->_left->_left = NULL;
-					node->_left->_right = NULL;
-					node->_left->_parent = node;
-					_alloc.construct(&node->_left->_pair, pair);
 
-					setLeftRight();
-					return node->_left;
-				}
-				else
-					node = insertNode(node->_left, comp, pair);
-			}
-			else
+
+			while(true)
 			{
-				if (!node->_right)
+				if (comp(pair.first, node->_pair.first))
 				{
-					node->_right = _alloc_node.allocate(1);
-					node->_right->_left = NULL;
-					node->_right->_right = NULL;
-					node->_right->_parent = node;
-					_alloc.construct(&node->_right->_pair, pair);
-					setLeftRight();
-					return node->_right;
+					if (!node->_left)
+					{
+						node->_left = _alloc_node.allocate(1);
+						node->_left->_left = NULL;
+						node->_left->_right = NULL;
+						node->_left->_parent = node;
+						_alloc.construct(&node->_left->_pair, pair);
+										setLeftRight();
+						return node->_left;
+					}
+					else
+						node = node->_left;
 				}
 				else
-					node = insertNode(node->_right, comp, pair);
+				{
+					if (!node->_right)
+					{
+						node->_right = _alloc_node.allocate(1);
+						node->_right->_left = NULL;
+						node->_right->_right = NULL;
+						node->_right->_parent = node;
+						_alloc.construct(&node->_right->_pair, pair);
+						setLeftRight();
+						return node->_right;
+					}
+					else
+						node = node->_right;
+				}
 			}
+			return NULL;
+			// if (comp(pair.first, node->_pair.first))
+			// {
+			// 	if (!node->_left)
+			// 	{
+			// 		node->_left = _alloc_node.allocate(1);
+			// 		node->_left->_left = NULL;
+			// 		node->_left->_right = NULL;
+			// 		node->_left->_parent = node;
+			// 		_alloc.construct(&node->_left->_pair, pair);
+            //      					setLeftRight();
+			// 		return node->_left;
+			// 	}
+			// 	else
+			// 		node = insertNode(node->_left, comp, pair);
+			// }
+			// else
+			// {
+			// 	if (!node->_right)
+			// 	{
+			// 		node->_right = _alloc_node.allocate(1);
+			// 		node->_right->_left = NULL;
+			// 		node->_right->_right = NULL;
+			// 		node->_right->_parent = node;
+			// 		_alloc.construct(&node->_right->_pair, pair);
+			// 		setLeftRight();
+			// 		return node->_right;
+			// 	}
+			// 	else
+			// 		node = insertNode(node->_right, comp, pair);
+			// }
 			return node;
 		}
 

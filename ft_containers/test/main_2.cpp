@@ -22,3 +22,8 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
+// MINE
+// ./bin/ft_containers 1  81.88s user 7.72s system 76% cpu 1:57.81 total
+// STD
+// ./bin/ft_containers 1  1.20s user 4.30s system 27% cpu 20.180 total
