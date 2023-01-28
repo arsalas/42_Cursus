@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include <memory>
+#include <sstream> // ostring
 
 #include "pair.hpp"
 #include "utils.hpp"
@@ -11,7 +12,6 @@
 #include "map_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "debug.hpp"
-
 
 namespace ft
 {
@@ -114,7 +114,7 @@ namespace ft
 			// Reservamos la memoria para el nodo
 			_alloc.construct(&_map->_pair, value_type());
 			// Insertamos todos los nodos que tiene el map que queremos copiar
-			insert(x.begin(), x.end());
+			insert(x.begin(), x.endNode());
 		}
 
 		/**
@@ -144,7 +144,7 @@ namespace ft
 			// Borramos todos los nodos del map
 			clear();
 			// Copiamos los nodos del map que queremos igualar
-			insert(x.begin(), x.end());
+			insert(x.begin(), x.endNode());
 			return *this;
 		}
 
@@ -182,7 +182,9 @@ namespace ft
 		 */
 		iterator end()
 		{
-			return iterator(_map);
+			iterator it = iterator(getRight());
+			it++;
+			return iterator(it);
 		}
 
 		/**
@@ -194,7 +196,7 @@ namespace ft
 		 */
 		const_iterator end() const
 		{
-			return const_iterator(_map);
+			return const_iterator(getRight());
 		}
 
 		/**
@@ -205,7 +207,9 @@ namespace ft
 		 */
 		reverse_iterator rbegin()
 		{
-			return reverse_iterator(end());
+			reverse_iterator it = reverse_iterator(getRight());
+			it--;
+			return it;
 		}
 
 		/**
@@ -286,12 +290,9 @@ namespace ft
 		 */
 		mapped_type &operator[](const key_type &k)
 		{
-			// TODO creo que esto no esta bien
 			return (*((this->insert(ft::make_pair(k, mapped_type()))).first)).second;
 		}
 
-		// TODO lanzar excepcion si no se encuentra
-		// TODO Comprobar si funciona
 		/**
 		 * @brief Returns a reference to the mapped value of the element identified with key k.
 		 * If k does not match the key of any element in the container, the function throws an out_of_range exception.
@@ -300,6 +301,12 @@ namespace ft
 		 */
 		mapped_type &at(const key_type &k)
 		{
+			if (!existKey(getRoot(), k))
+			{
+				std::stringstream ss;
+				ss << "map";
+				throw std::out_of_range(ss.str().c_str());
+			}
 			return (*((this->insert(ft::make_pair(k, mapped_type()))).first)).second;
 		}
 
@@ -451,7 +458,7 @@ namespace ft
 			iterator tmp;
 			size_type count = 0;
 			// Recorre el arbol binario
-			while (it != end())
+			while (it != endNode())
 			{
 				if (!_comp(it->first, k) && !_comp(k, it->first))
 				{
@@ -496,7 +503,6 @@ namespace ft
 			size_tmp = _size;
 			_size = x._size;
 			x._size = size_tmp;
-
 			tmp = _map;
 			_map = x._map;
 			x._map = tmp;
@@ -508,10 +514,8 @@ namespace ft
 		void clear()
 		{
 			// Borra todo el arbol binario
-			erase(begin(), end());
+			erase(begin(), endNode());
 		}
-
-		// TODO comprobar si hay que hacer el emplace
 
 		// ==============================================================
 		// 							OBSERVERS
@@ -557,7 +561,7 @@ namespace ft
 			if (found)
 				return iterator(found);
 			// En caso de no encontrarla retora un iterador al final del arbol
-			return (end());
+			return (endNode());
 		}
 
 		/**
@@ -575,7 +579,7 @@ namespace ft
 			if (found)
 				return const_iterator(found);
 			// En caso de no encontrarla retora un iterador constante al final del arbol
-			return (end());
+			return (endNode());
 		}
 
 		/**
@@ -603,7 +607,7 @@ namespace ft
 			iterator it = begin();
 
 			// Recorre el arbol hasta encontrar la key
-			while (it != end())
+			while (it != endNode())
 			{
 				if (!_comp(it->first, k))
 					return it;
@@ -624,7 +628,7 @@ namespace ft
 		{
 			const_iterator it = begin();
 			// Recorre el arbol hasta encontrar la key
-			while (it != end())
+			while (it != endNode())
 			{
 				if (!_comp(it->first, k))
 					return it;
@@ -645,7 +649,7 @@ namespace ft
 		{
 			iterator it = begin();
 
-			while (it != end())
+			while (it != endNode())
 			{
 				if (_comp(k, it->first))
 					return it;
@@ -666,7 +670,7 @@ namespace ft
 		{
 			const_iterator it = begin();
 
-			while (it != end())
+			while (it != endNode())
 			{
 				if (_comp(k, it->first))
 					return it;
@@ -689,24 +693,12 @@ namespace ft
 		 * @param key
 		 * @return tree*
 		 */
-		// TODO intentar mejorar la velocidad
 		tree *existKey(tree *root, key_type key) const
 		{
 			// Obtiene el root del nodo
 			tree *found = getRoot();
 			if (!root)
 				return NULL;
-
-			// while(found)
-			// {
-			// 	if (!_comp(found->_pair.first, key) && !_comp(key, found->_pair.first))
-			// 		return found;
-			// 	if (_comp(key, found->_pair.first))
-			// 		found = found->_left;
-			// 	else
-			// 		found = found->_right;
-			// }
-			// return NULL;
 			while (found)
 			{
 				if (found->_pair.first == key)
@@ -717,7 +709,6 @@ namespace ft
 					found = found->_right;
 			}
 			return NULL;
-
 
 			// Se desplaza a la izquierda en el arbol
 			found = existKey(root->_left, key);
@@ -772,7 +763,6 @@ namespace ft
 			_map->_right = tmp;
 		}
 
-		// TODO REVISAR
 		tree *insertNode(tree *node, key_compare comp, value_type pair)
 		{
 			// Miramos si el nodo que nos pasan es el map
@@ -793,9 +783,7 @@ namespace ft
 				else
 					node = node->_parent;
 			}
-
-
-			while(true)
+			while (true)
 			{
 				if (comp(pair.first, node->_pair.first))
 				{
@@ -806,7 +794,7 @@ namespace ft
 						node->_left->_right = NULL;
 						node->_left->_parent = node;
 						_alloc.construct(&node->_left->_pair, pair);
-										setLeftRight();
+						setLeftRight();
 						return node->_left;
 					}
 					else
@@ -885,21 +873,37 @@ namespace ft
 			return _map->_right;
 		}
 
+		iterator endNode()
+		{
+			return iterator(_map);
+		}
+
+		const_iterator endNode() const
+		{
+			return const_iterator(_map);
+		}
+
 		typename allocator_type::template rebind<tree>::other _alloc_node;
 		tree *_map;
 		allocator_type _alloc;
 		key_compare _comp;
 		size_type _size;
 	};
-	// TODO terminar funciones no miembro
+
+	// ==============================================================
+	// 							NON MEMBER FUNCTIONS
+	// ==============================================================
+
 	template <class Key, class T>
 	bool operator==(const map<Key, T> &lhs, const map<Key, T> &rhs)
 	{
+		// Si los sizes son distintos los maps no son iguales
 		if (lhs.size() != rhs.size())
 			return false;
 		typename map<Key, T>::const_iterator it1 = lhs.begin();
 		typename map<Key, T>::const_iterator it2 = rhs.begin();
 
+		// Recorremos los maps para comprobar si son iguales
 		while (it1 != lhs.end() && it2 != rhs.end())
 		{
 			if (*it1 != *it2)
@@ -908,7 +912,56 @@ namespace ft
 			it2++;
 		}
 		return (it1 == lhs.end()) && (it2 == rhs.end());
-	};
+	}
+
+	template <class Key, class T>
+	bool operator!=(const map<Key, T> &lhs, const map<Key, T> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class Key, class T>
+	bool operator<(const map<Key, T> &lhs, const map<Key, T> &rhs)
+	{
+		typename map<Key, T>::const_iterator it1 = lhs.begin();
+		typename map<Key, T>::const_iterator it2 = rhs.begin();
+
+		// Recorremos el arbol para comparar cada elemento
+		while (it1 != lhs.end() && it2 != rhs.end())
+		{
+			if (*it1 < *it2)
+				return true;
+			if (*it1 > *it2)
+				return false;
+			it1++;
+			it2++;
+		}
+		return (it1 == lhs.end()) && (it2 != rhs.end());
+	}
+
+	template <class Key, class T>
+	bool operator<=(const map<Key, T> &lhs, const map<Key, T> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class Key, class T>
+	bool operator>(const map<Key, T> &lhs, const map<Key, T> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class Key, class T>
+	bool operator>=(const map<Key, T> &lhs, const map<Key, T> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	void swap(map<Key, T, Compare, Alloc> &x, map<Key, T, Compare, Alloc> &y)
+	{
+		x.swap(y);
+	}
 }
 
 #endif

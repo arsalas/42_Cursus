@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 #include "map.hpp"
 
 void mapTest()
@@ -8,42 +9,25 @@ void mapTest()
 	std::cout << "====================" << std::endl;
 
 	ft::map<std::string, std::string> paises_moneda;
-	std::cout << "MAIN - Inglaterra" << std::endl;
+	ft::map<std::string, std::string>::iterator it;
 	paises_moneda["Inglaterra"] = "libra";
-	std::cout << "MAIN - Espana" << std::endl;
 	paises_moneda["Espana"] = "euro";
-	std::cout << "MAIN - EEUU" << std::endl;
 	paises_moneda["EEUU"] = "dolar";
-	std::cout << "MAIN - Singapur" << std::endl;
 	paises_moneda["Singapur"] = "dolar";
-	std::cout << "MAIN - Egipto" << std::endl;
 	paises_moneda["Egipto"] = "libra";
-	std::cout << "MAIN - Marruecos" << std::endl;
 	paises_moneda["Marruecos"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
-	std::cout << "MAIN - Espana" << std::endl;
 	paises_moneda["Espana"] = "euro";
-	std::cout << "MAIN - Australia" << std::endl;
 	paises_moneda["Australia"] = "dolar";
-	std::cout << "MAIN - FIN" << std::endl;
 	std::cout << "La moneda usada en Egipto es: " << paises_moneda["Egipto"] << std::endl;
 
-
 	paises_moneda.erase(paises_moneda.find("Marruecos"));
-	ft::map<std::string, std::string>::iterator it;
 	// paises_moneda.clear();
 	std::cout << "Iteracion paises: " << std::endl;
 	for (it = paises_moneda.begin(); it != paises_moneda.end(); it++)
@@ -79,5 +63,35 @@ void mapTest()
 				  << "->"
 				  << it2->second // string's value
 				  << std::endl;
+	}
+
+	{
+		ft::map<char, int> mymap;
+
+		mymap['b'] = 100;
+		mymap['a'] = 200;
+		mymap['c'] = 300;
+
+		// show content:
+		for (ft::map<char, int>::iterator it = mymap.begin(); it != mymap.end(); ++it)
+			std::cout << it->first << " => " << it->second << '\n';
+	}
+
+	{
+		ft::map<char, int> mymap;
+
+		mymap['x'] = 1001;
+		mymap['y'] = 2002;
+		mymap['z'] = 3003;
+
+		std::cout << "mymap contains:\n";
+
+		ft::pair<char, int> highest = *(mymap.rbegin()); // last element
+		std::cout << "PAIR: " << highest.first << std::endl;
+		ft::map<char, int>::iterator it = mymap.begin();
+		do
+		{
+			std::cout << it->first << " => " << it->second << '\n';
+		} while (mymap.value_comp()(*it++, highest));
 	}
 }
