@@ -8,7 +8,7 @@ NC				:= \033[m
 
 
 CXX				:= c++
-DEBUG_MSG		:= true
+DEBUG_MSG		:= false
 
 # FLAGS
 W_FLAGS			:= -Wall -Wextra -Werror

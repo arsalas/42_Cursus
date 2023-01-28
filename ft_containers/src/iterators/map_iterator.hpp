@@ -12,7 +12,7 @@ namespace ft
 	template <typename T>
 	struct Tree
 	{
-		bool unused_;
+		bool _unused;
 		Tree *_left;
 		Tree *_right;
 		Tree *_parent;

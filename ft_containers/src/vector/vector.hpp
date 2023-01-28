@@ -1,10 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#ifndef DEBUG
-#define DEBUG 0
-#endif
-
 #include <iostream>
 #include <memory>
 #include <iterator>
@@ -16,6 +12,7 @@
 #include "reverse_iterator.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"
+#include "debug.hpp"
 
 namespace ft
 {
@@ -57,8 +54,7 @@ namespace ft
 		explicit vector(const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _vector(NULL), _size(0), _capacity(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mDefault Constructor called of vector\e[0m" << std::endl;
+			printDebug("\e[0;33mDefault Constructor called of vector\e[0m\n");
 		}
 
 		/**
@@ -75,8 +71,7 @@ namespace ft
 			const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _vector(NULL), _size(0), _capacity(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mFill Constructor called of vector\e[0m" << std::endl;
+			printDebug("\e[0;33mFill Constructor called of vector\e[0m\n");
 			// Insertamos los valores en las n posiciones
 			insert(begin(), n, val);
 		}
@@ -98,8 +93,7 @@ namespace ft
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 			: _alloc(alloc), _vector(NULL), _size(0), _capacity(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mRange Constructor called of vector\e[0m" << std::endl;
+			printDebug("\e[0;33mRange Constructor called of vector\e[0m\n");
 			// Insertamos el rango de valores que nos pasan en el contructor con los iteradores
 			insert(begin(), first, last);
 		}
@@ -111,8 +105,7 @@ namespace ft
 		 */
 		vector(const vector &x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mCopy Constructor called of vector\e[0m" << std::endl;
+			printDebug("\e[0;33mCopy Constructor called of vector\e[0m\n");
 			// Asignamos todos los valores del vector de copia
 			assign(x.begin(), x.end());
 		}
@@ -124,8 +117,7 @@ namespace ft
 		 */
 		~vector()
 		{
-			if (DEBUG)
-				std::cout << "\e[0;31mDestructor called of vector\e[0m" << std::endl;
+			printDebug("\e[0;31mDestructor called of vector\e[0m\n");
 			clear();
 			_alloc.deallocate(_vector, _capacity);
 		}

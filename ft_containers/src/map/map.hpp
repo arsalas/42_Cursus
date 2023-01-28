@@ -60,9 +60,7 @@ namespace ft
 			const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _comp(comp), _size(0)
 		{
-			printDebug("\e[0;33mDefault Constructor called of map\e[0m");
-			//if (DEBUG)
-			//	std::cout << "\e[0;33mDefault Constructor called of map\e[0m" << std::endl;
+			printDebug("\e[0;33mDefault Constructor called of map\e[0m\n");
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -88,8 +86,7 @@ namespace ft
 			const allocator_type &alloc = allocator_type())
 			: _alloc(alloc), _comp(comp), _size(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mElements Constructor called of map\e[0m" << std::endl;
+			printDebug("\e[0;33mElements Constructor called of map\e[0m\n");
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -108,8 +105,7 @@ namespace ft
 		 */
 		map(const map &x) : _alloc(x._alloc), _comp(x._comp), _size(0)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mCopy Constructor called of map\e[0m" << std::endl;
+			printDebug("\e[0;33mCopy Constructor called of map\e[0m\n");
 			// El nodo principal no tiene parent, left y right apuntan al mismo nodo
 			_map = _alloc_node.allocate(1);
 			_map->_left = _map;
@@ -127,8 +123,7 @@ namespace ft
 		 */
 		~map()
 		{
-			if (DEBUG)
-				std::cout << "\e[0;31mDestructor called of map\e[0m" << std::endl;
+			printDebug("\e[0;31mDestructor called of map\e[0m\n");
 			// Destruye todos los nodos del map
 			clear();
 			// Libera la memoria reservada
@@ -365,12 +360,24 @@ namespace ft
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 		{
 			// Recorre los iteradores insertando los nodos
-			int i = 0;
+			InputIterator start = first;
 			while (first != last)
 			{
 				insert(*first);
 				first++;
-				i++;
+				if (first == last)
+					break;
+				first++;
+			}
+			first = start;
+			first++;
+			while (first != last)
+			{
+				insert(*first);
+				first++;
+				if (first == last)
+					break;
+				first++;
 			}
 		}
 
@@ -668,8 +675,6 @@ namespace ft
 			return it;
 		}
 
-		// TODO equal range
-
 	private:
 		// ==============================================================
 		// 							TREE
@@ -746,6 +751,7 @@ namespace ft
 		 */
 		void setLeftRight()
 		{
+			return;
 			tree *tmp = getRoot();
 
 			if (!tmp)
@@ -822,37 +828,6 @@ namespace ft
 						node = node->_right;
 				}
 			}
-			return NULL;
-			// if (comp(pair.first, node->_pair.first))
-			// {
-			// 	if (!node->_left)
-			// 	{
-			// 		node->_left = _alloc_node.allocate(1);
-			// 		node->_left->_left = NULL;
-			// 		node->_left->_right = NULL;
-			// 		node->_left->_parent = node;
-			// 		_alloc.construct(&node->_left->_pair, pair);
-            //      					setLeftRight();
-			// 		return node->_left;
-			// 	}
-			// 	else
-			// 		node = insertNode(node->_left, comp, pair);
-			// }
-			// else
-			// {
-			// 	if (!node->_right)
-			// 	{
-			// 		node->_right = _alloc_node.allocate(1);
-			// 		node->_right->_left = NULL;
-			// 		node->_right->_right = NULL;
-			// 		node->_right->_parent = node;
-			// 		_alloc.construct(&node->_right->_pair, pair);
-			// 		setLeftRight();
-			// 		return node->_right;
-			// 	}
-			// 	else
-			// 		node = insertNode(node->_right, comp, pair);
-			// }
 			return node;
 		}
 
@@ -873,6 +848,18 @@ namespace ft
 		 */
 		tree *getLeft() const
 		{
+			tree *tmp = getRoot();
+
+			if (!tmp)
+			{
+				_map->_left = _map;
+				_map->_right = _map;
+				return _map;
+			}
+			// Recorre el arbol hacia la izquierda
+			while (tmp && tmp->_left)
+				tmp = tmp->_left;
+			_map->_left = tmp;
 			return _map->_left;
 		}
 
@@ -883,6 +870,18 @@ namespace ft
 		 */
 		tree *getRight() const
 		{
+			tree *tmp = getRoot();
+
+			if (!tmp)
+			{
+				_map->_left = _map;
+				_map->_right = _map;
+				return _map;
+			}
+			// Recorre el arbol hacia la derecha
+			while (tmp && tmp->_right)
+				tmp = tmp->_right;
+			_map->_right = tmp;
 			return _map->_right;
 		}
 

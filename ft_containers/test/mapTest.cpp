@@ -34,11 +34,15 @@ void mapTest()
 	paises_moneda["Jordania"] = "dinar";
 	std::cout << "MAIN - Jordania" << std::endl;
 	paises_moneda["Jordania"] = "dinar";
+	std::cout << "MAIN - Espana" << std::endl;
 	paises_moneda["Espana"] = "euro";
-	std::cout << "MAIN - EEUU" << std::endl;
+	std::cout << "MAIN - Australia" << std::endl;
+	paises_moneda["Australia"] = "dolar";
 	std::cout << "MAIN - FIN" << std::endl;
 	std::cout << "La moneda usada en Egipto es: " << paises_moneda["Egipto"] << std::endl;
 
+
+	paises_moneda.erase(paises_moneda.find("Marruecos"));
 	ft::map<std::string, std::string>::iterator it;
 	// paises_moneda.clear();
 	std::cout << "Iteracion paises: " << std::endl;

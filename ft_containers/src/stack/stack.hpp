@@ -1,11 +1,8 @@
 #ifndef STACK_H
 #define STACK_H
 
-#ifndef DEBUG
-#define DEBUG 0
-#endif
-
 #include "vector.hpp"
+#include "debug.hpp"
 
 namespace ft
 {
@@ -33,8 +30,7 @@ namespace ft
 		explicit stack(const container_type &ctnr = container_type())
 			: c(ctnr)
 		{
-			if (DEBUG)
-				std::cout << "\e[0;33mDefault Constructor called of stack\e[0m" << std::endl;
+			printDebug("\e[0;33mDefault Constructor called of stack\e[0m\n");
 		}
 
 		// TODO comprobar si se ha de hacer el destructor(no sale en la documentacion)
@@ -43,8 +39,7 @@ namespace ft
 		 */
 		~stack()
 		{
-			if (DEBUG)
-				std::cout << "\e[0;31mDestructor called of stack\e[0m" << std::endl;
+			printDebug("\e[0;31mDestructor called of stack\e[0m\n");
 		}
 
 		/**
