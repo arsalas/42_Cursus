@@ -25,19 +25,14 @@ namespace ft
 		// ==============================================================
 		typedef T value_type;
 		typedef Alloc allocator_type;
-
 		typedef typename allocator_type::reference reference;
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::pointer pointer;
 		typedef typename allocator_type::const_pointer const_pointer;
-
 		typedef ft::vector_iterator<T, false> iterator;
 		typedef ft::vector_iterator<T, true> const_iterator;
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
-		// TODO comprobar si es correcto
-		// typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
-		// typedef typename allocator_type::size_type size_type;
 		typedef std::ptrdiff_t difference_type;
 		typedef std::size_t size_type;
 
@@ -132,7 +127,9 @@ namespace ft
 		{
 			if (&x == this)
 				return *this;
-			// TODO comprobar si hay que liberar la memoria previamente
+			// Limpiamos la memoria del vector
+			clear();
+			// Copiamos los elementos del otro vector
 			assign(x.begin(), x.end());
 			return *this;
 		}
@@ -342,11 +339,6 @@ namespace ft
 			_vector = newContainer;
 		}
 
-		// TODO comprobar si hay que hacerlo
-		void shrink_to_fit()
-		{
-		}
-
 		// ==============================================================
 		// 							ELEMENT ACCESS
 		// ==============================================================
@@ -361,8 +353,6 @@ namespace ft
 		reference operator[](size_type n)
 		{
 			return _vector[n];
-			// TODO Comprobar si funciona igual
-			// return *(_container + n);
 		}
 
 		/**
@@ -388,7 +378,6 @@ namespace ft
 		{
 			if (n >= _size)
 			{
-				// TODO comprobar si es correcto
 				std::stringstream ss;
 				ss << "vector";
 				throw std::out_of_range(ss.str().c_str());
@@ -408,7 +397,6 @@ namespace ft
 		{
 			if (n >= _size)
 			{
-				// TODO comprobar si es correcto
 				std::stringstream ss;
 				ss << "vector";
 				throw std::out_of_range(ss.str().c_str());
@@ -462,10 +450,6 @@ namespace ft
 		{
 			return _vector[_size - 1];
 		}
-
-		// TODO comprobar si son necesarias
-		// value_type *data() noexcept {}
-		// const value_type *data() const noexcept {}
 
 		// ==============================================================
 		// 							MODIFIERS
@@ -736,25 +720,25 @@ namespace ft
 			difference_type offset = last - first;
 			// Si el primer elemento y el ultimo es el mismo no hay que borrar nada
 			if (first == last)
-       			 return iterator(first);
+				return iterator(first);
 			// Recorremos las posiciones a borrar
 			for (iterator it = first; it != last; it++)
 			{
-        		_alloc.destroy(&(*it));
+				_alloc.destroy(&(*it));
 			}
 			// Restamos al size todos los elementos que hemos borrado
 			_size -= offset;
 			// Si la posicion inicial es mas pequena que el size desplazamos la memoria al inicio
 			if (start < _size)
 			{
-        		for (size_type i = start; i < _size; i++)
+				for (size_type i = start; i < _size; i++)
 				{
-          			_alloc.construct(&_vector[i], _vector[i + offset]);
-          			_alloc.destroy(&_vector[i + offset]);
-        		}
-      		}
+					_alloc.construct(&_vector[i], _vector[i + offset]);
+					_alloc.destroy(&_vector[i + offset]);
+				}
+			}
 			// Retornamos un iterador a la posicion inicial
- 			return iterator(&_vector[start]);
+			return iterator(&_vector[start]);
 		}
 
 		/**
@@ -787,9 +771,19 @@ namespace ft
 			erase(begin(), end());
 		}
 
-		// TODO comprobar si es necesaria
-		// template <class... Args>
-		// iterator emplace(const_iterator position, Args &&...args) {}
+		// ==============================================================
+		// 							ALLOCATOR
+		// ==============================================================
+
+		/**
+		 * @brief Returns a copy of the allocator object associated with the vector.
+		 *
+		 * @return The allocator.
+		 */
+		allocator_type get_allocator() const
+		{
+			return _alloc;
+		}
 
 	private:
 		allocator_type _alloc;
@@ -797,5 +791,70 @@ namespace ft
 		size_type _size;
 		size_type _capacity;
 	};
+
+	// ==============================================================
+	// 							OPERATORS
+	// ==============================================================
+
+	template <class T>
+	bool operator==(const vector<T> &lhs, const vector<T> &rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		for (size_t i = 0; i < lhs.size(); i++)
+		{
+			if (lhs[i] != rhs[i])
+				return false;
+		}
+		return true;
+	};
+
+	template <class T>
+	bool operator!=(const vector<T> &lhs, const vector<T> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T>
+	bool operator<(const vector<T> &lhs, const vector<T> &rhs)
+	{
+		typename vector<T>::const_iterator it1 = lhs.begin();
+		typename vector<T>::const_iterator it2 = rhs.begin();
+
+		while (it1 != lhs.end() && it2 != rhs.end())
+		{
+			if (*it1 < *it2)
+				return true;
+			else if (*it1 > *it2)
+				return false;
+			it1++;
+			it2++;
+		}
+		return (it2 != rhs.end());
+	};
+
+	template <class T>
+	bool operator<=(const vector<T> &lhs, const vector<T> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T>
+	bool operator>(const vector<T> &lhs, const vector<T> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class T>
+	bool operator>=(const vector<T> &lhs, const vector<T> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class T>
+	void swap(vector<T> &x, vector<T> &y)
+	{
+		x.swap(y);
+	}
 }
 #endif

@@ -366,25 +366,24 @@ namespace ft
 			InputIterator last,
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 		{
-			// Recorre los iteradores insertando los nodos
 			InputIterator start = first;
-			while (first != last)
+			size_t chunks = 100;
+			for (size_t i = 0; i < chunks; i++)
 			{
-				insert(*first);
-				first++;
-				if (first == last)
+				first = start;
+				while (first != last)
+				{
+					insert(*first);
+					for (size_t i = 0; i < chunks; i++)
+					{
+						first++;
+						if (first == last)
+							break;
+					}
+				}
+				start++;
+				if (start == last)
 					break;
-				first++;
-			}
-			first = start;
-			first++;
-			while (first != last)
-			{
-				insert(*first);
-				first++;
-				if (first == last)
-					break;
-				first++;
 			}
 		}
 

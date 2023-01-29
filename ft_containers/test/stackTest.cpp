@@ -144,29 +144,37 @@ void stackTest()
 		std::cout << std::endl;
 	}
 	std::cout << UCYN "Test non member functions overload" RESET << std::endl;
-
 	{
-		std::cout << "swap \t\t";
+		std::cout << "rel. operators\t";
+		std::stack<int> foo;
+		ft::stack<int> foo2;
+		std::stack<int> bar;
+		ft::stack<int> bar2;
 
-		std::stack<int> foo, bar;
-		ft::stack<int> foo2, bar2;
-		foo.push(10);
-		foo.push(20);
-		foo.push(30);
-		bar.push(111);
-		bar.push(222);
-		foo2.push(10);
-		foo2.push(20);
-		foo2.push(30);
-		bar2.push(111);
-		bar2.push(222);
+		for (int i = 0; i < 5; ++i)
+			foo.push(i);
+		for (int i = 0; i < 5; ++i)
+			foo2.push(i);
+		for (int i = 0; i < 20; ++i)
+			bar.push(i);
+		for (int i = 0; i < 20; ++i)
+			bar2.push(i);
 
-		swap(foo, bar);
-		swap(foo2, bar2);
-
-		(foo.size() == foo2.size()) ? testOk() : testKo();
-		(bar.size() == bar2.size()) ? testOk() : testKo();
+		((foo == bar) == (foo2 == bar2)) ? testOk() : testKo();
+		((foo != bar) == (foo2 != bar2)) ? testOk() : testKo();
+		((foo < bar) == (foo2 < bar2)) ? testOk() : testKo();
+		((foo > bar) == (foo2 > bar2)) ? testOk() : testKo();
+		((foo <= bar) == (foo2 <= bar2)) ? testOk() : testKo();
+		((foo >= bar) == (foo2 >= bar2)) ? testOk() : testKo();
 
 		std::cout << std::endl;
 	}
+	std::cout << UCYN "Test rendiment" RESET << std::endl;
+
+
+	{
+
+		testStackSubject();
+	}
+
 }

@@ -8,7 +8,7 @@ void mapTest()
 	std::cout << BLU "╔═════════════════════════════════════════╗" << std::endl;
 	std::cout << "║                   MAP                   ║" << std::endl;
 	std::cout << "╚═════════════════════════════════════════╝" RESET << std::endl;
-	std::cout << UCYN "Test constructors: " RESET << std::endl;
+	std::cout << UCYN "Test constructors " RESET << std::endl;
 	{
 
 		std::map<char, int> first;
@@ -52,7 +52,7 @@ void mapTest()
 		}
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test iterators: " RESET << std::endl;
+	std::cout << UCYN "Test non-member functions" RESET << std::endl;
 	{
 		ft::map<char, int> first;
 		ft::map<char, int> second;
@@ -78,6 +78,8 @@ void mapTest()
 		(second.size() == second2.size()) ? testOk() : testKo();
 		std::cout << std::endl;
 	}
+	std::cout << UCYN "Test iterators" RESET << std::endl;
+
 	{
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
@@ -163,7 +165,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 
-	std::cout << UCYN "Test capacity: " RESET << std::endl;
+	std::cout << UCYN "Test capacity" RESET << std::endl;
 	{
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
@@ -212,6 +214,7 @@ void mapTest()
 		(mymap.max_size() == mymap2.max_size()) ? testOk() : testKo();
 		std::cout << std::endl;
 	}
+	std::cout << UCYN "Test element access " RESET << std::endl;
 	{
 		std::map<char, std::string> mymap;
 		ft::map<char, std::string> mymap2;
@@ -265,7 +268,7 @@ void mapTest()
 
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test modifiers: " RESET << std::endl;
+	std::cout << UCYN "Test modifiers" RESET << std::endl;
 	{
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
@@ -429,7 +432,7 @@ void mapTest()
 		}
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test observers: " RESET << std::endl;
+	std::cout << UCYN "Test observers" RESET << std::endl;
 	{
 		std::cout << "key_comp\t";
 		std::map<char, int> mymap;
@@ -480,7 +483,7 @@ void mapTest()
 		} while (mymap.value_comp()(*it++, highest) && mymap2.value_comp()(*it2++, highest2));
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test operators: " RESET << std::endl;
+	std::cout << UCYN "Test operators" RESET << std::endl;
 	{
 		std::cout << "find\t\t";
 		std::map<char, int> mymap;
@@ -623,7 +626,7 @@ void mapTest()
 
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test allocators: " RESET << std::endl;
+	std::cout << UCYN "Test allocators" RESET << std::endl;
 	{
 		std::cout << "get_allocator\t";
 		int psize;
@@ -647,5 +650,10 @@ void mapTest()
 		mymap2.get_allocator().deallocate(p2, 5);
 
 		std::cout << std::endl;
+	}
+	std::cout << UCYN "Test rendiment" RESET << std::endl;
+	{
+
+		testMapSubject();
 	}
 }

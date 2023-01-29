@@ -33,7 +33,6 @@ namespace ft
 			printDebug("\e[0;33mDefault Constructor called of stack\e[0m\n");
 		}
 
-		// TODO comprobar si se ha de hacer el destructor(no sale en la documentacion)
 		/**
 		 * @brief Destroys the container object.
 		 */
@@ -100,11 +99,11 @@ namespace ft
 			c.pop_back();
 		}
 
-		// TODO comprobar que es de c++98 npexcept es c++11 
-		// void swap(stack &x) noexcept(/*see below*/)
-		// {
-		// 	_stack.swap(x);
-		// }
+		template <class T1, class C1>
+		friend bool operator==(const stack<T1, C1> &lhs, const stack<T1, C1> &rhs);
+
+		template <class T1, class C1>
+		friend bool operator<(const stack<T1, C1> &lhs, const stack<T1, C1> &rhs);
 
 	protected:
 		container_type c;
@@ -113,7 +112,41 @@ namespace ft
 	// ==============================================================
 	// 							NON-MEMBER FUNCTIONS
 	// ==============================================================
+	template <class T, class Ctnr>
+	bool operator==(const stack<T, Ctnr> &lhs, const stack<T, Ctnr> &rhs)
+	{
+		return lhs.c == rhs.c;
+	}
 
+	template <class T, class Ctnr>
+	bool operator<(const stack<T, Ctnr> &lhs, const stack<T, Ctnr> &rhs)
+	{
+		return lhs.c < rhs.c;
+	}
+
+	template <class T, class Ctnr>
+	bool operator!=(const stack<T, Ctnr> &lhs, const stack<T, Ctnr> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T, class Ctnr>
+	bool operator<=(const stack<T, Ctnr> &lhs, const stack<T, Ctnr> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T, class Ctnr>
+	bool operator>(const stack<T, Ctnr> &lhs, const stack<T, Ctnr> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class T, class Ctnr>
+	bool operator>=(const stack<T, Ctnr> &lhs, const stack<T, Ctnr> &rhs)
+	{
+		return !(lhs < rhs);
+	}
 }
 
 #endif

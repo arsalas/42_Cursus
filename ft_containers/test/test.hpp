@@ -29,4 +29,9 @@ void mapTest();
 void stackTest();
 void testOk();
 void testKo();
+void testVectorSubject();
+void testStackSubject();
+void testMapSubject();
+
+
 #endif
