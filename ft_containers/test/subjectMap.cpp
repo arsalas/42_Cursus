@@ -79,6 +79,9 @@ void testMapSubject()
 
 	clock_t end2 = clock();
 
+	(void)sum;
+	(void)sum2;
+
 	time_spent2 += (double)(end2 - begin2) / CLOCKS_PER_SEC;
 	std::cout << "time\t\t";
 	(time_spent <= time_spent2 * 20) ? testOk() : testKo();
