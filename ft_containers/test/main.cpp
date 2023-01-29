@@ -1,113 +1,29 @@
 #include <iostream>
-#include <string>
-#include <deque>
-#if 0 //CREATE A REAL STL EXAMPLE
-	#include <map>
-	#include <stack>
-	#include <vector>
-	namespace ft = std;
-#else
-	#include "map.hpp"
-	#include "stack.hpp"
-	#include "vector.hpp"
-#endif
+#include "test.hpp"
 
-#include <stdlib.h>
-
-#define MAX_RAM 429496729
-#define BUFFER_SIZE 4096
-struct Buffer
+int main(int argc, char *argv[])
 {
-	int idx;
-	char buff[BUFFER_SIZE];
-};
-
-
-#define COUNT (MAX_RAM / (int)sizeof(Buffer))
-
-template<typename T>
-class MutantStack : public ft::stack<T>
-{
-public:
-	MutantStack() {}
-	MutantStack(const MutantStack<T>& src) { *this = src; }
-	MutantStack<T>& operator=(const MutantStack<T>& rhs) 
+	for (int i = 1; i < argc; i++)
 	{
-		this->c = rhs.c;
-		return *this;
-	}
-	~MutantStack() {}
-
-	typedef typename ft::stack<T>::container_type::iterator iterator;
-
-	iterator begin() { return this->c.begin(); }
-	iterator end() { return this->c.end(); }
-};
-
-int main(int argc, char** argv) {
-	if (argc != 2)
-	{
-		std::cerr << "Usage: ./test seed" << std::endl;
-		std::cerr << "Provide a seed please" << std::endl;
-		std::cerr << "Count value:" << COUNT << std::endl;
-		return 1;
-	}
-	const int seed = atoi(argv[1]);
-	srand(seed);
-
-	ft::vector<std::string> vector_str;
-	ft::vector<int> vector_int;
-	ft::stack<int> stack_int;
-	ft::vector<Buffer> vector_buffer;
-	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	ft::map<int, int> map_int;
-
-	for (int i = 0; i < COUNT; i++)
-	{
-		vector_buffer.push_back(Buffer());
-	}
-	for (int i = 0; i < COUNT; i++)
-	{
-		const int idx = rand() % COUNT;
-		vector_buffer[idx].idx = 5;
-	}
-	ft::vector<Buffer>().swap(vector_buffer);
-	try
-	{
-		for (int i = 0; i < COUNT; i++)
-		{
-			const int idx = rand() % COUNT;
-			vector_buffer.at(idx);
-			std::cerr << "Error: THIS VECTOR SHOULD BE EMPTY!!" <<std::endl;
-		}
-	}
-	catch(const std::exception& e)
-	{
-		//NORMAL ! :P
-	}
-	for (int i = 0; i < COUNT; ++i)
-	{
-		// std::cout << "COUNT: " << COUNT << " - " << i << std::endl;
-		map_int.insert(ft::make_pair(rand(), rand()));
+		if ((std::string)argv[i] == "vector")
+			vectorTest();
+		if ((std::string)argv[i] == "map")
+			mapTest();
+		if ((std::string)argv[i] == "stack")
+			stackTest();
 	}
 
-	int sum = 0;
-	for (int i = 0; i < 10000; i++)
+	if (argc == 1)
 	{
-		int access = rand();
-		sum += map_int[access];
+		vectorTest();
+		mapTest();
+		stackTest();
 	}
-	std::cout << "should be constant with the same seed: " << sum << std::endl;
-	{
-		ft::map<int, int> copy = map_int;
-	}
-	MutantStack<char> iterable_stack;
-	for (char letter = 'a'; letter <= 'z'; letter++)
-		iterable_stack.push(letter);
-	for (MutantStack<char>::iterator it = iterable_stack.begin(); it != iterable_stack.end(); it++)
-	{
-		std::cout << *it;
-	}
-	std::cout << std::endl;
-	return (0);
+
+	return 0;
 }
+
+// MINE
+// ./bin/ft_containers 1  81.88s user 7.72s system 76% cpu 1:57.81 total
+// STD
+// ./bin/ft_containers 1  1.20s user 4.30s system 27% cpu 20.180 total

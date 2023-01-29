@@ -679,6 +679,42 @@ namespace ft
 			return it;
 		}
 
+		/**
+		 * @brief Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+		 * 
+		 * @param k Key to search for.
+		 * @return The function returns a pair, whose member pair::first is the lower bound of the range (the same as lower_bound), and pair::second is the upper bound (the same as upper_bound).
+		 */
+		ft::pair<iterator, iterator> equal_range(const key_type &k)
+		{
+			return ft::make_pair(lower_bound(k), upper_bound(k));
+		}
+
+		/**
+		 * @brief Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+		 * 
+		 * @param k Key to search for.
+		 * @return The function returns a pair, whose member pair::first is the lower bound of the range (the same as lower_bound), and pair::second is the upper bound (the same as upper_bound).
+		 */
+		ft::pair<const_iterator, const_iterator> equal_range(const key_type &k) const
+		{
+			return ft::make_pair(lower_bound(k), upper_bound(k));
+		}
+		
+		// ==============================================================
+		// 							ALLOCATOR
+		// ==============================================================
+
+		/**
+		 * @brief Returns a copy of the allocator object associated with the map.
+		 * 
+		 * @return The allocator.
+		 */
+		allocator_type get_allocator() const
+		{
+			return _alloc;
+		}
+
 	private:
 		// ==============================================================
 		// 							TREE

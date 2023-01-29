@@ -21,7 +21,8 @@ RM 				:= rm -f
 
 # SRC
 SRCS 			=  main.cpp \
-				debug.cpp vectorTest.cpp mapTest.cpp stackTest.cpp 
+				debug.cpp utils.cpp \
+				vectorTest.cpp mapTest.cpp stackTest.cpp 
 
 
 # FOLDERS
