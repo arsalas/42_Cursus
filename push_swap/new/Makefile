@@ -77,6 +77,12 @@ leaks: $(BIN)
 	valgrind --leak-check=yes ./$(BIN) || \
 	leaks -atExit -- ./$(BIN)
 
+visualizer100:	$(BIN)
+	@python3 tests/pyviz.py `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
+
+visualizer500:	$(BIN)
+	@python3 tests/pyviz.py `ruby -e "puts (-249..250).to_a.shuffle.join(' ')"`
+
 
 test: $(BIN) test5 test100 test500
 
