@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
+#include "stack.h"
 
 /**
  * @brief Create a stacks object
@@ -21,15 +24,15 @@
  */
 void	create_stacks(t_stack *stack_a, t_stack *stack_b, int numbers)
 {
-	stack_a->original = ft_calloc(sizeof(int), numbers);
+	// stack_a->original = ft_calloc(sizeof(int), numbers);
+	// if (stack_a->original == NULL)
+	// 	exit (0);
 	stack_a->len = 0;
-	if (stack_a->original == NULL)
-		exit (0);
 	stack_a->stack = ft_calloc(sizeof(int), numbers);
 	if (stack_a->stack == NULL)
 		exit (0);
-	stack_b->stack = ft_calloc(sizeof(int), numbers);
 	stack_b->len = 0;
+	stack_b->stack = ft_calloc(sizeof(int), numbers);
 	if (stack_b->stack == NULL)
 		exit (0);
 }
@@ -44,5 +47,5 @@ void	destroy_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	free(stack_a->stack);
 	free(stack_b->stack);
-	free(stack_a->original);
+	// free(stack_a->original);
 }

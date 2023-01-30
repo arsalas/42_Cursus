@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions_3.c                                        :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 12:04:40 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/20 18:32:50 by aramirez         ###   ########.fr       */
+/*   Created: 2022/02/18 21:19:32 by aramirez          #+#    #+#             */
+/*   Updated: 2022/05/25 14:21:52 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef STACK_H
+# define STACK_H
 
-/**
- * @brief Desplaza hacia abajo todos los elementos del stack a y b,
- * el ultimo pasa a ser el primero
- * 
- * @param a stack a
- * @param b stack b
- * @param print 1 para printar por pantalla la accion
- */
-void	rrr(t_stack *a, t_stack *b, int print)
+typedef struct s_stack
 {
-	if (print == 1)
-		write(1, "rrr\n", 4);
-	reverse(a);
-	reverse(b);
-}
+	int	*stack;
+	int	*original;
+	int	len;
+}	t_stack;
+
+void	create_stacks(t_stack *stack_a, t_stack *stack_b, int numbers);
+void	destroy_stacks(t_stack *stack_a, t_stack *stack_b);
+
+#endif

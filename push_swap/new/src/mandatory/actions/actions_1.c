@@ -1,93 +1,99 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions_2.c                                        :+:      :+:    :+:   */
+/*   actions_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:53:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/20 18:32:20 by aramirez         ###   ########.fr       */
+/*   Updated: 2022/05/20 18:29:52 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <unistd.h>
+#include "stack.h"
+#include "helpers.h"
 
 /**
- * @brief Desplaza hacia arriba todos los elementos del stack a,
- * el primero pasa a ser el ultimo
+ * @brief  Intercambia los dos primeros numeros del stack a 
+ * si hay mas de dos elementos
  * 
  * @param a stack a
  * @param print 1 para printar por pantalla la accion
  */
-void	ra(t_stack *a, int print)
+void	sa(t_stack *a, int print)
 {
 	if (print == 1)
-		write(1, "ra\n", 3);
-	if (a->len == 0)
-		return ;
-	rotate(a);
+		write(1, "sa\n", 3);
+	swap_firsts(a);
 }
 
 /**
- * @brief Desplaza hacia arriba todos los elementos del stack b,
- * el primero pasa a ser el ultimo
+ * @brief Intercambia los dos primeros numeros del stack b 
+ * si hay mas de dos elementos
  * 
  * @param b stack b
  * @param print 1 para printar por pantalla la accion
  */
-void	rb(t_stack *b, int print)
+void	sb(t_stack *b, int print)
 {
 	if (print == 1)
-		write(1, "rb\n", 3);
+		write(1, "sb\n", 3);
+	swap_firsts(b);
+}
+
+/**
+ * @brief Intercambia los dos primeros numeros del stack a y b 
+ * si hay mas de dos elementos
+ * 
+ * @param a stack a
+ * @param b stack b
+ * @param print 1 para printar por pantalla la accion
+ */
+void	ss(t_stack *a, t_stack *b, int print)
+{
+	if (print == 1)
+		write(1, "ss\n", 3);
+	swap_firsts(a);
+	swap_firsts(b);
+}
+
+/**
+ * @brief Toma el primer elemento del stack b y lo pone encima de a
+ * No hace nada si a esta vacio
+ * 
+ * @param a stack a
+ * @param b stack b
+ * @param print 1 para printar por pantalla la accion
+ */
+void	pa(t_stack *a, t_stack *b, int print)
+{
+	if (print == 1)
+		write(1, "pa\n", 3);
 	if (b->len == 0)
 		return ;
-	rotate(b);
+	push_increment(a, b->stack[0]);
+	push_decrement(b);
+	a->len++;
+	b->len--;
 }
 
 /**
- * @brief Desplaza hacia arriba todos los elementos del stack a y b,
- * el primero pasa a ser el ultimo
+ * @brief Pone el primer elemento del stack a y lo pone en b
+ *  No hace nada si a esta vacio
  * 
  * @param a stack a
  * @param b stack b
  * @param print 1 para printar por pantalla la accion
  */
-void	rr(t_stack *a, t_stack *b, int print)
+void	pb(t_stack *a, t_stack *b, int print)
 {
 	if (print == 1)
-		write(1, "rr\n", 3);
-	rotate(a);
-	rotate(b);
-}
-
-/**
- * @brief Desplaza hacia abajo todos los elementos del stack a,
- * el ultimo pasa a ser el primero
- * 
- * @param a stack a
- * @param print 1 para printar por pantalla la accion
- */
-void	rra(t_stack *a, int print)
-{
-	if (print == 1)
-		write(1, "rra\n", 4);
+		write(1, "pb\n", 3);
 	if (a->len == 0)
 		return ;
-	reverse(a);
-}
-
-/**
- * @brief Desplaza hacia abajo todos los elementos del stack b,
- * el ultimo pasa a ser el primero
- * 
- * @param b stack b
- * @param print 1 para printar por pantalla la accion
- */
-void	rrb(t_stack *b, int print)
-{
-	if (print == 1)
-		write(1, "rrb\n", 4);
-	if (b->len == 0)
-		return ;
-	reverse(b);
+	push_increment(b, a->stack[0]);
+	push_decrement(a);
+	a->len--;
+	b->len++;
 }

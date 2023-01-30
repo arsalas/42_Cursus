@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <limits.h>
+#include "stack.h"
+#include "actions.h"
+
+int	is_order(t_stack *stack);
 
 typedef struct s_movements
 {
@@ -369,21 +373,21 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 	return (moves);
 }
 
-void printStacks(t_stack *stack_a, t_stack *stack_b)
-{
-	printf("Stack a: ");
-	for (int i = 0; i < stack_a->len; i++)
-	{
-		printf("%i ", stack_a->stack[i] + 1);
-	}
-	printf("\n");
-	printf("Stack b: ");
-	for (int i = 0; i < stack_b->len; i++)
-	{
-		printf("%i ", stack_b->stack[i] + 1);
-	}
-	printf("\n");
-}
+// void printStacks(t_stack *stack_a, t_stack *stack_b)
+// {
+// 	printf("Stack a: ");
+// 	for (int i = 0; i < stack_a->len; i++)
+// 	{
+// 		printf("%i ", stack_a->stack[i] + 1);
+// 	}
+// 	printf("\n");
+// 	printf("Stack b: ");
+// 	for (int i = 0; i < stack_b->len; i++)
+// 	{
+// 		printf("%i ", stack_b->stack[i] + 1);
+// 	}
+// 	printf("\n");
+// }
 
 int is_order_stack3(t_stack *stack)
 {
@@ -396,6 +400,8 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 	t_movements moves;
 	int i;
 
+	if (is_order(stack_a))
+		return;
 	int c = 0;
 	pb(stack_a, stack_b, 1);
 	pb(stack_a, stack_b, 1);
@@ -499,14 +505,15 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 		c++;
 	}
 
+	int min = get_min_num_stack(stack_a);
 	if (get_min_num_stack_position(stack_a) > stack_a->len / 2)
 	{
-		while (stack_a->stack[0] != 0)
+		while (stack_a->stack[0] != min)
 			rra(stack_a, 1);
 	}
 	else
 	{
-		while (stack_a->stack[0] != 0)
+		while (stack_a->stack[0] != min)
 			ra(stack_a, 1);
 	}
 

@@ -5,8 +5,6 @@ YELLOW			:= \033[33m
 BLUE			:= \033[34m
 NC				:= \033[m
 
-
-
 CC				:= gcc
 DEBUG_MSG		:= false
 
@@ -21,8 +19,9 @@ RM 				:= rm -f
 SRCS 			=  main.c\
 				actions_1.c actions_2.c actions_3.c \
 				errors.c \
-				actions_aux_1.c actions_aux_2.c digits.c \
-				aux_1.c aux_2.c movements.c order.c positions.c stacks.c
+				actions_aux.c \
+				parse.c \
+				movements.c order.c stack.c 
 
 
 # FOLDERS
@@ -33,11 +32,6 @@ BIN_DIR			:= bin
 # OBJECTS
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-#INCLUDES
-INCLUDES 		:= libs/libft/ includes/
-
-INC			= $(addprefix -I , $(INCLUDES))
-
 # DEPENDECES
 DEPS				= $(patsubst %.o, %.d, $(OBJS)) 
 DEPFLAGS			= -MMD -MF
@@ -45,28 +39,37 @@ DEPFLAGS			= -MMD -MF
 # PROGRAM NAME
 NAME 				:= push_swap
 
+# LIBS
+LIBS_PATH			:= libs
+LIBFT_PATH			:= libft
+LIBFT				:= $(LIBS_PATH)/$(LIBFT_PATH)/bin/libft.a
+LIBS 				:= $(LIBFT)
 
-LIBS_INCLUDES = libs/libft/libft.a
+#INCLUDES
+INCLUDES 		:= $(LIBS_PATH)/$(LIBFT_PATH)/ includes/ \
+				src/mandatory/actions src/mandatory/errors \
+				src/mandatory/helpers src/mandatory/parse \
+				src/mandatory/stacks
 
-
+INC			= $(addprefix -I , $(INCLUDES))
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.c src  src/actions src/errors src/helpers src/stacks
+vpath %.c src/mandatory  src/mandatory/actions src/mandatory/errors src/mandatory/helpers src/mandatory/parse src/mandatory/stacks
 
 .SECONDEXPANSION:
 
-all: $(BIN)
+all: $(LIBFT) $(BIN)
 
 $(OBJS_DIR)/%.o: %.c | $$(@D)
 	@echo "🔃 $(YELLOW)Compiling" $(basename $(notdir $@)) 
 	@$(CC) $(FLAGS) $(INC) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
 
-make_libs:
-	@make -C libs/libft
+$(LIBFT): libft_force_make
+	@make -C $(LIBS_PATH)/$(LIBFT_PATH)
 
 $(BIN): $(OBJS) $(BIN_DIR)
-	@$(CC) $(FLAGS) $(INC) $(OBJS) $(LIBS_INCLUDES) -o $(BIN)
+	@$(CC) $(FLAGS) $(INC) $(OBJS) $(LIBS) -o $(BIN)
 	@echo "✅ $(GREEN)$(NAME) compiled!$(NC)"
 
 run: $(BIN)
@@ -101,15 +104,16 @@ clean:
 	@$(RM) $(OBJS) $(DEPS)
 	@echo "✅ $(GREEN)$(NAME) cleaned!$(NC)"
 	@$(RM) -rf  $(OBJS_DIR)
+	@make clean -C $(LIBS_PATH)/$(LIBFT_PATH)
 
 fclean:		clean
 	@$(RM) $(BIN)
 	@$(RM) -rf  $(BIN_DIR)
+	@make file_clean -C $(LIBS_PATH)/$(LIBFT_PATH)
 
 re:	fclean all
 
 re_bonus: fclean bonus
-
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
@@ -119,4 +123,4 @@ $(BIN_DIR):
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re leaks run
+.PHONY: all clean fclean re leaks run libft_force_make 

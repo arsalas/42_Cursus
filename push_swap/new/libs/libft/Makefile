@@ -1,5 +1,20 @@
-CFLAGS 	= -Wall -Wextra -Werror -g3
+# COLORS
+RED				:= \033[31m
+GREEN			:= \033[32m
+YELLOW			:= \033[33m
+BLUE			:= \033[34m
+NC				:= \033[m
 
+CC				:= gcc
+
+# FLAGS
+W_FLAGS			:= -Wall -Wextra -Werror
+SANITIZER		:= -g -fsanitize=address
+FLAGS			:= $(W_FLAGS) $(SANITIZER)
+
+RM 				:= rm -f
+
+# SRC
 SRCS 	= ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
@@ -35,45 +50,61 @@ SRCS 	= ft_atoi.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 
-B_SRCS 	= ft_lstnew.c \
-		ft_lstadd_front.c \
-		ft_lstsize.c \
-		ft_lstlast.c \
-		ft_lstadd_back.c \
-		ft_lstdelone.c \
-		ft_lstclear.c \
-		ft_lstiter.c \
-		ft_lstmap.c \
+# FOLDERS
+OBJS_DIR		:= obj
+BIN_DIR			:= bin
 
-OBJS 	= $(SRCS:.c=.o)
+# OBJECTS
+OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-B_OBJS 	= $(B_SRCS:.c=.o)
+# DEPENDECES
+DEPS				= $(patsubst %.o, %.d, $(OBJS)) 
+DEPFLAGS			= -MMD -MF
 
-HEADERS 	= libft.h
-
+# PROGRAM NAME
 NAME 	= libft.a
 
-RM 		= rm -f
+# BINARY PATH
+BIN = $(BIN_DIR)/$(NAME)
 
-.c.o:	
-	@gcc -c ${CFLAGS} $< -o ${<:.c=.o}
+vpath %.c
 
-all:		${NAME}
+.SECONDEXPANSION:
 
-${NAME}:	$(OBJS) $(HEADERS)
-	@ar rc ${NAME} ${OBJS}
-	@echo "\x1b[32mlibft compiled!\x1b[0m"
+all: $(BIN_DIR) $(BIN)
 
-bonus:		${B_OBJS} ${OBJS}
-	@ar rc ${NAME} ${OBJS} ${B_OBJS}
+$(OBJS_DIR)/%.o: %.c | $$(@D)
+	@echo "🔃 $(YELLOW)Compiling" $(basename $(notdir $@)) 
+	@$(CC) $(FLAGS) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
+
+
+$(BIN): $(OBJS)
+	@ar rc $(BIN) $(OBJS)
+	@echo "✅ $(GREEN)$(NAME) compiled!$(NC)"
+
 
 clean:
-	@${RM} ${OBJS} ${B_OBJS}
-	@echo "\x1b[32mlibft cleaned!\x1b[0m"
+	@echo "🧹 $(RED)$(NAME) removing...$(NC)"
+	@$(RM) $(OBJS) $(DEPS)
+	@echo "✅ $(GREEN)$(NAME) cleaned!$(NC)"
+	@$(RM) -rf  $(OBJS_DIR)
 
 fclean:		clean
-	${RM} ${NAME}
+	@$(RM) $(BIN)
+	@$(RM) -rf  $(BIN_DIR)
+
+file_clean:	
+	@$(RM) $(BIN)
+	@$(RM) -rf  $(BIN_DIR)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
+
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+-include $(DEPS)
+
+.PHONY:		all clean fclean re file_clean

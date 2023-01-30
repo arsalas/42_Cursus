@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   parse.c                               	            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,17 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <unistd.h>
+#include <limits.h>
 
-/**
- * @brief Printa error en pantalla
- * 
- */
-void	print_error(void)
-{
-	write(1, "Error\n", 6);
-	exit(0);
-}
+#include "libft.h"
+#include "stack.h"
 
 /**
  * @brief Comprueba si es un numero valido 
@@ -28,7 +22,7 @@ void	print_error(void)
  * @param num numero a comprobar
  * @return 1 si es valido 0 si no lo es
  */
-int	ft_isnumbervalid(char *num)
+static int	ft_isnumber_valid(char *num)
 {
 	int	i;
 
@@ -50,7 +44,7 @@ int	ft_isnumbervalid(char *num)
  * @param str string del numero a comprobar
  * @return 1 si es valido 0 si no lo es
  */
-int	is_long(const char *str)
+static int	is_long(const char *str)
 {
 	int			i;
 	long long	n;
@@ -86,14 +80,14 @@ int	is_long(const char *str)
  * @param stack stack a buscar
  * @return 1 si esta duplicado 0 si no lo esta 
  */
-int	is_duplicate(int num, t_stack *stack)
+static int	is_duplicate(int num, t_stack *stack)
 {
 	int	i;
 
 	i = 0;
 	while (i < stack->len)
 	{
-		if (stack->original[i] == num)
+		if (stack->stack[i] == num)
 			return (1);
 		i++;
 	}
@@ -108,7 +102,7 @@ int	is_duplicate(int num, t_stack *stack)
  * @param stack stack
  * @return 1 si hay algun error y 0 si no hay errores 
  */
-int	do_format(int argc, char *argv[], t_stack *stack)
+int	parse_args(int argc, char *argv[], t_stack *stack)
 {
 	int	i;
 	int	num;
@@ -118,12 +112,12 @@ int	do_format(int argc, char *argv[], t_stack *stack)
 		exit(0);
 	while (i < argc - 1)
 	{
-		if (ft_isnumbervalid((argv[i + 1])) == 0)
-			return (1);
+		if (ft_isnumber_valid((argv[i + 1])) == 0)
+			return (-1);
 		num = ft_atoi(argv[i + 1]);
 		if ((is_duplicate(num, stack) == 1 || is_long(argv[i + 1]) == 1))
-			return (1);
-		stack->original[i] = ft_atoi(argv[i + 1]);
+			return (-1);
+		stack->stack[i] = ft_atoi(argv[i + 1]);
 		stack->len++;
 		i++;
 	}
