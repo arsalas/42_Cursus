@@ -305,10 +305,11 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 	int i = 0;
 	while (i < stack_b->len)
 	{
-		movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[i]));
-		movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[i]);
-		movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, stack_b->stack[i]));
-		movs_reverse_b = get_movs_reverse(stack_b, stack_b->stack[i]);
+		int obj = stack_b->stack[i];
+		movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, obj));
+		movs_rotate_b = get_movs_rotate(stack_b, obj);
+		movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, obj));
+		movs_reverse_b = get_movs_reverse(stack_b, obj);
 
 		// max_rot + (rot_a - rot_b)
 		a = max(movs_rotate_a, movs_rotate_b);
@@ -333,10 +334,11 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 		// printf("Moves total: %i\n", movs);
 		i++;
 	}
-	movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
-	movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[pos]);
-	movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
-	movs_reverse_b = get_movs_reverse(stack_b, stack_b->stack[pos]);
+	int obj = stack_b->stack[pos];
+	movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, obj));
+	movs_rotate_b = get_movs_rotate(stack_b, obj);
+	movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, obj));
+	movs_reverse_b = get_movs_reverse(stack_b, obj);
 
 	if (type == 0)
 	{
