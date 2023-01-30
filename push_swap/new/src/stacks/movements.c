@@ -294,7 +294,6 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 	t_movements moves;
 	int type;
 
-	int i = 0;
 	pos = 0;
 	movs = 0;
 	moves.ra = 0;
@@ -303,7 +302,8 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 	moves.rra = 0;
 	moves.rrb = 0;
 	moves.rrr = 0;
-	while (i < stack_a->len)
+	int i = 0;
+	while (i < stack_b->len)
 	{
 		movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[i]));
 		movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[i]);
@@ -333,11 +333,10 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 		// printf("Moves total: %i\n", movs);
 		i++;
 	}
-		movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
-		movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[pos]);
-		movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
-		movs_reverse_b = get_movs_reverse(stack_b, stack_b->stack[pos]);
-
+	movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
+	movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[pos]);
+	movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
+	movs_reverse_b = get_movs_reverse(stack_b, stack_b->stack[pos]);
 
 	if (type == 0)
 	{
@@ -454,60 +453,60 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 
 	// printStacks(stack_a, stack_b);
 
-	// while (stack_b->len > 0)
-	// {
-	// 	moves = get_moves_order_b(stack_a, stack_b);
-	// 	i = 0;
-	// 	while (i < moves.ra)
-	// 	{
-	// 		ra(stack_a, 1);
-	// 		i++;
-	// 	}
-	// 	i = 0;
-	// 	while (i < moves.rb)
-	// 	{
-	// 		rb(stack_b, 1);
-	// 		i++;
-	// 	}
-	// 	i = 0;
-	// 	while (i < moves.rr)
-	// 	{
-	// 		rr(stack_a, stack_b, 1);
-	// 		i++;
-	// 	}
-	// 	i = 0;
-	// 	while (i < moves.rra)
-	// 	{
-	// 		rra(stack_a, 1);
-	// 		i++;
-	// 	}
-	// 	i = 0;
-	// 	while (i < moves.rrb)
-	// 	{
-	// 		rrb(stack_b, 1);
-	// 		i++;
-	// 	}
-	// 	i = 0;
-	// 	while (i < moves.rrr)
-	// 	{
-	// 		rrr(stack_a, stack_b, 1);
-	// 		i++;
-	// 	}
-	// 	pa(stack_a, stack_b, 1);
-	// 	// printStacks(stack_a, stack_b);
-	// 	c++;
-	// }
+	while (stack_b->len > 0)
+	{
+		moves = get_moves_order_b(stack_a, stack_b);
+		i = 0;
+		while (i < moves.ra)
+		{
+			ra(stack_a, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rb)
+		{
+			rb(stack_b, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rr)
+		{
+			rr(stack_a, stack_b, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rra)
+		{
+			rra(stack_a, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rrb)
+		{
+			rrb(stack_b, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rrr)
+		{
+			rrr(stack_a, stack_b, 1);
+			i++;
+		}
+		pa(stack_a, stack_b, 1);
+		// printStacks(stack_a, stack_b);
+		c++;
+	}
 
-	// if (get_min_num_stack_position(stack_a) > stack_a->len)
-	// {
-	// 	while (stack_a->stack[0] != 0)
-	// 		rra(stack_a, 1);
-	// }
-	// else
-	// {
-	// 	while (stack_a->stack[0] != 0)
-	// 		ra(stack_a, 1);
-	// }
+	if (get_min_num_stack_position(stack_a) > stack_a->len)
+	{
+		while (stack_a->stack[0] != 0)
+			rra(stack_a, 1);
+	}
+	else
+	{
+		while (stack_a->stack[0] != 0)
+			ra(stack_a, 1);
+	}
 
 	// if (get_max_num_stack_position(stack_b) > stack_b->len)
 	// {
