@@ -109,7 +109,7 @@ int get_max_num_stack_position(t_stack *stack)
 
 	if (stack->len == 0)
 		return (0);
-	max = stack->len - 1;
+	max = stack->stack[0];
 	pos = 0;
 	i = 1;
 	while (i < stack->len)
