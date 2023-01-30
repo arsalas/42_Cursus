@@ -332,10 +332,11 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 		// printf("Moves total: %i\n", movs);
 		i++;
 	}
-	movs_rotate_a = get_movs_rotate(stack_a, stack_a->stack[pos]);
-	movs_rotate_b = get_movs_rotate(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
-	movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[pos]);
-	movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
+		movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
+		movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[pos]);
+		movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, stack_b->stack[pos]));
+		movs_reverse_b = get_movs_reverse(stack_b, stack_b->stack[pos]);
+
 
 	if (type == 0)
 	{
