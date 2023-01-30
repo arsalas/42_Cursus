@@ -157,7 +157,7 @@ int get_num_to_top_a(t_stack *stack, int num) // 2
 
 	// max menor que num
 	int i = 0;
-	min = stack->len + 1;
+	min = INT_MAX;
 	while (i < stack->len)
 	{
 		if (stack->stack[i] > num && stack->stack[i] < min)
