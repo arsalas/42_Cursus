@@ -221,26 +221,30 @@ t_movements get_moves_order(t_stack *stack_a, t_stack *stack_b)
 	{
 		movs_rotate_a = get_movs_rotate(stack_a, stack_a->stack[i]);
 		movs_rotate_b = get_movs_rotate(stack_b, get_num_to_top_b(stack_b, stack_a->stack[i]));
-		movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[i]);
-		movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[i]));
+		// movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[i]);
+		// movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[i]));
 
 		// max_rot + (rot_a - rot_b)
 		a = max(movs_rotate_a, movs_rotate_b);
 		// if (movs_rotate_a != 0 && movs_rotate_b != 0)
 		// 	a += abs(movs_rotate_a - movs_rotate_b);
 		// max_rev + (rev_a - rev_b)
-		b = max(movs_reverse_a, movs_reverse_b);
+		// b = max(movs_reverse_a, movs_reverse_b);
 		// if (movs_reverse_a != 0 && movs_reverse_b != 0)
 		// 	b += abs(movs_reverse_a - movs_reverse_b);
 		// rot_a + rev_b
-		c = movs_rotate_a + movs_reverse_b;
+		// c = movs_rotate_a + movs_reverse_b;
 		// rev_a + rot_a
-		d = movs_reverse_a + movs_rotate_b;
-
-		if (i == 0 || movs > min(min(a, b), min(c, d)))
+		// d = movs_reverse_a + movs_rotate_b;
+		(void)b;
+		(void)c;
+		(void)d;
+		(void)movs_reverse_a;
+		(void)movs_reverse_b;
+		if (i == 0 || movs > a)
 		{
-			movs = min(min(a, b), min(c, d));
-			type = get_type(a, b, c, d);
+			movs = a;
+			type = 0;
 			pos = i;
 		}
 		// printf("Moves: a: %i, b: %i, c: %i, d: %i\n", a, b, c, d);
@@ -249,8 +253,8 @@ t_movements get_moves_order(t_stack *stack_a, t_stack *stack_b)
 	}
 	movs_rotate_a = get_movs_rotate(stack_a, stack_a->stack[pos]);
 	movs_rotate_b = get_movs_rotate(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
-	movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[pos]);
-	movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
+	// movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[pos]);
+	// movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
 
 	if (type == 0)
 	{
@@ -260,24 +264,24 @@ t_movements get_moves_order(t_stack *stack_a, t_stack *stack_b)
 		else
 			moves.rb = movs_rotate_b - movs_rotate_a;
 	}
-	else if (type == 1)
-	{
-		moves.rrr = max(movs_reverse_a, movs_reverse_b);
-		if (movs_reverse_a > movs_reverse_b)
-			moves.rra = movs_reverse_a - movs_reverse_b;
-		else
-			moves.rrb = movs_reverse_b - movs_reverse_a;
-	}
-	else if (type == 2)
-	{
-		moves.ra = movs_rotate_a;
-		moves.rrb = movs_reverse_b;
-	}
-	else if (type == 3)
-	{
-		moves.rra = movs_reverse_a;
-		moves.rb = movs_rotate_b;
-	}
+	// else if (type == 1)
+	// {
+	// 	moves.rrr = max(movs_reverse_a, movs_reverse_b);
+	// 	if (movs_reverse_a > movs_reverse_b)
+	// 		moves.rra = movs_reverse_a - movs_reverse_b;
+	// 	else
+	// 		moves.rrb = movs_reverse_b - movs_reverse_a;
+	// }
+	// else if (type == 2)
+	// {
+	// 	moves.ra = movs_rotate_a;
+	// 	moves.rrb = movs_reverse_b;
+	// }
+	// else if (type == 3)
+	// {
+	// 	moves.rra = movs_reverse_a;
+	// 	moves.rb = movs_rotate_b;
+	// }
 	return (moves);
 }
 
