@@ -135,7 +135,7 @@ int get_num_to_top_b(t_stack *stack, int num) // 3
 		return (max);
 	// max menor que num
 	int i = 0;
-	min = -1;
+	min = INT_MIN;
 	while (i < stack->len)
 	{
 		if (stack->stack[i] < num && stack->stack[i] > min)
@@ -502,12 +502,12 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 	if (get_min_num_stack_position(stack_a) > stack_a->len)
 	{
 		while (stack_a->stack[0] != 0)
-			rra(stack_a, 1);
+			ra(stack_a, 1);
 	}
 	else
 	{
 		while (stack_a->stack[0] != 0)
-			ra(stack_a, 1);
+			rra(stack_a, 1);
 	}
 
 	// if (get_max_num_stack_position(stack_b) > stack_b->len)
