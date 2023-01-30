@@ -197,7 +197,7 @@ int get_type(int a, int b, int c, int d)
 	return (3);
 }
 
-t_movements get_moves_order(t_stack *stack_a, t_stack *stack_b)
+t_movements get_moves_order_a(t_stack *stack_a, t_stack *stack_b)
 {
 	int movs_rotate_a;
 	int movs_rotate_b;
@@ -223,6 +223,89 @@ t_movements get_moves_order(t_stack *stack_a, t_stack *stack_b)
 		movs_rotate_b = get_movs_rotate(stack_b, get_num_to_top_b(stack_b, stack_a->stack[i]));
 		movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[i]);
 		movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[i]));
+
+		// max_rot + (rot_a - rot_b)
+		a = max(movs_rotate_a, movs_rotate_b);
+		// if (movs_rotate_a != 0 && movs_rotate_b != 0)
+		// 	a += abs(movs_rotate_a - movs_rotate_b);
+		// max_rev + (rev_a - rev_b)
+		b = max(movs_reverse_a, movs_reverse_b);
+		// if (movs_reverse_a != 0 && movs_reverse_b != 0)
+		// 	b += abs(movs_reverse_a - movs_reverse_b);
+		// rot_a + rev_b
+		c = movs_rotate_a + movs_reverse_b;
+		// rev_a + rot_a
+		d = movs_reverse_a + movs_rotate_b;
+
+		if (i == 0 || movs > min(min(a, b), min(c, d)))
+		{
+			movs = min(min(a, b), min(c, d));
+			type = get_type(a, b, c, d);
+			pos = i;
+		}
+		// printf("Moves: a: %i, b: %i, c: %i, d: %i\n", a, b, c, d);
+		// printf("Moves total: %i\n", movs);
+		i++;
+	}
+	movs_rotate_a = get_movs_rotate(stack_a, stack_a->stack[pos]);
+	movs_rotate_b = get_movs_rotate(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
+	movs_reverse_a = get_movs_reverse(stack_a, stack_a->stack[pos]);
+	movs_reverse_b = get_movs_reverse(stack_b, get_num_to_top_b(stack_b, stack_a->stack[pos]));
+
+	if (type == 0)
+	{
+		moves.rr = max(movs_rotate_a, movs_rotate_b);
+		if (movs_rotate_a > movs_rotate_b)
+			moves.ra = movs_rotate_a - movs_rotate_b;
+		else
+			moves.rb = movs_rotate_b - movs_rotate_a;
+	}
+	else if (type == 1)
+	{
+		moves.rrr = max(movs_reverse_a, movs_reverse_b);
+		if (movs_reverse_a > movs_reverse_b)
+			moves.rra = movs_reverse_a - movs_reverse_b;
+		else
+			moves.rrb = movs_reverse_b - movs_reverse_a;
+	}
+	else if (type == 2)
+	{
+		moves.ra = movs_rotate_a;
+		moves.rrb = movs_reverse_b;
+	}
+	else if (type == 3)
+	{
+		moves.rra = movs_reverse_a;
+		moves.rb = movs_rotate_b;
+	}
+	return (moves);
+}
+t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
+{
+	int movs_rotate_a;
+	int movs_rotate_b;
+	int movs_reverse_a;
+	int movs_reverse_b;
+	int pos, movs;
+	int a, b, c, d;
+	t_movements moves;
+	int type;
+
+	int i = 0;
+	pos = 0;
+	movs = 0;
+	moves.ra = 0;
+	moves.rb = 0;
+	moves.rr = 0;
+	moves.rra = 0;
+	moves.rrb = 0;
+	moves.rrr = 0;
+	while (i < stack_a->len)
+	{
+		movs_rotate_a = get_movs_rotate(stack_a, get_num_to_top_a(stack_a, stack_b->stack[i]));
+		movs_rotate_b = get_movs_rotate(stack_b, stack_b->stack[i]);
+		movs_reverse_a = get_movs_reverse(stack_a, get_num_to_top_a(stack_a, stack_b->stack[i]));
+		movs_reverse_b = get_movs_reversestack_b, stack_b->stack[i]);
 
 		// max_rot + (rot_a - rot_b)
 		a = max(movs_rotate_a, movs_rotate_b);
@@ -315,7 +398,7 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 	// printStack(stack_b);
 	while (stack_a->len > 3)
 	{
-		moves = get_moves_order(stack_a, stack_b);
+		moves = get_moves_order_a(stack_a, stack_b);
 		i = 0;
 		while (i < moves.ra)
 		{
@@ -370,26 +453,46 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 
 	while (stack_b->len > 0)
 	{
-		int numObj = get_num_to_top_a(stack_a, stack_b->stack[0]);
-		int movs_rotate_a = get_movs_rotate(stack_a, numObj);
-		int movs_reverse_a = get_movs_reverse(stack_a, numObj);
-
-		if (movs_rotate_a > movs_reverse_a)
+		moves = get_moves_order_b(stack_a, stack_b);
+		i = 0;
+		while (i < moves.ra)
 		{
-			while (stack_a->stack[0] != numObj)
-			{
-				ra(stack_a, 1);
-			}
+			ra(stack_a, 1);
+			i++;
 		}
-		else
+		i = 0;
+		while (i < moves.rb)
 		{
-			while (stack_a->stack[0] != numObj)
-			{
-				rra(stack_a, 1);
-			}
+			rb(stack_b, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rr)
+		{
+			rr(stack_a, stack_b, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rra)
+		{
+			rra(stack_a, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rrb)
+		{
+			rrb(stack_b, 1);
+			i++;
+		}
+		i = 0;
+		while (i < moves.rrr)
+		{
+			rrr(stack_a, stack_b, 1);
+			i++;
 		}
 		pa(stack_a, stack_b, 1);
 		// printStacks(stack_a, stack_b);
+		c++;
 	}
 
 	if (get_min_num_stack_position(stack_a) > stack_a->len)
