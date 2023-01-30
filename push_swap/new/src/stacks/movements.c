@@ -25,6 +25,7 @@ typedef struct s_movements
 int get_movs_rotate(t_stack *stack, int num)
 {
 	int i = 0;
+
 	while (i < stack->len)
 	{
 		if (stack->stack[i] == num)
@@ -238,7 +239,7 @@ t_movements get_moves_order_a(t_stack *stack_a, t_stack *stack_b)
 		// rev_a + rot_a
 		d = movs_reverse_a + movs_rotate_b;
 
-		if (i == 0 || movs > min(min(a, b), min(c, d)))
+		if (i == 0 || min(min(a, b), min(c, d)) < movs)
 		{
 			movs = min(min(a, b), min(c, d));
 			type = get_type(a, b, c, d);
@@ -255,7 +256,7 @@ t_movements get_moves_order_a(t_stack *stack_a, t_stack *stack_b)
 
 	if (type == 0)
 	{
-		moves.rr = max(movs_rotate_a, movs_rotate_b);
+		moves.rr = min(movs_rotate_a, movs_rotate_b);
 		if (movs_rotate_a > movs_rotate_b)
 			moves.ra = movs_rotate_a - movs_rotate_b;
 		else
@@ -263,7 +264,7 @@ t_movements get_moves_order_a(t_stack *stack_a, t_stack *stack_b)
 	}
 	else if (type == 1)
 	{
-		moves.rrr = max(movs_reverse_a, movs_reverse_b);
+		moves.rrr = min(movs_reverse_a, movs_reverse_b);
 		if (movs_reverse_a > movs_reverse_b)
 			moves.rra = movs_reverse_a - movs_reverse_b;
 		else
@@ -321,7 +322,7 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 		// rev_a + rot_a
 		d = movs_reverse_a + movs_rotate_b;
 
-		if (i == 0 || movs > min(min(a, b), min(c, d)))
+		if (i == 0 || min(min(a, b), min(c, d)) < movs)
 		{
 			movs = min(min(a, b), min(c, d));
 			type = get_type(a, b, c, d);
@@ -338,7 +339,7 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 
 	if (type == 0)
 	{
-		moves.rr = max(movs_rotate_a, movs_rotate_b);
+		moves.rr = min(movs_rotate_a, movs_rotate_b);
 		if (movs_rotate_a > movs_rotate_b)
 			moves.ra = movs_rotate_a - movs_rotate_b;
 		else
@@ -346,7 +347,7 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 	}
 	else if (type == 1)
 	{
-		moves.rrr = max(movs_reverse_a, movs_reverse_b);
+		moves.rrr = min(movs_reverse_a, movs_reverse_b);
 		if (movs_reverse_a > movs_reverse_b)
 			moves.rra = movs_reverse_a - movs_reverse_b;
 		else
@@ -392,7 +393,6 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 	t_movements moves;
 	int i;
 
-	i = 0;
 	int c = 0;
 	pb(stack_a, stack_b, 1);
 	pb(stack_a, stack_b, 1);
