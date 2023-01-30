@@ -454,60 +454,60 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 
 	// printStacks(stack_a, stack_b);
 
-	while (stack_b->len > 0)
-	{
-		moves = get_moves_order_b(stack_a, stack_b);
-		i = 0;
-		while (i < moves.ra)
-		{
-			ra(stack_a, 1);
-			i++;
-		}
-		i = 0;
-		while (i < moves.rb)
-		{
-			rb(stack_b, 1);
-			i++;
-		}
-		i = 0;
-		while (i < moves.rr)
-		{
-			rr(stack_a, stack_b, 1);
-			i++;
-		}
-		i = 0;
-		while (i < moves.rra)
-		{
-			rra(stack_a, 1);
-			i++;
-		}
-		i = 0;
-		while (i < moves.rrb)
-		{
-			rrb(stack_b, 1);
-			i++;
-		}
-		i = 0;
-		while (i < moves.rrr)
-		{
-			rrr(stack_a, stack_b, 1);
-			i++;
-		}
-		pa(stack_a, stack_b, 1);
-		// printStacks(stack_a, stack_b);
-		c++;
-	}
+	// while (stack_b->len > 0)
+	// {
+	// 	moves = get_moves_order_b(stack_a, stack_b);
+	// 	i = 0;
+	// 	while (i < moves.ra)
+	// 	{
+	// 		ra(stack_a, 1);
+	// 		i++;
+	// 	}
+	// 	i = 0;
+	// 	while (i < moves.rb)
+	// 	{
+	// 		rb(stack_b, 1);
+	// 		i++;
+	// 	}
+	// 	i = 0;
+	// 	while (i < moves.rr)
+	// 	{
+	// 		rr(stack_a, stack_b, 1);
+	// 		i++;
+	// 	}
+	// 	i = 0;
+	// 	while (i < moves.rra)
+	// 	{
+	// 		rra(stack_a, 1);
+	// 		i++;
+	// 	}
+	// 	i = 0;
+	// 	while (i < moves.rrb)
+	// 	{
+	// 		rrb(stack_b, 1);
+	// 		i++;
+	// 	}
+	// 	i = 0;
+	// 	while (i < moves.rrr)
+	// 	{
+	// 		rrr(stack_a, stack_b, 1);
+	// 		i++;
+	// 	}
+	// 	pa(stack_a, stack_b, 1);
+	// 	// printStacks(stack_a, stack_b);
+	// 	c++;
+	// }
 
-	if (get_min_num_stack_position(stack_a) > stack_a->len)
-	{
-		while (stack_a->stack[0] != 0)
-			rra(stack_a, 1);
-	}
-	else
-	{
-		while (stack_a->stack[0] != 0)
-			ra(stack_a, 1);
-	}
+	// if (get_min_num_stack_position(stack_a) > stack_a->len)
+	// {
+	// 	while (stack_a->stack[0] != 0)
+	// 		rra(stack_a, 1);
+	// }
+	// else
+	// {
+	// 	while (stack_a->stack[0] != 0)
+	// 		ra(stack_a, 1);
+	// }
 
 	// if (get_max_num_stack_position(stack_b) > stack_b->len)
 	// {
