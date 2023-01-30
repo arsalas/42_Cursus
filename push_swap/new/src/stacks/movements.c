@@ -400,7 +400,7 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 	pb(stack_a, stack_b, 1);
 	pb(stack_a, stack_b, 1);
 	// printStack(stack_b);
-	while (stack_a->len > 3)
+	while (stack_a->len > 2)
 	{
 		moves = get_moves_order_a(stack_a, stack_b);
 		i = 0;
@@ -448,10 +448,10 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 	// stack a esta ordenado al reves
 	// stack a no esta ordenado
 
-	if (!is_order_stack3(stack_a))
-	{
-		sa(stack_a, 1);
-	}
+	// if (!is_order_stack3(stack_a))
+	// {
+	// 	sa(stack_a, 1);
+	// }
 
 	// printStacks(stack_a, stack_b);
 
@@ -499,15 +499,15 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 		c++;
 	}
 
-	if (get_min_num_stack_position(stack_a) > stack_a->len)
+	if (get_min_num_stack_position(stack_a) > stack_a->len / 2)
 	{
 		while (stack_a->stack[0] != 0)
-			ra(stack_a, 1);
+			rra(stack_a, 1);
 	}
 	else
 	{
 		while (stack_a->stack[0] != 0)
-			rra(stack_a, 1);
+			ra(stack_a, 1);
 	}
 
 	// if (get_max_num_stack_position(stack_b) > stack_b->len)
