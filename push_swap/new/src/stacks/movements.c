@@ -388,7 +388,9 @@ void printStacks(t_stack *stack_a, t_stack *stack_b)
 int is_order_stack3(t_stack *stack)
 {
 	return (
-		(stack->stack[0] < stack->stack[1] && stack->stack[1] < stack->stack[2]) || (stack->stack[0] > stack->stack[1] && stack->stack[1] < stack->stack[2]) || (stack->stack[0] < stack->stack[1] && stack->stack[1] > stack->stack[2] && stack->stack[0] > stack->stack[2]));
+		(stack->stack[0] < stack->stack[1] && stack->stack[1] < stack->stack[2]) 
+		|| (stack->stack[0] > stack->stack[1] && stack->stack[1] < stack->stack[2]) 
+		|| (stack->stack[0] < stack->stack[1] && stack->stack[1] > stack->stack[2]);
 }
 
 void push_swap(t_stack *stack_a, t_stack *stack_b)
