@@ -133,7 +133,8 @@ int get_num_to_top_b(t_stack *stack, int num) // 6
 	if (num > max || num < min)
 		return (max);
 	// max menor que num
-	int i = 0;
+	int i = 1;
+	min = stack->stack[0];
 	while (i < stack->len)
 	{
 		if (stack->stack[i] < num && stack->stack[i] > min)
