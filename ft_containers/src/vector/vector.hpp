@@ -639,6 +639,8 @@ namespace ft
 			InputIterator last,
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 		{
+			if (last < first)
+				return;
 			// Calculamos el indice donde se empiezan a insertar los elementos
 			size_type offset = position - begin();
 			// Creamos un iterador en la primera posicion del elemento

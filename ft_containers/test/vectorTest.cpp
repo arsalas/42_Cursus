@@ -639,6 +639,24 @@ void vectorTest()
 		}
 		(c == c2) ? testOk() : testKo();
 
+		myvector.insert(it + 2, anothervector.end(), anothervector.begin());
+		myvector2.insert(it2 + 2, anothervector2.end(), anothervector2.begin());
+
+		it2 = myvector2.begin();
+		c = 0;
+		c2 = 0;
+		for (it = myvector.begin(); it < myvector.end(); it++)
+		{
+			(*it == *it2) ? testOk() : testKo();
+			it2++;
+			c++;
+		}
+		for (it2 = myvector2.begin(); it2 < myvector2.end(); it2++)
+		{
+			c2++;
+		}
+		(c == c2) ? testOk() : testKo();
+
 		std::cout << '\n';
 	}
 	{
