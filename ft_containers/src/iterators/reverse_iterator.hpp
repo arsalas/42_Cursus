@@ -30,21 +30,17 @@ namespace ft
 
 		reverse_iterator(const iterator_type copy) : _it(copy) {}
 		template <typename It>
-		reverse_iterator(const reverse_iterator<It> &copy) : _it(copy.base()){};
+		reverse_iterator(const reverse_iterator<It> &copy) : _it(copy._it){};
 
 		virtual ~reverse_iterator() {}
 
 		template <class It>
 		self &operator=(const reverse_iterator<It> &other)
 		{
-			_it = other.base();
+			_it = other._it;
 			return *this;
 		}
 
-		iterator_type base() const
-		{
-			return _it;
-		}
 
 		// ==============================================================
 		// 							OPERATORS
@@ -122,7 +118,7 @@ namespace ft
 		template <class It>
 		difference_type operator-(const reverse_iterator<It> &x)
 		{
-			return x.base().operator-(_it);
+			return x._it.operator-(_it);
 		}
 
 		friend reverse_iterator operator+(difference_type n, const reverse_iterator &rhs)
@@ -133,37 +129,37 @@ namespace ft
 		template <class It>
 		bool operator==(const reverse_iterator<It> &rhs) const
 		{
-			return _it == rhs.base();
+			return _it == rhs._it;
 		}
 
 		template <class It>
 		bool operator!=(const reverse_iterator<It> &rhs) const
 		{
-			return _it != rhs.base();
+			return _it != rhs._it;
 		}
 
 		template <class It>
 		bool operator<(const reverse_iterator<It> &rhs) const
 		{
-			return _it > rhs.base();
+			return _it > rhs._it;
 		}
 
 		template <class It>
 		bool operator>(const reverse_iterator<It> &rhs) const
 		{
-			return _it < rhs.base();
+			return _it < rhs._it;
 		}
 
 		template <class It>
 		bool operator<=(const reverse_iterator<It> &rhs) const
 		{
-			return _it >= rhs.base();
+			return _it >= rhs._it;
 		}
 
 		template <class It>
 		bool operator>=(const reverse_iterator<It> &rhs) const
 		{
-			return _it <= rhs.base();
+			return _it <= rhs._it;
 		}
 
 	private:
