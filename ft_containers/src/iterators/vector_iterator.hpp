@@ -17,7 +17,6 @@ namespace ft
 		typedef T value_type;
 		typedef vector_iterator<T, isconst> self;
 		typedef std::ptrdiff_t difference_type;
-		typedef std::bidirectional_iterator_tag iterator_category;
 		typedef typename choose_type<isconst, const T &, T &>::type reference;
 		typedef typename choose_type<isconst, const T *, T *>::type pointer;
 

@@ -16,7 +16,6 @@ namespace ft
 		typedef reverse_iterator self;
 		typedef Iterator iterator_type;
 
-		typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
 		typedef typename iterator_traits<iterator_type>::value_type value_type;
 		typedef typename iterator_traits<iterator_type>::pointer pointer;
 		typedef typename iterator_traits<iterator_type>::reference reference;
