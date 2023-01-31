@@ -15,6 +15,16 @@
 
 #include "stack.h"
 
+typedef struct s_actions
+{
+	int ra;
+	int rb;
+	int rr;
+	int rra;
+	int rrb;
+	int rrr;
+} t_actions;
+
 void	sa(t_stack *a, int print);
 void	sb(t_stack *b, int print);
 void	ss(t_stack *a, t_stack *b, int print);

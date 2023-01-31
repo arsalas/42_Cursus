@@ -14,7 +14,7 @@
 #include "stack.h"
 #include "actions.h"
 
-int	is_order(t_stack *stack);
+int	is_stack_sort(t_stack *stack);
 
 typedef struct s_movements
 {
@@ -185,12 +185,6 @@ int min(int n1, int n2)
 	return n1;
 }
 
-int abs(int n)
-{
-	if (n < 0)
-		return (n * -1);
-	return n;
-}
 
 int get_type(int a, int b, int c, int d)
 {
@@ -233,12 +227,8 @@ t_movements get_moves_order_a(t_stack *stack_a, t_stack *stack_b)
 
 		// max_rot + (rot_a - rot_b)
 		a = max(movs_rotate_a, movs_rotate_b);
-		// if (movs_rotate_a != 0 && movs_rotate_b != 0)
-		// 	a += abs(movs_rotate_a - movs_rotate_b);
 		// max_rev + (rev_a - rev_b)
 		b = max(movs_reverse_a, movs_reverse_b);
-		// if (movs_reverse_a != 0 && movs_reverse_b != 0)
-		// 	b += abs(movs_reverse_a - movs_reverse_b);
 		// rot_a + rev_b
 		c = movs_rotate_a + movs_reverse_b;
 		// rev_a + rot_a
@@ -250,8 +240,6 @@ t_movements get_moves_order_a(t_stack *stack_a, t_stack *stack_b)
 			type = get_type(a, b, c, d);
 			pos = i;
 		}
-		// printf("Moves: a: %i, b: %i, c: %i, d: %i\n", a, b, c, d);
-		// printf("Moves total: %i, type: %c, pos: %i\n", movs, (type + 'a'), pos);
 		i++;
 	}
 	movs_rotate_a = get_movs_rotate(stack_a, stack_a->stack[pos]);
@@ -317,12 +305,8 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 
 		// max_rot + (rot_a - rot_b)
 		a = max(movs_rotate_a, movs_rotate_b);
-		// if (movs_rotate_a != 0 && movs_rotate_b != 0)
-		// 	a += abs(movs_rotate_a - movs_rotate_b);
 		// max_rev + (rev_a - rev_b)
 		b = max(movs_reverse_a, movs_reverse_b);
-		// if (movs_reverse_a != 0 && movs_reverse_b != 0)
-		// 	b += abs(movs_reverse_a - movs_reverse_b);
 		// rot_a + rev_b
 		c = movs_rotate_a + movs_reverse_b;
 		// rev_a + rot_a
@@ -334,8 +318,6 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 			type = get_type(a, b, c, d);
 			pos = i;
 		}
-		// printf("Moves: a: %i, b: %i, c: %i, d: %i\n", a, b, c, d);
-		// printf("Moves total: %i\n", movs);
 		i++;
 	}
 	int obj = stack_b->stack[pos];
@@ -373,34 +355,14 @@ t_movements get_moves_order_b(t_stack *stack_a, t_stack *stack_b)
 	return (moves);
 }
 
-// void printStacks(t_stack *stack_a, t_stack *stack_b)
-// {
-// 	printf("Stack a: ");
-// 	for (int i = 0; i < stack_a->len; i++)
-// 	{
-// 		printf("%i ", stack_a->stack[i] + 1);
-// 	}
-// 	printf("\n");
-// 	printf("Stack b: ");
-// 	for (int i = 0; i < stack_b->len; i++)
-// 	{
-// 		printf("%i ", stack_b->stack[i] + 1);
-// 	}
-// 	printf("\n");
-// }
 
-int is_order_stack3(t_stack *stack)
-{
-	return (
-		(stack->stack[0] < stack->stack[1] && stack->stack[1] < stack->stack[2]) || (stack->stack[0] > stack->stack[1] && stack->stack[1] < stack->stack[2]) || (stack->stack[0] < stack->stack[1] && stack->stack[1] > stack->stack[2]));
-}
 
 void push_swap(t_stack *stack_a, t_stack *stack_b)
 {
 	t_movements moves;
 	int i;
 
-	if (is_order(stack_a))
+	if (is_stack_sort(stack_a))
 		return;
 	int c = 0;
 	pb(stack_a, stack_b, 1);
@@ -450,17 +412,6 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 		c++;
 	}
 
-	// stack a esta ordenado
-	// stack a esta ordenado al reves
-	// stack a no esta ordenado
-
-	// if (!is_order_stack3(stack_a))
-	// {
-	// 	sa(stack_a, 1);
-	// }
-
-	// printStacks(stack_a, stack_b);
-
 	while (stack_b->len > 0)
 	{
 		moves = get_moves_order_b(stack_a, stack_b);
@@ -501,7 +452,6 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 			i++;
 		}
 		pa(stack_a, stack_b, 1);
-		// printStacks(stack_a, stack_b);
 		c++;
 	}
 
@@ -517,21 +467,4 @@ void push_swap(t_stack *stack_a, t_stack *stack_b)
 			ra(stack_a, 1);
 	}
 
-	// if (get_max_num_stack_position(stack_b) > stack_b->len)
-	// {
-	// 	while (stack_b->stack[0] != 0)
-	// 		rrb(stack_b, 1);
-	// }
-	// else
-	// {
-	// 	while (stack_b->stack[0] != 0)
-	// 		rb(stack_b, 1);
-	// }
-
-	// while (stack_b->len > 0)
-	// {
-	// 	pa(stack_a, stack_b, 1);
-	// }
-
-	// printStacks(stack_a, stack_b);
 }

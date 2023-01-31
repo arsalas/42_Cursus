@@ -24,9 +24,6 @@
  */
 void	create_stacks(t_stack *stack_a, t_stack *stack_b, int numbers)
 {
-	// stack_a->original = ft_calloc(sizeof(int), numbers);
-	// if (stack_a->original == NULL)
-	// 	exit (0);
 	stack_a->len = 0;
 	stack_a->stack = ft_calloc(sizeof(int), numbers);
 	if (stack_a->stack == NULL)
@@ -47,5 +44,24 @@ void	destroy_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	free(stack_a->stack);
 	free(stack_b->stack);
-	// free(stack_a->original);
+}
+
+/**
+ * @brief Comprueba si el array esta ordendo 
+ * 
+ * @param stack stack a utilizar
+ * @return 1 si esta ordenado 0 si no lo esta
+ */
+int	is_stack_sort(t_stack *stack)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack->len - 1)
+	{
+		if (stack->stack[i] > stack->stack[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }

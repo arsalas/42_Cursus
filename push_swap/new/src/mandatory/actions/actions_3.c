@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "actions.h"
 #include "stack.h"
 #include "helpers.h"
 
@@ -29,3 +30,71 @@ void	rrr(t_stack *a, t_stack *b, int print)
 	reverse(a);
 	reverse(b);
 }
+
+t_actions new_actions(void)
+{
+	t_actions actions;
+
+	actions.ra = 0;
+	actions.rb = 0;
+	actions.rr = 0;
+	actions.rra = 0;
+	actions.rrb = 0;
+	actions.rrr = 0;
+	return (actions);
+} 
+
+static void execute_actions_rotate(t_actions actions, t_stack *stack_a, t_stack *stack_b)
+{
+	int	i;
+
+	i = 0;
+	while (i < actions.ra)
+	{
+		ra(stack_a, 1);
+		i++;
+	}
+	i = 0;
+	while (i < actions.rb)
+	{
+		rb(stack_b, 1);
+		i++;
+	}
+	i = 0;
+	while (i < actions.rr)
+	{
+		rr(stack_a, stack_b, 1);
+		i++;
+	}
+}
+
+static void execute_actions_rotate_reverse(t_actions actions, t_stack *stack_a, t_stack *stack_b)
+{
+	int	i;
+
+	i = 0;
+	while (i < actions.rra)
+	{
+		rra(stack_a, 1);
+		i++;
+	}
+	i = 0;
+	while (i < actions.rrb)
+	{
+		rrb(stack_b, 1);
+		i++;
+	}
+	i = 0;
+	while (i < actions.rrr)
+	{
+		rrr(stack_a, stack_b, 1);
+		i++;
+	}
+}
+
+void execute_actions(t_actions actions, t_stack *stack_a, t_stack *stack_b)
+{
+	execute_actions_rotate(actions, stack_a, stack_b);
+	execute_actions_rotate_reverse(actions, stack_a, stack_b);
+}
+

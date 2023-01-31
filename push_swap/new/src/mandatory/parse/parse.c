@@ -28,7 +28,11 @@ static int	ft_isnumber_valid(char *num)
 
 	i = 0;
 	if (num[i] == '-')
+	{
+		if (ft_strlen(num) == 1)
+			return (0);
 		i++;
+	}
 	while (num[i])
 	{
 		if (ft_isdigit(num[i]) == 0)

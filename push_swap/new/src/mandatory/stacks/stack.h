@@ -16,7 +16,6 @@
 typedef struct s_stack
 {
 	int	*stack;
-	int	*original;
 	int	len;
 }	t_stack;
 
