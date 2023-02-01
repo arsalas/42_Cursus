@@ -22,8 +22,8 @@ SRCS 			=  main.c\
 				actions_aux.c \
 				maths.c \
 				parse.c \
-				sorting.c \
-				stack.c 
+				sorting_1.c sorting_2.c sorting_3.c \
+				stack.c stack_aux.c
 
 
 # FOLDERS
@@ -57,7 +57,7 @@ INC			= $(addprefix -I , $(INCLUDES))
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.c src/mandatory  src/mandatory/actions src/mandatory/errors src/mandatory/helpers src/mandatory/parse src/mandatory/stacks src/mandatory/maths src/mandatory/sorting
+vpath %.c src/mandatory src/mandatory/actions src/mandatory/errors src/mandatory/helpers src/mandatory/maths src/mandatory/parse src/mandatory/sorting src/mandatory/stacks
 
 .SECONDEXPANSION:
 
@@ -81,6 +81,9 @@ leaks: $(BIN)
 	@which valgrind | grep -o valgrind > /dev/null && \
 	valgrind --leak-check=yes ./$(BIN) || \
 	leaks -atExit -- ./$(BIN)
+
+norm:
+	@norminette $(SRCS)
 
 visualizer100:	$(BIN)
 	@python3 tests/pyviz.py `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`

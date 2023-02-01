@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:54:32 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/23 14:26:10 by aramirez         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:05:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ void	print_error(void)
 	write(2, "Error\n", 6);
 	exit(0);
 }
-

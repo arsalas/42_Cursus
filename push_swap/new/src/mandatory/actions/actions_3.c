@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:04:40 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/20 18:32:50 by aramirez         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:04:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	rrr(t_stack *a, t_stack *b, int print)
 	reverse(b);
 }
 
-t_actions new_action(void)
+t_actions	new_action(void)
 {
-	t_actions actions;
+	t_actions	actions;
 
 	actions.ra = 0;
 	actions.rb = 0;
@@ -42,9 +42,10 @@ t_actions new_action(void)
 	actions.rrb = 0;
 	actions.rrr = 0;
 	return (actions);
-} 
+}
 
-static void execute_actions_rotate(t_actions actions, t_stack *stack_a, t_stack *stack_b)
+static void	execute_actions_rotate(
+	t_actions actions, t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
 
@@ -68,7 +69,8 @@ static void execute_actions_rotate(t_actions actions, t_stack *stack_a, t_stack 
 	}
 }
 
-static void execute_actions_rotate_reverse(t_actions actions, t_stack *stack_a, t_stack *stack_b)
+static void	execute_actions_rotate_reverse(
+	t_actions actions, t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
 
@@ -92,9 +94,8 @@ static void execute_actions_rotate_reverse(t_actions actions, t_stack *stack_a, 
 	}
 }
 
-void execute_actions(t_actions actions, t_stack *stack_a, t_stack *stack_b)
+void	execute_actions(t_actions actions, t_stack *stack_a, t_stack *stack_b)
 {
 	execute_actions_rotate(actions, stack_a, stack_b);
 	execute_actions_rotate_reverse(actions, stack_a, stack_b);
 }
-
