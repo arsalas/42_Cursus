@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:11:51 by aramirez          #+#    #+#             */
-/*   Updated: 2023/02/01 12:31:51 by aramirez         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:12:46 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ t_option	get_min_actions_a(t_stack *stack_a, t_stack *stack_b, int obj)
 {
 	t_option	option;
 
-	option.movs_rotate_a = get_movs_rotate(stack_a, obj);
-	option.movs_rotate_b = get_movs_rotate(
-			stack_b, get_num_to_top_b(stack_b, obj));
-	option.movs_reverse_a = get_movs_reverse(stack_a, obj);
-	option.movs_reverse_b = get_movs_reverse(
-			stack_b, get_num_to_top_b(stack_b, obj));
+	option.movs_rotate_a = get_movs_rotate(
+			stack_a, get_num_to_top_a(stack_a, obj));
+	option.movs_rotate_b = get_movs_rotate(stack_b, obj);
+	option.movs_reverse_a = get_movs_reverse(
+			stack_a, get_num_to_top_a(stack_a, obj));
+	option.movs_reverse_b = get_movs_reverse(stack_b, obj);
 	calc_min_actions_by_moves(&option);
 	return (option);
 }
@@ -87,10 +87,10 @@ t_option	get_min_actions_b(t_stack *stack_a, t_stack *stack_b, int obj)
 
 	option.movs_rotate_a = get_movs_rotate(stack_a, obj);
 	option.movs_rotate_b = get_movs_rotate(
-			stack_b, get_num_to_top_a(stack_b, obj));
+			stack_b, get_num_to_top_b(stack_b, obj));
 	option.movs_reverse_a = get_movs_reverse(stack_a, obj);
 	option.movs_reverse_b = get_movs_reverse(
-			stack_b, get_num_to_top_a(stack_b, obj));
+			stack_b, get_num_to_top_b(stack_b, obj));
 	calc_min_actions_by_moves(&option);
 	return (option);
 }

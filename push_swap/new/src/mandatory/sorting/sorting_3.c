@@ -6,7 +6,7 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:22:38 by aramirez          #+#    #+#             */
-/*   Updated: 2023/02/01 12:37:07 by aramirez         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:11:07 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ t_actions	get_moves_sort_b(t_stack *stack_a, t_stack *stack_b)
 	t_option	min_option;
 
 	i = 0;
-	while (i < stack_a->len)
+	while (i < stack_b->len)
 	{
-		option = get_min_actions_a(stack_a, stack_b, stack_a->stack[i]);
+		option = get_min_actions_a(stack_a, stack_b, stack_b->stack[i]);
 		if (i == 0 || option.quantity_moves < min_option.quantity_moves)
 			min_option = option;
 		i++;
