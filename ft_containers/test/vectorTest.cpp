@@ -32,6 +32,12 @@ void vectorTest()
 		ft::vector<int>::iterator it2 = second2.begin();
 		for (std::vector<int>::iterator it = second.begin(); it != second.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				continue;
+			}
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 		}
@@ -49,6 +55,13 @@ void vectorTest()
 		ft::vector<int>::iterator it2 = second2.begin();
 		for (std::vector<int>::iterator it = second.begin(); it != second.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				continue;
+			}
+
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 		}
@@ -66,6 +79,12 @@ void vectorTest()
 		ft::vector<int>::iterator it2 = second2.begin();
 		for (std::vector<int>::iterator it = second.begin(); it != second.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				continue;
+			}
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 		}
@@ -106,6 +125,14 @@ void vectorTest()
 		int i = 0, i2 = 0;
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				i++;
+				++it2;
+				continue;
+			}
+
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 			i++;
@@ -132,6 +159,13 @@ void vectorTest()
 		int i = 0, i2 = 0;
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				i++;
+				continue;
+			}
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 			i++;
@@ -163,6 +197,12 @@ void vectorTest()
 		ft::vector<int>::iterator it2 = myvector2.begin();
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				continue;
+			}
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 		}
@@ -189,6 +229,12 @@ void vectorTest()
 		ft::vector<int>::iterator it2 = myvector2.begin();
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				continue;
+			}
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 		}
@@ -629,6 +675,14 @@ void vectorTest()
 		int c = 0, c2 = 0;
 		for (it = myvector.begin(); it < myvector.end(); it++)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				c++;
+				continue;
+			}
+
 			(*it == *it2) ? testOk() : testKo();
 			it2++;
 			c++;
@@ -681,6 +735,11 @@ void vectorTest()
 
 		for (unsigned i = 0; i < myvector.size(); ++i)
 		{
+			if (!myvector2[i])
+			{
+				testKo();
+				continue;
+			}
 			(myvector[i] == myvector2[i]) ? testOk() : testKo();
 		}
 		(myvector.size() == myvector2.size()) ? testOk() : testKo();
@@ -812,6 +871,14 @@ void vectorTest()
 		ft::vector<int>::iterator it2 = foo2.begin();
 		for (std::vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				c++;
+				continue;
+			}
+
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 			c++;
@@ -827,6 +894,14 @@ void vectorTest()
 		c2 = 0;
 		for (std::vector<int>::iterator it = bar.begin(); it != bar.end(); ++it)
 		{
+			if (it2 == NULL)
+			{
+				testKo();
+				++it2;
+				c++;
+				continue;
+			}
+
 			(*it == *it2) ? testOk() : testKo();
 			++it2;
 			c++;
