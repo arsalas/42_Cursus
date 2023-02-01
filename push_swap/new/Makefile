@@ -20,8 +20,10 @@ SRCS 			=  main.c\
 				actions_1.c actions_2.c actions_3.c \
 				errors.c \
 				actions_aux.c \
+				maths.c \
 				parse.c \
-				movements.c order.c stack.c 
+				sorting.c \
+				stack.c 
 
 
 # FOLDERS
@@ -49,13 +51,13 @@ LIBS 				:= $(LIBFT)
 INCLUDES 		:= $(LIBS_PATH)/$(LIBFT_PATH)/ includes/ \
 				src/mandatory/actions src/mandatory/errors \
 				src/mandatory/helpers src/mandatory/parse \
-				src/mandatory/stacks
+				src/mandatory/stacks src/mandatory/maths src/mandatory/sorting
 
 INC			= $(addprefix -I , $(INCLUDES))
 # BINARY PATH
 BIN = $(BIN_DIR)/$(NAME)
 
-vpath %.c src/mandatory  src/mandatory/actions src/mandatory/errors src/mandatory/helpers src/mandatory/parse src/mandatory/stacks
+vpath %.c src/mandatory  src/mandatory/actions src/mandatory/errors src/mandatory/helpers src/mandatory/parse src/mandatory/stacks src/mandatory/maths src/mandatory/sorting
 
 .SECONDEXPANSION:
 

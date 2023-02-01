@@ -31,7 +31,7 @@ void	rrr(t_stack *a, t_stack *b, int print)
 	reverse(b);
 }
 
-t_actions new_actions(void)
+t_actions new_action(void)
 {
 	t_actions actions;
 

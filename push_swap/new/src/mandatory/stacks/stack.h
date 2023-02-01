@@ -21,5 +21,6 @@ typedef struct s_stack
 
 void	create_stacks(t_stack *stack_a, t_stack *stack_b, int numbers);
 void	destroy_stacks(t_stack *stack_a, t_stack *stack_b);
+int		is_stack_sort(t_stack *stack);
 
 #endif

@@ -13,6 +13,7 @@
 #include "stack.h"
 #include "parse.h"
 #include "errors.h"
+#include "sorting.h"
 
 void push_swap(t_stack *stack_a, t_stack *stack_b);
 void	get_positions(t_stack *stack);
@@ -26,7 +27,7 @@ int	main(int argc, char *argv[])
 	if (parse_args(argc, argv, &stack_a) == -1)
 		print_error();
 	// get_positions(&stack_a);
-	push_swap(&stack_a, &stack_b);
+	sort_stacks(&stack_a, &stack_b);
 	destroy_stacks(&stack_a, &stack_b);
 	return (0);
 }

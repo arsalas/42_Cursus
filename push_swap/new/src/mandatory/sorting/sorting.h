@@ -3,6 +3,7 @@
 #ifndef SORTING_H
 # define SORTING_H
 
+#include "stack.h"
 
 typedef enum e_options_type
 {
@@ -23,5 +24,6 @@ typedef struct s_option
 
 }	t_option;
 
+void sort_stacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif
