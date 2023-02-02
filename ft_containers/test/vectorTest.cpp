@@ -647,7 +647,6 @@ void vectorTest()
 	}
 	{
 		std::cout << "insert\t\t";
-
 		std::vector<int> myvector(2, 100);
 		std::vector<int>::iterator it;
 		ft::vector<int> myvector2(2, 100);
@@ -692,6 +691,40 @@ void vectorTest()
 			c2++;
 		}
 		(c == c2) ? testOk() : testKo();
+
+		{
+			std::vector<int> myvector;
+			ft::vector<int> myvector2;
+			std::vector<int>::iterator it;
+			ft::vector<int>::iterator it2;
+
+			for (int i = 0; i < 20; ++i)
+			{
+				myvector.insert(myvector.begin() + myvector.size() / 2, i, 40600 + i);
+				myvector2.insert(myvector2.begin() + myvector2.size() / 2, i, 40600 + i);
+			}
+			c = 0;
+			it2 = myvector2.begin();
+			for (it = myvector.begin(); it < myvector.end(); it++)
+			{
+				if (it2 == NULL)
+				{
+					testKo();
+					++it2;
+					it + 2;
+					c++;
+					continue;
+				}
+				it2++;
+				c++;
+			}
+			c2 = 0;
+			for (it2 = myvector2.begin(); it2 < myvector2.end(); it2++)
+			{
+				c2++;
+			}
+			(c == c2) ? testOk() : testKo();
+		}
 
 		// myvector.insert(it + 2, anothervector.end(), anothervector.begin());
 		// myvector2.insert(it2 + 2, anothervector2.end(), anothervector2.begin());

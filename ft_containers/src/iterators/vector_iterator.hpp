@@ -7,7 +7,7 @@
 
 namespace ft
 {
-	template <class T, bool isconst = false >
+	template <class T, bool isconst = false>
 	struct vector_iterator
 	{
 		// ==============================================================
@@ -144,15 +144,15 @@ namespace ft
 			return _ptr;
 		}
 
-		friend self operator+(int n, self it)
-		{
-			return it += n;
-		}
+		// friend self operator+(int n, self it)
+		// {
+		// 	return it += n;
+		// }
 
-		friend self operator-(int n, self it)
-		{
-			return it -= n;
-		}
+		// friend self operator-(int n, self it)
+		// {
+		// 	return it -= n;
+		// }
 
 		pointer _ptr;
 	};

@@ -120,10 +120,15 @@ namespace ft
 			return x._it.operator-(_it);
 		}
 
-		friend reverse_iterator operator+(difference_type n, const reverse_iterator &rhs)
-		{
-			return rhs + n;
-		}
+		// friend reverse_iterator operator+(difference_type n, const reverse_iterator &rhs)
+		// {
+		// 	return rhs - n;
+		// }
+
+		// friend reverse_iterator operator-(difference_type n, const reverse_iterator &rhs)
+		// {
+		// 	return rhs + n;
+		// }
 
 		template <class It>
 		bool operator==(const reverse_iterator<It> &rhs) const

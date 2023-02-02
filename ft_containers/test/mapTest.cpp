@@ -40,6 +40,33 @@ void mapTest()
 			(it3->first == it4->first && it3->second == it4->second) ? testOk() : testKo();
 			++it3;
 		}
+		{
+			std::pair<std::string, std::string> old_arr[] =
+				{
+					std::make_pair("Ground", "Grass"),
+					std::make_pair("Floor", "Cement"),
+					std::make_pair("Table", "Wood")};
+
+			int n = (sizeof(old_arr) /
+					 sizeof(old_arr[0]));
+			std::map<std::string, std::string> New_Map(old_arr, old_arr + n);
+			ft::pair<std::string, std::string> old_arr2[] =
+				{
+					ft::make_pair("Ground", "Grass"),
+					ft::make_pair("Floor", "Cement"),
+					ft::make_pair("Table", "Wood")};
+
+			int n2 = (sizeof(old_arr2) /
+					  sizeof(old_arr2[0]));
+			ft::map<std::string, std::string> New_Map2(old_arr2, old_arr2 + n2);
+
+			ft::map<std::string, std::string>::iterator it2 = New_Map2.begin();
+			for (std::map<std::string, std::string>::iterator it = New_Map.begin(); it != New_Map.end(); ++it)
+			{
+				(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
+				++it2;
+			}
+		}
 		std::cout << std::endl;
 		std::cout << "copy\t\t";
 		std::map<char, int> third(first);
