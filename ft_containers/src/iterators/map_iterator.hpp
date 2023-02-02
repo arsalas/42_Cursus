@@ -27,7 +27,6 @@ namespace ft
 		// ==============================================================
 		typedef map_iterator<Key, T, isconst> self;
 		typedef std::ptrdiff_t difference_type;
-		typedef std::bidirectional_iterator_tag iterator_category;
 		typedef ft::pair<const Key, T> value_type;
 		typedef typename choose_type<isconst, const value_type &, value_type &>::type reference;
 		typedef typename choose_type<isconst, const value_type *, value_type *>::type pointer;
