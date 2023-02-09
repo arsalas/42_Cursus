@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 12:01:49 by aramirez          #+#    #+#             */
-/*   Updated: 2022/01/20 12:17:06 by aramirez         ###   ########.fr       */
+/*   Created: 2022/01/25 15:57:53 by aramirez          #+#    #+#             */
+/*   Updated: 2022/02/08 12:11:08 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
+# define BUFFER_SIZE 1000
+# include <stdlib.h>
+# include <unistd.h>
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
-{
-	int		len;
-	char	*str;
-	int		i;
+int		contain_line(char *str);
+int		get_len(char *str);
+char	*concat_str(char *storage, char *buffer, int len_b);
+int		count_line_words(char *str);
+void	clean_storage(char *storage);
+char	*get_next_line(int fd);
+char	*free_malloc(char *str);
 
-	len = ft_strlen((char *)s);
-	str = malloc(sizeof(char) * len + 1);
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = f(i, s[i]);
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+#endif

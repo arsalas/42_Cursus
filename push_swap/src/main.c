@@ -6,11 +6,14 @@
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 12:34:48 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/24 17:50:36 by aramirez         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:03:34 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stack.h"
+#include "parse.h"
+#include "errors.h"
+#include "sorting.h"
 
 int	main(int argc, char *argv[])
 {
@@ -18,13 +21,9 @@ int	main(int argc, char *argv[])
 	t_stack	stack_b;
 
 	create_stacks(&stack_a, &stack_b, argc - 1);
-	if (do_format(argc, argv, &stack_a) == 1)
+	if (parse_args(argc, argv, &stack_a) == -1)
 		print_error();
-	get_positions(&stack_a);
-	if (stack_a.len <= 5)
-		order_radial(&stack_a, &stack_b, 1);
-	else
-		chunk_sort(&stack_a, &stack_b);
+	sort_stacks(&stack_a, &stack_b);
 	destroy_stacks(&stack_a, &stack_b);
 	return (0);
 }

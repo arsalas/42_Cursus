@@ -1,115 +1,154 @@
-CFLAGS 	:= -Wall -Wextra -Werror -g
-CC		:= gcc
+# COLORS
+RED				:= \033[31m
+GREEN			:= \033[32m
+YELLOW			:= \033[33m
+BLUE			:= \033[34m
+NC				:= \033[m
 
-SRCS 	= actions_1.c \
-		actions_2.c \
-		actions_3.c \
-		errors.c \
-		actions_aux_1.c \
-		actions_aux_2.c \
-		digits.c \
-		sorting_chunks.c \
-		sorting_radial.c \
-		sorting_simple.c \
-		aux_1.c \
-		aux_2.c \
-		order.c \
-		positions.c \
-		stacks.c \
+CC				:= gcc
+DEBUG_MSG		:= false
 
-SRCS_M	= main.c
+# FLAGS
+W_FLAGS			:= -Wall -Wextra -Werror
+SANITIZER		:= -g -fsanitize=address
+FLAGS			:= $(W_FLAGS) $(SANITIZER)
 
-SRCS_B 	= bonus.c main_bonus.c
+RM 				:= rm -f
 
-HEADERS 	= includes/push_swap.h
-HEADERS_B 	= includes/push_swap_bonus.h
-LIBS_INCLUDES = libft/libft.a
+# SRC
+SRCS_M 			= actions_1.c actions_2.c actions_3.c \
+				errors.c \
+				helpers.c \
+				maths.c \
+				parse.c \
+				sorting_1.c sorting_2.c sorting_3.c \
+				stack.c stack_aux.c
 
-OBJS_DIR	:= obj
+SRCS			= main.c $(SRCS_M)
 
-INCLUDES 	:=  libft/ includes/
-INC 		= $(addprefix -I , $(INCLUDES))
+SRCS_B 			= main_bonus.c \
+				checker_bonus.c \
+				actions_1.c actions_2.c actions_3.c \
+				errors.c \
+				helpers.c \
+				parse.c \
+				stack.c stack_aux.c \
+				get_next_line_bonus.c get_next_line_utils_bonus.c \
+				
 
+
+# FOLDERS
+OBJS_DIR		:= obj
+BIN_DIR			:= bin
+
+
+# OBJECTS
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 OBJS_B		= $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.o))
-OBJS_M		= $(addprefix $(OBJS_DIR)/, $(SRCS_M:.c=.o))
 
-NAME 	:= push_swap
+# DEPENDECES
+DEPS				= $(patsubst %.o, %.d, $(OBJS)) 
+DEPS_B				= $(patsubst %.o, %.d, $(OBJS_B)) 
+DEPFLAGS			= -MMD -MF
 
-NAME_B 	:= checker
+# PROGRAM NAME
+NAME 				:= push_swap
+NAME_B				:= checker
 
-RM 		:= rm -f
+# LIBS
+LIBS_PATH			:= libs
+LIBFT_PATH			:= libft
+LIBFT				:= $(LIBS_PATH)/$(LIBFT_PATH)/bin/libft.a
+LIBS 				:= $(LIBFT)
 
-vpath %.c src src/actions src/errors src/helpers src/sorting src/stacks src/bonus %.h includes
+#INCLUDES
+INCLUDES 		:= $(LIBS_PATH)/$(LIBFT_PATH) includes
+INC				= $(addprefix -I, $(INCLUDES))
 
+
+# BINARY PATH
+BIN = $(BIN_DIR)/$(NAME)
+BIN_B = $(BIN_DIR)/$(NAME_B)
+
+vpath %.c src src/actions src/errors src/helpers src/maths src/parse src/sorting src/stacks src/checker src/gnl
+vpath %.h includes
 .SECONDEXPANSION:
 
-all:	make_libs $(NAME)
+all: $(LIBFT) $(BIN)
+
+bonus:  $(LIBFT) $(BIN_B)
 
 $(OBJS_DIR)/%.o: %.c | $$(@D)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@echo "🔃 $(YELLOW)Compiling" $(basename $(notdir $@)) "$(NC)"
+	@$(CC) $(FLAGS) $(INC) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
 
-make_libs:
-	@make -C libft
+$(LIBFT): libft_force_make
+	@make -C $(LIBS_PATH)/$(LIBFT_PATH)
 
-$(NAME): $(OBJS) $(OBJS_M) $(HEADERS) $(LIBS_INCLUDES)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS) $(OBJS_M) $(LIBS_INCLUDES) -o $(NAME)
-	@echo "\x1b[32m$(NAME) compiled!\x1b[0m"
+$(BIN): $(OBJS)
+	@mkdir -p $(BIN_DIR)
+	@$(CC) $(FLAGS) $(INC) $(OBJS) $(LIBS) -o $(BIN)
+	@echo "✅ $(GREEN)$(NAME) compiled!$(NC)"
 
-bonus:	make_libs $(NAME_B)
+$(BIN_B): $(OBJS_B)
+	@mkdir -p $(BIN_DIR)
+	@$(CC) $(FLAGS) $(INC_B) $(OBJS_B) $(LIBS) -o $(BIN_B)
+	@echo "✅ $(GREEN)$(NAME_B) compiled!$(NC)"
 
-$(NAME_B): $(OBJS) $(OBJS_B) $(HEADERS_B) $(LIBS_INCLUDES)
-	@$(CC) $(CFLAGS) $(OBJS) $(OBJS_B) $(LIBS_INCLUDES) -o $(NAME_B)
-	@echo "\x1b[32m$(NAME) bonus compiled!\x1b[0m"
+run: $(BIN)
+	@./$(BIN)
 
-test: $(NAME) test5 test100 test500
+leaks: $(BIN)
+	@which valgrind | grep -o valgrind > /dev/null && \
+	valgrind --leak-check=yes ./$(BIN) || \
+	leaks -atExit -- ./$(BIN)
 
-test5:	$(NAME)
-	@sh tests/test.sh 1 5 5
+norm:
+	@norminette src
 
-test100:	$(NAME)
-	@sh tests/test.sh 1 100 5
-
-test500:	$(NAME)
-	@sh tests/test.sh 1 500 5
-
-visualizer100:	$(NAME)
+visualizer100:	$(BIN)
 	@python3 tests/pyviz.py `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 
-visualizer500:	$(NAME)
+visualizer500:	$(BIN)
 	@python3 tests/pyviz.py `ruby -e "puts (-249..250).to_a.shuffle.join(' ')"`
 
-leaks: $(NAME)
-	@leaks -atExit -- ./$(NAME) 1 2 3 a
-#	@valgrind --leak-check=yes ./$(NAME)  1 2 3 a
 
-random10:
-	@ruby -e "puts (1..10).to_a.shuffle.join(' ')"
+test: $(BIN) test5 test100 test500
 
-random100:
-	@ruby -e "puts (1..100).to_a.shuffle.join(' ')"
+test5:	$(BIN)
+	@sh tests/test.sh 1 5 5
 
-random500:
-	@ruby -e "puts (1..500).to_a.shuffle.join(' ')"
+test100:	$(BIN)
+	@sh tests/test.sh 1 100 5
 
-norminette:
-	@norminette | sh ./tests/norminette.sh
+test500:	$(BIN)
+	@sh tests/test.sh 1 500 5
+
 
 clean:
-	@$(RM) $(OBJS)
-	@$(RM) $(OBJS_M)
-	@$(RM) $(OBJS_B)
-	@$(RM) $(DEPS)
-	@$(RM) $(DEPS_M)
-	@make clean -C libft
-	@echo "\x1b[32mcleaned!\x1b[0m"
+	@echo "🧹 $(RED)$(NAME) removing...$(NC)"
+	@$(RM) $(OBJS) $(DEPS)
+	@echo "✅ $(GREEN)$(NAME) cleaned!$(NC)"
+	@$(RM) -rf  $(OBJS_DIR)
+	@make clean -C $(LIBS_PATH)/$(LIBFT_PATH)
 
 fclean:		clean
-	@$(RM) $(NAME)
+	@$(RM) $(BIN)
+	@$(RM) $(BIN_B)
+	@$(RM) -rf  $(BIN_DIR)
+	@make file_clean -C $(LIBS_PATH)/$(LIBFT_PATH)
 
 re:	fclean all
+
+re_bonus: fclean bonus
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-.PHONY:		all clean fclean re bonus make_libs test test5 test100 test500 visualizer100 visualizer500 leaks random10 random100 random500 norminette
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+-include $(DEPS)
+-include $(DEPS_B)
+
+.PHONY: all clean fclean re re_bonus leaks run libft_force_make 

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <unistd.h>
+#include "stack.h"
+#include "helpers.h"
 
 /**
  * @brief Desplaza hacia arriba todos los elementos del stack a,

@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus.c                                            :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramirez <aramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 18:24:25 by aramirez          #+#    #+#             */
-/*   Updated: 2022/05/20 18:20:58 by aramirez         ###   ########.fr       */
+/*   Created: 2023/02/09 15:35:33 by aramirez          #+#    #+#             */
+/*   Updated: 2023/02/09 19:19:41 by aramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_bonus.h"
+#include <unistd.h>
+#include "actions.h"
+#include "errors.h"
+#include "get_next_line_bonus.h"
+#include "libft.h"
+#include "stack.h"
 
 /**
  * @brief Funcion que compara si dos strings son iguales
@@ -19,7 +24,7 @@
  * @param str2 string 2
  * @return int retorna 1 si son igulas y 0 si son distintas
  */
-int	str_cmp(char *str1, char *str2)
+static int	str_cmp(char *str1, char *str2)
 {
 	int	len_1;
 	int	len_2;
@@ -49,7 +54,7 @@ int	str_cmp(char *str1, char *str2)
  * @param stack_a stack a
  * @param stack_b stack b
  */
-void	actions(char *str, t_stack *stack_a, t_stack *stack_b)
+static void	actions(char *str, t_stack *stack_a, t_stack *stack_b)
 {
 	if (str_cmp(str, "sa") == 1)
 		sa(stack_a, 0);
@@ -75,4 +80,29 @@ void	actions(char *str, t_stack *stack_a, t_stack *stack_b)
 		rrr(stack_a, stack_b, 0);
 	else
 		print_error();
+}
+
+/**
+ * @brief Lee las instrucciones y las aplica para comprobar
+ * si el stack esta ordenado
+ * @param stack_a 
+ * @param stack_b 
+ */
+void	checker(t_stack *stack_a, t_stack *stack_b)
+{
+	char	*str;
+
+	str = "";
+	while (str)
+	{
+		str = get_next_line(0);
+		if (!str)
+			break ;
+		actions(str, stack_a, stack_b);
+		free(str);
+	}
+	if (is_stack_sort(stack_a) == 1 && stack_b->len == 0)
+		write(1, "OK\n", 3);
+	else
+		write(2, "KO\n", 3);
 }

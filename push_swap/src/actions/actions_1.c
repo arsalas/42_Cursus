@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <unistd.h>
+#include "stack.h"
+#include "helpers.h"
 
 /**
  * @brief  Intercambia los dos primeros numeros del stack a 
