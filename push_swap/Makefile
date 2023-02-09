@@ -116,13 +116,13 @@ visualizer500:	$(BIN)
 test: $(BIN) test5 test100 test500
 
 test5:	$(BIN)
-	@sh tests/test.sh 1 5 5
+	@sh tests/test.sh 1 5 5 -full
 
 test100:	$(BIN)
-	@sh tests/test.sh 1 100 5
+	@sh tests/test.sh 1 100 5 -full
 
 test500:	$(BIN)
-	@sh tests/test.sh 1 500 5
+	@sh tests/test.sh 1 500 5 -full
 
 
 clean:
