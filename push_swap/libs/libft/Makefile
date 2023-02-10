@@ -59,7 +59,7 @@ OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 # DEPENDECES
 DEPS				= $(patsubst %.o, %.d, $(OBJS)) 
-DEPFLAGS			= -MMD -MF
+DEPFLAGS			= -MMD -MP
 
 # PROGRAM NAME
 NAME 	= libft.a
@@ -74,8 +74,8 @@ vpath %.c
 all: $(BIN_DIR) $(BIN)
 
 $(OBJS_DIR)/%.o: %.c | $$(@D)
-	@echo "🔃 $(YELLOW)Compiling" $(basename $(notdir $@)) 
-	@$(CC) $(FLAGS) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
+	@echo "🔃 $(BLUE)Compiling" $(basename $(notdir $@)) 
+	@$(CC) $(FLAGS) $(DEPFLAGS) $(INC) -c $< -o $@
 
 
 $(BIN): $(OBJS)

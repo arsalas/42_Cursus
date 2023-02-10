@@ -49,7 +49,7 @@ OBJS_B		= $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.o))
 # DEPENDECES
 DEPS				= $(patsubst %.o, %.d, $(OBJS)) 
 DEPS_B				= $(patsubst %.o, %.d, $(OBJS_B)) 
-DEPFLAGS			= -MMD -MF
+DEPFLAGS			= -MMD -MP
 
 # PROGRAM NAME
 NAME 				:= push_swap
@@ -71,7 +71,8 @@ BIN = $(BIN_DIR)/$(NAME)
 BIN_B = $(BIN_DIR)/$(NAME_B)
 
 vpath %.c src src/actions src/errors src/helpers src/maths src/parse src/sorting src/stacks src/checker src/gnl
-vpath %.h includes
+vpath %.h includes $(LIBS_PATH)/$(LIBFT_PATH)
+
 .SECONDEXPANSION:
 
 all: $(LIBFT) $(BIN)
@@ -79,8 +80,8 @@ all: $(LIBFT) $(BIN)
 bonus:  $(LIBFT) $(BIN_B)
 
 $(OBJS_DIR)/%.o: %.c | $$(@D)
-	@echo "🔃 $(YELLOW)Compiling" $(basename $(notdir $@)) "$(NC)"
-	@$(CC) $(FLAGS) $(INC) -c $< -o $@ $(DEPFLAGS) $(patsubst %.o, %.d, $@) 
+	@echo "🔃 $(BLUE)Compiling" $(basename $(notdir $@)) "$(NC)"
+	@$(CC) $(FLAGS) $(DEPFLAGS) $(INC) -c $< -o $@
 
 $(LIBFT): libft_force_make
 	@make -C $(LIBS_PATH)/$(LIBFT_PATH)
@@ -100,8 +101,13 @@ run: $(BIN)
 
 leaks: $(BIN)
 	@which valgrind | grep -o valgrind > /dev/null && \
-	valgrind --leak-check=yes ./$(BIN) || \
-	leaks -atExit -- ./$(BIN)
+	valgrind --leak-check=yes ./$(BIN) `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`  || \
+	leaks -atExit -- ./$(BIN) `ruby -e "puts (1..100).to_a.shuffle.join(' ')"` 
+
+leaks_bonus: $(BIN_B)
+	@which valgrind | grep -o valgrind > /dev/null && \
+	valgrind --leak-check=yes ./$(BIN_B) `ruby -e "puts (1..100).to_a.shuffle.join(' ')"` || \
+	leaks -atExit -- ./$(BIN_B) `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 
 norm:
 	@norminette src
@@ -151,4 +157,4 @@ $(BIN_DIR):
 -include $(DEPS)
 -include $(DEPS_B)
 
-.PHONY: all clean fclean re re_bonus leaks run libft_force_make 
+.PHONY: all clean fclean re re_bonus leaks leaks_bonus run libft_force_make 
