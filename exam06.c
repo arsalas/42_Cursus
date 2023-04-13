@@ -45,32 +45,32 @@
 
 typedef struct s_client
 {
-	int					id;
-	char				id_str[25];
-	int					sock; // don't forget to close it when removing client
-	struct sockaddr_in	addr;
-	socklen_t			addr_len;
-	char				*buf; // set to NULL when client is added, and deallocated with free() when client is removed
-	struct s_client		*next;
-}	t_client;
+	int id;
+	char id_str[25];
+	int sock; // don't forget to close it when removing client
+	struct sockaddr_in addr;
+	socklen_t addr_len;
+	char *buf; // set to NULL when client is added, and deallocated with free() when client is removed
+	struct s_client *next;
+} t_client;
 
 typedef struct s_server
 {
-	int					sock;
-	struct sockaddr_in	addr;
-	t_client			*client_list;
-	int					id_next_client;
-	fd_set				save_set, read_set, write_set; // don't forget to use FD_CLR() when removing a client
-}	t_server;
+	int sock;
+	struct sockaddr_in addr;
+	t_client *client_list;
+	int id_next_client;
+	fd_set save_set, read_set, write_set; // don't forget to use FD_CLR() when removing a client
+} t_server;
 
-void	fatal()
+void fatal()
 {
-	char	*str = "Fatal error\n";
+	char *str = "Fatal error\n";
 	write(2, str, strlen(str));
 	exit(1);
 }
 
-void	setup_server(t_server *s, int port)
+void setup_server(t_server *s, int port)
 {
 	s->client_list = NULL;
 	s->id_next_client = 0;
@@ -84,7 +84,7 @@ void	setup_server(t_server *s, int port)
 	// assign IP, PORT
 	bzero(&s->addr, sizeof(struct sockaddr_in));
 	s->addr.sin_family = AF_INET;
-	s->addr.sin_addr.s_addr = htonl(2130706433); //127.0.0.1
+	s->addr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
 	s->addr.sin_port = htons(port);
 
 	// Binding newly created socket to given IP and verification
@@ -98,10 +98,10 @@ void	setup_server(t_server *s, int port)
 	FD_SET(s->sock, &s->save_set);
 }
 
-void	add_client(t_server *server)
+void add_client(t_server *server)
 {
 	// creating the client
-	t_client	*c = calloc(1, sizeof(t_client));
+	t_client *c = calloc(1, sizeof(t_client));
 	if (c == NULL)
 		fatal();
 	c->addr_len = sizeof(struct sockaddr_in);
@@ -122,9 +122,9 @@ void	add_client(t_server *server)
 	server->client_list = c;
 
 	// announcing the new client
-	char	welcome_msg[50];
+	char welcome_msg[50];
 	sprintf(welcome_msg, "server: client %d just arrived\n", c->id);
-	t_client	*browse = c->next;
+	t_client *browse = c->next;
 	while (browse)
 	{
 		if (FD_ISSET(browse->sock, &server->write_set)) // This cannot evaluate as true for the new client, as it has not gotten a chance to go through select() yet
@@ -135,8 +135,8 @@ void	add_client(t_server *server)
 
 int extract_message(char **buf, char **msg)
 {
-	char	*newbuf;
-	int	i;
+	char *newbuf;
+	int i;
 
 	*msg = 0;
 	if (*buf == 0)
@@ -160,10 +160,37 @@ int extract_message(char **buf, char **msg)
 	return (0);
 }
 
+int extract_message_rest(char **buf, char **msg)
+{
+	char *newbuf;
+	int i;
+
+	*msg = 0;
+	if (*buf == 0)
+		return (0);
+	i = 0;
+	while ((*buf)[i])
+	{
+		if ((*buf)[i] == '\n' || (*buf)[i + 1] == '\0')
+		{
+			newbuf = calloc(1, sizeof(*newbuf) * (strlen(*buf + i + 1) + 1));
+			if (newbuf == 0)
+				return (-1);
+			strcpy(newbuf, *buf + i + 1);
+			*msg = *buf;
+			(*msg)[i + 1] = 0;
+			*buf = newbuf;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 char *str_join(char *buf, char *add)
 {
-	char	*newbuf;
-	int		len;
+	char *newbuf;
+	int len;
 
 	if (buf == 0)
 		len = 0;
@@ -180,26 +207,23 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
-void	dispatch_msg(t_client **client, t_server *server, int *skip_increment)
+void dispatch_msg(t_client **client, t_server *server, int *skip_increment)
 {
-	static int entry = 0;
-	char	read_buf[10];
-	int		recv_return = recv((*client)->sock, read_buf, 9, 0);
-	printf("SIG: %i, RECIV: %s\n",recv_return, read_buf);
+	char read_buf[10];
+	int recv_return = recv((*client)->sock, read_buf, 9, 0);
 	if (recv_return > 0)
 	{
-		entry = 1;
 		read_buf[recv_return] = 0;
 		(*client)->buf = str_join((*client)->buf, read_buf);
-		char	*msg = NULL;
-		char	*to_send = NULL;
+		char *msg = NULL;
+		char *to_send = NULL;
 		while (extract_message(&(*client)->buf, &msg))
 		{
 			to_send = str_join(to_send, (*client)->id_str);
 			to_send = str_join(to_send, msg);
 			free(msg);
 		}
-		t_client	*browse = server->client_list;
+		t_client *browse = server->client_list;
 		while (browse && to_send)
 		{
 			if (browse->id != (*client)->id && FD_ISSET(browse->sock, &server->write_set))
@@ -208,39 +232,34 @@ void	dispatch_msg(t_client **client, t_server *server, int *skip_increment)
 		}
 		free(to_send);
 	}
-	//else if (recv_return == -1)
+	// else if (recv_return == -1)
 	//{
 	//	write(2, "recv = -1\n", 10);
-	//}
-	else //if (recv_return <= 0) // if error (-1), we remove the client too
+	// }
+	else // if (recv_return <= 0) // if error (-1), we remove the client too
 	{
-		// to_send = (*client)->buf;
+		char *msg = NULL;
+		char *to_send = NULL;
+		while (extract_message_rest(&(*client)->buf, &msg))
 		{
-			{// char	*to_send = NULL;
-			// printf("FIN->%s<-\n", (*client)->buf);
-			t_client	*browse = server->client_list;
-			while (browse && (*client)->buf)
-			{
-				if (browse->id != (*client)->id && FD_ISSET(browse->sock, &server->write_set))
-				{
-					if (strlen((*client)->buf) > 0)
-					{
-						if (entry)
-							send(browse->sock, (*client)->id_str, strlen((*client)->id_str), 0);
-						send(browse->sock, (*client)->buf, strlen((*client)->buf), 0);
-					}
-				}
-				browse = browse->next;
-			}}
-		// free(to_send);
+			to_send = str_join(to_send, (*client)->id_str);
+			to_send = str_join(to_send, msg);
+			free(msg);
 		}
+		t_client *browse2 = server->client_list;
+		while (browse2 && to_send)
+		{
+			if (browse2->id != (*client)->id && FD_ISSET(browse2->sock, &server->write_set))
+				send(browse2->sock, to_send, strlen(to_send), 0);
+			browse2 = browse2->next;
+		}
+		free(to_send);
 
-		entry = 0;
-		t_client	*to_delete = (*client);
+		t_client *to_delete = (*client);
 		*client = to_delete->next;
 		*skip_increment = 1; // ready for next loop cycle
 
-		char	goodbye_msg[50];
+		char goodbye_msg[50];
 		sprintf(goodbye_msg, "server: client %d just left\n", to_delete->id);
 		free(to_delete->buf); // can be either NULL or something allocated
 		FD_CLR(to_delete->sock, &server->save_set);
@@ -251,14 +270,14 @@ void	dispatch_msg(t_client **client, t_server *server, int *skip_increment)
 			server->client_list = to_delete->next;
 		else
 		{
-			t_client	*parent_of_to_delete = server->client_list;
+			t_client *parent_of_to_delete = server->client_list;
 			while (parent_of_to_delete && parent_of_to_delete->next != to_delete)
 				parent_of_to_delete = parent_of_to_delete->next;
 			parent_of_to_delete->next = to_delete->next;
 		}
 
 		// announcing the departure, to_delete is not in the client list at this point
-		t_client	*browse = server->client_list;
+		t_client *browse = server->client_list;
 		while (browse)
 		{
 			if (FD_ISSET(browse->sock, &server->write_set))
@@ -269,16 +288,16 @@ void	dispatch_msg(t_client **client, t_server *server, int *skip_increment)
 	}
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		char	*str = "Wrong number of arguments\n";
+		char *str = "Wrong number of arguments\n";
 		write(2, str, strlen(str));
 		exit(1);
 	}
 
-	t_server	server;
+	t_server server;
 	setup_server(&server, atoi(argv[1]));
 
 	while (1)
@@ -288,15 +307,15 @@ int	main(int argc, char **argv)
 
 		if (-1 == select(FD_SETSIZE, &server.read_set, &server.write_set, NULL, NULL))
 		{
-			//write(2, "error with select\n", 18);
+			// write(2, "error with select\n", 18);
 			continue;
 		}
 		if (FD_ISSET(server.sock, &server.read_set))
 			add_client(&server);
-		t_client	*browse = server.client_list;
+		t_client *browse = server.client_list;
 		while (browse)
 		{
-			int	skip_increment = 0;
+			int skip_increment = 0;
 			if (FD_ISSET(browse->sock, &server.read_set))
 				dispatch_msg(&browse, &server, &skip_increment);
 			if (skip_increment == 0) // if we delete the node in the list, we have to increment the pointer in dispatch_msg and skip here
