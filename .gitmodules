@@ -1,3 +1,6 @@
 [submodule "minishell"]
 	path = minishell
 	url = https://github.com/arsalas/minishell.git
+[submodule "webserv"]
+	path = webserv
+	url = https://github.com/arsalas/webserv.git
