@@ -32,7 +32,7 @@
 |**04**|Exam Rank 04|C|[![aramirez's 42 Exam Rank 04 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2916771)](https://github.com/JaeSeoKim/badge42)|
 |**05**|[Inception](https://github.com/arsalas/42_Cursus/tree/main/inception)|Docker|[![aramirez's 42 Inception Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2931430)](https://github.com/JaeSeoKim/badge42)|
 |**05**|[Ft_containers](https://github.com/arsalas/42_Cursus/tree/main/ft_containers)|C++|[![aramirez's 42 ft_containers Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2931429)](https://github.com/JaeSeoKim/badge42)|
-|**05**|Wevserv|C++|[![aramirez's 42 webserv Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/3013345)](https://github.com/JaeSeoKim/badge42)|
+|**05**|[Wevserv](https://github.com/arsalas/webserv)|C++|[![aramirez's 42 webserv Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/3013345)](https://github.com/JaeSeoKim/badge42)|
 |**05**|Exam Rank 05|C++|[![aramirez's 42 Exam Rank 05 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/2970633)](https://github.com/JaeSeoKim/badge42)|
 |**06**|Exam Rank 06|C|[![aramirez's 42 Exam Rank 06 Score](https://badge42.vercel.app/api/v2/cl6y65hc100490gl7reg9ecj1/project/3058171)](https://github.com/JaeSeoKim/badge42)|
 
